@@ -14,7 +14,7 @@ namespace Console1
         {
             using (uybusEntities db = new uybusEntities()) {
                 Parametro p = new Parametro();
-                p.Valor = 5;
+                p.Valor = 4;
                 db.Parametro.Add(p);
                 db.SaveChanges();
 
