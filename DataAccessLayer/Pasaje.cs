@@ -18,7 +18,7 @@ namespace DataAccessLayer
         public Nullable<int> Asientos { get; set; }
         public string Documento { get; set; }
         public string TipoDocuemtno { get; set; }
-        public int IdUsuario { get; set; }
+        public Nullable<int> IdUsuario { get; set; }
         public int IdViaje { get; set; }
         public int IdParadaDestino { get; set; }
         public int IdParadaOrigen { get; set; }

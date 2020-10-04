@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 
-namespace Console1
+namespace Consola
 {
     class Program
     {
@@ -82,7 +82,7 @@ namespace Console1
 
             Usuario user = new Usuario();
             user.IdPersona = "45435876"; // Joaquin Suares, joaq@gmail.com, 1234
-            db.Usuario.Add(user); 
+            db.Usuario.Add(user);
             db.SaveChanges();
 
             Conductor con = new Conductor();
@@ -165,7 +165,7 @@ namespace Console1
             db.Linea.Add(c);
             db.SaveChanges();
             // ---------------------------Parada----------------------------------
-            Parada pa= new Parada();
+            Parada pa = new Parada();
             pa.Nombre = "Terminal Norte";
             pa.Lat = -34.900132;
             pa.Long = -56.171441;
@@ -435,7 +435,7 @@ namespace Console1
             pas.TipoDocuemtno = "CI";
             pas.Documento = "45435876";
             pas.IdViaje = 1;
-            pas.IdUsuario= 1;
+            pas.IdUsuario = 1;
             pas.IdParadaOrigen = 1;
             pas.IdParadaDestino = 2;
             db.Pasaje.Add(pas);
@@ -456,13 +456,15 @@ namespace Console1
         }
         static void Main(string[] args)
         {
-            using (uybusEntities db = new uybusEntities()) {
+            using (uybusEntities db = new uybusEntities())
+            {
                 //datosDePrueba(db); //Descomentar para cargar datos a la base de datos uytube
                 var lst = db.Persona;
                 foreach (var l in lst)
                 {
                     Console.WriteLine(l.Nombre);
                 }
+                Console.WriteLine("Si no Obtubiste ningun resultado, descomenta la linea 461. ");
                 /*
                 //---------------Select all---------
                 var lst = db.persona;

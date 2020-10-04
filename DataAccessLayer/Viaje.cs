@@ -21,9 +21,9 @@ namespace DataAccessLayer
         }
     
         public int IdViaje { get; set; }
-        public byte Finalizado { get; set; }
+        public Nullable<byte> Finalizado { get; set; }
         public System.DateTime Fecha { get; set; }
-        public System.TimeSpan HoraInicioReal { get; set; }
+        public Nullable<System.TimeSpan> HoraInicioReal { get; set; }
         public int IdSalida { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

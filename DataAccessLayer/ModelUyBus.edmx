@@ -51,7 +51,7 @@
           <Property Name="Asientos" Type="int" />
           <Property Name="Documento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TipoDocuemtno" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" />
           <Property Name="IdViaje" Type="int" Nullable="false" />
           <Property Name="IdParadaDestino" Type="int" Nullable="false" />
           <Property Name="IdParadaOrigen" Type="int" Nullable="false" />
@@ -123,9 +123,9 @@
             <PropertyRef Name="IdViaje" />
           </Key>
           <Property Name="IdViaje" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Finalizado" Type="tinyint" Nullable="false" />
+          <Property Name="Finalizado" Type="tinyint" />
           <Property Name="Fecha" Type="date" Nullable="false" />
-          <Property Name="HoraInicioReal" Type="time" Precision="7" Nullable="false" />
+          <Property Name="HoraInicioReal" Type="time" Precision="7" />
           <Property Name="IdSalida" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Admin_Persona">
@@ -177,7 +177,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pasaje_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -445,7 +445,7 @@
           <Property Name="Asientos" Type="Int32" />
           <Property Name="Documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TipoDocuemtno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" />
           <Property Name="IdViaje" Type="Int32" Nullable="false" />
           <Property Name="IdParadaDestino" Type="Int32" Nullable="false" />
           <Property Name="IdParadaOrigen" Type="Int32" Nullable="false" />
@@ -537,9 +537,9 @@
             <PropertyRef Name="IdViaje" />
           </Key>
           <Property Name="IdViaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Finalizado" Type="Byte" Nullable="false" />
+          <Property Name="Finalizado" Type="Byte" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="HoraInicioReal" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HoraInicioReal" Type="Time" Precision="7" />
           <Property Name="IdSalida" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pasaje" Relationship="Self.FK_Pasaje_Viaje" FromRole="Viaje" ToRole="Pasaje" />
           <NavigationProperty Name="Salida" Relationship="Self.FK_Viaje_Salida" FromRole="Viaje" ToRole="Salida" />
@@ -641,7 +641,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pasaje_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
