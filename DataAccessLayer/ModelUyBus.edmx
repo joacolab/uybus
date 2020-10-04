@@ -1,0 +1,970 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="uybusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="IdAdmin" />
+          </Key>
+          <Property Name="IdAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPersona" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Conductor">
+          <Key>
+            <PropertyRef Name="IdConductor" />
+          </Key>
+          <Property Name="IdConductor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VencimientoLicencia" Type="date" Nullable="false" />
+          <Property Name="IdPersona" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Linea">
+          <Key>
+            <PropertyRef Name="IdLinea" />
+          </Key>
+          <Property Name="IdLinea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parada">
+          <Key>
+            <PropertyRef Name="IdParada" />
+          </Key>
+          <Property Name="IdParada" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lat" Type="float" Nullable="false" />
+          <Property Name="Long" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parametro">
+          <Key>
+            <PropertyRef Name="IdParametro" />
+          </Key>
+          <Property Name="IdParametro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Valor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pasaje">
+          <Key>
+            <PropertyRef Name="IdPasaje" />
+          </Key>
+          <Property Name="IdPasaje" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Asientos" Type="int" />
+          <Property Name="Documento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoDocuemtno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="IdViaje" Type="int" Nullable="false" />
+          <Property Name="IdParadaDestino" Type="int" Nullable="false" />
+          <Property Name="IdParadaOrigen" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Documento" />
+          </Key>
+          <Property Name="Documento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoDocumento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Precio">
+          <Key>
+            <PropertyRef Name="IdPrecio" />
+          </Key>
+          <Property Name="IdPrecio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Precio" Type="int" Nullable="false" />
+          <Property Name="FechaEntradaVigencia" Type="date" Nullable="false" />
+          <Property Name="IdLinea" Type="int" Nullable="false" />
+          <Property Name="IdParada" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salida">
+          <Key>
+            <PropertyRef Name="IdSalida" />
+          </Key>
+          <Property Name="IdSalida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoraInicio" Type="time" Precision="7" Nullable="false" />
+          <Property Name="IdConductor" Type="int" Nullable="false" />
+          <Property Name="IdVehiculo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdLinea" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuperAdmin">
+          <Key>
+            <PropertyRef Name="IdSuperAdmin" />
+          </Key>
+          <Property Name="IdSuperAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPersona" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tramo">
+          <Key>
+            <PropertyRef Name="IdLinea" />
+            <PropertyRef Name="IdParada" />
+          </Key>
+          <Property Name="IdLinea" Type="int" Nullable="false" />
+          <Property Name="IdParada" Type="int" Nullable="false" />
+          <Property Name="TiempoEstimado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPersona" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vehiculo">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Modelo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Marca" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CantAsientos" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Viaje">
+          <Key>
+            <PropertyRef Name="IdViaje" />
+          </Key>
+          <Property Name="IdViaje" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Finalizado" Type="tinyint" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="HoraInicioReal" Type="time" Precision="7" Nullable="false" />
+          <Property Name="IdSalida" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Admin_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Documento" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conductor_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Conductor" Type="Self.Conductor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Documento" />
+            </Principal>
+            <Dependent Role="Conductor">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Parada">
+          <End Role="Parada" Type="Self.Parada" Multiplicity="1" />
+          <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parada">
+              <PropertyRef Name="IdParada" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="IdParadaOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Parada1">
+          <End Role="Parada" Type="Self.Parada" Multiplicity="1" />
+          <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parada">
+              <PropertyRef Name="IdParada" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="IdParadaDestino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Viaje">
+          <End Role="Viaje" Type="Self.Viaje" Multiplicity="1" />
+          <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Viaje">
+              <PropertyRef Name="IdViaje" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="IdViaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Precio_Tramo">
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="1" />
+          <End Role="Precio" Type="Self.Precio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tramo">
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdParada" />
+            </Principal>
+            <Dependent Role="Precio">
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdParada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salida_Conductor">
+          <End Role="Conductor" Type="Self.Conductor" Multiplicity="1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conductor">
+              <PropertyRef Name="IdConductor" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="IdConductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salida_Linea">
+          <End Role="Linea" Type="Self.Linea" Multiplicity="1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="IdLinea" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="IdLinea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salida_Vehiculo">
+          <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="IdVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuperAdmin_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="SuperAdmin" Type="Self.SuperAdmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Documento" />
+            </Principal>
+            <Dependent Role="SuperAdmin">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tramo_Linea">
+          <End Role="Linea" Type="Self.Linea" Multiplicity="1" />
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="IdLinea" />
+            </Principal>
+            <Dependent Role="Tramo">
+              <PropertyRef Name="IdLinea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tramo_Parada">
+          <End Role="Parada" Type="Self.Parada" Multiplicity="1" />
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parada">
+              <PropertyRef Name="IdParada" />
+            </Principal>
+            <Dependent Role="Tramo">
+              <PropertyRef Name="IdParada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Documento" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Viaje_Salida">
+          <End Role="Salida" Type="Self.Salida" Multiplicity="1" />
+          <End Role="Viaje" Type="Self.Viaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salida">
+              <PropertyRef Name="IdSalida" />
+            </Principal>
+            <Dependent Role="Viaje">
+              <PropertyRef Name="IdSalida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="uybusModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conductor" EntityType="Self.Conductor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Linea" EntityType="Self.Linea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parada" EntityType="Self.Parada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parametro" EntityType="Self.Parametro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pasaje" EntityType="Self.Pasaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Precio" EntityType="Self.Precio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salida" EntityType="Self.Salida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuperAdmin" EntityType="Self.SuperAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tramo" EntityType="Self.Tramo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Viaje" EntityType="Self.Viaje" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Admin_Persona" Association="Self.FK_Admin_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conductor_Persona" Association="Self.FK_Conductor_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Conductor" EntitySet="Conductor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Parada" Association="Self.FK_Pasaje_Parada">
+            <End Role="Parada" EntitySet="Parada" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Parada1" Association="Self.FK_Pasaje_Parada1">
+            <End Role="Parada" EntitySet="Parada" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Usuario" Association="Self.FK_Pasaje_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Viaje" Association="Self.FK_Pasaje_Viaje">
+            <End Role="Viaje" EntitySet="Viaje" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Precio_Tramo" Association="Self.FK_Precio_Tramo">
+            <End Role="Tramo" EntitySet="Tramo" />
+            <End Role="Precio" EntitySet="Precio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salida_Conductor" Association="Self.FK_Salida_Conductor">
+            <End Role="Conductor" EntitySet="Conductor" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salida_Linea" Association="Self.FK_Salida_Linea">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salida_Vehiculo" Association="Self.FK_Salida_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuperAdmin_Persona" Association="Self.FK_SuperAdmin_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="SuperAdmin" EntitySet="SuperAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tramo_Linea" Association="Self.FK_Tramo_Linea">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="Tramo" EntitySet="Tramo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tramo_Parada" Association="Self.FK_Tramo_Parada">
+            <End Role="Parada" EntitySet="Parada" />
+            <End Role="Tramo" EntitySet="Tramo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Persona" Association="Self.FK_Usuario_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Viaje_Salida" Association="Self.FK_Viaje_Salida">
+            <End Role="Salida" EntitySet="Salida" />
+            <End Role="Viaje" EntitySet="Viaje" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="uybusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="IdAdmin" />
+          </Key>
+          <Property Name="IdAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPersona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Admin_Persona" FromRole="Admin" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Conductor">
+          <Key>
+            <PropertyRef Name="IdConductor" />
+          </Key>
+          <Property Name="IdConductor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VencimientoLicencia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdPersona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Conductor_Persona" FromRole="Conductor" ToRole="Persona" />
+          <NavigationProperty Name="Salida" Relationship="Self.FK_Salida_Conductor" FromRole="Conductor" ToRole="Salida" />
+        </EntityType>
+        <EntityType Name="Linea">
+          <Key>
+            <PropertyRef Name="IdLinea" />
+          </Key>
+          <Property Name="IdLinea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Salida" Relationship="Self.FK_Salida_Linea" FromRole="Linea" ToRole="Salida" />
+          <NavigationProperty Name="Tramo" Relationship="Self.FK_Tramo_Linea" FromRole="Linea" ToRole="Tramo" />
+        </EntityType>
+        <EntityType Name="Parada">
+          <Key>
+            <PropertyRef Name="IdParada" />
+          </Key>
+          <Property Name="IdParada" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lat" Type="Double" Nullable="false" />
+          <Property Name="Long" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Pasaje" Relationship="Self.FK_Pasaje_Parada" FromRole="Parada" ToRole="Pasaje" />
+          <NavigationProperty Name="Pasaje1" Relationship="Self.FK_Pasaje_Parada1" FromRole="Parada" ToRole="Pasaje" />
+          <NavigationProperty Name="Tramo" Relationship="Self.FK_Tramo_Parada" FromRole="Parada" ToRole="Tramo" />
+        </EntityType>
+        <EntityType Name="Parametro">
+          <Key>
+            <PropertyRef Name="IdParametro" />
+          </Key>
+          <Property Name="IdParametro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Valor" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pasaje">
+          <Key>
+            <PropertyRef Name="IdPasaje" />
+          </Key>
+          <Property Name="IdPasaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Asientos" Type="Int32" />
+          <Property Name="Documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoDocuemtno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IdViaje" Type="Int32" Nullable="false" />
+          <Property Name="IdParadaDestino" Type="Int32" Nullable="false" />
+          <Property Name="IdParadaOrigen" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Parada" Relationship="Self.FK_Pasaje_Parada" FromRole="Pasaje" ToRole="Parada" />
+          <NavigationProperty Name="Parada1" Relationship="Self.FK_Pasaje_Parada1" FromRole="Pasaje" ToRole="Parada" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Pasaje_Usuario" FromRole="Pasaje" ToRole="Usuario" />
+          <NavigationProperty Name="Viaje" Relationship="Self.FK_Pasaje_Viaje" FromRole="Pasaje" ToRole="Viaje" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Documento" />
+          </Key>
+          <Property Name="Documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Admin_Persona" FromRole="Persona" ToRole="Admin" />
+          <NavigationProperty Name="Conductor" Relationship="Self.FK_Conductor_Persona" FromRole="Persona" ToRole="Conductor" />
+          <NavigationProperty Name="SuperAdmin" Relationship="Self.FK_SuperAdmin_Persona" FromRole="Persona" ToRole="SuperAdmin" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Persona" FromRole="Persona" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Precio">
+          <Key>
+            <PropertyRef Name="IdPrecio" />
+          </Key>
+          <Property Name="IdPrecio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Precio1" Type="Int32" Nullable="false" />
+          <Property Name="FechaEntradaVigencia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdLinea" Type="Int32" Nullable="false" />
+          <Property Name="IdParada" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tramo" Relationship="Self.FK_Precio_Tramo" FromRole="Precio" ToRole="Tramo" />
+        </EntityType>
+        <EntityType Name="Salida">
+          <Key>
+            <PropertyRef Name="IdSalida" />
+          </Key>
+          <Property Name="IdSalida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoraInicio" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="IdConductor" Type="Int32" Nullable="false" />
+          <Property Name="IdVehiculo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdLinea" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Conductor" Relationship="Self.FK_Salida_Conductor" FromRole="Salida" ToRole="Conductor" />
+          <NavigationProperty Name="Linea" Relationship="Self.FK_Salida_Linea" FromRole="Salida" ToRole="Linea" />
+          <NavigationProperty Name="Vehiculo" Relationship="Self.FK_Salida_Vehiculo" FromRole="Salida" ToRole="Vehiculo" />
+          <NavigationProperty Name="Viaje" Relationship="Self.FK_Viaje_Salida" FromRole="Salida" ToRole="Viaje" />
+        </EntityType>
+        <EntityType Name="SuperAdmin">
+          <Key>
+            <PropertyRef Name="IdSuperAdmin" />
+          </Key>
+          <Property Name="IdSuperAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPersona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_SuperAdmin_Persona" FromRole="SuperAdmin" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Tramo">
+          <Key>
+            <PropertyRef Name="IdLinea" />
+            <PropertyRef Name="IdParada" />
+          </Key>
+          <Property Name="IdLinea" Type="Int32" Nullable="false" />
+          <Property Name="IdParada" Type="Int32" Nullable="false" />
+          <Property Name="TiempoEstimado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Linea" Relationship="Self.FK_Tramo_Linea" FromRole="Tramo" ToRole="Linea" />
+          <NavigationProperty Name="Parada" Relationship="Self.FK_Tramo_Parada" FromRole="Tramo" ToRole="Parada" />
+          <NavigationProperty Name="Precio" Relationship="Self.FK_Precio_Tramo" FromRole="Tramo" ToRole="Precio" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPersona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pasaje" Relationship="Self.FK_Pasaje_Usuario" FromRole="Usuario" ToRole="Pasaje" />
+          <NavigationProperty Name="Persona" Relationship="Self.FK_Usuario_Persona" FromRole="Usuario" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Vehiculo">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CantAsientos" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Salida" Relationship="Self.FK_Salida_Vehiculo" FromRole="Vehiculo" ToRole="Salida" />
+        </EntityType>
+        <EntityType Name="Viaje">
+          <Key>
+            <PropertyRef Name="IdViaje" />
+          </Key>
+          <Property Name="IdViaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Finalizado" Type="Byte" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HoraInicioReal" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="IdSalida" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pasaje" Relationship="Self.FK_Pasaje_Viaje" FromRole="Viaje" ToRole="Pasaje" />
+          <NavigationProperty Name="Salida" Relationship="Self.FK_Viaje_Salida" FromRole="Viaje" ToRole="Salida" />
+        </EntityType>
+        <Association Name="FK_Admin_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Documento" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conductor_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Conductor" Type="Self.Conductor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Documento" />
+            </Principal>
+            <Dependent Role="Conductor">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salida_Conductor">
+          <End Role="Conductor" Type="Self.Conductor" Multiplicity="1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conductor">
+              <PropertyRef Name="IdConductor" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="IdConductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salida_Linea">
+          <End Role="Linea" Type="Self.Linea" Multiplicity="1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="IdLinea" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="IdLinea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tramo_Linea">
+          <End Role="Linea" Type="Self.Linea" Multiplicity="1" />
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Linea">
+              <PropertyRef Name="IdLinea" />
+            </Principal>
+            <Dependent Role="Tramo">
+              <PropertyRef Name="IdLinea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Parada">
+          <End Role="Parada" Type="Self.Parada" Multiplicity="1" />
+          <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parada">
+              <PropertyRef Name="IdParada" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="IdParadaOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Parada1">
+          <End Role="Parada" Type="Self.Parada" Multiplicity="1" />
+          <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parada">
+              <PropertyRef Name="IdParada" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="IdParadaDestino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tramo_Parada">
+          <End Role="Parada" Type="Self.Parada" Multiplicity="1" />
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parada">
+              <PropertyRef Name="IdParada" />
+            </Principal>
+            <Dependent Role="Tramo">
+              <PropertyRef Name="IdParada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Viaje">
+          <End Role="Viaje" Type="Self.Viaje" Multiplicity="1" />
+          <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Viaje">
+              <PropertyRef Name="IdViaje" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="IdViaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuperAdmin_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="SuperAdmin" Type="Self.SuperAdmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Documento" />
+            </Principal>
+            <Dependent Role="SuperAdmin">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Documento" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Precio_Tramo">
+          <End Role="Tramo" Type="Self.Tramo" Multiplicity="1" />
+          <End Role="Precio" Type="Self.Precio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tramo">
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdParada" />
+            </Principal>
+            <Dependent Role="Precio">
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdParada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salida_Vehiculo">
+          <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="IdVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Viaje_Salida">
+          <End Role="Salida" Type="Self.Salida" Multiplicity="1" />
+          <End Role="Viaje" Type="Self.Viaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salida">
+              <PropertyRef Name="IdSalida" />
+            </Principal>
+            <Dependent Role="Viaje">
+              <PropertyRef Name="IdSalida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="uybusEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Conductor" EntityType="Self.Conductor" />
+          <EntitySet Name="Linea" EntityType="Self.Linea" />
+          <EntitySet Name="Parada" EntityType="Self.Parada" />
+          <EntitySet Name="Parametro" EntityType="Self.Parametro" />
+          <EntitySet Name="Pasaje" EntityType="Self.Pasaje" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" />
+          <EntitySet Name="Precio" EntityType="Self.Precio" />
+          <EntitySet Name="Salida" EntityType="Self.Salida" />
+          <EntitySet Name="SuperAdmin" EntityType="Self.SuperAdmin" />
+          <EntitySet Name="Tramo" EntityType="Self.Tramo" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" />
+          <EntitySet Name="Viaje" EntityType="Self.Viaje" />
+          <AssociationSet Name="FK_Admin_Persona" Association="Self.FK_Admin_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conductor_Persona" Association="Self.FK_Conductor_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Conductor" EntitySet="Conductor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salida_Conductor" Association="Self.FK_Salida_Conductor">
+            <End Role="Conductor" EntitySet="Conductor" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salida_Linea" Association="Self.FK_Salida_Linea">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tramo_Linea" Association="Self.FK_Tramo_Linea">
+            <End Role="Linea" EntitySet="Linea" />
+            <End Role="Tramo" EntitySet="Tramo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Parada" Association="Self.FK_Pasaje_Parada">
+            <End Role="Parada" EntitySet="Parada" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Parada1" Association="Self.FK_Pasaje_Parada1">
+            <End Role="Parada" EntitySet="Parada" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tramo_Parada" Association="Self.FK_Tramo_Parada">
+            <End Role="Parada" EntitySet="Parada" />
+            <End Role="Tramo" EntitySet="Tramo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Usuario" Association="Self.FK_Pasaje_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Viaje" Association="Self.FK_Pasaje_Viaje">
+            <End Role="Viaje" EntitySet="Viaje" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuperAdmin_Persona" Association="Self.FK_SuperAdmin_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="SuperAdmin" EntitySet="SuperAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Persona" Association="Self.FK_Usuario_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Precio_Tramo" Association="Self.FK_Precio_Tramo">
+            <End Role="Tramo" EntitySet="Tramo" />
+            <End Role="Precio" EntitySet="Precio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salida_Vehiculo" Association="Self.FK_Salida_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Viaje_Salida" Association="Self.FK_Viaje_Salida">
+            <End Role="Salida" EntitySet="Salida" />
+            <End Role="Viaje" EntitySet="Viaje" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="uybusModelStoreContainer" CdmEntityContainer="uybusEntities">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="uybusModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="IdAdmin" ColumnName="IdAdmin" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conductor">
+            <EntityTypeMapping TypeName="uybusModel.Conductor">
+              <MappingFragment StoreEntitySet="Conductor">
+                <ScalarProperty Name="IdConductor" ColumnName="IdConductor" />
+                <ScalarProperty Name="VencimientoLicencia" ColumnName="VencimientoLicencia" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Linea">
+            <EntityTypeMapping TypeName="uybusModel.Linea">
+              <MappingFragment StoreEntitySet="Linea">
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parada">
+            <EntityTypeMapping TypeName="uybusModel.Parada">
+              <MappingFragment StoreEntitySet="Parada">
+                <ScalarProperty Name="IdParada" ColumnName="IdParada" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Long" ColumnName="Long" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parametro">
+            <EntityTypeMapping TypeName="uybusModel.Parametro">
+              <MappingFragment StoreEntitySet="Parametro">
+                <ScalarProperty Name="IdParametro" ColumnName="IdParametro" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pasaje">
+            <EntityTypeMapping TypeName="uybusModel.Pasaje">
+              <MappingFragment StoreEntitySet="Pasaje">
+                <ScalarProperty Name="IdPasaje" ColumnName="IdPasaje" />
+                <ScalarProperty Name="Asientos" ColumnName="Asientos" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="TipoDocuemtno" ColumnName="TipoDocuemtno" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdViaje" ColumnName="IdViaje" />
+                <ScalarProperty Name="IdParadaDestino" ColumnName="IdParadaDestino" />
+                <ScalarProperty Name="IdParadaOrigen" ColumnName="IdParadaOrigen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persona">
+            <EntityTypeMapping TypeName="uybusModel.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Precio">
+            <EntityTypeMapping TypeName="uybusModel.Precio">
+              <MappingFragment StoreEntitySet="Precio">
+                <ScalarProperty Name="IdPrecio" ColumnName="IdPrecio" />
+                <ScalarProperty Name="Precio1" ColumnName="Precio" />
+                <ScalarProperty Name="FechaEntradaVigencia" ColumnName="FechaEntradaVigencia" />
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+                <ScalarProperty Name="IdParada" ColumnName="IdParada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salida">
+            <EntityTypeMapping TypeName="uybusModel.Salida">
+              <MappingFragment StoreEntitySet="Salida">
+                <ScalarProperty Name="IdSalida" ColumnName="IdSalida" />
+                <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+                <ScalarProperty Name="IdConductor" ColumnName="IdConductor" />
+                <ScalarProperty Name="IdVehiculo" ColumnName="IdVehiculo" />
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuperAdmin">
+            <EntityTypeMapping TypeName="uybusModel.SuperAdmin">
+              <MappingFragment StoreEntitySet="SuperAdmin">
+                <ScalarProperty Name="IdSuperAdmin" ColumnName="IdSuperAdmin" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tramo">
+            <EntityTypeMapping TypeName="uybusModel.Tramo">
+              <MappingFragment StoreEntitySet="Tramo">
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+                <ScalarProperty Name="IdParada" ColumnName="IdParada" />
+                <ScalarProperty Name="TiempoEstimado" ColumnName="TiempoEstimado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="uybusModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehiculo">
+            <EntityTypeMapping TypeName="uybusModel.Vehiculo">
+              <MappingFragment StoreEntitySet="Vehiculo">
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="CantAsientos" ColumnName="CantAsientos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Viaje">
+            <EntityTypeMapping TypeName="uybusModel.Viaje">
+              <MappingFragment StoreEntitySet="Viaje">
+                <ScalarProperty Name="IdViaje" ColumnName="IdViaje" />
+                <ScalarProperty Name="Finalizado" ColumnName="Finalizado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="HoraInicioReal" ColumnName="HoraInicioReal" />
+                <ScalarProperty Name="IdSalida" ColumnName="IdSalida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
