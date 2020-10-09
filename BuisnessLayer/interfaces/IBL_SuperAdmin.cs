@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BuisnessLayer.interfaces
 {
-    interface IBL_SuperAdmin
+    public interface IBL_SuperAdmin
     {
     }
 }

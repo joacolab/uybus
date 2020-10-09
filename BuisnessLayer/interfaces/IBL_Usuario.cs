@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BuisnessLayer.interfaces
 {
-    interface IBL_Usuario
+    public interface IBL_Usuario
     {
+        void comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, System.DateTime fechaViaje, string tipoDoc, string documento, int idParametro, int asiento);
     }
 }

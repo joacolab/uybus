@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BuisnessLayer.interfaces
 {
-    interface IBL_Conductor
+    public interface IBL_Conductor
     {
     }
 }

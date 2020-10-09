@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BuisnessLayer.interfaces
 {
-    interface IBL_Invitado
+    public interface IBL_Invitado
     {
+        void registrarse(string Documento, string Correo, string Password, string TipoDocumento,string Nombre);
     }
 }
