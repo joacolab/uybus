@@ -8,5 +8,7 @@ namespace BuisnessLayer.interfaces
 {
     public interface IBL_SuperAdmin
     {
+        void ubicarVehiculo();
+        void asignarRol(int id);
     }
 }
