@@ -458,6 +458,7 @@ namespace Consola
         {
             using (uybusEntities db = new uybusEntities())
             {
+
                 //datosDePrueba(db); //Descomentar para cargar datos a la base de datos uytube
                 var lst = db.Persona;
                 foreach (var l in lst)
