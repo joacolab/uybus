@@ -8,5 +8,7 @@ namespace BuisnessLayer.interfaces
 {
     public interface IBL_Conductor
     {
+        bool verificarPasaje(int codigoQR, int idParada);
+        void iniciarViaje(int idViaje, int idSalida);
     }
 }
