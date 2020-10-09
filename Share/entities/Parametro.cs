@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuisnessLayer.interfaces
+namespace Share.entities
 {
-    public interface IBL_test
+    class Parametro
     {
-        void foo();
+        public int IdParametro { get; set; }
+        public int Valor { get; set; }
     }
 }

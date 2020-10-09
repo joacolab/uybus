@@ -14,10 +14,10 @@ namespace Share.entities
         public string TipoDocumento { get; set; }
         public string Nombre { get; set; }
 
-        public Persona()
-        {
-
-        }
+        public Admin Admin { get; set; }
+        public Conductor Conductor { get; set; }
+        public SuperAdmin SuperAdmin { get; set; }
+        public Usuario Usuario { get; set; }
 
     }
 }

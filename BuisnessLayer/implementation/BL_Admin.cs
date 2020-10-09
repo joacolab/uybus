@@ -7,11 +7,7 @@ using System.Threading.Tasks;
 
 namespace BuisnessLayer.implementation
 {
-    public class BL_tets : IBL_test
+    public class BL_Admin : IBL_Admin
     {
-        public void foo()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

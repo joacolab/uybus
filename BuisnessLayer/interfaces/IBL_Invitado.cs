@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Share.entities
+namespace BuisnessLayer.interfaces
 {
-    class Admin
+    interface IBL_Invitado
     {
-        public int Id { get; set; }
-        public Persona Persona { get; set; }
     }
 }

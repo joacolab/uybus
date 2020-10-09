@@ -14,28 +14,16 @@ namespace DataAccessLayer
     
     public partial class Persona
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Persona()
-        {
-            this.Admin = new HashSet<Admin>();
-            this.Conductor = new HashSet<Conductor>();
-            this.SuperAdmin = new HashSet<SuperAdmin>();
-            this.Usuario = new HashSet<Usuario>();
-        }
-    
+        public int id { get; set; }
         public string Documento { get; set; }
         public string Correo { get; set; }
         public string Password { get; set; }
         public string TipoDocumento { get; set; }
         public string Nombre { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Admin> Admin { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Conductor> Conductor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SuperAdmin> SuperAdmin { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuario { get; set; }
+        public virtual Admin Admin { get; set; }
+        public virtual Conductor Conductor { get; set; }
+        public virtual SuperAdmin SuperAdmin { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

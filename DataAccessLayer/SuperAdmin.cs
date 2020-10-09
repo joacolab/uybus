@@ -14,8 +14,7 @@ namespace DataAccessLayer
     
     public partial class SuperAdmin
     {
-        public int IdSuperAdmin { get; set; }
-        public string IdPersona { get; set; }
+        public int Id { get; set; }
     
         public virtual Persona Persona { get; set; }
     }

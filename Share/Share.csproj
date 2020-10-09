@@ -43,7 +43,19 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="entities\Admin.cs" />
+    <Compile Include="entities\Conductor.cs" />
+    <Compile Include="entities\Linea.cs" />
+    <Compile Include="entities\Parada.cs" />
+    <Compile Include="entities\Parametro.cs" />
+    <Compile Include="entities\Pasaje.cs" />
     <Compile Include="entities\Persona.cs" />
+    <Compile Include="entities\Precio.cs" />
+    <Compile Include="entities\Salida.cs" />
+    <Compile Include="entities\SuperAdmin.cs" />
+    <Compile Include="entities\Tramo.cs" />
+    <Compile Include="entities\Usuario.cs" />
+    <Compile Include="entities\Vehiculo.cs" />
+    <Compile Include="entities\Viaje.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

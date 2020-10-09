@@ -7,18 +7,16 @@
       <Schema Namespace="uybusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
-            <PropertyRef Name="IdAdmin" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdPersona" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Conductor">
           <Key>
-            <PropertyRef Name="IdConductor" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdConductor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VencimientoLicencia" Type="date" Nullable="false" />
-          <Property Name="IdPersona" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Linea">
           <Key>
@@ -58,8 +56,9 @@
         </EntityType>
         <EntityType Name="Persona">
           <Key>
-            <PropertyRef Name="Documento" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Documento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
@@ -88,10 +87,9 @@
         </EntityType>
         <EntityType Name="SuperAdmin">
           <Key>
-            <PropertyRef Name="IdSuperAdmin" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdSuperAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdPersona" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Tramo">
           <Key>
@@ -104,10 +102,9 @@
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
-            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdPersona" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Vehiculo">
           <Key>
@@ -130,25 +127,25 @@
         </EntityType>
         <Association Name="FK_Admin_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Persona">
-              <PropertyRef Name="Documento" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Admin">
-              <PropertyRef Name="IdPersona" />
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Conductor_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Conductor" Type="Self.Conductor" Multiplicity="*" />
+          <End Role="Conductor" Type="Self.Conductor" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Persona">
-              <PropertyRef Name="Documento" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Conductor">
-              <PropertyRef Name="IdPersona" />
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -181,7 +178,7 @@
           <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
-              <PropertyRef Name="IdUsuario" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Pasaje">
               <PropertyRef Name="IdUsuario" />
@@ -219,7 +216,7 @@
           <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Conductor">
-              <PropertyRef Name="IdConductor" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Salida">
               <PropertyRef Name="IdConductor" />
@@ -252,13 +249,13 @@
         </Association>
         <Association Name="FK_SuperAdmin_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="SuperAdmin" Type="Self.SuperAdmin" Multiplicity="*" />
+          <End Role="SuperAdmin" Type="Self.SuperAdmin" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Persona">
-              <PropertyRef Name="Documento" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="SuperAdmin">
-              <PropertyRef Name="IdPersona" />
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -288,13 +285,13 @@
         </Association>
         <Association Name="FK_Usuario_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Persona">
-              <PropertyRef Name="Documento" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Usuario">
-              <PropertyRef Name="IdPersona" />
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -393,19 +390,17 @@
       <Schema Namespace="uybusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Admin">
           <Key>
-            <PropertyRef Name="IdAdmin" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdPersona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_Admin_Persona" FromRole="Admin" ToRole="Persona" />
         </EntityType>
         <EntityType Name="Conductor">
           <Key>
-            <PropertyRef Name="IdConductor" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdConductor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VencimientoLicencia" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdPersona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_Conductor_Persona" FromRole="Conductor" ToRole="Persona" />
           <NavigationProperty Name="Salida" Relationship="Self.FK_Salida_Conductor" FromRole="Conductor" ToRole="Salida" />
         </EntityType>
@@ -456,8 +451,9 @@
         </EntityType>
         <EntityType Name="Persona">
           <Key>
-            <PropertyRef Name="Documento" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -495,10 +491,9 @@
         </EntityType>
         <EntityType Name="SuperAdmin">
           <Key>
-            <PropertyRef Name="IdSuperAdmin" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdSuperAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdPersona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_SuperAdmin_Persona" FromRole="SuperAdmin" ToRole="Persona" />
         </EntityType>
         <EntityType Name="Tramo">
@@ -515,10 +510,9 @@
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
-            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdPersona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Pasaje" Relationship="Self.FK_Pasaje_Usuario" FromRole="Usuario" ToRole="Pasaje" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_Usuario_Persona" FromRole="Usuario" ToRole="Persona" />
         </EntityType>
@@ -546,25 +540,25 @@
         </EntityType>
         <Association Name="FK_Admin_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Persona">
-              <PropertyRef Name="Documento" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Admin">
-              <PropertyRef Name="IdPersona" />
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Conductor_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Conductor" Type="Self.Conductor" Multiplicity="*" />
+          <End Role="Conductor" Type="Self.Conductor" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Persona">
-              <PropertyRef Name="Documento" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Conductor">
-              <PropertyRef Name="IdPersona" />
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -573,7 +567,7 @@
           <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Conductor">
-              <PropertyRef Name="IdConductor" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Salida">
               <PropertyRef Name="IdConductor" />
@@ -645,7 +639,7 @@
           <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
-              <PropertyRef Name="IdUsuario" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Pasaje">
               <PropertyRef Name="IdUsuario" />
@@ -666,25 +660,25 @@
         </Association>
         <Association Name="FK_SuperAdmin_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="SuperAdmin" Type="Self.SuperAdmin" Multiplicity="*" />
+          <End Role="SuperAdmin" Type="Self.SuperAdmin" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Persona">
-              <PropertyRef Name="Documento" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="SuperAdmin">
-              <PropertyRef Name="IdPersona" />
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Persona">
-              <PropertyRef Name="Documento" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Usuario">
-              <PropertyRef Name="IdPersona" />
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -811,17 +805,15 @@
           <EntitySetMapping Name="Admin">
             <EntityTypeMapping TypeName="uybusModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="IdAdmin" ColumnName="IdAdmin" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Conductor">
             <EntityTypeMapping TypeName="uybusModel.Conductor">
               <MappingFragment StoreEntitySet="Conductor">
-                <ScalarProperty Name="IdConductor" ColumnName="IdConductor" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="VencimientoLicencia" ColumnName="VencimientoLicencia" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -868,6 +860,7 @@
           <EntitySetMapping Name="Persona">
             <EntityTypeMapping TypeName="uybusModel.Persona">
               <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Documento" ColumnName="Documento" />
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -901,8 +894,7 @@
           <EntitySetMapping Name="SuperAdmin">
             <EntityTypeMapping TypeName="uybusModel.SuperAdmin">
               <MappingFragment StoreEntitySet="SuperAdmin">
-                <ScalarProperty Name="IdSuperAdmin" ColumnName="IdSuperAdmin" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -918,8 +910,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="uybusModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Share.entities
+namespace BuisnessLayer.interfaces
 {
-    class Admin
+    public interface IBL_Admin
     {
-        public int Id { get; set; }
-        public Persona Persona { get; set; }
+        //void gestionDeViajes();
+
     }
 }

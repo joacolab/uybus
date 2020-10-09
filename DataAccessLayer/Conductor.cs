@@ -20,9 +20,8 @@ namespace DataAccessLayer
             this.Salida = new HashSet<Salida>();
         }
     
-        public int IdConductor { get; set; }
+        public int Id { get; set; }
         public System.DateTime VencimientoLicencia { get; set; }
-        public string IdPersona { get; set; }
     
         public virtual Persona Persona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
