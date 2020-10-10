@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="implementation\BL_Admin.cs" />
     <Compile Include="implementation\BL_Conductor.cs" />
     <Compile Include="implementation\BL_Invitado.cs" />

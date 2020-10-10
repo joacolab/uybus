@@ -9,5 +9,14 @@ namespace BuisnessLayer.implementation
 {
     public class BL_SuperAdmin : IBL_SuperAdmin
     {
+        public void asignarRol(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ubicarVehiculo()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
