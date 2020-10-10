@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    class Pasaje
+    public class Pasaje
     {
         public int IdPasaje { get; set; }
         public Nullable<int> Asientos { get; set; }
@@ -17,9 +17,9 @@ namespace Share.entities
         public int IdParadaDestino { get; set; }
         public int IdParadaOrigen { get; set; }
 
-        public Parada Parada { get; set; } = null;
-        public Parada Parada1 { get; set; } = null;
-        public Usuario Usuario { get; set; } = null;
-        public Viaje Viaje { get; set; } = null;
+        public Parada Parada { get; set; } 
+        public Parada Parada1 { get; set; }
+        public Usuario Usuario { get; set; }
+        public Viaje Viaje { get; set; } 
     }
 }

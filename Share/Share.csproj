@@ -56,7 +56,9 @@
     <Compile Include="entities\Usuario.cs" />
     <Compile Include="entities\Vehiculo.cs" />
     <Compile Include="entities\Viaje.cs" />
+    <Compile Include="enums\Dias.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

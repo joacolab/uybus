@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    class Parametro
+    public class Parametro
     {
         public int IdParametro { get; set; }
         public int Valor { get; set; }

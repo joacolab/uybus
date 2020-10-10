@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    class Tramo
+    public class Tramo
     {
         public int IdLinea { get; set; }
         public int IdParada { get; set; }
         public int TiempoEstimado { get; set; }
 
-        public Linea Linea { get; set; } = null;
-        public Parada Parada { get; set; } = null;
-        public ICollection<Precio> Precio { get; set; } = null;
+        public Linea Linea { get; set; }
+        public Parada Parada { get; set; } 
+        public ICollection<Precio> Precio { get; set; } = new List<Precio>();
     }
 }

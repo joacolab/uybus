@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    class Admin
+    public class Admin
     {
         public int Id { get; set; }
         public Persona Persona { get; set; }
