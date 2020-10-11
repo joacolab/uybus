@@ -15,6 +15,11 @@ namespace DataAccessLayer.implementation
             throw new NotImplementedException();
         }
 
+        public void editVehiculo(string matricula, string marca, string modelo, int cantAsientos)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<EVehiculo> getAllVehiculos()
         {
             throw new NotImplementedException();

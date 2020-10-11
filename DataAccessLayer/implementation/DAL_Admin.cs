@@ -12,7 +12,23 @@ namespace DataAccessLayer.implementation
     {
         public EAdmin addAdmin(int idPersona)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    EAdmin EA = new EAdmin();
+
+                    Admin ad = new Admin();
+                    ad.Id = idPersona;
+                    db.SaveChanges();
+                    EA.Id = idPersona;
+                    return EA;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public EAdmin getAdmin(int idAdmin)
