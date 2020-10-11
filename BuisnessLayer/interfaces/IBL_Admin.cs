@@ -27,7 +27,9 @@ namespace BuisnessLayer.interfaces
 
         Parada crearParada(string nombre, float lat, float lon);
 
-        Linea crearLinea(string nombre, List<Tramo> tramos);
+        Linea crearLinea(string nombre);
+
+        Tramo crearTramos(int idParada, int idLinea, int tiempoEst, int precio, DateTime FechaEntradaVigencia);
 
         /// <summary>
         /// aniade la fecha de vencimiento de libreta de conducir al condutor

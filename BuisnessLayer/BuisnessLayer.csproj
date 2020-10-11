@@ -43,11 +43,13 @@
   <ItemGroup>
     <Compile Include="implementation\BL_Admin.cs" />
     <Compile Include="implementation\BL_Conductor.cs" />
+    <Compile Include="implementation\BL_General.cs" />
     <Compile Include="implementation\BL_Invitado.cs" />
     <Compile Include="implementation\BL_SuperAdmin.cs" />
     <Compile Include="implementation\BL_Usuario.cs" />
     <Compile Include="interfaces\IBL_Admin.cs" />
     <Compile Include="interfaces\IBL_Conductor.cs" />
+    <Compile Include="interfaces\IBL_General.cs" />
     <Compile Include="interfaces\IBL_Invitado.cs" />
     <Compile Include="interfaces\IBL_SuperAdmin.cs" />
     <Compile Include="interfaces\IBL_Usuario.cs" />

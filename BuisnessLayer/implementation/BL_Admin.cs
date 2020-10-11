@@ -16,12 +16,22 @@ namespace BuisnessLayer.implementation
             throw new NotImplementedException();
         }
 
+        public Linea crearLinea(string nombre)
+        {
+            throw new NotImplementedException();
+        }
+
         public Parada crearParada(string nombre, float lat, float lon)
         {
             throw new NotImplementedException();
         }
 
         public Salida crearSalida(int idConductor, string Matricula, int idLinea, TimeSpan horaInicio)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Tramo crearTramos(int idParada, int idLinea, int tiempoEst, int precio, DateTime FechaEntradaVigencia)
         {
             throw new NotImplementedException();
         }
