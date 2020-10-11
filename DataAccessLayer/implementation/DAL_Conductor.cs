@@ -10,22 +10,12 @@ namespace DataAccessLayer.implementation
 {
     public class DAL_Conductor : IDAL_Conductor
     {
-        public EConductor addConductor(int idPersona)
+        public EConductor addConductor(int idPersona, DateTime FechaVenc)
         {
             throw new NotImplementedException();
         }
 
-        public EConductor addConductor(int idPersona, DateTime FechaVenc, List<ESalida> salidas)
-        {
-            throw new NotImplementedException();
-        }
-
-        public EConductor addFechaVencLib(int idConductor, DateTime FechaVenc)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void addSalidas(int idConductor, List<ESalida> salidas)
+        public void addFechaVencLib(int idConductor, DateTime FechaVenc)
         {
             throw new NotImplementedException();
         }
@@ -36,11 +26,6 @@ namespace DataAccessLayer.implementation
         }
 
         public EConductor getConductores(int idConductor)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<ESalida> getSalidas(int idConductor)
         {
             throw new NotImplementedException();
         }

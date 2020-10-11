@@ -10,12 +10,7 @@ namespace DataAccessLayer.implementation
 {
     public class DAL_Viaje : IDAL_Viaje
     {
-        public void addPasajes(int viaje, List<EPasaje> pasajes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public EViaje addViaje(bool finalizdo, DateTime Fecha, TimeSpan HoraInicioReal, int IdSalida, List<EPasaje> pasajes)
+        public EViaje addViaje(bool finalizdo, DateTime Fecha, TimeSpan HoraInicioReal, int IdSalida)
         {
             throw new NotImplementedException();
         }

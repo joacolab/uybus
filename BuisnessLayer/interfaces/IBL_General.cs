@@ -10,8 +10,8 @@ namespace BuisnessLayer.interfaces
     public interface IBL_General
     {
         void finalizarViaje(int idViaje);
-        List<EPasaje> reposrtesPasajes(DateTime fechaDesde, DateTime fechaHasat, int linea, int horario);
-        void notificacionProximidad();
+        List<EPasaje> reposrtesPasajes(DateTime fechaDesde, DateTime fechaHasat, int linea, int salida);
+        List<EUsuario> notificacionProximidad(int Parada, int viaje);
         /// <summary>
         /// debuelbe 1, si el viaje con ese "idViaje", tiene todos los asientos del vehiculo ocupados, desde el origen hasta el final.
         /// </summary>

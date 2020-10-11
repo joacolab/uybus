@@ -20,11 +20,6 @@ namespace DataAccessLayer.implementation
             throw new NotImplementedException();
         }
 
-        public List<EPasaje> getPasajes(int idUsuario)
-        {
-            throw new NotImplementedException();
-        }
-
         public EUsuario getUsuario(int idUsuario)
         {
             throw new NotImplementedException();

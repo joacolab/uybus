@@ -10,22 +10,7 @@ namespace DataAccessLayer.implementation
 {
     public class DAL_Parada : IDAL_Parada
     {
-        public EParada addParada(int idParada, List<EPasaje> pasajesDestino, List<EPasaje> pasajesOrigen, List<ETramo> tramos, string nombre, float lat, float lon)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void addPasajeDestino(int idParada, List<EPasaje> pasajesDestino)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void addPasajeOrigen(int idParada, List<EPasaje> pasajesOrigen)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void addTramo(int idParada, List<ETramo> tramos)
+        public EParada addParada(int idParada, string nombre, float lat, float lon)
         {
             throw new NotImplementedException();
         }

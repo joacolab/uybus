@@ -11,11 +11,6 @@ namespace BuisnessLayer.implementation
 {
     public class BL_Admin : IBL_Admin
     {
-        public ELinea crearLinea(string nombre, List<ETramo> tramos)
-        {
-            throw new NotImplementedException();
-        }
-
         public ELinea crearLinea(string nombre)
         {
             throw new NotImplementedException();

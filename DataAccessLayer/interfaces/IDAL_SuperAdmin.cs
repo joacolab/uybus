@@ -11,7 +11,6 @@ namespace DataAccessLayer.interfaces
     {
         ESuperAdmin addSuperAdmin(int idPersona);
         List<ESuperAdmin> getAllSuperAdmin();
-
         ESuperAdmin getSuperAdmin(int idSuperAdmin);
     }
 }

@@ -17,7 +17,6 @@ namespace BuisnessLayer.implementation
 
         public List<string> proximoVehiculo(int idUsuario, int idParada)
         {
-            //comentario
             throw new NotImplementedException();
         }
     }

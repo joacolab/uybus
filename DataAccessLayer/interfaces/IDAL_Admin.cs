@@ -11,7 +11,7 @@ namespace DataAccessLayer.interfaces
     {
         EAdmin addAdmin(int idPersona);
         List<EAdmin> getAllAdmin();
-
         EAdmin getAdmin(int idAdmin);
+
     }
 }

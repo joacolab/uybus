@@ -9,10 +9,9 @@ namespace DataAccessLayer.interfaces
 {
     public interface IDAL_Salida
     {
-        ESalida addSalida(string matricula, int linea, TimeSpan horaInicio, int idConductor, List<EViaje>);
+        ESalida addSalida(string matricula, int linea, TimeSpan horaInicio, int idConductor);
         List<ESalida> getAllSalidas();
         ESalida getSalidas(int idSalida);
 
-        int getIdConductor(int idSalida);
     }
 }

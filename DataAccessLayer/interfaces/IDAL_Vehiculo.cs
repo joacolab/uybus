@@ -9,11 +9,8 @@ namespace DataAccessLayer.interfaces
 {
     public interface IDAL_Vehiculo
     {
-        EVehiculo addVehiculo(string matricula, string marca, string modelo, int cantAsientos, List<ESalida> salidas);
+        EVehiculo addVehiculo(string matricula, string marca, string modelo, int cantAsientos);
         List<EVehiculo> getAllVehiculos();
-
-        void addSalidas(string matricula, List<ESalida> salidas);
         EVehiculo getVehiculos(string matricula);
-        List<ESalida> getSalidas(string matricula);
     }
 }

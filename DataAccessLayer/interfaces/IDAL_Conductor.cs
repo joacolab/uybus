@@ -9,14 +9,11 @@ namespace DataAccessLayer.interfaces
 {
     public interface IDAL_Conductor
     {
-        EConductor addConductor(int idPersona, DateTime FechaVenc, List<ESalida> salidas);
+        EConductor addConductor(int idPersona, DateTime FechaVenc);
         List<EConductor> getAllConductores();
         EConductor getConductores(int idConductor);
 
-        void addSalidas(int idConductor, List<ESalida> salidas);
+        void addFechaVencLib(int idConductor, DateTime FechaVenc);
 
-        List<ESalida> getSalidas(int idConductor);
-
-        EConductor addFechaVencLib(int idConductor, DateTime FechaVenc);
     }
 }

@@ -10,17 +10,12 @@ namespace DataAccessLayer.implementation
 {
     public class DAL_Salida : IDAL_Salida
     {
-        public ESalida addSalida(string matricula, int linea, TimeSpan horaInicio, int idConductor, List<EViaje> )
+        public ESalida addSalida(string matricula, int linea, TimeSpan horaInicio, int idConductor)
         {
             throw new NotImplementedException();
         }
 
         public List<ESalida> getAllSalidas()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int getIdConductor(int idSalida)
         {
             throw new NotImplementedException();
         }

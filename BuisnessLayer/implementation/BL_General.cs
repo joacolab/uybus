@@ -15,7 +15,7 @@ namespace BuisnessLayer.implementation
             throw new NotImplementedException();
         }
 
-        public void notificacionProximidad()
+        public List<EUsuario> notificacionProximidad(int Parada, int viaje)
         {
             throw new NotImplementedException();
         }
@@ -25,7 +25,7 @@ namespace BuisnessLayer.implementation
             throw new NotImplementedException();
         }
 
-        public List<EPasaje> reposrtesPasajes(DateTime fechaDesde, DateTime fechaHasat, int linea, int horario)
+        public List<EPasaje> reposrtesPasajes(DateTime fechaDesde, DateTime fechaHasat, int linea, int salida)
         {
             throw new NotImplementedException();
         }

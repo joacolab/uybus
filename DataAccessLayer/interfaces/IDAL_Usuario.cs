@@ -11,8 +11,7 @@ namespace DataAccessLayer.interfaces
     {
         EUsuario addUsuario(int idPersona);
         List<EUsuario> getAllUsuarios();
-
         EUsuario getUsuario(int idUsuario);
-        List<EPasaje> getPasajes(int idUsuario);
+
     }
 }
