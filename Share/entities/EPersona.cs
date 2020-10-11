@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    public class Persona
+    public class EPersona
     {
         public int id { get; set; }
         public string Documento { get; set; }
@@ -15,10 +15,10 @@ namespace Share.entities
         public string TipoDocumento { get; set; }
         public string Nombre { get; set; }
 
-        public Admin Admin { get; set; }
-        public Conductor Conductor { get; set; }
-        public SuperAdmin SuperAdmin { get; set; }
-        public Usuario Usuario { get; set; }
+        public EAdmin Admin { get; set; }
+        public EConductor Conductor { get; set; }
+        public ESuperAdmin SuperAdmin { get; set; }
+        public EUsuario Usuario { get; set; }
 
     }
 }

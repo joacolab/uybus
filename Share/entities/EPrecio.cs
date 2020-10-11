@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    public class Precio
+    public class EPrecio
     {
         public int IdPrecio { get; set; }
         public int Precio1 { get; set; }
@@ -14,6 +14,6 @@ namespace Share.entities
         public int IdLinea { get; set; }
         public int IdParada { get; set; }
 
-        public Tramo Tramo { get; set; }
+        public ETramo Tramo { get; set; }
     }
 }

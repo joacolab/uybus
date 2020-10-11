@@ -10,7 +10,7 @@ namespace BuisnessLayer.implementation
 {
     public class BL_Usuario : IBL_Usuario
     {
-        public Pasaje comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, DateTime fechaViaje, string tipoDoc, string documento, int idParametro, int asiento)
+        public EPasaje comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, DateTime fechaViaje, string tipoDoc, string documento, int idParametro, int asiento)
         {
             throw new NotImplementedException();
         }

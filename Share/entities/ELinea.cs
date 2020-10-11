@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    public class Linea
+    public class ELinea
     {
         public int IdLinea { get; set; }
         public string Nombre { get; set; }
 
-        public ICollection<Salida> Salida { get; set; } = new List<Salida>();
-        public ICollection<Tramo> Tramo { get; set; } = new List<Tramo>();
+        public ICollection<ESalida> Salida { get; set; } = new List<ESalida>();
+        public ICollection<ETramo> Tramo { get; set; } = new List<ETramo>();
     }
 }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    public class Usuario
+    public class EAdmin
     {
         public int Id { get; set; }
-        public ICollection<Pasaje> Pasaje { get; set; } = new List<Pasaje>();
-        public Persona Persona { get; set; } 
+        public EPersona Persona { get; set; }
     }
 }

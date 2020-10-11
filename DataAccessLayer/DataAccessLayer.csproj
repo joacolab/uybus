@@ -53,10 +53,35 @@
     <Compile Include="Admin.cs">
       <DependentUpon>ModelUyBus.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Conductor.cs">
       <DependentUpon>ModelUyBus.tt</DependentUpon>
     </Compile>
+    <Compile Include="implementation\DAL_Admin.cs" />
+    <Compile Include="implementation\DAL_Conductor.cs" />
+    <Compile Include="implementation\DAL_Linea.cs" />
+    <Compile Include="implementation\DAL_Parada.cs" />
+    <Compile Include="implementation\DAL_Parametro.cs" />
+    <Compile Include="implementation\DAL_Pasaje.cs" />
+    <Compile Include="implementation\DAL_Precio.cs" />
+    <Compile Include="implementation\DAL_Salida.cs" />
+    <Compile Include="implementation\DAL_SuperAdmin.cs" />
+    <Compile Include="implementation\DAL_Tramo.cs" />
+    <Compile Include="implementation\DAL_Usuario.cs" />
+    <Compile Include="implementation\DAL_Vehiculo.cs" />
+    <Compile Include="implementation\DAL_Viaje.cs" />
+    <Compile Include="interfaces\IDAL_Admin.cs" />
+    <Compile Include="interfaces\IDAL_Conductor.cs" />
+    <Compile Include="interfaces\IDAL_Linea.cs" />
+    <Compile Include="interfaces\IDAL_Parada.cs" />
+    <Compile Include="interfaces\IDAL_Parametro.cs" />
+    <Compile Include="interfaces\IDAL_Pasaje.cs" />
+    <Compile Include="interfaces\IDAL_Precio.cs" />
+    <Compile Include="interfaces\IDAL_Salida.cs" />
+    <Compile Include="interfaces\IDAL_SuperAdmin.cs" />
+    <Compile Include="interfaces\IDAL_Tramo.cs" />
+    <Compile Include="interfaces\IDAL_Usuario.cs" />
+    <Compile Include="interfaces\IDAL_Vehiculo.cs" />
+    <Compile Include="interfaces\IDAL_Viaje.cs" />
     <Compile Include="Linea.cs">
       <DependentUpon>ModelUyBus.tt</DependentUpon>
     </Compile>
@@ -138,9 +163,12 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="implementation\" />
-    <Folder Include="interfaces\" />
+    <ProjectReference Include="..\Share\Share.csproj">
+      <Project>{7543C2DE-25C1-41CF-B158-91060EB329AE}</Project>
+      <Name>Share</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

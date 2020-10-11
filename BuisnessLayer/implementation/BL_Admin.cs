@@ -11,42 +11,42 @@ namespace BuisnessLayer.implementation
 {
     public class BL_Admin : IBL_Admin
     {
-        public Linea crearLinea(string nombre, List<Tramo> tramos)
+        public ELinea crearLinea(string nombre, List<ETramo> tramos)
         {
             throw new NotImplementedException();
         }
 
-        public Linea crearLinea(string nombre)
+        public ELinea crearLinea(string nombre)
         {
             throw new NotImplementedException();
         }
 
-        public Parada crearParada(string nombre, float lat, float lon)
+        public EParada crearParada(string nombre, float lat, float lon)
         {
             throw new NotImplementedException();
         }
 
-        public Salida crearSalida(int idConductor, string Matricula, int idLinea, TimeSpan horaInicio)
+        public ESalida crearSalida(int idConductor, string Matricula, int idLinea, TimeSpan horaInicio)
         {
             throw new NotImplementedException();
         }
 
-        public Tramo crearTramos(int idParada, int idLinea, int tiempoEst, int precio, DateTime FechaEntradaVigencia)
+        public ETramo crearTramos(int idParada, int idLinea, int tiempoEst, int precio, DateTime FechaEntradaVigencia)
         {
             throw new NotImplementedException();
         }
 
-        public Vehiculo crearVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos)
+        public EVehiculo crearVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos)
         {
             throw new NotImplementedException();
         }
 
-        public List<Viaje> crearViajes(DateTime fechaInicio, DateTime fechaFinal, List<Dias> diasSemana, int idSalida)
+        public List<EViaje> crearViajes(DateTime fechaInicio, DateTime fechaFinal, List<Dias> diasSemana, int idSalida)
         {
             throw new NotImplementedException();
         }
 
-        public Vehiculo editarVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos)
+        public EVehiculo editarVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos)
         {
             throw new NotImplementedException();
         }

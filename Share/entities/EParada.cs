@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    public class Parada
+    public class EParada
     {
         public int IdParada { get; set; }
         public string Nombre { get; set; }
         public double Lat { get; set; }
         public double Long { get; set; }
-        public ICollection<Pasaje> Pasaje { get; set; } = new List<Pasaje>();
-        public ICollection<Pasaje> Pasaje1 { get; set; } = new List<Pasaje>();
-        public ICollection<Tramo> Tramo { get; set; } = new List<Tramo>();
+        public ICollection<EPasaje> Pasaje { get; set; } = new List<EPasaje>();
+        public ICollection<EPasaje> Pasaje1 { get; set; } = new List<EPasaje>();
+        public ICollection<ETramo> Tramo { get; set; } = new List<ETramo>();
     }
 }

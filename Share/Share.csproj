@@ -41,20 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="entities\Admin.cs" />
-    <Compile Include="entities\Conductor.cs" />
-    <Compile Include="entities\Linea.cs" />
-    <Compile Include="entities\Parada.cs" />
-    <Compile Include="entities\Parametro.cs" />
-    <Compile Include="entities\Pasaje.cs" />
-    <Compile Include="entities\Persona.cs" />
-    <Compile Include="entities\Precio.cs" />
-    <Compile Include="entities\Salida.cs" />
-    <Compile Include="entities\SuperAdmin.cs" />
-    <Compile Include="entities\Tramo.cs" />
-    <Compile Include="entities\Usuario.cs" />
-    <Compile Include="entities\Vehiculo.cs" />
-    <Compile Include="entities\Viaje.cs" />
+    <Compile Include="entities\EAdmin.cs" />
+    <Compile Include="entities\EConductor.cs" />
+    <Compile Include="entities\ELinea.cs" />
+    <Compile Include="entities\EParada.cs" />
+    <Compile Include="entities\EParametro.cs" />
+    <Compile Include="entities\EPasaje.cs" />
+    <Compile Include="entities\EPersona.cs" />
+    <Compile Include="entities\EPrecio.cs" />
+    <Compile Include="entities\ESalida.cs" />
+    <Compile Include="entities\ESuperAdmin.cs" />
+    <Compile Include="entities\ETramo.cs" />
+    <Compile Include="entities\EUsuario.cs" />
+    <Compile Include="entities\EVehiculo.cs" />
+    <Compile Include="entities\EViaje.cs" />
     <Compile Include="enums\Dias.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

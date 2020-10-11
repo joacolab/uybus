@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    public class Salida
+    public class ESalida
     {
         public int IdSalida { get; set; }
         public System.TimeSpan HoraInicio { get; set; }
@@ -14,9 +14,9 @@ namespace Share.entities
         public string IdVehiculo { get; set; }
         public int IdLinea { get; set; }
 
-        public Conductor Conductor { get; set; }
-        public Linea Linea { get; set; }
-        public Vehiculo Vehiculo { get; set; }
-        public ICollection<Viaje> Viaje { get; set; } = new List<Viaje>();
+        public EConductor Conductor { get; set; }
+        public ELinea Linea { get; set; }
+        public EVehiculo Vehiculo { get; set; }
+        public ICollection<EViaje> Viaje { get; set; } = new List<EViaje>();
     }
 }

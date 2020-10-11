@@ -25,7 +25,7 @@ namespace BuisnessLayer.implementation
             throw new NotImplementedException();
         }
 
-        public List<Pasaje> reposrtesPasajes(DateTime fechaDesde, DateTime fechaHasat, int linea, int horario)
+        public List<EPasaje> reposrtesPasajes(DateTime fechaDesde, DateTime fechaHasat, int linea, int horario)
         {
             throw new NotImplementedException();
         }

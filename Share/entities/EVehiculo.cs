@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    public class Vehiculo
+    public class EVehiculo
     {
         public string Matricula { get; set; }
         public string Modelo { get; set; }
         public string Marca { get; set; }
         public int CantAsientos { get; set; }
-        public ICollection<Salida> Salida { get; set; } = new List<Salida>();
+        public ICollection<ESalida> Salida { get; set; } = new List<ESalida>();
     }
 }

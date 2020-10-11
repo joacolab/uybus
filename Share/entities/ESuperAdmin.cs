@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Share.entities
 {
-    public class Parametro
+    public class ESuperAdmin
     {
-        public int IdParametro { get; set; }
-        public int Valor { get; set; }
+        public int Id { get; set; }
+        public EPersona Persona { get; set; }
     }
 }

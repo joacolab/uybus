@@ -21,15 +21,15 @@ namespace BuisnessLayer.interfaces
         /// <param name="diasSemana">Días de la semana en los que se realiza el viaje</param>
         /// <param name="idSalida">Identificador de salida correspondiente a los horarios de salida</param>
         /// <returns></returns>
-        List<Viaje> crearViajes(DateTime fechaInicio, DateTime fechaFinal, List<Dias> diasSemana, int idSalida);
-        Vehiculo crearVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos);
-        Vehiculo editarVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos);
+        List<EViaje> crearViajes(DateTime fechaInicio, DateTime fechaFinal, List<Dias> diasSemana, int idSalida);
+        EVehiculo crearVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos);
+        EVehiculo editarVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos);
 
-        Parada crearParada(string nombre, float lat, float lon);
+        EParada crearParada(string nombre, float lat, float lon);
 
-        Linea crearLinea(string nombre);
+        ELinea crearLinea(string nombre);
 
-        Tramo crearTramos(int idParada, int idLinea, int tiempoEst, int precio, DateTime FechaEntradaVigencia);
+        ETramo crearTramos(int idParada, int idLinea, int tiempoEst, int precio, DateTime FechaEntradaVigencia);
 
         /// <summary>
         /// aniade la fecha de vencimiento de libreta de conducir al condutor
@@ -39,6 +39,6 @@ namespace BuisnessLayer.interfaces
         /// <returns></returns>
         void gestionConductores(int idUsuario, DateTime venLibreta);
 
-        Salida crearSalida(int idConductor, string Matricula, int idLinea, TimeSpan horaInicio);
+        ESalida crearSalida(int idConductor, string Matricula, int idLinea, TimeSpan horaInicio);
     }
 }
