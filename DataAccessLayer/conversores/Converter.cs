@@ -79,7 +79,6 @@ namespace DataAccessLayer.conversores
             t.Precio = lst;
             return t;
         }
-
         static public ETramo tramoAETramo(Tramo t)
         {
             ETramo et = new ETramo();
@@ -94,7 +93,6 @@ namespace DataAccessLayer.conversores
             et.Precio = lst;
             return et;
         }
-
         static public ELinea lineaAElinea(Linea l)
         {
             ELinea el = new ELinea();
@@ -137,9 +135,6 @@ namespace DataAccessLayer.conversores
             l.Tramo = lst2;
             return l;
         }
-
-
-
         static public EParametro parametroAEParametro(Parametro p)
         {
             EParametro ep = new EParametro();
@@ -322,8 +317,6 @@ namespace DataAccessLayer.conversores
             vi.Pasaje = lst;
             return vi;
         }
-
-
         static public ESalida salidaAESalida(Salida sal)
         {
             ESalida Esal = new ESalida();
