@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{510D1794-514B-4BA8-98FD-A3442FEF42C6}</ProjectGuid>
+    <ProjectGuid>{70EF34FC-2B9D-491A-AF8E-84A0034194D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataAccessLayer</RootNamespace>
@@ -56,12 +56,14 @@
     <Compile Include="Conductor.cs">
       <DependentUpon>ModelUyBus.tt</DependentUpon>
     </Compile>
+    <Compile Include="conversores\Converter.cs" />
     <Compile Include="implementation\DAL_Admin.cs" />
     <Compile Include="implementation\DAL_Conductor.cs" />
     <Compile Include="implementation\DAL_Linea.cs" />
     <Compile Include="implementation\DAL_Parada.cs" />
     <Compile Include="implementation\DAL_Parametro.cs" />
     <Compile Include="implementation\DAL_Pasaje.cs" />
+    <Compile Include="implementation\DAL_Persona.cs" />
     <Compile Include="implementation\DAL_Precio.cs" />
     <Compile Include="implementation\DAL_Salida.cs" />
     <Compile Include="implementation\DAL_SuperAdmin.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="interfaces\IDAL_Parada.cs" />
     <Compile Include="interfaces\IDAL_Parametro.cs" />
     <Compile Include="interfaces\IDAL_Pasaje.cs" />
+    <Compile Include="interfaces\IDAL_Persona.cs" />
     <Compile Include="interfaces\IDAL_Precio.cs" />
     <Compile Include="interfaces\IDAL_Salida.cs" />
     <Compile Include="interfaces\IDAL_SuperAdmin.cs" />
@@ -166,7 +169,7 @@
   <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Share\Share.csproj">
-      <Project>{7543C2DE-25C1-41CF-B158-91060EB329AE}</Project>
+      <Project>{7543c2de-25c1-41cf-b158-91060eb329ae}</Project>
       <Name>Share</Name>
     </ProjectReference>
   </ItemGroup>

@@ -55,6 +55,8 @@
     <Compile Include="entities\EUsuario.cs" />
     <Compile Include="entities\EVehiculo.cs" />
     <Compile Include="entities\EViaje.cs" />
+    <Compile Include="enums\TipoDoc.cs" />
+    <Compile Include="enums\Rol.cs" />
     <Compile Include="enums\Dias.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

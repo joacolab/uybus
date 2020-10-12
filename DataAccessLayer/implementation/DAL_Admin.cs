@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.interfaces;
+﻿using DataAccessLayer.conversores;
+using DataAccessLayer.interfaces;
 using Share.entities;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace DataAccessLayer.implementation
                     Admin ad = new Admin();
                     ad.Id = idPersona;
                     db.SaveChanges();
+
                     EA.Id = idPersona;
                     return EA;
                 }
@@ -31,14 +33,30 @@ namespace DataAccessLayer.implementation
             }
         }
 
-        public EAdmin getAdmin(int idAdmin)
+        public List<EPersona> getAllAdmin()
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    List<EPersona> lstEp = null;
 
-        public List<EAdmin> getAllAdmin()
-        {
-            throw new NotImplementedException();
+                    var Admins = db.Admin;
+
+                    foreach (var a in Admins)
+                    {
+                        Persona per = db.Persona.Find(a.Id);
+                        EPersona Eper = new EPersona();
+                        Eper = Converter.personaAEpersona(per);
+                        lstEp.Add(Eper);
+                    }
+                    return lstEp;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

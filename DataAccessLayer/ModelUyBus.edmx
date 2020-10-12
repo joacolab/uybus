@@ -62,8 +62,11 @@
           <Property Name="Documento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="TipoDocumento" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoDocumento" Type="int" Nullable="false" />
+          <Property Name="pNombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sNombre" Type="varchar" MaxLength="50" />
+          <Property Name="pApellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sApellido" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Precio">
           <Key>
@@ -457,8 +460,11 @@
           <Property Name="Documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TipoDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoDocumento" Type="Int32" Nullable="false" />
+          <Property Name="pNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Admin" Relationship="Self.FK_Admin_Persona" FromRole="Persona" ToRole="Admin" />
           <NavigationProperty Name="Conductor" Relationship="Self.FK_Conductor_Persona" FromRole="Persona" ToRole="Conductor" />
           <NavigationProperty Name="SuperAdmin" Relationship="Self.FK_SuperAdmin_Persona" FromRole="Persona" ToRole="SuperAdmin" />
@@ -865,7 +871,10 @@
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="pNombre" ColumnName="pNombre" />
+                <ScalarProperty Name="sNombre" ColumnName="sNombre" />
+                <ScalarProperty Name="pApellido" ColumnName="pApellido" />
+                <ScalarProperty Name="sApellido" ColumnName="sApellido" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

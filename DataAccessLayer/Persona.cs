@@ -18,8 +18,11 @@ namespace DataAccessLayer
         public string Documento { get; set; }
         public string Correo { get; set; }
         public string Password { get; set; }
-        public string TipoDocumento { get; set; }
-        public string Nombre { get; set; }
+        public int TipoDocumento { get; set; }
+        public string pNombre { get; set; }
+        public string sNombre { get; set; }
+        public string pApellido { get; set; }
+        public string sApellido { get; set; }
     
         public virtual Admin Admin { get; set; }
         public virtual Conductor Conductor { get; set; }

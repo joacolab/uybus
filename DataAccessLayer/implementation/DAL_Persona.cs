@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.implementation
 {
-    class DAL_Viaje
+    class DAL_Persona
     {
     }
 }
