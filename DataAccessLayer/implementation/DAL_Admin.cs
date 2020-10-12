@@ -21,6 +21,7 @@ namespace DataAccessLayer.implementation
 
                     Admin ad = new Admin();
                     ad.Id = idPersona;
+                    db.Admin.Add(ad);
                     db.SaveChanges();
 
                     EA.Id = idPersona;

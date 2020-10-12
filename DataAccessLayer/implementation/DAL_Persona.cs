@@ -27,6 +27,7 @@ namespace DataAccessLayer.implementation
                     p.sNombre = sNombre;
                     p.pApellido = pApellido;
                     p.sApellido = sApellido;
+                    db.Persona.Add(p);
                     db.SaveChanges();
 
                     EPersona ep = new EPersona();

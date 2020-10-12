@@ -17,12 +17,14 @@ namespace DataAccessLayer.implementation
             {
                 using (uybusEntities db = new uybusEntities())
                 {
-                    ETramo et = new ETramo();
                     Tramo t = new Tramo();
                     t.TiempoEstimado = tiempoEstimado;
                     t.IdParada = idParada;
                     t.IdLinea = idLinea;
+                    db.Tramo.Add(t);
                     db.SaveChanges();
+
+                    ETramo et = new ETramo();
                     et = Converter.tramoAETramo(t);
                     return et;
                 }
