@@ -37,7 +37,20 @@ namespace DataAccessLayer.implementation
 
         public List<ETramo> getAllTramos()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    List<ETramo> lstET = new List<ETramo>();
+
+                    // falta
+                    return lstET;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public EPrecio getPrecioVigente(int idLinea, int idParada)

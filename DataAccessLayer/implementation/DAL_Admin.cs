@@ -40,7 +40,7 @@ namespace DataAccessLayer.implementation
             {
                 using (uybusEntities db = new uybusEntities())
                 {
-                    List<EPersona> lstEp = null;
+                    List<EPersona> lstEp = new List<EPersona>();
 
                     var Admins = db.Admin;
 
