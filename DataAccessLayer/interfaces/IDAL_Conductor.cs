@@ -11,9 +11,9 @@ namespace DataAccessLayer.interfaces
     {
         EConductor addConductor(int idPersona, DateTime FechaVenc);
         List<EConductor> getAllConductores();
-        EConductor getConductores(int idConductor);
+        EConductor getConductor(int idConductor);
 
-        void addFechaVencLib(int idConductor, DateTime FechaVenc);
+        void updateFechaVencLib(int idConductor, DateTime FechaVenc);
 
     }
 }
