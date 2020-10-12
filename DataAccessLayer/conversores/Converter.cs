@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,7 +44,7 @@ namespace DataAccessLayer.conversores
             c.VencimientoLicencia = ec.VencimientoLicencia;
 
             List<Salida> lst = new List<Salida>();
-            foreach ( var s in ec.Salida)
+            foreach (var s in ec.Salida)
             {
                 lst.Add(esalidaASalida(s));
             }
@@ -70,21 +71,49 @@ namespace DataAccessLayer.conversores
             t.IdLinea = et.IdLinea;
             t.IdParada = et.IdParada;
             t.TiempoEstimado = et.TiempoEstimado;
+            List<Precio> lst = new List<Precio>();
+            foreach (var s in et.Precio)
+            {
+                lst.Add(eprecioAPrecio(s));
+            }
+            t.Precio = lst;
             return t;
         }
+
         static public ETramo tramoAETramo(Tramo t)
         {
             ETramo et = new ETramo();
             et.IdLinea = t.IdLinea;
             et.IdParada = t.IdParada;
             et.TiempoEstimado = t.TiempoEstimado;
+            List<EPrecio> lst = new List<EPrecio>();
+            foreach (var s in t.Precio)
+            {
+                lst.Add(precioAEPrecio(s));
+            }
+            et.Precio = lst;
             return et;
         }
+
         static public ELinea lineaAElinea(Linea l)
         {
             ELinea el = new ELinea();
             el.IdLinea = l.IdLinea;
             el.Nombre = l.Nombre;
+
+            List<ESalida> lst = new List<ESalida>();
+            foreach (var s in l.Salida)
+            {
+                lst.Add(salidaAESalida(s));
+            }
+            el.Salida = lst;
+
+            List<ETramo> lst2 = new List<ETramo>();
+            foreach (var s in l.Tramo)
+            {
+                lst2.Add(tramoAETramo(s));
+            }
+            el.Tramo = lst2;
             return el;
         }
         static public Linea elineaALinea(ELinea el)
@@ -92,8 +121,25 @@ namespace DataAccessLayer.conversores
             Linea l = new Linea();
             l.IdLinea = el.IdLinea;
             l.Nombre = el.Nombre;
+
+            List<Salida> lst = new List<Salida>();
+            foreach (var s in el.Salida)
+            {
+                lst.Add(esalidaASalida(s));
+            }
+            l.Salida = lst;
+
+            List<Tramo> lst2 = new List<Tramo>();
+            foreach (var s in el.Tramo)
+            {
+                lst2.Add(etramoATramo(s));
+            }
+            l.Tramo = lst2;
             return l;
         }
+
+
+
         static public EParametro parametroAEParametro(Parametro p)
         {
             EParametro ep = new EParametro();
@@ -135,6 +181,12 @@ namespace DataAccessLayer.conversores
             v.Modelo = ev.Modelo;
             v.Marca = ev.Marca;
             v.CantAsientos = ev.CantAsientos;
+            List<Salida> lst = new List<Salida>();
+            foreach (var s in ev.Salida)
+            {
+                lst.Add(esalidaASalida(s));
+            }
+            v.Salida = lst;
             return v;
         }
         static public EVehiculo vehiculoAEVehiculo(Vehiculo v)
@@ -144,7 +196,37 @@ namespace DataAccessLayer.conversores
             ev.Modelo = v.Modelo;
             ev.Marca = v.Marca;
             ev.CantAsientos = v.CantAsientos;
+            List<ESalida> lst = new List<ESalida>();
+            foreach (var s in v.Salida)
+            {
+                lst.Add(salidaAESalida(s));
+            }
+            ev.Salida = lst;
             return ev;
+        }
+        static public Usuario eusuarioAUsuario(EUsuario eu)
+        {
+            Usuario u = new Usuario();
+            u.Id = u.Id;
+            List<Pasaje> lst = new List<Pasaje>();
+            foreach (var s in eu.Pasaje)
+            {
+                lst.Add(epasajeAPasaje(s));
+            }
+            u.Pasaje = lst;
+            return u;
+        }
+        static public EUsuario usuarioAEUsuario(Usuario u)
+        {
+            EUsuario eu = new EUsuario();
+            eu.Id = u.Id;
+            List<EPasaje> lst = new List<EPasaje>();
+            foreach (var s in u.Pasaje)
+            {
+                lst.Add(pasajeAEPasaje(s));
+            }
+            eu.Pasaje = lst;
+            return eu;
         }
         static public EParada paradaAEParada(Parada par)
         {
@@ -153,6 +235,27 @@ namespace DataAccessLayer.conversores
             Epar.Nombre = par.Nombre;
             Epar.Lat = par.Lat;
             Epar.Long = par.Long;
+
+            List<EPasaje> lst = new List<EPasaje>();
+            foreach (var s in par.Pasaje)
+            {
+                lst.Add(pasajeAEPasaje(s));
+            }
+            Epar.Pasaje = lst;
+
+            List<EPasaje> lst2 = new List<EPasaje>();
+            foreach (var s in par.Pasaje1)
+            {
+                lst2.Add(pasajeAEPasaje(s));
+            }
+            Epar.Pasaje1 = lst2;
+
+            List<ETramo> lst3 = new List<ETramo>();
+            foreach (var s in par.Tramo)
+            {
+                lst3.Add(tramoAETramo(s));
+            }
+            Epar.Tramo = lst3;
             return Epar;
         }
         static public Parada eparadaAParada(EParada Epar)
@@ -162,6 +265,29 @@ namespace DataAccessLayer.conversores
             par.Nombre = Epar.Nombre;
             par.Lat = Epar.Lat;
             par.Long = Epar.Long;
+
+            List<Pasaje> lst = new List<Pasaje>();
+            foreach (var s in Epar.Pasaje)
+            {
+                lst.Add(epasajeAPasaje(s));
+            }
+            par.Pasaje = lst;
+
+            List<Pasaje> lst2 = new List<Pasaje>();
+            foreach (var s in Epar.Pasaje1)
+            {
+                lst2.Add(epasajeAPasaje(s));
+            }
+            par.Pasaje1 = lst2;
+
+            List<Tramo> lst3 = new List<Tramo>();
+            foreach (var s in Epar.Tramo)
+            {
+                lst3.Add(etramoATramo(s));
+            }
+            par.Tramo = lst3;
+            return par;
+
             return par;
         }
         static public EViaje viajeAEViaje(Viaje vi)
@@ -172,6 +298,12 @@ namespace DataAccessLayer.conversores
             Evi.Fecha = vi.Fecha;
             Evi.HoraInicioReal = vi.HoraInicioReal;
             Evi.IdSalida = vi.IdSalida;
+            List<EPasaje> lst = new List<EPasaje>();
+            foreach (var s in vi.Pasaje)
+            {
+                lst.Add(pasajeAEPasaje(s));
+            }
+            Evi.Pasaje = lst;
             return Evi;
         }
         static public Viaje eviajeAViaje(EViaje Evi)
@@ -182,8 +314,16 @@ namespace DataAccessLayer.conversores
             vi.Fecha = Evi.Fecha;
             vi.HoraInicioReal = Evi.HoraInicioReal;
             vi.IdSalida = Evi.IdSalida;
+            List<Pasaje> lst = new List<Pasaje>();
+            foreach (var s in Evi.Pasaje)
+            {
+                lst.Add(epasajeAPasaje(s));
+            }
+            vi.Pasaje = lst;
             return vi;
         }
+
+
         static public ESalida salidaAESalida(Salida sal)
         {
             ESalida Esal = new ESalida();
@@ -192,6 +332,13 @@ namespace DataAccessLayer.conversores
             Esal.IdConductor = sal.IdConductor;
             Esal.IdVehiculo = sal.IdVehiculo;
             Esal.IdLinea = sal.IdLinea;
+
+            List<EViaje> lst = new List<EViaje>();
+            foreach (var s in sal.Viaje)
+            {
+                lst.Add(viajeAEViaje(s));
+            }
+            Esal.Viaje = lst;
             return Esal;
         }
         static public Salida esalidaASalida(ESalida Esal)
@@ -202,6 +349,12 @@ namespace DataAccessLayer.conversores
             sal.IdConductor = Esal.IdConductor;
             sal.IdVehiculo = Esal.IdVehiculo;
             sal.IdLinea = Esal.IdLinea;
+            List<Viaje> lst = new List<Viaje>();
+            foreach (var s in Esal.Viaje)
+            {
+                lst.Add(eviajeAViaje(s));
+            }
+            sal.Viaje = lst;
             return sal;
         }
         static public EPasaje pasajeAEPasaje(Pasaje pas)
