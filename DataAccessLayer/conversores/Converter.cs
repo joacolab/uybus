@@ -23,7 +23,6 @@ namespace DataAccessLayer.conversores
             Eper.sApellido = per.sApellido;
             return Eper;
         }
-
         static public Persona epersonaAPersona(EPersona ep)
         {
             Persona p = new Persona();
@@ -37,28 +36,34 @@ namespace DataAccessLayer.conversores
             p.Password = ep.Password;
             return p;
         }
-
         static public Conductor econductorAConductor(EConductor ec)
         {
             Conductor c = new Conductor();
             c.Id = ec.Id;
             c.VencimientoLicencia = ec.VencimientoLicencia;
+
+            List<Salida> lst = new List<Salida>();
+            foreach ( var s in ec.Salida)
+            {
+                lst.Add(esalidaASalida(s));
+            }
+            c.Salida = lst;
             return c;
         }
-
-        /// <summary>
-        /// Convierte un conductor a un Econductor
-        /// </summary>
-        /// <param name="c">Objeto de tipo Conductor del Modelo</param>
-        /// <returns>Econcuctor</returns>
         static public EConductor conductorAEConductor(Conductor c)
         {
             EConductor ec = new EConductor();
             ec.Id = c.Id;
             ec.VencimientoLicencia = c.VencimientoLicencia;
+
+            List<ESalida> lst = new List<ESalida>();
+            foreach (var s in c.Salida)
+            {
+                lst.Add(salidaAESalida(s));
+            }
+            ec.Salida = lst;
             return ec;
         }
-
         static public Tramo etramoATramo(ETramo et)
         {
             Tramo t = new Tramo();
@@ -67,12 +72,6 @@ namespace DataAccessLayer.conversores
             t.TiempoEstimado = et.TiempoEstimado;
             return t;
         }
-
-        /// <summary>
-        /// Convierte un Modelo Tramo a un ETramo 
-        /// </summary>
-        /// <param name="t"></param>
-        /// <returns>ETramo</returns>
         static public ETramo tramoAETramo(Tramo t)
         {
             ETramo et = new ETramo();
@@ -81,7 +80,6 @@ namespace DataAccessLayer.conversores
             et.TiempoEstimado = t.TiempoEstimado;
             return et;
         }
-
         static public ELinea lineaAElinea(Linea l)
         {
             ELinea el = new ELinea();
@@ -89,7 +87,6 @@ namespace DataAccessLayer.conversores
             el.Nombre = l.Nombre;
             return el;
         }
-
         static public Linea elineaALinea(ELinea el)
         {
             Linea l = new Linea();
@@ -97,7 +94,6 @@ namespace DataAccessLayer.conversores
             l.Nombre = el.Nombre;
             return l;
         }
-
         static public EParametro parametroAEParametro(Parametro p)
         {
             EParametro ep = new EParametro();
@@ -105,7 +101,6 @@ namespace DataAccessLayer.conversores
             ep.Valor = p.Valor;
             return ep;
         }
-
         static public Parametro eparametroAParametro(EParametro ep)
         {
             Parametro p = new Parametro();
@@ -113,7 +108,6 @@ namespace DataAccessLayer.conversores
             p.Valor = ep.Valor;
             return p;
         }
-
         static public Precio eprecioAPrecio(EPrecio ep)
         {
             Precio p = new Precio();
@@ -124,7 +118,6 @@ namespace DataAccessLayer.conversores
             p.IdParada = ep.IdParada;
             return p;
         }
-
         static public EPrecio precioAEPrecio(Precio p)
         {
             EPrecio ep = new EPrecio();
@@ -135,7 +128,6 @@ namespace DataAccessLayer.conversores
             ep.IdParada = p.IdParada;
             return ep;
         }
-
         static public Vehiculo evehiculoAVehiculo(EVehiculo ev)
         {
             Vehiculo v = new Vehiculo();
@@ -145,7 +137,6 @@ namespace DataAccessLayer.conversores
             v.CantAsientos = ev.CantAsientos;
             return v;
         }
-
         static public EVehiculo vehiculoAEVehiculo(Vehiculo v)
         {
             EVehiculo ev = new EVehiculo();
@@ -155,7 +146,6 @@ namespace DataAccessLayer.conversores
             ev.CantAsientos = v.CantAsientos;
             return ev;
         }
-
         static public EParada paradaAEParada(Parada par)
         {
             EParada Epar = new EParada();
@@ -165,7 +155,6 @@ namespace DataAccessLayer.conversores
             Epar.Long = par.Long;
             return Epar;
         }
-
         static public Parada eparadaAParada(EParada Epar)
         {
             Parada par = new Parada();
@@ -175,8 +164,6 @@ namespace DataAccessLayer.conversores
             par.Long = Epar.Long;
             return par;
         }
-
-
         static public EViaje viajeAEViaje(Viaje vi)
         {
             EViaje Evi = new EViaje();
@@ -187,7 +174,6 @@ namespace DataAccessLayer.conversores
             Evi.IdSalida = vi.IdSalida;
             return Evi;
         }
-
         static public Viaje eviajeAViaje(EViaje Evi)
         {
             Viaje vi = new Viaje();
@@ -208,8 +194,6 @@ namespace DataAccessLayer.conversores
             Esal.IdLinea = sal.IdLinea;
             return Esal;
         }
-
-
         static public Salida esalidaASalida(ESalida Esal)
         {
             Salida sal = new Salida();
@@ -220,8 +204,6 @@ namespace DataAccessLayer.conversores
             sal.IdLinea = Esal.IdLinea;
             return sal;
         }
-
-
         static public EPasaje pasajeAEPasaje(Pasaje pas)
         {
             EPasaje Epas = new EPasaje();
@@ -235,7 +217,6 @@ namespace DataAccessLayer.conversores
             Epas.IdParadaOrigen = pas.IdParadaOrigen;
             return Epas;
         }
-
         static public Pasaje epasajeAPasaje(EPasaje Epas)
         {
             Pasaje pas = new Pasaje();
@@ -249,6 +230,5 @@ namespace DataAccessLayer.conversores
             pas.IdParadaOrigen = Epas.IdParadaOrigen;
             return pas;
         }
-
     }
 }
