@@ -13,17 +13,68 @@ namespace DataAccessLayer.implementation
     {
         public EUsuario addUsuario(int idPersona)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Usuario u = new Usuario();
+                    u.Id = idPersona;
+                    db.Usuario.Add(u);
+                    db.SaveChanges();
+
+                    EUsuario eu = new EUsuario();
+                    eu = Converter.usuarioAEUsuario(u);
+                    return eu;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<EUsuario> getAllUsuarios()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    List<EUsuario> lstEu = new List<EUsuario>();
+
+                    var usus = db.Usuario;
+
+                    foreach (var u in usus)
+                    {
+                        EUsuario eu = new EUsuario();
+                        eu = Converter.usuarioAEUsuario(u);
+                        lstEu.Add(eu);
+                    }
+                    return lstEu;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public EUsuario getUsuario(int idUsuario)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Usuario u = db.Usuario.Find(idUsuario);
+                    EUsuario eu = new EUsuario();
+                    eu = Converter.usuarioAEUsuario(u);
+                    return eu;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

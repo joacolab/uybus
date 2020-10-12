@@ -13,22 +13,91 @@ namespace DataAccessLayer.implementation
     {
         public EVehiculo addVehiculo(string matricula, string marca, string modelo, int cantAsientos)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Vehiculo v = new Vehiculo();
+                    v.Matricula = matricula;
+                    v.Modelo = modelo;
+                    v.Marca = marca;
+                    v.CantAsientos = cantAsientos;
+                    db.Vehiculo.Add(v);
+                    db.SaveChanges();
+
+                    EVehiculo ev = new EVehiculo();
+                    ev = Converter.vehiculoAEVehiculo(v);
+                    return ev;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void editVehiculo(string matricula, string marca, string modelo, int cantAsientos)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Vehiculo v = db.Vehiculo.Find(matricula);
+                    v.Modelo = modelo;
+                    v.Marca = marca;
+                    v.CantAsientos = cantAsientos;
+                    db.Entry(v).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<EVehiculo> getAllVehiculos()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    List<EVehiculo> lstEv = new List<EVehiculo>();
+
+                    var veics = db.Vehiculo;
+
+                    foreach (var v in veics)
+                    {
+
+                        EVehiculo ev = new EVehiculo();
+                        ev = Converter.vehiculoAEVehiculo(v);
+                        lstEv.Add(ev);
+                    }
+                    return lstEv;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public EVehiculo getVehiculos(string matricula)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Vehiculo v = db.Vehiculo.Find(matricula);
+                    EVehiculo ev = new EVehiculo();
+                    ev = Converter.vehiculoAEVehiculo(v);
+                    return ev;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

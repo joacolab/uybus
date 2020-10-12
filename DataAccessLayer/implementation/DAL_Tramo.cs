@@ -42,8 +42,13 @@ namespace DataAccessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     List<ETramo> lstET = new List<ETramo>();
-
-                    // falta
+                    var tramos = db.Tramo;
+                    foreach (var t in tramos)
+                    {
+                        ETramo et = new ETramo();
+                        et = Converter.tramoAETramo(t);
+                        lstET.Add(et);
+                    }
                     return lstET;
                 }
             }
@@ -53,14 +58,22 @@ namespace DataAccessLayer.implementation
             }
         }
 
-        public EPrecio getPrecioVigente(int idLinea, int idParada)
-        {
-            throw new NotImplementedException();
-        }
-
         public ETramo getTramos(int idLinea, int idParada)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Tramo t = db.Tramo.Find(idLinea, idParada);
+                    ETramo et = new ETramo();
+                    et = Converter.tramoAETramo(t);
+                    return et;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
