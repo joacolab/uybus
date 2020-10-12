@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.interfaces;
+﻿using DataAccessLayer.conversores;
+using DataAccessLayer.interfaces;
 using Share.entities;
 using Share.enums;
 using System;

@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.interfaces;
+﻿using DataAccessLayer.conversores;
+using DataAccessLayer.interfaces;
 using Share.entities;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,24 @@ namespace DataAccessLayer.implementation
     {
         public ETramo addTramo(int tiempoEstimado, int idLinea, int idParada)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    ETramo et = new ETramo();
+                    Tramo t = new Tramo();
+                    t.TiempoEstimado = tiempoEstimado;
+                    t.IdParada = idParada;
+                    t.IdLinea = idLinea;
+                    db.SaveChanges();
+                    et = Converter.tramoAETramo(t);
+                    return et;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<ETramo> getAllTramos()
