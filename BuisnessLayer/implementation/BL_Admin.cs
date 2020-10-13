@@ -1,4 +1,6 @@
 ﻿using BuisnessLayer.interfaces;
+using DataAccessLayer.implementation;
+using DataAccessLayer.interfaces;
 using Share.entities;
 using Share.enums;
 using System;
@@ -11,19 +13,29 @@ namespace BuisnessLayer.implementation
 {
     public class BL_Admin : IBL_Admin
     {
+        private IDAL_Linea iLinea;
+        private IDAL_Parada iParada;
+        private IDAL_Salida iSalida;
+
+        public BL_Admin()
+        {
+            iLinea = new DAL_Linea();
+            iParada = new DAL_Parada();
+            iSalida = new DAL_Salida();
+        }
         public ELinea crearLinea(string nombre)
         {
-            throw new NotImplementedException();
+            return iLinea.addLinea(nombre);
         }
 
-        public EParada crearParada(string nombre, float lat, float lon)
+        public EParada crearParada(string nombre, double lat, double lon)
         {
-            throw new NotImplementedException();
+            return iParada.addParada(nombre, lat, lon);
         }
 
         public ESalida crearSalida(int idConductor, string Matricula, int idLinea, TimeSpan horaInicio)
         {
-            throw new NotImplementedException();
+            return iSalida.addSalida(Matricula, idLinea, horaInicio, idConductor);
         }
 
         public ETramo crearTramos(int idParada, int idLinea, int tiempoEst, int precio, DateTime FechaEntradaVigencia)

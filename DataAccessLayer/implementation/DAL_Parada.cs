@@ -19,14 +19,13 @@ namespace DataAccessLayer.implementation
         /// <param name="lat">Latutud de la parada</param>
         /// <param name="lon">Longitud</param>
         /// <returns></returns>
-        public EParada addParada(int idParada, string nombre, float lat, float lon)
+        public EParada addParada(string nombre, double lat, double lon)
         {
             try
             {
                 using (uybusEntities db = new uybusEntities())
                 {
                     Parada parada = new Parada();
-                    parada.IdParada = idParada;
                     parada.Nombre = nombre;
                     parada.Lat = lat;
                     parada.Long = lon;

@@ -56,6 +56,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{70ef34fc-2b9d-491a-af8e-84a0034194d3}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Share\Share.csproj">
       <Project>{7543C2DE-25C1-41CF-B158-91060EB329AE}</Project>
       <Name>Share</Name>

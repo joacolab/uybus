@@ -9,7 +9,7 @@ namespace DataAccessLayer.interfaces
 {
     public interface IDAL_Parada
     {
-        EParada addParada(int idParada, string nombre, float lat, float lon);
+        EParada addParada(string nombre, double lat, double lon);
         List<EParada> getAllParadas();
         EParada getParada(int parada);
     }
