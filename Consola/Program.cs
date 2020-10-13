@@ -22,14 +22,17 @@ namespace Consola
             IBL_General blg = new BL_General();
             IBL_Conductor blc = new BL_Conductor();
             IBL_SuperAdmin bls = new BL_SuperAdmin();
-            //ELinea el = bla.crearLinea("B");//testeado
-            //EParada ep = bla.crearParada("Parada1", -34.333432, -56.324321);//testeado
-            //EVehiculo ev = bla.crearVehiculos( "Mercedez-benz", "we3", "ABC1234", 42);//testeado
-            //EVehiculo ev = bla.editarVehiculos("Mercedez-benz", "ert", "ABC1234", 42);//testeado
+
+
             //EUsuario eu = bli.registrarse("55615808", "carlos@gmail.com", "1234", 1, "Carlos", "Mauro","Gonzalez","Perez");//testeado
-            //EPersona ep = bls.asignarRol(6,Rol.Conductor);//testeada
-            //ESalida es = bla.crearSalida(6, "ABC1234", 1, new TimeSpan(8, 30, 00)); //testeada
-            //bla.gestionConductores(6,new DateTime(2021,10,10));//testeada
+            //EPersona ep = bls.asignarRol(1,Rol.Conductor);//testeada
+            //bla.gestionConductores(1,new DateTime(2021,10,10));//testeada
+            //EParada pa = bla.crearParada("Parada1", -34.333432, -56.324321);//testeado
+            //ELinea el = bla.crearLinea("B");//testeado
+            //EVehiculo ev = bla.crearVehiculos( "Mercedez-benz", "we3", "ABC1234", 42);//testeado
+            //EVehiculo eve = bla.editarVehiculos("Mercedez-benz", "ert", "ABC1234", 42);//testeado
+            //ESalida es = bla.crearSalida(1, "ABC1234", 1, new TimeSpan(8, 30, 00)); //testeada
+
             /*
             List<Dias> dias = new List<Dias>();
             dias.Add(Dias.Lunes);
