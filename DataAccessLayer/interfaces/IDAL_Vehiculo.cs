@@ -11,7 +11,7 @@ namespace DataAccessLayer.interfaces
     {
         EVehiculo addVehiculo(string matricula, string marca, string modelo, int cantAsientos);
 
-        void editVehiculo(string matricula, string marca, string modelo, int cantAsientos);
+        EVehiculo editVehiculo(string matricula, string marca, string modelo, int cantAsientos);
         List<EVehiculo> getAllVehiculos();
         EVehiculo getVehiculos(string matricula);
     }

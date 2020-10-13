@@ -36,7 +36,7 @@ namespace DataAccessLayer.implementation
             }
         }
 
-        public void editVehiculo(string matricula, string marca, string modelo, int cantAsientos)
+        public EVehiculo editVehiculo(string matricula, string marca, string modelo, int cantAsientos)
         {
             try
             {
@@ -48,6 +48,8 @@ namespace DataAccessLayer.implementation
                     v.CantAsientos = cantAsientos;
                     db.Entry(v).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
+
+                    return Converter.vehiculoAEVehiculo(v); 
                 }
             }
             catch (System.Exception ex)
