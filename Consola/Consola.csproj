@@ -62,9 +62,9 @@
       <Project>{0d7c8f96-c7b9-4c17-957a-3d116a02c2ef}</Project>
       <Name>BuisnessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
-      <Project>{70EF34FC-2B9D-491A-AF8E-84A0034194D3}</Project>
-      <Name>DataAccessLayer</Name>
+    <ProjectReference Include="..\DataAcessLayer\DataAcessLayer.csproj">
+      <Project>{407bb8e6-5fe6-4142-a22c-f3de4aca0b91}</Project>
+      <Name>DataAcessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Share\Share.csproj">
       <Project>{7543c2de-25c1-41cf-b158-91060eb329ae}</Project>

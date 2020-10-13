@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Share.entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace BuisnessLayer.interfaces
 {
     public interface IBL_Invitado
     {
-        void registrarse(string Documento, string Correo, string Password, string TipoDocumento,string Nombre);
+        EUsuario registrarse(string Documento, string Correo, string Password, int TipoDocumento, string pNombre, string sNombre, string pApellido, string sApellido);
     }
 }

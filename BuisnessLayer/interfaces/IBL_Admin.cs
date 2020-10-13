@@ -21,7 +21,7 @@ namespace BuisnessLayer.interfaces
         /// <param name="diasSemana">Días de la semana en los que se realiza el viaje</param>
         /// <param name="idSalida">Identificador de salida correspondiente a los horarios de salida</param>
         /// <returns></returns>
-        List<EViaje> crearViajes(DateTime fechaInicio, DateTime fechaFinal, List<Dias> diasSemana, int idSalida, TimeSpan hrInicioReal);
+        List<EViaje> crearViajes(DateTime fechaInicio, DateTime fechaFinal, List<Dias> diasSemana, int idSalida);
         EVehiculo crearVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos);
         EVehiculo editarVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos);
 

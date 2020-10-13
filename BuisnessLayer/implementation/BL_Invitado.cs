@@ -1,4 +1,7 @@
 ﻿using BuisnessLayer.interfaces;
+using DataAcessLayer.implementation;
+using DataAcessLayer.interfaces;
+using Share.entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +12,18 @@ namespace BuisnessLayer.implementation
 {
     public class BL_Invitado : IBL_Invitado
     {
-        public void registrarse(string Documento, string Correo, string Password, string TipoDocumento, string Nombre)
+        private IDAL_Usuario iUsuario;
+        private IDAL_Persona iPersona;
+
+        public BL_Invitado(){
+            iUsuario = new DAL_Usuario();
+            iPersona = new DAL_Persona();
+        }
+        public EUsuario registrarse(string Documento, string Correo, string Password, int TipoDocumento, string pNombre, string sNombre, string pApellido, string sApellido)
         {
-            throw new NotImplementedException();
+            EPersona ep = iPersona.addPersona(Documento, Correo, Password, TipoDocumento, pNombre, sNombre, pApellido, sApellido);
+            EUsuario eu = iUsuario.addUsuario(ep.id);
+            return eu;
         }
     }
 }

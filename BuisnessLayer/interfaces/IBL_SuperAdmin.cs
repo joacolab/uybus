@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Share.entities;
+using Share.enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,6 @@ namespace BuisnessLayer.interfaces
         /// 
         /// </summary>
         /// <param name="id">id del usuario</param>
-        void asignarRol(int id);
+        EPersona asignarRol(int id, Rol rol);
     }
 }
