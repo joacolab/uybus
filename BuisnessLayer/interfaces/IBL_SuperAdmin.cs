@@ -1,4 +1,5 @@
-﻿using Share.entities;
+﻿using Share.DTOs;
+using Share.entities;
 using Share.enums;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace BuisnessLayer.interfaces
 {
     public interface IBL_SuperAdmin
     {
-        void ubicarVehiculo();
+        List<DTOubicacion> ubicarVehiculo();
 
         /// <summary>
         /// 

@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\DTOubicacion.cs" />
     <Compile Include="entities\EAdmin.cs" />
     <Compile Include="entities\EConductor.cs" />
     <Compile Include="entities\ELinea.cs" />
+    <Compile Include="entities\ELlegada.cs" />
     <Compile Include="entities\EParada.cs" />
     <Compile Include="entities\EParametro.cs" />
     <Compile Include="entities\EPasaje.cs" />

@@ -251,6 +251,13 @@ namespace DataAcessLayer.conversores
                 lst3.Add(tramoAETramo(s));
             }
             Epar.Tramo = lst3;
+
+            List<ELlegada> lst4 = new List<ELlegada>();
+            foreach (var s in par.Llegada)
+            {
+                lst4.Add(llegadaAEllegada(s));
+            }
+            Epar.Llegada = lst4;
             return Epar;
         }
         static public Parada eparadaAParada(EParada Epar)
@@ -281,6 +288,13 @@ namespace DataAcessLayer.conversores
                 lst3.Add(etramoATramo(s));
             }
             par.Tramo = lst3;
+
+            List<Llegada> lst4 = new List<Llegada>();
+            foreach (var s in Epar.Llegada)
+            {
+                lst4.Add(ellegadaAllegada(s));
+            }
+            par.Llegada = lst4;
             return par;
         }
         static public EViaje viajeAEViaje(Viaje vi)
@@ -297,7 +311,30 @@ namespace DataAcessLayer.conversores
                 lst.Add(pasajeAEPasaje(s));
             }
             Evi.Pasaje = lst;
+
+            List<ELlegada> lst2 = new List<ELlegada>();
+            foreach (var s in vi.Llegada)
+            {
+                lst2.Add(llegadaAEllegada(s));
+            }
+            Evi.Llegada = lst2;
             return Evi;
+        }
+        static public ELlegada llegadaAEllegada(Llegada ll)
+        {
+            ELlegada el = new ELlegada();
+            el.idParada = ll.idParada;
+            el.idViaje = ll.idViaje;
+            el.hora = ll.hora;
+            return el;
+        }
+        static public Llegada ellegadaAllegada(ELlegada el)
+        {
+            Llegada ll = new Llegada();
+            ll.idParada = el.idParada;
+            ll.idViaje = el.idViaje;
+            ll.hora = el.hora;
+            return ll;
         }
         static public Viaje eviajeAViaje(EViaje Evi)
         {
@@ -313,6 +350,13 @@ namespace DataAcessLayer.conversores
                 lst.Add(epasajeAPasaje(s));
             }
             vi.Pasaje = lst;
+
+            List<Llegada> lst2 = new List<Llegada>();
+            foreach (var s in Evi.Llegada)
+            {
+                lst2.Add(ellegadaAllegada(s));
+            }
+            vi.Llegada = lst2;
             return vi;
         }
         static public ESalida salidaAESalida(Salida sal)

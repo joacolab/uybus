@@ -15,5 +15,6 @@ namespace Share.entities
         public ICollection<EPasaje> Pasaje { get; set; } = new List<EPasaje>();
         public ICollection<EPasaje> Pasaje1 { get; set; } = new List<EPasaje>();
         public ICollection<ETramo> Tramo { get; set; } = new List<ETramo>();
+        public ICollection<ELlegada> Llegada { get; set; } = new List<ELlegada>();
     }
 }

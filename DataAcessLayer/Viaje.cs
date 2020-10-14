@@ -18,6 +18,7 @@ namespace DataAcessLayer
         public Viaje()
         {
             this.Pasaje = new HashSet<Pasaje>();
+            this.Llegada = new HashSet<Llegada>();
         }
     
         public int IdViaje { get; set; }
@@ -29,5 +30,7 @@ namespace DataAcessLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pasaje> Pasaje { get; set; }
         public virtual Salida Salida { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Llegada> Llegada { get; set; }
     }
 }

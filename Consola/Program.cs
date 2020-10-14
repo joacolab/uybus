@@ -9,6 +9,9 @@ using BuisnessLayer.implementation;
 using BuisnessLayer.interfaces;
 using Share.entities;
 using Share.enums;
+using System.Runtime.InteropServices;
+using System.Threading;
+using Share.DTOs;
 
 namespace Consola
 {
@@ -41,6 +44,13 @@ namespace Consola
             */
             //ETramo et = bla.crearTramos(1,1,1000,15,new DateTime(2019,04,04));//testeada
 
+            /*
+            List<DTOubicacion> lstdto = bls.ubicarVehiculo();
+            foreach (var l in lstdto)
+            {
+                Console.WriteLine(l.hora + " " + l.lat +" "+ l.lon +" "+ l.matricula);//testeado
+            }
+            */
 
             Console.WriteLine("\nPrecione Enter  para finalizar.");
             Console.Read();

@@ -60,6 +60,7 @@
     <Compile Include="implementation\DAL_Admin.cs" />
     <Compile Include="implementation\DAL_Conductor.cs" />
     <Compile Include="implementation\DAL_Linea.cs" />
+    <Compile Include="implementation\DAL_Llegada.cs" />
     <Compile Include="implementation\DAL_Parada.cs" />
     <Compile Include="implementation\DAL_Parametro.cs" />
     <Compile Include="implementation\DAL_Pasaje.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="interfaces\IDAL_Admin.cs" />
     <Compile Include="interfaces\IDAL_Conductor.cs" />
     <Compile Include="interfaces\IDAL_Linea.cs" />
+    <Compile Include="interfaces\IDAL_Llegada.cs" />
     <Compile Include="interfaces\IDAL_Parada.cs" />
     <Compile Include="interfaces\IDAL_Parametro.cs" />
     <Compile Include="interfaces\IDAL_Pasaje.cs" />
@@ -86,6 +88,9 @@
     <Compile Include="interfaces\IDAL_Vehiculo.cs" />
     <Compile Include="interfaces\IDAL_Viaje.cs" />
     <Compile Include="Linea.cs">
+      <DependentUpon>ModelUyBus.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Llegada.cs">
       <DependentUpon>ModelUyBus.tt</DependentUpon>
     </Compile>
     <Compile Include="ModelUyBus.Context.cs">
@@ -123,6 +128,9 @@
       <DependentUpon>ModelUyBus.tt</DependentUpon>
     </Compile>
     <Compile Include="SuperAdmin.cs">
+      <DependentUpon>ModelUyBus.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
       <DependentUpon>ModelUyBus.tt</DependentUpon>
     </Compile>
     <Compile Include="Tramo.cs">

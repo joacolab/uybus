@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="uybusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="uybusModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="Id" />
@@ -24,6 +24,15 @@
           </Key>
           <Property Name="IdLinea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Llegada">
+          <Key>
+            <PropertyRef Name="idParada" />
+            <PropertyRef Name="idViaje" />
+          </Key>
+          <Property Name="idParada" Type="int" Nullable="false" />
+          <Property Name="idViaje" Type="int" Nullable="false" />
+          <Property Name="hora" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Parada">
           <Key>
@@ -94,6 +103,16 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Tramo">
           <Key>
             <PropertyRef Name="IdLinea" />
@@ -149,6 +168,30 @@
             </Principal>
             <Dependent Role="Conductor">
               <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Llegada_Parada">
+          <End Role="Parada" Type="Self.Parada" Multiplicity="1" />
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parada">
+              <PropertyRef Name="IdParada" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="idParada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Llegada_Viaje">
+          <End Role="Viaje" Type="Self.Viaje" Multiplicity="1" />
+          <End Role="Llegada" Type="Self.Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Viaje">
+              <PropertyRef Name="IdViaje" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="idViaje" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -314,6 +357,7 @@
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Conductor" EntityType="Self.Conductor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Linea" EntityType="Self.Linea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Llegada" EntityType="Self.Llegada" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parada" EntityType="Self.Parada" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parametro" EntityType="Self.Parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pasaje" EntityType="Self.Pasaje" Schema="dbo" store:Type="Tables" />
@@ -321,6 +365,7 @@
           <EntitySet Name="Precio" EntityType="Self.Precio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Salida" EntityType="Self.Salida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SuperAdmin" EntityType="Self.SuperAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tramo" EntityType="Self.Tramo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
@@ -332,6 +377,14 @@
           <AssociationSet Name="FK_Conductor_Persona" Association="Self.FK_Conductor_Persona">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Conductor" EntitySet="Conductor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Llegada_Parada" Association="Self.FK_Llegada_Parada">
+            <End Role="Parada" EntitySet="Parada" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Llegada_Viaje" Association="Self.FK_Llegada_Viaje">
+            <End Role="Viaje" EntitySet="Viaje" />
+            <End Role="Llegada" EntitySet="Llegada" />
           </AssociationSet>
           <AssociationSet Name="FK_Pasaje_Parada" Association="Self.FK_Pasaje_Parada">
             <End Role="Parada" EntitySet="Parada" />
@@ -386,8 +439,7 @@
             <End Role="Viaje" EntitySet="Viaje" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="uybusModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -427,6 +479,7 @@
           <NavigationProperty Name="Pasaje" Relationship="Self.FK_Pasaje_Parada" FromRole="Parada" ToRole="Pasaje" />
           <NavigationProperty Name="Pasaje1" Relationship="Self.FK_Pasaje_Parada1" FromRole="Parada" ToRole="Pasaje" />
           <NavigationProperty Name="Tramo" Relationship="Self.FK_Tramo_Parada" FromRole="Parada" ToRole="Tramo" />
+          <NavigationProperty Name="Llegada" Relationship="uybusModel.FK_Llegada_Parada" FromRole="Parada" ToRole="Llegada" />
         </EntityType>
         <EntityType Name="Parametro">
           <Key>
@@ -543,6 +596,7 @@
           <Property Name="IdSalida" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pasaje" Relationship="Self.FK_Pasaje_Viaje" FromRole="Viaje" ToRole="Pasaje" />
           <NavigationProperty Name="Salida" Relationship="Self.FK_Viaje_Salida" FromRole="Viaje" ToRole="Salida" />
+          <NavigationProperty Name="Llegada" Relationship="uybusModel.FK_Llegada_Viaje" FromRole="Viaje" ToRole="Llegada" />
         </EntityType>
         <Association Name="FK_Admin_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
@@ -801,7 +855,62 @@
             <End Role="Salida" EntitySet="Salida" />
             <End Role="Viaje" EntitySet="Viaje" />
           </AssociationSet>
+          <EntitySet Name="Llegada" EntityType="uybusModel.Llegada" />
+          <EntitySet Name="sysdiagrams" EntityType="uybusModel.sysdiagrams" />
+          <AssociationSet Name="FK_Llegada_Parada" Association="uybusModel.FK_Llegada_Parada">
+            <End Role="Parada" EntitySet="Parada" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Llegada_Viaje" Association="uybusModel.FK_Llegada_Viaje">
+            <End Role="Viaje" EntitySet="Viaje" />
+            <End Role="Llegada" EntitySet="Llegada" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Llegada">
+          <Key>
+            <PropertyRef Name="idParada" />
+            <PropertyRef Name="idViaje" />
+          </Key>
+          <Property Name="idParada" Type="Int32" Nullable="false" />
+          <Property Name="idViaje" Type="Int32" Nullable="false" />
+          <Property Name="hora" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Parada" Relationship="uybusModel.FK_Llegada_Parada" FromRole="Llegada" ToRole="Parada" />
+          <NavigationProperty Name="Viaje" Relationship="uybusModel.FK_Llegada_Viaje" FromRole="Llegada" ToRole="Viaje" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Llegada_Parada">
+          <End Type="uybusModel.Parada" Role="Parada" Multiplicity="1" />
+          <End Type="uybusModel.Llegada" Role="Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parada">
+              <PropertyRef Name="IdParada" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="idParada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Llegada_Viaje">
+          <End Type="uybusModel.Viaje" Role="Viaje" Multiplicity="1" />
+          <End Type="uybusModel.Llegada" Role="Llegada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Viaje">
+              <PropertyRef Name="IdViaje" />
+            </Principal>
+            <Dependent Role="Llegada">
+              <PropertyRef Name="idViaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -941,6 +1050,26 @@
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="HoraInicioReal" ColumnName="HoraInicioReal" />
                 <ScalarProperty Name="IdSalida" ColumnName="IdSalida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Llegada">
+            <EntityTypeMapping TypeName="uybusModel.Llegada">
+              <MappingFragment StoreEntitySet="Llegada">
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="idViaje" ColumnName="idViaje" />
+                <ScalarProperty Name="idParada" ColumnName="idParada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="uybusModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

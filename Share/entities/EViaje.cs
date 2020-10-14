@@ -15,5 +15,6 @@ namespace Share.entities
         public int IdSalida { get; set; }
         public ICollection<EPasaje> Pasaje { get; set; } = new List<EPasaje>();
         public ESalida Salida { get; set; }
+        public ICollection<ELlegada> Llegada { get; set; } = new List<ELlegada>();
     }
 }
