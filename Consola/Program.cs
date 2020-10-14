@@ -30,7 +30,7 @@ namespace Consola
             //EUsuario eu = bli.registrarse("55615808", "carlos@gmail.com", "1234", 1, "Carlos", "Mauro","Gonzalez","Perez");//testeado
             //EPersona ep = bls.asignarRol(1,Rol.Conductor);//testeada
             //bla.gestionConductores(1,new DateTime(2021,10,10));//testeada
-            //EParada pa = bla.crearParada("Parada1", -34.333432, -56.324321);//testeado
+            //EParada pa = bla.crearParada("Parada2", -34.333432, -56.324321);//testeado
             //ELinea el = bla.crearLinea("B");//testeado
             //EVehiculo ev = bla.crearVehiculos( "Mercedez-benz", "we3", "ABC1234", 42);//testeado
             //EVehiculo eve = bla.editarVehiculos("Mercedez-benz", "ert", "ABC1234", 42);//testeado
@@ -43,14 +43,16 @@ namespace Consola
             List<EViaje> viajes = bla.crearViajes(new DateTime(2020,10,2), new DateTime(2020, 10, 30), dias, 1); //testeado
             */
             //ETramo et = bla.crearTramos(1,1,1000,15,new DateTime(2019,04,04));//testeada
+            //ELlegada ell = blg.CrearLlegada(2, 2, new TimeSpan(03, 03, 03));//Testeada
 
-            /*
+            //blc.iniciarViaje(1, new TimeSpan()); 
+
             List<DTOubicacion> lstdto = bls.ubicarVehiculo();
             foreach (var l in lstdto)
             {
                 Console.WriteLine(l.hora + " " + l.lat +" "+ l.lon +" "+ l.matricula);//testeado
             }
-            */
+            
 
             Console.WriteLine("\nPrecione Enter  para finalizar.");
             Console.Read();
