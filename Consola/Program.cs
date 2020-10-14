@@ -45,14 +45,15 @@ namespace Consola
             //ETramo et = bla.crearTramos(1,1,1000,15,new DateTime(2019,04,04));//testeada
             //ELlegada ell = blg.CrearLlegada(2, 2, new TimeSpan(03, 03, 03));//Testeada
 
-            //blc.iniciarViaje(1, new TimeSpan()); 
+            //blc.iniciarViaje(1, new TimeSpan(20,0,0)); //testeado
+            //blg.finalizarViaje(1);//testeado
 
-            List<DTOubicacion> lstdto = bls.ubicarVehiculo();
+            /*List<DTOubicacion> lstdto = bls.ubicarVehiculo();
             foreach (var l in lstdto)
             {
                 Console.WriteLine(l.hora + " " + l.lat +" "+ l.lon +" "+ l.matricula);//testeado
             }
-            
+            */
 
             Console.WriteLine("\nPrecione Enter  para finalizar.");
             Console.Read();

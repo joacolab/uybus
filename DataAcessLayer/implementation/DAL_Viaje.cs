@@ -3,6 +3,7 @@ using DataAcessLayer.interfaces;
 using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,6 +72,47 @@ namespace DataAcessLayer.implementation
                     EViaje ev = new EViaje();
                     ev = Converter.viajeAEViaje(v);
                     return ev;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public EViaje iniciarViaje(int idViaje, TimeSpan HoraInicioReal)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Viaje v = db.Viaje.Find(idViaje);
+                    EViaje ev = new EViaje();
+                    v.HoraInicioReal = HoraInicioReal;
+                    db.Entry(v).State = EntityState.Modified;
+                    db.SaveChanges();
+                    ev = Converter.viajeAEViaje(v);
+                    return ev;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void finalizarViaje(int idViaje)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Viaje v = db.Viaje.Find(idViaje);
+                    EViaje ev = new EViaje();
+                    v.Finalizado = 1;
+                    db.Entry(v).State = EntityState.Modified;
+                    db.SaveChanges();
+                    ev = Converter.viajeAEViaje(v);
                 }
             }
             catch (System.Exception ex)

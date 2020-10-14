@@ -46,7 +46,7 @@ namespace BuisnessLayer.implementation
 
         public void finalizarViaje(int idViaje)
         {
-            iViaje.getViaje(idViaje).Finalizado = 1;
+            iViaje.finalizarViaje(idViaje);
         }
 
         public List<EUsuario> notificacionProximidad(int Parada, int viaje)

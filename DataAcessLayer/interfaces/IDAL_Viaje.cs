@@ -12,7 +12,7 @@ namespace DataAcessLayer.interfaces
         EViaje addViaje(bool finalizdo, DateTime Fecha, int IdSalida);
         List<EViaje> getAllViajes();
         EViaje getViaje(int idViaje);
-
-
+        EViaje iniciarViaje(int idViaje, TimeSpan HoraInicioReal);
+        void finalizarViaje(int idViaje);
     }
 }

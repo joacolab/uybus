@@ -36,8 +36,7 @@ namespace BuisnessLayer.implementation
         }
         public void iniciarViaje(int idViaje, TimeSpan horaInicioR)
         {
-            iViaje.getViaje(idViaje).HoraInicioReal = horaInicioR;
-    
+            iViaje.iniciarViaje(idViaje, horaInicioR);
         }
 
         public bool verificarPasaje(int codigoQR, int idParada)
