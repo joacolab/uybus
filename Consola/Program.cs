@@ -12,6 +12,8 @@ using Share.enums;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Share.DTOs;
+using DataAcessLayer.interfaces;
+using DataAcessLayer.implementation;
 
 namespace Consola
 {
@@ -19,11 +21,14 @@ namespace Consola
     {
         static void Main(string[] args)
         {
-            IBL_Admin bla = new BL_Admin();
+            IBL_Admin bla = new BL_Admin(new DAL_Linea(), new DAL_Parada(),
+                new DAL_Salida(), new DAL_Vehiculo(), new DAL_Conductor(), 
+                new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
+
             IBL_Usuario blu = new BL_Usuario();
             IBL_Invitado bli = new BL_Invitado();
-            IBL_General blg = new BL_General();
-            IBL_Conductor blc = new BL_Conductor();
+            IBL_General blg = new BL_General(new DAL_Viaje(), new DAL_Llegada());
+            IBL_Conductor blc = new BL_Conductor(new DAL_Viaje(), new DAL_Pasaje());
             IBL_SuperAdmin bls = new BL_SuperAdmin();
 
             // ----------------- Testeado -------------------

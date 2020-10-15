@@ -12,31 +12,14 @@ namespace BuisnessLayer.implementation
 {
     public class BL_General : IBL_General
     {
-
-        private IDAL_Linea iLinea;
-        private IDAL_Parada iParada;
-        private IDAL_Salida iSalida;
-        private IDAL_Vehiculo iVehiculo;
-        private IDAL_Conductor iConductor;
-        private IDAL_Tramo iTramo;
-        private IDAL_Precio iPrecio;
         private IDAL_Viaje iViaje;
         private IDAL_Llegada iLllegada;
 
-
-        public BL_General()
+        public BL_General(IDAL_Viaje _iViaje, IDAL_Llegada _iLllegada)
         {
-            iLinea = new DAL_Linea();
-            iParada = new DAL_Parada();
-            iSalida = new DAL_Salida();
-            iVehiculo = new DAL_Vehiculo();
-            iConductor = new DAL_Conductor();
-            iTramo = new DAL_Tramo();
-            iPrecio = new DAL_Precio();
-            iViaje = new DAL_Viaje();
-            iLllegada = new DAL_Llegada();
+            iViaje = _iViaje;
+            iLllegada = _iLllegada;
         }
-
 
         public ELlegada CrearLlegada(int idParada, int idViaje, TimeSpan hora)
         {

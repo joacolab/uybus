@@ -22,16 +22,18 @@ namespace BuisnessLayer.implementation
         private IDAL_Precio iPrecio;
         private IDAL_Viaje iViaje;
 
-        public BL_Admin()
+        public BL_Admin(IDAL_Linea _iLinea, IDAL_Parada _iParada, IDAL_Salida _iSalida,
+            IDAL_Vehiculo _iVehiculo, IDAL_Conductor _iConductor, IDAL_Tramo _iTramo,
+            IDAL_Precio _iPrecio, IDAL_Viaje _iViaje)
         {
-            iLinea = new DAL_Linea();
-            iParada = new DAL_Parada();
-            iSalida = new DAL_Salida();
-            iVehiculo = new DAL_Vehiculo();
-            iConductor = new DAL_Conductor();
-            iTramo = new DAL_Tramo();
-            iPrecio = new DAL_Precio();
-            iViaje = new DAL_Viaje();
+            iLinea = _iLinea;
+            iParada = _iParada;
+            iSalida = _iSalida;
+            iVehiculo = _iVehiculo;
+            iConductor = _iConductor;
+            iTramo = _iTramo;
+            iPrecio = _iPrecio;
+            iViaje = _iViaje;
         }
         public ELinea crearLinea(string nombre)
         {
