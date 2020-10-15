@@ -26,7 +26,7 @@ namespace Consola
             IBL_Conductor blc = new BL_Conductor();
             IBL_SuperAdmin bls = new BL_SuperAdmin();
 
-
+            // ----------------- Testeado -------------------
             //EUsuario eu = bli.registrarse("55615808", "carlos@gmail.com", "1234", 1, "Carlos", "Mauro","Gonzalez","Perez");//testeado
             //EPersona ep = bls.asignarRol(1,Rol.Conductor);//testeada
             //bla.gestionConductores(1,new DateTime(2021,10,10));//testeada
@@ -54,6 +54,12 @@ namespace Consola
                 Console.WriteLine(l.hora + " " + l.lat +" "+ l.lon +" "+ l.matricula);//testeado
             }
             */
+            //EPasaje ep = blu.comprarPasaje(1, 6, 1, 2, "null", "null", 2); //testeado
+
+            //Console.WriteLine(blc.verificarPasaje(1, 2));//testeado
+
+            // ----------------- Falta testear -------------------
+
 
             Console.WriteLine("\nPrecione Enter  para finalizar.");
             Console.Read();

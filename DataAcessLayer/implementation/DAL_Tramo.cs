@@ -75,5 +75,25 @@ namespace DataAcessLayer.implementation
                 throw ex;
             }
         }
+
+        public int valorVigente(int idLinea, int idParada)
+        {
+            ETramo t = getTramos(idLinea, idParada);
+            List<EPrecio> lst = t.Precio.ToList();            
+
+            List<EPrecio> lst2 = new List<EPrecio>();
+
+            foreach (var l in lst)
+            {
+                if (l.FechaEntradaVigencia.CompareTo(DateTime.Today) == -1)
+                {
+                    lst2.Add(l);
+                }
+            }
+
+            lst2.OrderBy(r => r.FechaEntradaVigencia);
+
+            return lst2.Last().Precio1;
+        }
     }
 }

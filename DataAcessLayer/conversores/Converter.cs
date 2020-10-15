@@ -202,7 +202,7 @@ namespace DataAcessLayer.conversores
         static public Usuario eusuarioAUsuario(EUsuario eu)
         {
             Usuario u = new Usuario();
-            u.Id = u.Id;
+            u.Id = eu.Id;
             List<Pasaje> lst = new List<Pasaje>();
             foreach (var s in eu.Pasaje)
             {

@@ -8,7 +8,7 @@ namespace BuisnessLayer.interfaces
 {
     public interface IBL_Conductor
     {
-        bool verificarPasaje(int codigoQR, int idParada);
+        bool verificarPasaje(int idPasaje, int idParada);
 
         /// <summary>
         /// Se setea la "horaInicioR" a una instancia Viaje cuyo id es "idViaje"

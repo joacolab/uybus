@@ -20,8 +20,7 @@ namespace BuisnessLayer.implementation
         private IDAL_Tramo iTramo;
         private IDAL_Precio iPrecio;
         private IDAL_Viaje iViaje;
-
-
+        private IDAL_Pasaje iPasaje;
 
         public BL_Conductor()
         {
@@ -33,15 +32,45 @@ namespace BuisnessLayer.implementation
             iTramo = new DAL_Tramo();
             iPrecio = new DAL_Precio();
             iViaje = new DAL_Viaje();
+            iPasaje = new DAL_Pasaje();
         }
         public void iniciarViaje(int idViaje, TimeSpan horaInicioR)
         {
             iViaje.iniciarViaje(idViaje, horaInicioR);
         }
 
-        public bool verificarPasaje(int codigoQR, int idParada)
+        /// <summary>
+        /// retorna true, si el id de la parada_Destino del pasaje con "idPasaje", coinside con "idParada"
+        /// </summary>
+        /// <param name="idPasaje"></param>
+        /// <param name="idParada"></param>
+        /// <returns></returns>
+        public bool verificarPasaje(int idPasaje, int idParada)
         {
-            throw new NotImplementedException();
+            EPasaje ep = iPasaje.getPasajes(idPasaje);
+            if (idParada== ep.IdParadaOrigen) return true;
+            else return false;
+
+            //EParada epDestino = iParada.getParada(ep.IdParadaDestino);
+            //EParada epOrigen = iParada.getParada(ep.IdParadaOrigen);
+
+            /*
+            EViaje ev = iViaje.getViaje(ep.IdViaje);
+            ESalida es = iSalida.getSalidas(ev.IdSalida);
+            ELinea el = iLinea.getLinea(es.IdLinea);
+
+            List<ETramo> tramos = el.Tramo.ToList<ETramo>(); //tramo es un ICollection<Etramo>
+
+            List<EParada> lstEp = new List<EParada>();
+            foreach (var t in tramos)
+            {
+                EParada epar = iParada.getParada(t.IdParada);
+                lstEp.Add(epar);
+            }
+            if (lstEp.Contains(epDestino) && lstEp.Contains(epOrigen)) return true;
+            else return false;
+            */
+
         }
     }
 }

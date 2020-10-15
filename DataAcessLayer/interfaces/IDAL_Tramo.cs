@@ -12,5 +12,7 @@ namespace DataAcessLayer.interfaces
         ETramo addTramo(int tiempoEstimado, int idLinea, int idParada);
         List<ETramo> getAllTramos();
         ETramo getTramos(int idLinea, int idParada);
+
+        int valorVigente(int idLinea, int idParada);
     }
 }

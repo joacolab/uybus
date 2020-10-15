@@ -9,7 +9,8 @@ namespace BuisnessLayer.interfaces
 {
     public interface IBL_Usuario
     {
-        EPasaje comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, System.DateTime fechaViaje, string tipoDoc, string documento, int idParametro, int asiento);
+        EPasaje comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, string tipoDoc, string documento, int asiento);
+        
         /// <summary>
         /// 
         /// </summary>
