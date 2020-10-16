@@ -59,11 +59,10 @@ namespace Consola
             }
             */
            // EPasaje ep = blu.comprarPasaje(1, 2, 1, 2, "null", "null", 2); //testeado
-            EPasaje ep = blu.comprarPasaje(1, -1, 6, 3, "CI", "4333873-7", 2); //testeado
-            //Console.WriteLine(blc.verificarPasaje(1, 2));//testeado
+            //EPasaje ep = blu.comprarPasaje(1, -1, 6, 3, "CI", "4333873-7", 2); //testeado
+            //Console.WriteLine(blc.verificarPasaje(1, 1));//testeado
 
             // ----------------- Falta testear -------------------
-
 
             Console.WriteLine("\nPrecione Enter  para finalizar.");
             Console.Read();

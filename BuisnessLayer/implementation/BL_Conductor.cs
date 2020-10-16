@@ -34,6 +34,7 @@ namespace BuisnessLayer.implementation
         public bool verificarPasaje(int idPasaje, int idParada)
         {
             EPasaje ep = iPasaje.getPasajes(idPasaje);
+            Console.WriteLine(idParada +" "+ ep.IdParadaOrigen);
             if (idParada== ep.IdParadaOrigen) return true;
             else return false;
 
