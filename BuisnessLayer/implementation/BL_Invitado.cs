@@ -15,9 +15,10 @@ namespace BuisnessLayer.implementation
         private IDAL_Usuario iUsuario;
         private IDAL_Persona iPersona;
 
-        public BL_Invitado(){
-            iUsuario = new DAL_Usuario();
-            iPersona = new DAL_Persona();
+        public BL_Invitado(IDAL_Persona _iPersona, IDAL_Usuario _iUsuario)
+        {
+            iUsuario = _iUsuario;
+            iPersona = _iPersona;
         }
         public EUsuario registrarse(string Documento, string Correo, string Password, int TipoDocumento, string pNombre, string sNombre, string pApellido, string sApellido)
         {

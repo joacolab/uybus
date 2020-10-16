@@ -18,6 +18,8 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Pasaje pasaje = new Pasaje();
+                   
+                    if(idUsuario != -1) pasaje.IdUsuario =idUsuario;
                     pasaje.Asientos = asiento;
                     pasaje.Documento = documento;
                     pasaje.TipoDocuemtno = tipoDocumento;

@@ -15,46 +15,38 @@ namespace BuisnessLayer.implementation
     {
         private IDAL_Persona iPersona;
         private IDAL_Usuario iUsuario;
-        private IDAL_Admin iAdmin;
-        private IDAL_Conductor iConductor;
-        private IDAL_Llegada iLlegada;
         private IDAL_Linea iLinea;
-        private IDAL_Parada iParada;
         private IDAL_Salida iSalida;
-        private IDAL_Vehiculo iVehiculo;
         private IDAL_Tramo iTramo;
-        private IDAL_Precio iPrecio;
         private IDAL_Viaje iViaje;
         private IDAL_Pasaje iPasaje;
         private IDAL_Parametro iParametro;
 
-        public BL_Usuario()
+        public BL_Usuario(IDAL_Persona _iPersona, IDAL_Usuario _iUsuario, IDAL_Linea _iLinea, IDAL_Salida _iSalida, IDAL_Tramo _iTramo, IDAL_Viaje _iViaje, IDAL_Pasaje _iPasaje, IDAL_Parametro _iParametro)
         {
-            iPersona = new DAL_Persona();
-            iUsuario = new DAL_Usuario();
-            iAdmin = new DAL_Admin();
-            iConductor = new DAL_Conductor();
-            iLlegada = new DAL_Llegada();
-            iLinea = new DAL_Linea();
-            iParada = new DAL_Parada();
-            iSalida = new DAL_Salida();
-            iVehiculo = new DAL_Vehiculo();
-            iTramo = new DAL_Tramo();
-            iPrecio = new DAL_Precio();
-            iViaje = new DAL_Viaje();
-            iPasaje = new DAL_Pasaje();
-            iParametro = new DAL_Parametro();
+            iPersona = _iPersona;
+            iUsuario = _iUsuario;
+            iLinea = _iLinea;
+            iSalida = _iSalida;
+            iTramo = _iTramo;
+            iViaje = _iViaje;
+            iPasaje = _iPasaje;
+            iParametro = _iParametro;
         }
-
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="idViaje"></param>
+        /// <param name="idUsuario"> -1 si el usuario no esta logeado. </param>
+        /// <param name="idParadaOrigen"></param>
+        /// <param name="idParadaDestino"></param>
+        /// <param name="tipoDoc"> "vacio" si el usaurio esta logeado.</param>
+        /// <param name="documento"> "vacio" si el usaurio esta  logeado.</param>
+        /// <param name="asiento"> Se gurdara -1 si, el costo de pasaje es inferior al parámetro.</param>
+        /// <returns></returns>
         public EPasaje comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, string tipoDoc, string documento, int asiento)
         {
 
-            EPasaje ep = new EPasaje();
-            EUsuario eu = iUsuario.getUsuario(idUsuario);
-            EPersona epe = iPersona.getPersona(idUsuario);
-
-            //-------------------------------
-            
             EViaje ev = iViaje.getViaje(idViaje);
             ESalida es = iSalida.getSalidas(ev.IdSalida);
             ELinea el = iLinea.getLinea(es.IdLinea);
@@ -90,14 +82,18 @@ namespace BuisnessLayer.implementation
             
             EParametro epara = iParametro.getAllParametros().Last();
             
-            if (epara.Valor < cosotP) asiento = -1;
-            
+            if (epara.Valor > cosotP) asiento = -1;
+            Console.WriteLine(cosotP);
+            EPasaje ep = new EPasaje();
             if (idUsuario == -1) //Usuario NOO logeado
             {
+
+              
                 ep = iPasaje.addPasaje(asiento, documento, tipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
             }
             else //Usuario Logeado
             {
+                EPersona epe = iPersona.getPersona(idUsuario);
                 string strTipoDoc;
                 if (epe.TipoDocumento == 1) strTipoDoc = "CI";
                 else strTipoDoc = "Credencial";

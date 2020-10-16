@@ -19,28 +19,22 @@ namespace BuisnessLayer.implementation
         private IDAL_Admin iAdmin;
         private IDAL_Conductor iConductor;
         private IDAL_Llegada iLlegada;
-        private IDAL_Linea iLinea;
         private IDAL_Parada iParada;
         private IDAL_Salida iSalida;
         private IDAL_Vehiculo iVehiculo;
-        private IDAL_Tramo iTramo;
-        private IDAL_Precio iPrecio;
         private IDAL_Viaje iViaje;
 
-        public BL_SuperAdmin()
+        public BL_SuperAdmin(IDAL_Persona _iPersona, IDAL_Usuario _iUsuario, IDAL_Admin _iAdmin, IDAL_Conductor _iConductor, IDAL_Llegada _iLlegada, IDAL_Parada _iParada, IDAL_Salida _iSalida, IDAL_Vehiculo _iVehiculo, IDAL_Viaje _iViaje)
         {
-            iPersona = new DAL_Persona();
-            iUsuario = new DAL_Usuario();
-            iAdmin = new DAL_Admin();
-            iConductor = new DAL_Conductor();
-            iLlegada = new DAL_Llegada();
-            iLinea = new DAL_Linea();
-            iParada = new DAL_Parada();
-            iSalida = new DAL_Salida();
-            iVehiculo = new DAL_Vehiculo();
-            iTramo = new DAL_Tramo();
-            iPrecio = new DAL_Precio();
-            iViaje = new DAL_Viaje();
+            iPersona = _iPersona;
+            iUsuario = _iUsuario;
+            iAdmin = _iAdmin;
+            iConductor = _iConductor;
+            iLlegada = _iLlegada;
+            iParada = _iParada;
+            iSalida = _iSalida;
+            iVehiculo = _iVehiculo;
+            iViaje = _iViaje;
         }
         public EPersona asignarRol(int id, Rol rol)
         {
