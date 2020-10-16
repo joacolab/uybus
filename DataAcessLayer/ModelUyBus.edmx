@@ -103,16 +103,6 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Tramo">
           <Key>
             <PropertyRef Name="IdLinea" />
@@ -121,6 +111,7 @@
           <Property Name="IdLinea" Type="int" Nullable="false" />
           <Property Name="IdParada" Type="int" Nullable="false" />
           <Property Name="TiempoEstimado" Type="int" Nullable="false" />
+          <Property Name="Orden" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -365,7 +356,6 @@
           <EntitySet Name="Precio" EntityType="Self.Precio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Salida" EntityType="Self.Salida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SuperAdmin" EntityType="Self.SuperAdmin" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tramo" EntityType="Self.Tramo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
@@ -566,6 +556,7 @@
           <NavigationProperty Name="Linea" Relationship="Self.FK_Tramo_Linea" FromRole="Tramo" ToRole="Linea" />
           <NavigationProperty Name="Parada" Relationship="Self.FK_Tramo_Parada" FromRole="Tramo" ToRole="Parada" />
           <NavigationProperty Name="Precio" Relationship="Self.FK_Precio_Tramo" FromRole="Tramo" ToRole="Precio" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -856,7 +847,6 @@
             <End Role="Viaje" EntitySet="Viaje" />
           </AssociationSet>
           <EntitySet Name="Llegada" EntityType="uybusModel.Llegada" />
-          <EntitySet Name="sysdiagrams" EntityType="uybusModel.sysdiagrams" />
           <AssociationSet Name="FK_Llegada_Parada" Association="uybusModel.FK_Llegada_Parada">
             <End Role="Parada" EntitySet="Parada" />
             <End Role="Llegada" EntitySet="Llegada" />
@@ -876,16 +866,6 @@
           <Property Name="hora" Type="Time" Nullable="false" Precision="7" />
           <NavigationProperty Name="Parada" Relationship="uybusModel.FK_Llegada_Parada" FromRole="Llegada" ToRole="Parada" />
           <NavigationProperty Name="Viaje" Relationship="uybusModel.FK_Llegada_Viaje" FromRole="Llegada" ToRole="Viaje" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_Llegada_Parada">
           <End Type="uybusModel.Parada" Role="Parada" Multiplicity="1" />
@@ -1019,6 +999,7 @@
           <EntitySetMapping Name="Tramo">
             <EntityTypeMapping TypeName="uybusModel.Tramo">
               <MappingFragment StoreEntitySet="Tramo">
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
                 <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
                 <ScalarProperty Name="IdParada" ColumnName="IdParada" />
                 <ScalarProperty Name="TiempoEstimado" ColumnName="TiempoEstimado" />
@@ -1059,17 +1040,6 @@
                 <ScalarProperty Name="hora" ColumnName="hora" />
                 <ScalarProperty Name="idViaje" ColumnName="idViaje" />
                 <ScalarProperty Name="idParada" ColumnName="idParada" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="uybusModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

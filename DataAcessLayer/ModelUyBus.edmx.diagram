@@ -35,7 +35,6 @@
         <AssociationConnector Association="uybusModel.FK_Salida_Vehiculo" ManuallyRouted="false" />
         <AssociationConnector Association="uybusModel.FK_Viaje_Salida" ManuallyRouted="false" />
         <EntityTypeShape EntityType="uybusModel.Llegada" Width="1.5" PointX="12.75" PointY="6.375" />
-        <EntityTypeShape EntityType="uybusModel.sysdiagrams" Width="1.5" PointX="8.375" PointY="0.75" />
         <AssociationConnector Association="uybusModel.FK_Llegada_Parada" />
         <AssociationConnector Association="uybusModel.FK_Llegada_Viaje" />
       </Diagram>

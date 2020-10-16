@@ -23,6 +23,7 @@ namespace DataAcessLayer
         public int IdLinea { get; set; }
         public int IdParada { get; set; }
         public int TiempoEstimado { get; set; }
+        public int Orden { get; set; }
     
         public virtual Linea Linea { get; set; }
         public virtual Parada Parada { get; set; }

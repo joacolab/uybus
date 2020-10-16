@@ -49,31 +49,31 @@ insert into vehiculo VALUES('SAB5465','Sbelto Doppio 1202','Comil', 42);
 insert into vehiculo VALUES('MAT6548','Campione Invictus 1200','Comil', 40);
 insert into vehiculo VALUES('MAU7645','Sbelto Doppio 1202','Comil', 42);
 
-insert into tramo VALUES(1, 1, 0);
-insert into tramo VALUES(1, 2, 1300);
-insert into tramo VALUES(1, 3, 1300);
-insert into tramo VALUES(1, 4, 1300);
-insert into tramo VALUES(1, 5, 1300);
+insert into tramo VALUES(1, 1, 0, 1);
+insert into tramo VALUES(1, 2, 1300, 2);
+insert into tramo VALUES(1, 3, 1300, 3);
+insert into tramo VALUES(1, 4, 1300, 4);
+insert into tramo VALUES(1, 5, 1300, 5);
 
-insert into tramo VALUES(2, 5, 0);
-insert into tramo VALUES(2, 4, 1300);
-insert into tramo VALUES(2, 3, 1300);
-insert into tramo VALUES(2, 2, 1300);
-insert into tramo VALUES(2, 1, 1300);
+insert into tramo VALUES(2, 5, 0, 1);
+insert into tramo VALUES(2, 4, 1300, 2);
+insert into tramo VALUES(2, 3, 1300, 3);
+insert into tramo VALUES(2, 2, 1300, 4);
+insert into tramo VALUES(2, 1, 1300, 5);
 
-insert into tramo VALUES(3, 1, 0);
-insert into tramo VALUES(3, 6, 1300);
-insert into tramo VALUES(3, 7, 1300);
-insert into tramo VALUES(3, 8, 1300);
-insert into tramo VALUES(3, 9, 1300);
-insert into tramo VALUES(3, 5, 1300);
+insert into tramo VALUES(3, 1, 0, 1);
+insert into tramo VALUES(3, 6, 1300, 2);
+insert into tramo VALUES(3, 7, 1300, 3);
+insert into tramo VALUES(3, 8, 1300, 4);
+insert into tramo VALUES(3, 9, 1300, 5);
+insert into tramo VALUES(3, 5, 1300, 6);
 
-insert into tramo VALUES(4, 5, 0);
-insert into tramo VALUES(4, 9, 1300);
-insert into tramo VALUES(4, 8, 1300);
-insert into tramo VALUES(4, 7, 1300);
-insert into tramo VALUES(4, 6, 1300);
-insert into tramo VALUES(4, 1, 1300);
+insert into tramo VALUES(4, 5, 0, 1);
+insert into tramo VALUES(4, 9, 1300, 2);
+insert into tramo VALUES(4, 8, 1300, 3);
+insert into tramo VALUES(4, 7, 1300, 4);
+insert into tramo VALUES(4, 6, 1300, 5);
+insert into tramo VALUES(4, 1, 1300, 6);
 
 insert into precio VALUES(41, '2018-01-01', 1, 1);
 insert into precio VALUES(43, '2019-01-01', 1, 1);

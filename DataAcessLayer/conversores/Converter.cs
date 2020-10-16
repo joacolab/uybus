@@ -71,6 +71,7 @@ namespace DataAcessLayer.conversores
             t.IdLinea = et.IdLinea;
             t.IdParada = et.IdParada;
             t.TiempoEstimado = et.TiempoEstimado;
+            t.Orden = et.Orden;
             List<Precio> lst = new List<Precio>();
             foreach (var s in et.Precio)
             {
@@ -85,7 +86,8 @@ namespace DataAcessLayer.conversores
             et.IdLinea = t.IdLinea;
             et.IdParada = t.IdParada;
             et.TiempoEstimado = t.TiempoEstimado;
-            List<EPrecio> lst = new List<EPrecio>();
+            et.Orden = t.Orden;
+            List <EPrecio> lst = new List<EPrecio>();
             foreach (var s in t.Precio)
             {
                 lst.Add(precioAEPrecio(s));

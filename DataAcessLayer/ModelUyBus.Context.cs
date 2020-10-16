@@ -40,6 +40,5 @@ namespace DataAcessLayer
         public virtual DbSet<Vehiculo> Vehiculo { get; set; }
         public virtual DbSet<Viaje> Viaje { get; set; }
         public virtual DbSet<Llegada> Llegada { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }
