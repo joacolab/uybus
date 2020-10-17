@@ -137,8 +137,8 @@ insert into salida VALUES ('19:00:00.000', 8, 'MAU7645', 3);
 insert into salida VALUES ('19:00:00.000', 7, 'MAT6548', 4);
 insert into salida VALUES ('22:00:00.000', 8, 'MAU7645', 4);
 
-insert into viaje VALUES(0, '2020-12-03', NULL , 1); 
-insert into viaje VALUES(0, '2020-12-03', NULL , 2);
+insert into viaje VALUES(0, '2020-12-03', '08:01:00.000', 1); 
+insert into viaje VALUES(0, '2020-12-03', '10:01:00.000', 2);
 insert into viaje VALUES(0, '2020-12-03', NULL , 3);
 insert into viaje VALUES(0, '2020-12-03', NULL , 4);
 insert into viaje VALUES(0, '2020-12-03', NULL , 5);
@@ -172,3 +172,7 @@ insert into pasaje VALUES(NULL, '45553576','CI', NULL, 1, 2, 1);
 insert into pasaje VALUES(NULL, '65453576','CI', NULL, 1, 2, 1);
 insert into pasaje VALUES(NULL, '65453576','CI', NULL, 1, 2, 1);
 insert into pasaje VALUES(NULL, '87643576','CI', NULL, 1, 2, 1);
+
+
+insert into llegada VALUES(2, 1, '08:22:00.000','2020-12-03');
+insert into llegada VALUES(2, 2, '10:22:00.000','2020-12-03');

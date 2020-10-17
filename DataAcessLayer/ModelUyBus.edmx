@@ -33,6 +33,7 @@
           <Property Name="idParada" Type="int" Nullable="false" />
           <Property Name="idViaje" Type="int" Nullable="false" />
           <Property Name="hora" Type="time" Precision="7" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Parada">
           <Key>
@@ -866,6 +867,7 @@
           <Property Name="hora" Type="Time" Nullable="false" Precision="7" />
           <NavigationProperty Name="Parada" Relationship="uybusModel.FK_Llegada_Parada" FromRole="Llegada" ToRole="Parada" />
           <NavigationProperty Name="Viaje" Relationship="uybusModel.FK_Llegada_Viaje" FromRole="Llegada" ToRole="Viaje" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <Association Name="FK_Llegada_Parada">
           <End Type="uybusModel.Parada" Role="Parada" Multiplicity="1" />
@@ -1037,6 +1039,7 @@
           <EntitySetMapping Name="Llegada">
             <EntityTypeMapping TypeName="uybusModel.Llegada">
               <MappingFragment StoreEntitySet="Llegada">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="hora" ColumnName="hora" />
                 <ScalarProperty Name="idViaje" ColumnName="idViaje" />
                 <ScalarProperty Name="idParada" ColumnName="idParada" />

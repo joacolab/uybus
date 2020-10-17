@@ -130,9 +130,6 @@
     <Compile Include="SuperAdmin.cs">
       <DependentUpon>ModelUyBus.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>ModelUyBus.tt</DependentUpon>
-    </Compile>
     <Compile Include="Tramo.cs">
       <DependentUpon>ModelUyBus.tt</DependentUpon>
     </Compile>

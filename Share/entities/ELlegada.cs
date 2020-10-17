@@ -11,7 +11,7 @@ namespace Share.entities
         public int idParada { get; set; }
         public int idViaje { get; set; }
         public TimeSpan hora { get; set; }
-
+        public System.DateTime fecha { get; set; }
         public EParada Parada { get; set; }
         public EViaje Viaje { get; set; }
     }

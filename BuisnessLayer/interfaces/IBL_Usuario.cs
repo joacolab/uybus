@@ -1,4 +1,5 @@
-﻿using Share.entities;
+﻿using Share.DTOs;
+using Share.entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,6 @@ namespace BuisnessLayer.interfaces
         /// <param name="idUsuario"></param>
         /// <param name="idParada"></param>
         /// <returns>Matriculas de proximos vehiculos</returns>
-        List<string> proximoVehiculo(int idUsuario, int idParada);
+        List<DTOproxVehiculo> proximoVehiculo(int idUsuario, int idParada);
     }
 }

@@ -328,6 +328,7 @@ namespace DataAcessLayer.conversores
             el.idParada = ll.idParada;
             el.idViaje = ll.idViaje;
             el.hora = ll.hora;
+            el.fecha = ll.fecha;
             return el;
         }
         static public Llegada ellegadaAllegada(ELlegada el)
@@ -336,6 +337,7 @@ namespace DataAcessLayer.conversores
             ll.idParada = el.idParada;
             ll.idViaje = el.idViaje;
             ll.hora = el.hora;
+            ll.fecha = el.fecha;
             return ll;
         }
         static public Viaje eviajeAViaje(EViaje Evi)

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\DTOproxVehiculo.cs" />
     <Compile Include="DTOs\DTOubicacion.cs" />
     <Compile Include="entities\EAdmin.cs" />
     <Compile Include="entities\EConductor.cs" />

@@ -17,6 +17,7 @@ namespace DataAcessLayer
         public int idParada { get; set; }
         public int idViaje { get; set; }
         public System.TimeSpan hora { get; set; }
+        public System.DateTime fecha { get; set; }
     
         public virtual Parada Parada { get; set; }
         public virtual Viaje Viaje { get; set; }
