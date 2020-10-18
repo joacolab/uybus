@@ -10,7 +10,22 @@ namespace BuisnessLayer.interfaces
     public interface IBL_General
     {
         void finalizarViaje(int idViaje);
-        List<EPasaje> reposrtesPasajes(DateTime fechaDesde, DateTime fechaHasat, int linea, int salida);
+
+
+        /// <summary>
+        ///Si solo me pasan fechas retorno los pasajes de los viajes de esas fechas(No me deben pasar el id del viaje), 
+        ///Si me pasan viaje retorno los pasajes del viaje (No me deben pasar fechas),
+        ///Si me pasan salida retorno los pasajes de los viajes de la salida(No me deben pasar el id del viaje);
+        ///si me pasan linea retorno los pasajes de los viajes de las salidas de la linea(No me deben pasar el id del viaje)
+        ///     
+        /// </summary>
+        /// <param name="fechaDesde">(1900,01,01) si no es por fecha</param>
+        /// <param name="fechaHasat">(1900,01,01) si no es por fecha</param>
+        /// <param name="linea"> -1 si no es por linea</param>
+        /// <param name="salida"> -1 si no es por salida</param>
+        /// <param name="viaje"> -1 si no es por viaje</param>
+        /// <returns></returns>
+        List<EPasaje> reposrtesPasajes(DateTime fechaDesde, DateTime fechaHasat, int linea, int salida,int viaje);
 
         ELlegada CrearLlegada(int idParada, int idViaje, TimeSpan hora);
         List<EUsuario> notificacionProximidad(int Parada, int viaje);
