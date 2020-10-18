@@ -21,8 +21,9 @@ namespace BuisnessLayer.implementation
         private IDAL_Tramo iTramo;
         private IDAL_Parada iParada;
         private IDAL_Pasaje iPasaje;
+        private IDAL_Usuario iUsuario;
 
-        public BL_General(IDAL_Viaje _iViaje, IDAL_Llegada _iLllegada, IDAL_Salida _iSalida,IDAL_Linea _iLinea, IDAL_Tramo _iTramo,IDAL_Parada _iParada,IDAL_Pasaje _iPasaje)
+        public BL_General(IDAL_Viaje _iViaje, IDAL_Llegada _iLllegada, IDAL_Salida _iSalida,IDAL_Linea _iLinea, IDAL_Tramo _iTramo,IDAL_Parada _iParada,IDAL_Pasaje _iPasaje, IDAL_Usuario _iUsuario)
         {
             iViaje = _iViaje;
             iLllegada = _iLllegada;
@@ -31,6 +32,7 @@ namespace BuisnessLayer.implementation
             iTramo = _iTramo;
             iParada = _iParada;
             iPasaje = _iPasaje;
+            iUsuario = _iUsuario;
         }
 
         public ELlegada CrearLlegada(int idParada, int idViaje, TimeSpan hora)
@@ -46,32 +48,27 @@ namespace BuisnessLayer.implementation
 
         public List<EUsuario> notificacionProximidad(int Parada, int viaje)
         {
-
             List<EUsuario> usuarios = new List<EUsuario>();
             int idL = iSalida.getSalidas(iViaje.getViaje(viaje).IdSalida).IdLinea;
 
-             ETramo tramo = iTramo.getTramos(idL ,Parada);
-
+            ETramo tramo = iTramo.getTramos(idL ,Parada);
+            
             List<ETramo> etramos = iLinea.getLinea(idL).Tramo.ToList();
             EParada proximaParada = null;
             
             foreach (var item in etramos)
             {
-               
                 if (item.Orden == tramo.Orden +1) {
                     proximaParada = iParada.getParada(item.IdParada);
                     break;
-                }
-
-               
+                }      
             }
             if (proximaParada == null) throw new Exception("Parada no encontrada");
 
-            foreach (var item in proximaParada.Pasaje1.ToList())
+            foreach (var item in proximaParada.Pasaje.ToList())
             {
-                if(item.Usuario != null)   usuarios.Add(item.Usuario);
+                if (item.IdUsuario != null) usuarios.Add(iUsuario.getUsuario(item.IdUsuario ?? default(int)));
             }
-
 
             return usuarios;
         }
@@ -83,27 +80,15 @@ namespace BuisnessLayer.implementation
         private List<DateTime> obtenerFechas(DateTime fechaDesde, DateTime fechaHasat) {
             List<DateTime> resultado = new List<DateTime>();
 
-            int anioInicio = fechaDesde.Year;
-            int anioFinal = fechaHasat.Year;
-            int cantAnios = anioFinal - anioInicio;
+            int diaI = fechaDesde.DayOfYear;
+            int diaF = fechaHasat.DayOfYear;
+            int cantDias = diaF - diaI;
 
-
-
-            int cantDias = fechaDesde.DayOfYear - fechaHasat.DayOfYear;
-            for (int i = 0; i <= cantAnios; i++)
+            for (int i = 0; i <= cantDias; i++)
             {
-                for (int e = 0; e <= cantDias; e++)
-                {
-                    resultado.Add(fechaDesde.AddYears(i).AddDays(e));
-                    
-                }
-
+                resultado.Add(fechaDesde.AddDays(i));
             }
-            foreach (var item in resultado)
-            {
-                Console.WriteLine(item);
 
-            }
             return resultado;
         }
         private List<EPasaje> pasajesDeViaje(int viaje) {
@@ -147,10 +132,13 @@ namespace BuisnessLayer.implementation
         private List<EPasaje> pasajesDeLinea(int linea, List<DateTime> fechas) 
         {
             List<EPasaje> pasajes = new List<EPasaje>();
+
             foreach (var salida in iLinea.getLinea(linea).Salida.ToList())
             {
-
-                pasajes.Concat(pasajesDeSalida(salida.IdSalida, fechas));
+                foreach (var pas in pasajesDeSalida(salida.IdSalida, fechas))
+                {
+                    pasajes.Add(pas);
+                }
             }
             return pasajes;
         }
