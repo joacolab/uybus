@@ -24,7 +24,7 @@ namespace Consola
             IBL_Admin bla = new BL_Admin(new DAL_Linea(), new DAL_Parada(), new DAL_Salida(), new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
             IBL_Usuario blu = new BL_Usuario(new DAL_Persona(), new DAL_Usuario(), new DAL_Linea(),new DAL_Salida(),new DAL_Tramo(), new DAL_Viaje(),new DAL_Pasaje(),new DAL_Parametro(), new DAL_Parada(), new DAL_Llegada(), new DAL_Vehiculo()) ;
             IBL_Invitado bli = new BL_Invitado( new DAL_Persona(), new DAL_Usuario());
-            IBL_General blg = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(),new DAL_Pasaje(), new DAL_Usuario());   
+            IBL_General blg = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(),new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo());   
             IBL_Conductor blc = new BL_Conductor(new DAL_Viaje(), new DAL_Pasaje());
             IBL_SuperAdmin bls = new BL_SuperAdmin(new DAL_Persona(), new DAL_Usuario(), new DAL_Admin(), new DAL_Conductor(), new DAL_Llegada(), new DAL_Parada(), new DAL_Salida(), new DAL_Vehiculo(), new DAL_Viaje()) ;
 
@@ -72,12 +72,7 @@ namespace Consola
                 Console.WriteLine(usuario.Id);
             }*/
 
-
-
-            
-
-           
-            
+            //Console.WriteLine(blg.reporteUtilidad(1, new DateTime(2020,12,01),new DateTime(2020,12,04), -1, -1));//testeado
 
 
             // ----------------- Falta testear -------------------

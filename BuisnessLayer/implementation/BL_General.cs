@@ -22,8 +22,9 @@ namespace BuisnessLayer.implementation
         private IDAL_Parada iParada;
         private IDAL_Pasaje iPasaje;
         private IDAL_Usuario iUsuario;
+        private IDAL_Vehiculo iVehiculo;
 
-        public BL_General(IDAL_Viaje _iViaje, IDAL_Llegada _iLllegada, IDAL_Salida _iSalida,IDAL_Linea _iLinea, IDAL_Tramo _iTramo,IDAL_Parada _iParada,IDAL_Pasaje _iPasaje, IDAL_Usuario _iUsuario)
+        public BL_General(IDAL_Viaje _iViaje, IDAL_Llegada _iLllegada, IDAL_Salida _iSalida,IDAL_Linea _iLinea, IDAL_Tramo _iTramo,IDAL_Parada _iParada,IDAL_Pasaje _iPasaje, IDAL_Usuario _iUsuario, IDAL_Vehiculo _iVehiculo)
         {
             iViaje = _iViaje;
             iLllegada = _iLllegada;
@@ -33,6 +34,7 @@ namespace BuisnessLayer.implementation
             iParada = _iParada;
             iPasaje = _iPasaje;
             iUsuario = _iUsuario;
+            iVehiculo = _iVehiculo;
         }
 
         public ELlegada CrearLlegada(int idParada, int idViaje, TimeSpan hora)
@@ -73,10 +75,108 @@ namespace BuisnessLayer.implementation
             return usuarios;
         }
 
+        private int valorVigente(int idLinea, int idParada)
+        {
+            ETramo t = iTramo.getTramos(idLinea, idParada);
+            List<EPrecio> lst = t.Precio.ToList();
+
+            List<EPrecio> lst2 = new List<EPrecio>();
+
+            foreach (var l in lst)
+            {
+                if (l.FechaEntradaVigencia.CompareTo(DateTime.Today) == -1)
+                {
+                    lst2.Add(l);
+                }
+            }
+
+            lst2.OrderBy(r => r.FechaEntradaVigencia);
+
+            return lst2.Last().Precio1;
+        }
+        private int costoEntreParadas(int idLinea, int IdParadaOrigen, int IdParadaDestino)
+        {
+            List<ETramo> tramos = iLinea.getLinea(idLinea).Tramo.ToList();
+            iParada.getParada(IdParadaOrigen);
+
+            int orednOrigen = iTramo.getTramos(idLinea, IdParadaOrigen).Orden;
+            int orenDestingo = iTramo.getTramos(idLinea, IdParadaDestino).Orden;
+
+
+            List<int> ordenes = new List<int>();
+            for (int i = orednOrigen; i <= orenDestingo; i++)
+            {
+                ordenes.Add(i);
+            }
+
+            int costoPasaje = 0;
+            foreach (var tramo in tramos)
+            {
+                foreach (var orden in ordenes)
+                {
+                    if(tramo.Orden == orden)
+                    {
+                        costoPasaje = costoPasaje + valorVigente(idLinea, tramo.IdParada);
+                    }
+                }
+            }
+
+            return costoPasaje;
+        }
+        private float utilidadPorViaje(int idViaje, List<DateTime> fechas)
+        {
+            int cantAsientos = iVehiculo.getVehiculos(iSalida.getSalidas(iViaje.getViaje(idViaje).IdSalida).IdVehiculo).CantAsientos;
+            int idLinea = iSalida.getSalidas(iViaje.getViaje(idViaje).IdSalida).IdLinea;
+
+            int maxCostoPsaje = 0;
+            foreach (var tramo in iLinea.getLinea(idLinea).Tramo.ToList())
+            {
+                maxCostoPsaje = maxCostoPsaje + valorVigente(idLinea, tramo.IdParada);
+            }
+
+            int maxUtilidad = maxCostoPsaje * cantAsientos;
+
+
+            int costoPasajes = 0;
+            foreach (var pasaje in iViaje.getViaje(idViaje).Pasaje.ToList())
+            {
+                costoPasajes = costoPasajes + costoEntreParadas(idLinea, pasaje.IdParadaOrigen, pasaje.IdParadaDestino);
+            }
+            float utilidad = (float)costoPasajes / (float)maxUtilidad;
+            return utilidad;
+        }
+        private float utilidadPorSalida(int salida, List<DateTime> fechas)
+        {
+            float costo = 0;
+            foreach (var viaje in iSalida.getSalidas(salida).Viaje.ToList())
+            {
+                costo = costo + utilidadPorViaje(viaje.IdViaje, fechas);
+            }
+            return costo;
+        }
+        private float utilidadPorLinea(int linea, List<DateTime> fechas)
+        {
+            float costo = 0;
+            foreach (var salida in iLinea.getLinea(linea).Salida.ToList())
+            {
+                costo = costo + utilidadPorSalida(salida.IdSalida, fechas);
+            }
+            return costo;
+        }
         public float reporteUtilidad(int idViaje, DateTime fechaDesde, DateTime fechaHasat, int linea, int salida)
         {
-            throw new NotImplementedException();
+
+            List<DateTime> fechas = obtenerFechas(fechaDesde, fechaHasat);
+
+            if (linea != -1) return utilidadPorLinea(linea, fechas);
+            if (salida != -1) return utilidadPorSalida(salida, fechas);
+            if (idViaje != -1) return utilidadPorViaje(idViaje, fechas);
+            throw new Exception("Error en los parametros");
+
+
         }
+
+
         private List<DateTime> obtenerFechas(DateTime fechaDesde, DateTime fechaHasat) {
             List<DateTime> resultado = new List<DateTime>();
 
