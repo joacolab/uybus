@@ -180,13 +180,9 @@ namespace BuisnessLayer.implementation
         private List<DateTime> obtenerFechas(DateTime fechaDesde, DateTime fechaHasat) {
             List<DateTime> resultado = new List<DateTime>();
 
-            int diaI = fechaDesde.DayOfYear;
-            int diaF = fechaHasat.DayOfYear;
-            int cantDias = diaF - diaI;
-
-            for (int i = 0; i <= cantDias; i++)
+            for (DateTime n = fechaDesde; n.CompareTo(fechaHasat) <= 0; n = n.AddDays(1))
             {
-                resultado.Add(fechaDesde.AddDays(i));
+                resultado.Add(n);
             }
 
             return resultado;

@@ -81,6 +81,18 @@ namespace BuisnessLayer.implementation
             int diaFinal = final.DayOfYear;
             int canDias = diaFinal - diaInicio;
 
+            for (DateTime n = incio; n.CompareTo(final) <= 0; n = n.AddDays(1))
+            {
+                foreach (var d in dias)
+                {
+                    if (n.DayOfWeek.ToString() == diasToDays(d))
+                    {
+                        resultado.Add(n);
+                        break;
+                    }
+                }
+            }
+            /*
             for (int e = 0; e <= canDias; e++)
             {
                 foreach (var d in dias)
@@ -92,6 +104,7 @@ namespace BuisnessLayer.implementation
                     }
                 }
             }
+            */
             return resultado;
         }
         public List<EViaje> crearViajes(DateTime fechaInicio, DateTime fechaFinal, List<Dias> diasSemana, int idSalida)
