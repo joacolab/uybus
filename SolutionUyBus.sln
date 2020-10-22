@@ -13,6 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAcessLayer", "DataAcess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIREST", "APIREST\APIREST.csproj", "{EBC18B06-22EE-4231-944C-D19E7183655F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_SOAP", "API_SOAP\API_SOAP.csproj", "{3180E47C-00BF-4787-8213-E50063C83B9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminal", "Terminal\Terminal.csproj", "{351171EE-8CF2-44F3-843B-91B301116C97}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3180E47C-00BF-4787-8213-E50063C83B9F} = {3180E47C-00BF-4787-8213-E50063C83B9F}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +46,14 @@ Global
 		{EBC18B06-22EE-4231-944C-D19E7183655F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBC18B06-22EE-4231-944C-D19E7183655F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBC18B06-22EE-4231-944C-D19E7183655F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3180E47C-00BF-4787-8213-E50063C83B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3180E47C-00BF-4787-8213-E50063C83B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3180E47C-00BF-4787-8213-E50063C83B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3180E47C-00BF-4787-8213-E50063C83B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{351171EE-8CF2-44F3-843B-91B301116C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{351171EE-8CF2-44F3-843B-91B301116C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{351171EE-8CF2-44F3-843B-91B301116C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{351171EE-8CF2-44F3-843B-91B301116C97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
