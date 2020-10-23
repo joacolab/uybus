@@ -31,6 +31,13 @@ namespace Terminal
 
         private void btnComprar_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(
+                    "Muchas gracias por usar nuestro sistema",
+                    "Pasaje comprado",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information
+                );
+
             this.Hide();
             new MainWindow().ShowDialog();
             this.Show();

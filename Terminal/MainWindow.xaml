@@ -10,13 +10,43 @@
     <Grid x:Name="main">
         <Label x:Name="lbTitulo" Content="Terminal de Compra de Pasajes" HorizontalAlignment="Left" Margin="134,10,0,0" VerticalAlignment="Top" Height="60" Width="510" FontSize="36"/>
         <Label HorizontalAlignment="Left" Margin="179,170,0,0" VerticalAlignment="Top" Width="173"/>
-        <Label x:Name="lbO" Content="Seleccione Origen" HorizontalAlignment="Left" Margin="550,84,0,0" VerticalAlignment="Top" Width="127" FontSize="14"/>
+        <Label x:Name="lbO" Content="Seleccione Origen" HorizontalAlignment="Left" Margin="287,84,0,0" VerticalAlignment="Top" Width="127" FontSize="14"/>
         <Label x:Name="lbL" Content="Seleccione Linea" HorizontalAlignment="Left" Margin="34,84,0,0" VerticalAlignment="Top" Width="119" FontSize="14"/>
-        <Label x:Name="lbD" Content="Seleccione Destino" HorizontalAlignment="Left" Margin="287,84,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lbD" Content="Seleccione Destino" HorizontalAlignment="Left" Margin="532,84,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Button x:Name="btnCerrar" Content="Cerrar" HorizontalAlignment="Left" Margin="34,355,0,0" VerticalAlignment="Top" Width="86" FontSize="18" Height="33" Click="btnCerrar_Click"/>
         <Button x:Name="btnS" Content="Siguiente" HorizontalAlignment="Left" Margin="655,355,0,0" VerticalAlignment="Top" Width="99" FontSize="18" Height="33" Click="btnS_Click"/>
-        <ListBox x:Name="lsL" HorizontalAlignment="Left" Height="208" Margin="34,126,0,0" VerticalAlignment="Top" Width="214"/>
-        <ListBox x:Name="lsD" HorizontalAlignment="Left" Height="208" Margin="287,126,0,0" VerticalAlignment="Top" Width="222"/>
-        <ListBox x:Name="lsO" HorizontalAlignment="Left" Height="208" Margin="550,126,0,0" VerticalAlignment="Top" Width="204"/>
+        <ListBox x:Name="lsL" HorizontalAlignment="Left" Height="208" Margin="34,126,0,0" VerticalAlignment="Top" Width="214" SelectionChanged="lsL_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding IdLinea}"/>
+                        <Run Text="-"/>
+                        <Run Text="{Binding Nombre}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="lsD" HorizontalAlignment="Left" Height="208" Margin="532,126,0,0" VerticalAlignment="Top" Width="222" SelectionChanged="lsD_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding IdParada}"/>
+                        <Run Text="-"/>
+                        <Run Text="{Binding Nombre}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="lsO" HorizontalAlignment="Left" Height="208" Margin="287,126,0,0" VerticalAlignment="Top" Width="204" SelectionChanged="lsO_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding IdParada}"/>
+                        <Run Text="-"/>
+                        <Run Text="{Binding Nombre}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

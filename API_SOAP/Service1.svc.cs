@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Share.entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -28,6 +29,11 @@ namespace API_SOAP
                 composite.StringValue += "Suffix";
             }
             return composite;
+        }
+
+        public List<ELinea> GetLineas()
+        {
+            throw new NotImplementedException();
         }
     }
 }

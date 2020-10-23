@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Share.entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,6 +13,8 @@ namespace API_SOAP
     [ServiceContract]
     public interface IService1
     {
+        [OperationContract]
+        List<ELinea> GetLineas();
 
         [OperationContract]
         string GetData(int value);
