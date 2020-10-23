@@ -200,5 +200,10 @@ namespace BuisnessLayer.implementation
 
             return proxVs;
         }
+
+        public List<ELinea> listarLineas()
+        {
+            return iLinea.getAllLineas();
+        }
     }
 }

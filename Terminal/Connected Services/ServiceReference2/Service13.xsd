@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Share.entities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Share.entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:58746/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfELinea">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ELinea" nillable="true" type="tns:ELinea" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfELinea" nillable="true" type="tns:ArrayOfELinea" />
+  <xs:complexType name="ELinea">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdLinea" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Salida" nillable="true" type="tns:ArrayOfESalida" />
+      <xs:element minOccurs="0" name="Tramo" nillable="true" type="tns:ArrayOfETramo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ELinea" nillable="true" type="tns:ELinea" />
+  <xs:complexType name="ArrayOfESalida">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ESalida" nillable="true" type="tns:ESalida" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfESalida" nillable="true" type="tns:ArrayOfESalida" />
+  <xs:complexType name="ESalida">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Conductor" nillable="true" type="tns:EConductor" />
+      <xs:element minOccurs="0" name="HoraInicio" type="ser:duration" />
+      <xs:element minOccurs="0" name="IdConductor" type="xs:int" />
+      <xs:element minOccurs="0" name="IdLinea" type="xs:int" />
+      <xs:element minOccurs="0" name="IdSalida" type="xs:int" />
+      <xs:element minOccurs="0" name="IdVehiculo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Linea" nillable="true" type="tns:ELinea" />
+      <xs:element minOccurs="0" name="Vehiculo" nillable="true" type="tns:EVehiculo" />
+      <xs:element minOccurs="0" name="Viaje" nillable="true" type="tns:ArrayOfEViaje" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ESalida" nillable="true" type="tns:ESalida" />
+  <xs:complexType name="EConductor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Persona" nillable="true" type="tns:EPersona" />
+      <xs:element minOccurs="0" name="Salida" nillable="true" type="tns:ArrayOfESalida" />
+      <xs:element minOccurs="0" name="VencimientoLicencia" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EConductor" nillable="true" type="tns:EConductor" />
+  <xs:complexType name="EPersona">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Admin" nillable="true" type="tns:EAdmin" />
+      <xs:element minOccurs="0" name="Conductor" nillable="true" type="tns:EConductor" />
+      <xs:element minOccurs="0" name="Correo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Documento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SuperAdmin" nillable="true" type="tns:ESuperAdmin" />
+      <xs:element minOccurs="0" name="TipoDocumento" type="xs:int" />
+      <xs:element minOccurs="0" name="Usuario" nillable="true" type="tns:EUsuario" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="pApellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="pNombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="sApellido" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="sNombre" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EPersona" nillable="true" type="tns:EPersona" />
+  <xs:complexType name="EAdmin">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Persona" nillable="true" type="tns:EPersona" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EAdmin" nillable="true" type="tns:EAdmin" />
+  <xs:complexType name="ESuperAdmin">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Persona" nillable="true" type="tns:EPersona" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ESuperAdmin" nillable="true" type="tns:ESuperAdmin" />
+  <xs:complexType name="EUsuario">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Pasaje" nillable="true" type="tns:ArrayOfEPasaje" />
+      <xs:element minOccurs="0" name="Persona" nillable="true" type="tns:EPersona" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EUsuario" nillable="true" type="tns:EUsuario" />
+  <xs:complexType name="ArrayOfEPasaje">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EPasaje" nillable="true" type="tns:EPasaje" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEPasaje" nillable="true" type="tns:ArrayOfEPasaje" />
+  <xs:complexType name="EPasaje">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Asientos" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Documento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdParadaDestino" type="xs:int" />
+      <xs:element minOccurs="0" name="IdParadaOrigen" type="xs:int" />
+      <xs:element minOccurs="0" name="IdPasaje" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdViaje" type="xs:int" />
+      <xs:element minOccurs="0" name="Parada" nillable="true" type="tns:EParada" />
+      <xs:element minOccurs="0" name="Parada1" nillable="true" type="tns:EParada" />
+      <xs:element minOccurs="0" name="TipoDocuemtno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Usuario" nillable="true" type="tns:EUsuario" />
+      <xs:element minOccurs="0" name="Viaje" nillable="true" type="tns:EViaje" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EPasaje" nillable="true" type="tns:EPasaje" />
+  <xs:complexType name="EParada">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdParada" type="xs:int" />
+      <xs:element minOccurs="0" name="Lat" type="xs:double" />
+      <xs:element minOccurs="0" name="Llegada" nillable="true" type="tns:ArrayOfELlegada" />
+      <xs:element minOccurs="0" name="Long" type="xs:double" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Pasaje" nillable="true" type="tns:ArrayOfEPasaje" />
+      <xs:element minOccurs="0" name="Pasaje1" nillable="true" type="tns:ArrayOfEPasaje" />
+      <xs:element minOccurs="0" name="Tramo" nillable="true" type="tns:ArrayOfETramo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EParada" nillable="true" type="tns:EParada" />
+  <xs:complexType name="ArrayOfELlegada">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ELlegada" nillable="true" type="tns:ELlegada" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfELlegada" nillable="true" type="tns:ArrayOfELlegada" />
+  <xs:complexType name="ELlegada">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Parada" nillable="true" type="tns:EParada" />
+      <xs:element minOccurs="0" name="Viaje" nillable="true" type="tns:EViaje" />
+      <xs:element minOccurs="0" name="fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="hora" type="ser:duration" />
+      <xs:element minOccurs="0" name="idParada" type="xs:int" />
+      <xs:element minOccurs="0" name="idViaje" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ELlegada" nillable="true" type="tns:ELlegada" />
+  <xs:complexType name="EViaje">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Finalizado" nillable="true" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="HoraInicioReal" nillable="true" type="ser:duration" />
+      <xs:element minOccurs="0" name="IdSalida" type="xs:int" />
+      <xs:element minOccurs="0" name="IdViaje" type="xs:int" />
+      <xs:element minOccurs="0" name="Llegada" nillable="true" type="tns:ArrayOfELlegada" />
+      <xs:element minOccurs="0" name="Pasaje" nillable="true" type="tns:ArrayOfEPasaje" />
+      <xs:element minOccurs="0" name="Salida" nillable="true" type="tns:ESalida" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EViaje" nillable="true" type="tns:EViaje" />
+  <xs:complexType name="ArrayOfETramo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ETramo" nillable="true" type="tns:ETramo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfETramo" nillable="true" type="tns:ArrayOfETramo" />
+  <xs:complexType name="ETramo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdLinea" type="xs:int" />
+      <xs:element minOccurs="0" name="IdParada" type="xs:int" />
+      <xs:element minOccurs="0" name="Linea" nillable="true" type="tns:ELinea" />
+      <xs:element minOccurs="0" name="Orden" type="xs:int" />
+      <xs:element minOccurs="0" name="Parada" nillable="true" type="tns:EParada" />
+      <xs:element minOccurs="0" name="Precio" nillable="true" type="tns:ArrayOfEPrecio" />
+      <xs:element minOccurs="0" name="TiempoEstimado" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ETramo" nillable="true" type="tns:ETramo" />
+  <xs:complexType name="ArrayOfEPrecio">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EPrecio" nillable="true" type="tns:EPrecio" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEPrecio" nillable="true" type="tns:ArrayOfEPrecio" />
+  <xs:complexType name="EPrecio">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FechaEntradaVigencia" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdLinea" type="xs:int" />
+      <xs:element minOccurs="0" name="IdParada" type="xs:int" />
+      <xs:element minOccurs="0" name="IdPrecio" type="xs:int" />
+      <xs:element minOccurs="0" name="Precio1" type="xs:int" />
+      <xs:element minOccurs="0" name="Tramo" nillable="true" type="tns:ETramo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EPrecio" nillable="true" type="tns:EPrecio" />
+  <xs:complexType name="EVehiculo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CantAsientos" type="xs:int" />
+      <xs:element minOccurs="0" name="Marca" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Matricula" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Modelo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Salida" nillable="true" type="tns:ArrayOfESalida" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EVehiculo" nillable="true" type="tns:EVehiculo" />
+  <xs:complexType name="ArrayOfEViaje">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EViaje" nillable="true" type="tns:EViaje" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEViaje" nillable="true" type="tns:ArrayOfEViaje" />
+</xs:schema>

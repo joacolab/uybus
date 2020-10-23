@@ -10,6 +10,7 @@ namespace BuisnessLayer.interfaces
 {
     public interface IBL_Usuario
     {
+        List<ELinea> listarLineas();
         EPasaje comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, string tipoDoc, string documento, int asiento);
         
         /// <summary>

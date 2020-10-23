@@ -1,4 +1,7 @@
-﻿using Share.entities;
+﻿using BuisnessLayer.implementation;
+using BuisnessLayer.interfaces;
+using DataAcessLayer.implementation;
+using Share.entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +16,7 @@ namespace API_SOAP
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class Service1 : IService1
     {
+        IBL_Usuario blu = new BL_Usuario(new DAL_Persona(), new DAL_Usuario(), new DAL_Linea(), new DAL_Salida(), new DAL_Tramo(), new DAL_Viaje(), new DAL_Pasaje(), new DAL_Parametro(), new DAL_Parada(), new DAL_Llegada(), new DAL_Vehiculo());
         public string GetData(int value)
         {
             return string.Format("You entered: {0}", value);
