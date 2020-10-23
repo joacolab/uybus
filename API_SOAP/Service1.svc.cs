@@ -37,7 +37,7 @@ namespace API_SOAP
 
         public List<ELinea> GetLineas()
         {
-            throw new NotImplementedException();
+            return blu.listarLineas();
         }
     }
 }
