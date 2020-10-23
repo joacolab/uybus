@@ -26,8 +26,24 @@ namespace Terminal
             InitializeComponent();
         }
 
+        private void btnCerrar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnS_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+            new FyH_selectViaje().ShowDialog();
+            this.Show();
+        }
+
+
+
+        /*
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
+            
             try
             {
                 Service1Client s = new Service1Client();
@@ -37,6 +53,8 @@ namespace Terminal
             {
                 lb1.Content = "Salto una excepción...";
             }
+            
         }
+        */
     }
 }
