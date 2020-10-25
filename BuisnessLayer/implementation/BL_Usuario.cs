@@ -1,4 +1,5 @@
 ﻿using BuisnessLayer.interfaces;
+using DataAcessLayer;
 using DataAcessLayer.implementation;
 using DataAcessLayer.interfaces;
 using Share.DTOs;
@@ -208,10 +209,23 @@ namespace BuisnessLayer.implementation
 
         public List<ESalida> GetSalidas(int lineaSelected)
         {
-            return iLinea.getLinea(lineaSelected).Salida.ToList();
+            List<ESalida> salidas = new List<ESalida>();
+            foreach (var salida in iLinea.getLinea(lineaSelected).Salida.ToList())
+            {
+                if (salida.Viaje.ToList().Count > 0) 
+                {
+                   salidas.Add(salida);
+                }
+            }
+            return salidas;
         }
 
 
+
+        public List<EViaje> GetFechasViajes(int IdSalida) 
+        {
+            return iSalida.getSalidas(IdSalida).Viaje.ToList();
+        }
 
         public List<EParada> listarParadas(int IdLinea)
         {
@@ -269,10 +283,39 @@ namespace BuisnessLayer.implementation
             }
             return lstParadas;
         }
-
-        public List<EViaje> GetViajes(int IdSalida)
+        /*
+                public List<EViaje> GetViajes(int IdSalida)
+                {
+                    return iSalida.getSalidas(IdSalida).Viaje.ToList();
+                }
+        */
+        public List<int> GetAsientos(int fechaSelected)
         {
-            return iSalida.getSalidas(IdSalida).Viaje.ToList();
+            EViaje viaje = iViaje.getViaje(fechaSelected);
+            ESalida salida = iSalida.getSalidas(viaje.IdSalida);
+            EVehiculo vehiculo =  iVehiculo.getVehiculos(salida.IdVehiculo);
+            int cantidadDeAsientos = vehiculo.CantAsientos;
+            List<EPasaje> lstPasajes = viaje.Pasaje.ToList();
+
+            List<int> lstPasajesOcupados = new List<int>();
+
+            foreach (var pasaje in lstPasajes)
+            {
+                if (pasaje.Asientos != null)
+                {
+                   lstPasajesOcupados.Add((int)pasaje.Asientos);
+                }
+            }
+            List<int> listaTotal = new List<int>();
+            for (int i = 1; i <= cantidadDeAsientos; i++)
+            {
+                listaTotal.Add(i);
+            }
+            List<int> asientosLibres = listaTotal.Except(lstPasajesOcupados).ToList();
+            return asientosLibres;
         }
+        
+
+
     }
 }

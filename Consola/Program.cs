@@ -65,9 +65,9 @@ namespace Consola
 
             // ----------------- Falta testear -------------------
 
-            foreach (var item in blu.listarParadasD(1, 2))
+            foreach (var item in blu.GetFechasViajes(1))
             {
-                Console.WriteLine(item.Nombre);
+                Console.WriteLine(item.IdSalida);
 
             }
 

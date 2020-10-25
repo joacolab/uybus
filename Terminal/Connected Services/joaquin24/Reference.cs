@@ -8,9 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections;
-
 namespace Terminal.joaquin24 {
     
     
@@ -36,11 +33,17 @@ namespace Terminal.joaquin24 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetParadasD", ReplyAction="http://tempuri.org/IService1/GetParadasDResponse")]
         System.Threading.Tasks.Task<Share.entities.EParada[]> GetParadasDAsync(int IdLinea, int IdParada);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetViajes", ReplyAction="http://tempuri.org/IService1/GetViajesResponse")]
-        Share.entities.EViaje[] GetViajes(int IdSalida);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAsientos", ReplyAction="http://tempuri.org/IService1/GetAsientosResponse")]
+        int[] GetAsientos(int fechaSelected);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetViajes", ReplyAction="http://tempuri.org/IService1/GetViajesResponse")]
-        System.Threading.Tasks.Task<Share.entities.EViaje[]> GetViajesAsync(int IdSalida);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAsientos", ReplyAction="http://tempuri.org/IService1/GetAsientosResponse")]
+        System.Threading.Tasks.Task<int[]> GetAsientosAsync(int fechaSelected);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetFechasViajes", ReplyAction="http://tempuri.org/IService1/GetFechasViajesResponse")]
+        Share.entities.EViaje[] GetFechasViajes(int IdSalida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetFechasViajes", ReplyAction="http://tempuri.org/IService1/GetFechasViajesResponse")]
+        System.Threading.Tasks.Task<Share.entities.EViaje[]> GetFechasViajesAsync(int IdSalida);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetParadas", ReplyAction="http://tempuri.org/IService1/GetParadasResponse")]
         Share.entities.EParada[] GetParadas(int IdLinea);
@@ -112,12 +115,20 @@ namespace Terminal.joaquin24 {
             return base.Channel.GetParadasDAsync(IdLinea, IdParada);
         }
         
-        public Share.entities.EViaje[] GetViajes(int IdSalida) {
-            return base.Channel.GetViajes(IdSalida);
+        public int[] GetAsientos(int fechaSelected) {
+            return base.Channel.GetAsientos(fechaSelected);
         }
         
-        public System.Threading.Tasks.Task<Share.entities.EViaje[]> GetViajesAsync(int IdSalida) {
-            return base.Channel.GetViajesAsync(IdSalida);
+        public System.Threading.Tasks.Task<int[]> GetAsientosAsync(int fechaSelected) {
+            return base.Channel.GetAsientosAsync(fechaSelected);
+        }
+        
+        public Share.entities.EViaje[] GetFechasViajes(int IdSalida) {
+            return base.Channel.GetFechasViajes(IdSalida);
+        }
+        
+        public System.Threading.Tasks.Task<Share.entities.EViaje[]> GetFechasViajesAsync(int IdSalida) {
+            return base.Channel.GetFechasViajesAsync(IdSalida);
         }
         
         public Share.entities.EParada[] GetParadas(int IdLinea) {
@@ -142,11 +153,6 @@ namespace Terminal.joaquin24 {
         
         public System.Threading.Tasks.Task<API_SOAP.CompositeType> GetDataUsingDataContractAsync(API_SOAP.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
-        }
-
-        internal IEnumerable GetFechasViajes(int idSalida)
-        {
-            throw new NotImplementedException();
         }
     }
 }

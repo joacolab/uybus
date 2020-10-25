@@ -15,7 +15,12 @@ namespace BuisnessLayer.interfaces
 
         List<ESalida> GetSalidas(int lineaSelected);
 
-        List<EViaje> GetViajes(int IdSalida);
+     //   List<EViaje> GetViajes(int IdSalida);
+
+        List<EViaje> GetFechasViajes(int IdSalida);
+
+
+        List<int> GetAsientos(int fechaSelected);
 
         List<EParada> listarParadasD(int IdLinea, int IdParada);
 

@@ -36,6 +36,11 @@ namespace API_SOAP
         }
         //  List<EParada> GetEParadas();
 
+        public List<EViaje> GetFechasViajes(int IdSalida)
+        {
+            return blu.GetFechasViajes(IdSalida);
+        }
+        
         public List<EParada> GetParadas(int IdLinea)
         {
             return blu.listarParadas(IdLinea);
@@ -54,9 +59,17 @@ namespace API_SOAP
             return blu.GetSalidas(lineaSelected);
         }
 
-        public List<EViaje> GetViajes(int IdSalida)
+        //  public List<EViaje> GetViajes(int IdSalida)
+        //{
+        //  return blu.GetViajes(IdSalida);
+        //}
+
+        public List<int> GetAsientos(int fechaSelected) 
         {
-            return blu.GetViajes(IdSalida);
+            return blu.GetAsientos(fechaSelected);
         }
+
     }
 }
+
+

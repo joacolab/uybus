@@ -127,6 +127,9 @@
     <None Include="Connected Services\joaquin24\Service13.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\joaquin24\Service14.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\API_SOAP.CompositeType.datasource" />
     <None Include="Properties\DataSources\Share.entities.ELinea.datasource" />

@@ -22,10 +22,15 @@ namespace API_SOAP
         [OperationContract]
         List<EParada> GetParadasD(int IdLinea, int IdParada);
 
-        [OperationContract]
-        List<EViaje> GetViajes(int IdSalida);
+        //[OperationContract]
+        // List<EViaje> GetViajes(int IdSalida);
 
-       // List<ESalida> GetFechasViajes()
+
+        [OperationContract]
+        List<int> GetAsientos(int fechaSelected);
+        // List<ESalida> GetFechasViajes()
+        [OperationContract]
+        List<EViaje> GetFechasViajes(int IdSalida);
 
 
         [OperationContract]

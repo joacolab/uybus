@@ -5,7 +5,8 @@
       <xsd:import schemaLocation="http://localhost:58746/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:58746/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:58746/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Share.entities" />
-      <xsd:import schemaLocation="http://localhost:58746/Service1.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/API_SOAP" />
+      <xsd:import schemaLocation="http://localhost:58746/Service1.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:58746/Service1.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/API_SOAP" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService1_GetLineas_InputMessage">
@@ -26,11 +27,17 @@
   <wsdl:message name="IService1_GetParadasD_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetParadasDResponse" />
   </wsdl:message>
-  <wsdl:message name="IService1_GetViajes_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetViajes" />
+  <wsdl:message name="IService1_GetAsientos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAsientos" />
   </wsdl:message>
-  <wsdl:message name="IService1_GetViajes_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetViajesResponse" />
+  <wsdl:message name="IService1_GetAsientos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAsientosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetFechasViajes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFechasViajes" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetFechasViajes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFechasViajesResponse" />
   </wsdl:message>
   <wsdl:message name="IService1_GetParadas_InputMessage">
     <wsdl:part name="parameters" element="tns:GetParadas" />
@@ -63,9 +70,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetParadasD" message="tns:IService1_GetParadasD_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetParadasDResponse" message="tns:IService1_GetParadasD_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetViajes">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetViajes" message="tns:IService1_GetViajes_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetViajesResponse" message="tns:IService1_GetViajes_OutputMessage" />
+    <wsdl:operation name="GetAsientos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAsientos" message="tns:IService1_GetAsientos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAsientosResponse" message="tns:IService1_GetAsientos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFechasViajes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetFechasViajes" message="tns:IService1_GetFechasViajes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetFechasViajesResponse" message="tns:IService1_GetFechasViajes_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetParadas">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetParadas" message="tns:IService1_GetParadas_InputMessage" />
@@ -109,8 +120,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetViajes">
-      <soap:operation soapAction="http://tempuri.org/IService1/GetViajes" style="document" />
+    <wsdl:operation name="GetAsientos">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAsientos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFechasViajes">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetFechasViajes" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
