@@ -26,6 +26,8 @@ namespace Terminal
         private EParada paradaDSelected = null;
         private ESalida SalidaSelected = null;
         private EViaje fechaSelected = null;
+        private int AsientoSelected = -1;
+        private int PrecioSelected = -1;
         public FyH_selectViaje(ELinea _lineaSelected,EParada _paradaOSelected,EParada _paradaDSelected)
         {   
 
@@ -33,13 +35,11 @@ namespace Terminal
             lineaSelected = _lineaSelected;
             paradaOSelected = _paradaOSelected;
             paradaDSelected = _paradaDSelected;
-
-            SalidaSelected = null;
-            fechaSelected = null;
-
             cargarHorasSalidas(lineaSelected);
-            
-           // cargarFechasViaje(null);
+            btnSig.IsEnabled = false;
+            lsA.IsEnabled = false;
+
+            // cargarFechasViaje(null);
 
             //cargarFechasDeViajes();
 
@@ -53,7 +53,8 @@ namespace Terminal
         private void btnSig_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
-            new documento().ShowDialog();
+            Window docu = new documento(lineaSelected, paradaOSelected, paradaDSelected, SalidaSelected, fechaSelected, AsientoSelected, PrecioSelected);
+            docu.ShowDialog();
             this.Show();
         }
 
@@ -79,7 +80,6 @@ namespace Terminal
             
             if (lsHdSalida.SelectedIndex < 0)
             {
-                
                 cargarFechasDeViajes(null);
                 return;
             }
@@ -96,8 +96,19 @@ namespace Terminal
                 cargarAsientos(null);
                 return;
             }
-            fechaSelected = (EViaje)lsFs.SelectedValue;
-            cargarAsientos(fechaSelected);
+
+
+            Service1Client s = new Service1Client();
+            if (s.canSelectSeat(lineaSelected.IdLinea, paradaOSelected.IdParada, paradaDSelected.IdParada))
+            {
+                fechaSelected = (EViaje)lsFs.SelectedValue;
+                cargarAsientos(fechaSelected);
+                lsA.IsEnabled = true;
+            }
+            else
+            {
+                btnSig.IsEnabled = true;
+            }
         }
 
         private void cargarAsientos(EViaje fechaSelected)
@@ -108,6 +119,12 @@ namespace Terminal
                 Service1Client s = new Service1Client();
                 lsA.ItemsSource = s.GetAsientos(fechaSelected.IdViaje);
             }
+        }
+
+        private void lsA_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AsientoSelected = (int)lsA.SelectedValue;
+            btnSig.IsEnabled = true;
         }
 
 

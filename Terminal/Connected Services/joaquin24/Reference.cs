@@ -33,6 +33,12 @@ namespace Terminal.joaquin24 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetParadasD", ReplyAction="http://tempuri.org/IService1/GetParadasDResponse")]
         System.Threading.Tasks.Task<Share.entities.EParada[]> GetParadasDAsync(int IdLinea, int IdParada);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/canSelectSeat", ReplyAction="http://tempuri.org/IService1/canSelectSeatResponse")]
+        bool canSelectSeat(int IdLinea, int idParadaOrigen, int idParadaDestino);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/canSelectSeat", ReplyAction="http://tempuri.org/IService1/canSelectSeatResponse")]
+        System.Threading.Tasks.Task<bool> canSelectSeatAsync(int IdLinea, int idParadaOrigen, int idParadaDestino);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAsientos", ReplyAction="http://tempuri.org/IService1/GetAsientosResponse")]
         int[] GetAsientos(int fechaSelected);
         
@@ -113,6 +119,14 @@ namespace Terminal.joaquin24 {
         
         public System.Threading.Tasks.Task<Share.entities.EParada[]> GetParadasDAsync(int IdLinea, int IdParada) {
             return base.Channel.GetParadasDAsync(IdLinea, IdParada);
+        }
+        
+        public bool canSelectSeat(int IdLinea, int idParadaOrigen, int idParadaDestino) {
+            return base.Channel.canSelectSeat(IdLinea, idParadaOrigen, idParadaDestino);
+        }
+        
+        public System.Threading.Tasks.Task<bool> canSelectSeatAsync(int IdLinea, int idParadaOrigen, int idParadaDestino) {
+            return base.Channel.canSelectSeatAsync(IdLinea, idParadaOrigen, idParadaDestino);
         }
         
         public int[] GetAsientos(int fechaSelected) {

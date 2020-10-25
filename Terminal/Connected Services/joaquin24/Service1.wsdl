@@ -27,6 +27,12 @@
   <wsdl:message name="IService1_GetParadasD_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetParadasDResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_canSelectSeat_InputMessage">
+    <wsdl:part name="parameters" element="tns:canSelectSeat" />
+  </wsdl:message>
+  <wsdl:message name="IService1_canSelectSeat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:canSelectSeatResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetAsientos_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAsientos" />
   </wsdl:message>
@@ -69,6 +75,10 @@
     <wsdl:operation name="GetParadasD">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetParadasD" message="tns:IService1_GetParadasD_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetParadasDResponse" message="tns:IService1_GetParadasD_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="canSelectSeat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/canSelectSeat" message="tns:IService1_canSelectSeat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/canSelectSeatResponse" message="tns:IService1_canSelectSeat_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAsientos">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAsientos" message="tns:IService1_GetAsientos_InputMessage" />
@@ -113,6 +123,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetParadasD">
       <soap:operation soapAction="http://tempuri.org/IService1/GetParadasD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="canSelectSeat">
+      <soap:operation soapAction="http://tempuri.org/IService1/canSelectSeat" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

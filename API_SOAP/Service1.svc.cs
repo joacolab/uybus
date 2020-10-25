@@ -69,6 +69,10 @@ namespace API_SOAP
             return blu.GetAsientos(fechaSelected);
         }
 
+        public bool canSelectSeat(int IdLinea, int idParadaOrigen, int idParadaDestino)
+        {
+            return blu.canSelectSeat(IdLinea, idParadaOrigen, idParadaDestino);
+        }
     }
 }
 

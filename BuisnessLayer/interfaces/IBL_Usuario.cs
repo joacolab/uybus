@@ -22,6 +22,8 @@ namespace BuisnessLayer.interfaces
 
         List<int> GetAsientos(int fechaSelected);
 
+        bool canSelectSeat(int IdLinea, int idParadaOrigen, int idParadaDestino);
+
         List<EParada> listarParadasD(int IdLinea, int IdParada);
 
         EPasaje comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, string tipoDoc, string documento, int asiento);

@@ -43,6 +43,7 @@ insert into parada VALUES ('LasPiedras',-34.708392, -56.216555);
 insert into parametro VALUES (60);
 insert into parametro VALUES (70);
 insert into parametro VALUES (80);
+insert into parametro VALUES (120);
 
 insert into vehiculo VALUES('SAF3465','Campione Invictus 1200','Comil', 40); 
 insert into vehiculo VALUES('SAB5465','Sbelto Doppio 1202','Comil', 42);

@@ -25,6 +25,8 @@ namespace API_SOAP
         //[OperationContract]
         // List<EViaje> GetViajes(int IdSalida);
 
+        [OperationContract]
+        bool canSelectSeat(int IdLinea, int idParadaOrigen, int idParadaDestino);
 
         [OperationContract]
         List<int> GetAsientos(int fechaSelected);

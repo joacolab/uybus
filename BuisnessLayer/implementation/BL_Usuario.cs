@@ -26,7 +26,7 @@ namespace BuisnessLayer.implementation
         private IDAL_Parada iParada;
         private IDAL_Llegada iLlegada;
         private IDAL_Vehiculo iVehiculo;
-
+        
 
         public BL_Usuario(IDAL_Persona _iPersona, IDAL_Usuario _iUsuario, IDAL_Linea _iLinea, IDAL_Salida _iSalida, IDAL_Tramo _iTramo, IDAL_Viaje _iViaje, IDAL_Pasaje _iPasaje, IDAL_Parametro _iParametro, IDAL_Parada _iParada, IDAL_Llegada _iLlegada, IDAL_Vehiculo _iVehiculo)
         {
@@ -55,7 +55,7 @@ namespace BuisnessLayer.implementation
         /// <returns></returns>
         public EPasaje comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, string tipoDoc, string documento, int asiento)
         {
-
+            
             EViaje ev = iViaje.getViaje(idViaje);
             ESalida es = iSalida.getSalidas(ev.IdSalida);
             ELinea el = iLinea.getLinea(es.IdLinea);
@@ -314,7 +314,50 @@ namespace BuisnessLayer.implementation
             List<int> asientosLibres = listaTotal.Except(lstPasajesOcupados).ToList();
             return asientosLibres;
         }
-        
+        public bool canSelectSeat(int IdLinea, int idParadaOrigen, int idParadaDestino) 
+        {
+            ELinea el = iLinea.getLinea(IdLinea);
+            List<ETramo> tramos = el.Tramo.ToList<ETramo>();
+
+            int posOrigen = -1;
+            int posdestino = -1;
+            foreach (var t in tramos)
+            {
+                if (t.IdLinea == el.IdLinea && t.IdParada == idParadaOrigen)
+                {
+                    posOrigen = tramos.IndexOf(t);
+                }
+                if (t.IdLinea == el.IdLinea && t.IdParada == idParadaDestino)
+                {
+                    posdestino = tramos.IndexOf(t);
+                }
+            }
+            
+            List<ETramo> subTramos = new List<ETramo>();
+            
+            for (int e = posOrigen; e <= posdestino; e++)
+            {
+                subTramos.Add(tramos.ElementAt(e));
+            }
+            
+            int cosotP = 0;
+
+            foreach (var s in subTramos)
+            {
+                cosotP = cosotP + iTramo.valorVigente(s.IdLinea, s.IdParada);
+            }
+            
+            EParametro epara = iParametro.getAllParametros().Last();
+            Console.WriteLine("valor esperado" + epara.Valor);
+            Console.WriteLine("Costo pasaje" + cosotP);
+
+            if (epara.Valor > cosotP)
+            {
+                return false;
+            }
+
+            return true;
+        }
 
 
     }

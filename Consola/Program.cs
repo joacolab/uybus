@@ -65,12 +65,13 @@ namespace Consola
 
             // ----------------- Falta testear -------------------
 
-            foreach (var item in blu.GetFechasViajes(1))
-            {
-                Console.WriteLine(item.IdSalida);
+            //foreach (var item in blu.GetFechasViajes(1))
+            //{
+            //  Console.WriteLine(item.IdSalida);
 
-            }
+            // }
 
+            blu.canSelectSeat(1, 1, 2);
 
             Console.WriteLine("\nPrecione Enter  para finalizar.");
             Console.Read();

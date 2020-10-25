@@ -44,6 +44,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="canSelectSeat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdLinea" type="xs:int" />
+        <xs:element minOccurs="0" name="idParadaOrigen" type="xs:int" />
+        <xs:element minOccurs="0" name="idParadaDestino" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="canSelectSeatResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="canSelectSeatResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetAsientos">
     <xs:complexType>
       <xs:sequence>
