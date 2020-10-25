@@ -205,5 +205,74 @@ namespace BuisnessLayer.implementation
         {
             return iLinea.getAllLineas();
         }
+
+        public List<ESalida> GetSalidas(int lineaSelected)
+        {
+            return iLinea.getLinea(lineaSelected).Salida.ToList();
+        }
+
+
+
+        public List<EParada> listarParadas(int IdLinea)
+        {
+            List<EParada> lstParadas = new List<EParada>();
+            ELinea linea =  iLinea.getLinea(IdLinea);
+            List<ETramo> lstTramos = linea.Tramo.ToList();
+
+            List<ETramo> SortedList = lstTramos.OrderBy(o => o.Orden).ToList();
+
+            int ultimoTramo = SortedList.Count() -1;
+
+            SortedList.RemoveAt(ultimoTramo);
+
+            foreach (var tramo in SortedList)
+            {
+                lstParadas.Add(iParada.getParada(tramo.IdParada));
+            }
+            return lstParadas;
+        }
+
+        public List<EParada> listarParadasD(int IdLinea, int IdParada)
+        {
+
+            ETramo tramoOrigen = new ETramo();
+            ELinea linea = iLinea.getLinea(IdLinea);
+
+            List<EParada> lstParadas = new List<EParada>();
+            List<ETramo> lstTramos = linea.Tramo.ToList();
+            // int con el primero y pasarle un range (ese int, last tramo -1)
+
+            List<ETramo> SortedList = lstTramos.OrderBy(o => o.Orden).ToList();
+            foreach (var item in SortedList)
+            {
+                if (item.IdLinea == IdLinea && item.IdParada == IdParada)
+                {
+                    tramoOrigen = item;
+                }
+            }
+            int indexOrigen = SortedList.IndexOf(tramoOrigen) + 1;
+
+           
+            int Largo = SortedList.Count();
+
+
+            List<ETramo> tramosF = new List<ETramo>();
+            for (int i = indexOrigen; i < Largo; i++)
+            {
+                tramosF.Add(SortedList.ElementAt(i));
+
+            }
+
+            foreach (var tramo in tramosF)
+            {
+                lstParadas.Add(iParada.getParada(tramo.IdParada));
+            }
+            return lstParadas;
+        }
+
+        public List<EViaje> GetViajes(int IdSalida)
+        {
+            return iSalida.getSalidas(IdSalida).Viaje.ToList();
+        }
     }
 }

@@ -17,6 +17,19 @@ namespace API_SOAP
         List<ELinea> GetLineas();
 
         [OperationContract]
+        List<ESalida> GetSalidas(int lineaSelected);
+
+        [OperationContract]
+        List<EParada> GetParadasD(int IdLinea, int IdParada);
+
+        [OperationContract]
+        List<EViaje> GetViajes(int IdSalida);
+
+
+        [OperationContract]
+        List<EParada> GetParadas(int IdLinea);
+
+        [OperationContract]
         string GetData(int value);
 
         [OperationContract]

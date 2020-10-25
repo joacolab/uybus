@@ -34,10 +34,29 @@ namespace API_SOAP
             }
             return composite;
         }
+        //  List<EParada> GetEParadas();
 
+        public List<EParada> GetParadas(int IdLinea)
+        {
+            return blu.listarParadas(IdLinea);
+        }
         public List<ELinea> GetLineas()
         {
             return blu.listarLineas();
+        }
+
+        public List<EParada> GetParadasD(int IdLinea, int IdParada)
+        {
+            return blu.listarParadasD(IdLinea, IdParada);
+        }
+
+        public List<ESalida> GetSalidas(int lineaSelected) {
+            return blu.GetSalidas(lineaSelected);
+        }
+
+        public List<EViaje> GetViajes(int IdSalida)
+        {
+            return blu.GetViajes(IdSalida);
         }
     }
 }

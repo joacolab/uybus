@@ -14,6 +14,30 @@
   <wsdl:message name="IService1_GetLineas_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLineasResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetSalidas_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSalidas" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetSalidas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSalidasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetParadasD_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetParadasD" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetParadasD_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetParadasDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetViajes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetViajes" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetViajes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetViajesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetParadas_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetParadas" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetParadas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetParadasResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetData_InputMessage">
     <wsdl:part name="parameters" element="tns:GetData" />
   </wsdl:message>
@@ -31,6 +55,22 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetLineas" message="tns:IService1_GetLineas_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetLineasResponse" message="tns:IService1_GetLineas_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetSalidas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetSalidas" message="tns:IService1_GetSalidas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetSalidasResponse" message="tns:IService1_GetSalidas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParadasD">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetParadasD" message="tns:IService1_GetParadasD_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetParadasDResponse" message="tns:IService1_GetParadasD_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetViajes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetViajes" message="tns:IService1_GetViajes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetViajesResponse" message="tns:IService1_GetViajes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParadas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetParadas" message="tns:IService1_GetParadas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetParadasResponse" message="tns:IService1_GetParadas_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDataResponse" message="tns:IService1_GetData_OutputMessage" />
@@ -44,6 +84,42 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetLineas">
       <soap:operation soapAction="http://tempuri.org/IService1/GetLineas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSalidas">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetSalidas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParadasD">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetParadasD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetViajes">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetViajes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParadas">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetParadas" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

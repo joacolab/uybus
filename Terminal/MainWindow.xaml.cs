@@ -13,13 +13,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Terminal.ServiceReference2;
+using Terminal.joaquin24;
 
 namespace Terminal
 {
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
+//http://localhost:58746/Service1.svc?wsdl
     public partial class MainWindow : Window
     {
         private ELinea lineaSelected = null;
@@ -37,36 +38,14 @@ namespace Terminal
         {
             Service1Client s = new Service1Client();
             lsL.ItemsSource = s.GetLineas();
-            /*
-            ELinea e = new ELinea();
-            e.IdLinea = 1;
-            e.Nombre = "Montv a sanjose";
-
-            List<ELinea> l = new List<ELinea>();
-            l.Add(e);
-            l.Add(e);
-            l.Add(e);
-            l.Add(e);*/
-            //lsL.ItemsSource = l;
         }
 
         private void cargarListaDeParadasO(ELinea linea)
         {
             if (linea != null)
             {
-                //Service1Client s = new Service1Client();
-                //lsO.ItemsSource = s.GetData(linea);
-
-                EParada p = new EParada();
-                p.IdParada = 1;
-                p.Nombre = "PuntaValdez";
-
-                List<EParada> ps = new List<EParada>();
-                ps.Add(p);
-                ps.Add(p);
-                ps.Add(p);
-                ps.Add(p);
-                lsO.ItemsSource = ps;
+                Service1Client s = new Service1Client();
+                lsO.ItemsSource = s.GetParadas(linea.IdLinea);
             }
         }
 
@@ -74,19 +53,9 @@ namespace Terminal
         {
             if (linea != null)
             {
-                //Service1Client s = new Service1Client();
-                //lsO.ItemsSource = s.GetData(linea);
+                Service1Client s = new Service1Client();
+                lsD.ItemsSource = s.GetParadasD(linea.IdLinea,parada.IdParada);
 
-                EParada p = new EParada();
-                p.IdParada = 1;
-                p.Nombre = "PuntaValdez";
-
-                List<EParada> ps = new List<EParada>();
-               
-                ps.Add(p);
-                ps.Add(p);
-                ps.Add(p);
-                lsD.ItemsSource = ps;
             }
         }
 
@@ -99,17 +68,20 @@ namespace Terminal
         private void btnS_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
-            new FyH_selectViaje().ShowDialog();
+            Window FyH = new FyH_selectViaje(lineaSelected, paradaOSelected, paradaDSelected);
+            FyH.ShowDialog();
             this.Show();
         }
 
         private void lsL_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             if (lsL.SelectedIndex < 0)
             {
                 cargarListaDeParadasO(null);
                 return;
             }
+            //lsD.Items.Clear();
             lineaSelected = (ELinea)lsL.SelectedValue;
             cargarListaDeParadasO(lineaSelected);
         }
@@ -148,5 +120,5 @@ namespace Terminal
             
         }
         */
-    }
-}
+            }
+        }

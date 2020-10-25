@@ -202,4 +202,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfEViaje" nillable="true" type="tns:ArrayOfEViaje" />
+  <xs:complexType name="ArrayOfEParada">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EParada" nillable="true" type="tns:EParada" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEParada" nillable="true" type="tns:ArrayOfEParada" />
 </xs:schema>

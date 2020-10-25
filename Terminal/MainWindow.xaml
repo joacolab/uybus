@@ -37,7 +37,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="lsO" HorizontalAlignment="Left" Height="208" Margin="287,126,0,0" VerticalAlignment="Top" Width="204" SelectionChanged="lsO_SelectionChanged">
+        <ListBox x:Name="lsO" Height="208" Margin="287,126,301,0" VerticalAlignment="Top" SelectionChanged="lsO_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
