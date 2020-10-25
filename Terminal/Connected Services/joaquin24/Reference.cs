@@ -8,6 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.Collections;
+
 namespace Terminal.joaquin24 {
     
     
@@ -139,6 +142,11 @@ namespace Terminal.joaquin24 {
         
         public System.Threading.Tasks.Task<API_SOAP.CompositeType> GetDataUsingDataContractAsync(API_SOAP.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
+        }
+
+        internal IEnumerable GetFechasViajes(int idSalida)
+        {
+            throw new NotImplementedException();
         }
     }
 }

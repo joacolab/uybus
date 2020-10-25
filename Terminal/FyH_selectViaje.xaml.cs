@@ -24,7 +24,7 @@ namespace Terminal
         private ELinea lineaSelected = null;
         private EParada paradaOSelected = null;
         private EParada paradaDSelected = null;
-        private ESalida SalidaSelected = null;
+        //private ESalida SalidaSelected = null;
         public FyH_selectViaje(ELinea _lineaSelected,EParada _paradaOSelected,EParada _paradaDSelected)
         {   
 
@@ -32,8 +32,12 @@ namespace Terminal
             lineaSelected = _lineaSelected;
             paradaOSelected = _paradaOSelected;
             paradaDSelected = _paradaDSelected;
-            cargarHorasSalidas(null);
-            cargarFechasDeViajes(null);
+
+            
+            cargarHorasSalidas(lineaSelected);
+           // cargarFechasViaje(null);
+
+            //cargarFechasDeViajes();
 
         }
         private void cargarHorasSalidas(ELinea lineaSelected)
@@ -59,9 +63,10 @@ namespace Terminal
             this.Close();
         }
 
+        /*
         private void lsHdSalida_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*
+            
             if (lsHdSalida.SelectedIndex < 0)
             {
                 cargarFechasDeViajes(null);
@@ -70,20 +75,42 @@ namespace Terminal
             //lsD.Items.Clear();
             SalidaSelected = (ESalida)lsHdSalida.SelectedValue;
             cargarFechasDeViajes(SalidaSelected);
-            */
+            
         }
-
+        */
+     /*
         private void cargarFechasDeViajes(ESalida salidaSelected)
         {
-            /*
+            
             if (salidaSelected != null)
             {
                 Service1Client s = new Service1Client();
                 lsFs.ItemsSource = s.GetViajes(salidaSelected.IdSalida);
             }
-            */
+            
+        }
+        /*
+        private void lsHdSalida_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lsHdSalida.SelectedIndex < 0)
+            {
+                cargarFechasViaje(null);
+                return;
+            }
+            //lsD.Items.Clear();
+            ViajeSelected = (ESalida)lsHdSalida.SelectedValue;
+            cargarFechasViaje(ViajeSelected);
         }
 
-       
+        private void cargarFechasViaje(ESalida salida)
+        {
+            if (salida != null)
+            {
+                Service1Client s = new Service1Client();
+                lsFs.ItemsSource = s.GetFechasViajes(salida.IdSalida);
+
+            }
+        }
+        */
     }
 }

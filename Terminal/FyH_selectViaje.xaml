@@ -11,7 +11,7 @@
         <Button x:Name="btnVolver" Content="Volver" HorizontalAlignment="Left" Margin="32,363,0,0" VerticalAlignment="Top" Width="74" FontSize="18" Height="29" Click="btnVolver_Click"/>
         <Button x:Name="btnSig" Content="Siguiente" HorizontalAlignment="Left" Margin="659,363,0,0" VerticalAlignment="Top" Width="96" FontSize="18" Height="29" Click="btnSig_Click"/>
         <Label x:Name="lbHdS" Content="Seleccione Hora de Salida" HorizontalAlignment="Left" Margin="32,77,0,0" VerticalAlignment="Top" FontSize="14" Width="176" Height="30"/>
-        <ListBox x:Name="lsHdSalida" HorizontalAlignment="Left" Height="225" Margin="32,112,0,0" VerticalAlignment="Top" Width="215" SelectionChanged="lsHdSalida_SelectionChanged">
+        <ListBox x:Name="lsHdSalida" HorizontalAlignment="Left" Height="225" Margin="32,112,0,0" VerticalAlignment="Top" Width="215">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>

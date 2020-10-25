@@ -25,6 +25,8 @@ namespace API_SOAP
         [OperationContract]
         List<EViaje> GetViajes(int IdSalida);
 
+       // List<ESalida> GetFechasViajes()
+
 
         [OperationContract]
         List<EParada> GetParadas(int IdLinea);
