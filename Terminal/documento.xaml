@@ -10,9 +10,9 @@
     <Grid>
         <Label x:Name="lbTitu" Content="Terminal de Compra de Pasajes" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top" Width="516" FontSize="36"/>
         <Label x:Name="lbDoc" Content="Ingrese su documento" HorizontalAlignment="Left" Margin="159,100,0,0" VerticalAlignment="Top" FontSize="18"/>
-        <TextBox x:Name="tbDoc" HorizontalAlignment="Left" Height="28" Margin="159,147,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="187" FontSize="16"/>
-        <RadioButton x:Name="rbtnCI" Content="Cedula de identidad" HorizontalAlignment="Left" Margin="423,124,0,0" VerticalAlignment="Top" FontSize="18"/>
-        <RadioButton x:Name="rbtnC" Content="Credencial" HorizontalAlignment="Left" Margin="423,152,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <TextBox x:Name="tbDoc" HorizontalAlignment="Left" Height="28" Margin="159,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" FontSize="16" TextChanged="tbDoc_TextChanged"/>
+        <RadioButton x:Name="rbtnCI" GroupName="btnR" Content="Cedula de identidad" HorizontalAlignment="Left" Margin="423,124,0,0" VerticalAlignment="Top" FontSize="18" Click="rbtnCI_Click"/>
+        <RadioButton x:Name="rbtnC" GroupName="btnR" Content="Credencial" HorizontalAlignment="Left" Margin="423,152,0,0" VerticalAlignment="Top" FontSize="18" Click="rbtnC_Click"/>
         <Button x:Name="btnV" Content="Volver" HorizontalAlignment="Left" Margin="34,362,0,0" VerticalAlignment="Top" Width="75" FontSize="16" Height="29" Click="btnV_Click"/>
         <Button x:Name="btnComprar" Content="Comprar" HorizontalAlignment="Left" Margin="673,362,0,0" VerticalAlignment="Top" Width="80" FontSize="16" Height="29" Click="btnComprar_Click"/>
         <Label x:Name="lbC" Content="Costo del Pasaje:" HorizontalAlignment="Left" Margin="159,241,0,0" VerticalAlignment="Top" FontSize="18"/>

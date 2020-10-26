@@ -99,6 +99,7 @@ namespace Terminal
 
 
             Service1Client s = new Service1Client();
+            PrecioSelected  = s.precioDelPasaje(lineaSelected.IdLinea, paradaOSelected.IdParada, paradaDSelected.IdParada);
             if (s.canSelectSeat(lineaSelected.IdLinea, paradaOSelected.IdParada, paradaDSelected.IdParada))
             {
                 fechaSelected = (EViaje)lsFs.SelectedValue;
@@ -110,6 +111,8 @@ namespace Terminal
                 btnSig.IsEnabled = true;
             }
         }
+
+        
 
         private void cargarAsientos(EViaje fechaSelected)
         {

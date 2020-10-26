@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Terminal.joaquin24;
 
 namespace Terminal
 {
@@ -41,6 +42,9 @@ namespace Terminal
             AsientoSelected = _AsientoSelected;
             PrecioSelected = _PrecioSelected;
 
+            btnComprar.IsEnabled = false;
+            tbDoc.IsEnabled = false;
+            lbV.Content = "$ " + PrecioSelected.ToString();
 
             //btnSig.IsEnabled = false;
         }
@@ -55,6 +59,9 @@ namespace Terminal
 
         private void btnComprar_Click(object sender, RoutedEventArgs e)
         {
+            Service1Client s = new Service1Client();
+            s.comprarPasaje(fechaSelected.IdViaje, -1, paradaOSelected.IdParada, paradaDSelected.IdParada, TipoDocumento, Documento, AsientoSelected);
+
             MessageBox.Show(
                     "Muchas gracias por usar nuestro sistema",
                     "Pasaje comprado",
@@ -65,6 +72,42 @@ namespace Terminal
             this.Hide();
             new MainWindow().ShowDialog();
             this.Show();
+        }
+
+        private void rbtnCI_Click(object sender, RoutedEventArgs e)
+        {
+
+            tbDoc.IsEnabled = true;
+            if (rbtnCI.IsChecked == true)
+            {
+                TipoDocumento = 1;
+            }
+            else
+            {
+                TipoDocumento = 2;
+            }
+            
+        }
+
+        private void tbDoc_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Documento = tbDoc.Text;
+            btnComprar.IsEnabled = true;
+        }
+
+        private void rbtnC_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            tbDoc.IsEnabled = true;
+            if (rbtnC.IsChecked == true)
+            {
+                TipoDocumento = 2;
+            }
+            else
+            {
+                TipoDocumento = 1;
+            }
         }
     }
 }

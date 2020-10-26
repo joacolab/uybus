@@ -39,6 +39,12 @@ namespace Terminal.joaquin24 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/canSelectSeat", ReplyAction="http://tempuri.org/IService1/canSelectSeatResponse")]
         System.Threading.Tasks.Task<bool> canSelectSeatAsync(int IdLinea, int idParadaOrigen, int idParadaDestino);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/precioDelPasaje", ReplyAction="http://tempuri.org/IService1/precioDelPasajeResponse")]
+        int precioDelPasaje(int IdLinea, int idParadaOrigen, int idParadaDestino);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/precioDelPasaje", ReplyAction="http://tempuri.org/IService1/precioDelPasajeResponse")]
+        System.Threading.Tasks.Task<int> precioDelPasajeAsync(int IdLinea, int idParadaOrigen, int idParadaDestino);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAsientos", ReplyAction="http://tempuri.org/IService1/GetAsientosResponse")]
         int[] GetAsientos(int fechaSelected);
         
@@ -62,6 +68,12 @@ namespace Terminal.joaquin24 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
         System.Threading.Tasks.Task<string> GetDataAsync(int value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/comprarPasaje", ReplyAction="http://tempuri.org/IService1/comprarPasajeResponse")]
+        void comprarPasaje(int IdViaje, int UserId, int paradaOId, int paradaDId, int TipoDocumento, string Documento, int Asiento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/comprarPasaje", ReplyAction="http://tempuri.org/IService1/comprarPasajeResponse")]
+        System.Threading.Tasks.Task comprarPasajeAsync(int IdViaje, int UserId, int paradaOId, int paradaDId, int TipoDocumento, string Documento, int Asiento);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
         API_SOAP.CompositeType GetDataUsingDataContract(API_SOAP.CompositeType composite);
@@ -129,6 +141,14 @@ namespace Terminal.joaquin24 {
             return base.Channel.canSelectSeatAsync(IdLinea, idParadaOrigen, idParadaDestino);
         }
         
+        public int precioDelPasaje(int IdLinea, int idParadaOrigen, int idParadaDestino) {
+            return base.Channel.precioDelPasaje(IdLinea, idParadaOrigen, idParadaDestino);
+        }
+        
+        public System.Threading.Tasks.Task<int> precioDelPasajeAsync(int IdLinea, int idParadaOrigen, int idParadaDestino) {
+            return base.Channel.precioDelPasajeAsync(IdLinea, idParadaOrigen, idParadaDestino);
+        }
+        
         public int[] GetAsientos(int fechaSelected) {
             return base.Channel.GetAsientos(fechaSelected);
         }
@@ -159,6 +179,14 @@ namespace Terminal.joaquin24 {
         
         public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
             return base.Channel.GetDataAsync(value);
+        }
+        
+        public void comprarPasaje(int IdViaje, int UserId, int paradaOId, int paradaDId, int TipoDocumento, string Documento, int Asiento) {
+            base.Channel.comprarPasaje(IdViaje, UserId, paradaOId, paradaDId, TipoDocumento, Documento, Asiento);
+        }
+        
+        public System.Threading.Tasks.Task comprarPasajeAsync(int IdViaje, int UserId, int paradaOId, int paradaDId, int TipoDocumento, string Documento, int Asiento) {
+            return base.Channel.comprarPasajeAsync(IdViaje, UserId, paradaOId, paradaDId, TipoDocumento, Documento, Asiento);
         }
         
         public API_SOAP.CompositeType GetDataUsingDataContract(API_SOAP.CompositeType composite) {

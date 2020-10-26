@@ -33,6 +33,12 @@
   <wsdl:message name="IService1_canSelectSeat_OutputMessage">
     <wsdl:part name="parameters" element="tns:canSelectSeatResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_precioDelPasaje_InputMessage">
+    <wsdl:part name="parameters" element="tns:precioDelPasaje" />
+  </wsdl:message>
+  <wsdl:message name="IService1_precioDelPasaje_OutputMessage">
+    <wsdl:part name="parameters" element="tns:precioDelPasajeResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetAsientos_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAsientos" />
   </wsdl:message>
@@ -57,6 +63,12 @@
   <wsdl:message name="IService1_GetData_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDataResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_comprarPasaje_InputMessage">
+    <wsdl:part name="parameters" element="tns:comprarPasaje" />
+  </wsdl:message>
+  <wsdl:message name="IService1_comprarPasaje_OutputMessage">
+    <wsdl:part name="parameters" element="tns:comprarPasajeResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_GetDataUsingDataContract_InputMessage">
     <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
   </wsdl:message>
@@ -80,6 +92,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/canSelectSeat" message="tns:IService1_canSelectSeat_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/canSelectSeatResponse" message="tns:IService1_canSelectSeat_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="precioDelPasaje">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/precioDelPasaje" message="tns:IService1_precioDelPasaje_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/precioDelPasajeResponse" message="tns:IService1_precioDelPasaje_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetAsientos">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAsientos" message="tns:IService1_GetAsientos_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAsientosResponse" message="tns:IService1_GetAsientos_OutputMessage" />
@@ -95,6 +111,10 @@
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDataResponse" message="tns:IService1_GetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="comprarPasaje">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/comprarPasaje" message="tns:IService1_comprarPasaje_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/comprarPasajeResponse" message="tns:IService1_comprarPasaje_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetDataUsingDataContract">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDataUsingDataContract" message="tns:IService1_GetDataUsingDataContract_InputMessage" />
@@ -139,6 +159,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="precioDelPasaje">
+      <soap:operation soapAction="http://tempuri.org/IService1/precioDelPasaje" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAsientos">
       <soap:operation soapAction="http://tempuri.org/IService1/GetAsientos" style="document" />
       <wsdl:input>
@@ -168,6 +197,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetData">
       <soap:operation soapAction="http://tempuri.org/IService1/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="comprarPasaje">
+      <soap:operation soapAction="http://tempuri.org/IService1/comprarPasaje" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

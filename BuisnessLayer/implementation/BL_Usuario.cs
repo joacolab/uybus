@@ -92,7 +92,7 @@ namespace BuisnessLayer.implementation
             EParametro epara = iParametro.getAllParametros().Last();
             
             if (epara.Valor > cosotP) asiento = -1;
-            Console.WriteLine(cosotP);
+      
             EPasaje ep = new EPasaje();
             if (idUsuario == -1) //Usuario NOO logeado
             {
@@ -316,6 +316,18 @@ namespace BuisnessLayer.implementation
         }
         public bool canSelectSeat(int IdLinea, int idParadaOrigen, int idParadaDestino) 
         {
+            int cosotP = precioDelPasaje(IdLinea, idParadaOrigen, idParadaDestino);
+            EParametro epara = iParametro.getAllParametros().Last();
+            if (epara.Valor > cosotP)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public int precioDelPasaje(int IdLinea, int idParadaOrigen, int idParadaDestino)
+        {
             ELinea el = iLinea.getLinea(IdLinea);
             List<ETramo> tramos = el.Tramo.ToList<ETramo>();
 
@@ -332,33 +344,22 @@ namespace BuisnessLayer.implementation
                     posdestino = tramos.IndexOf(t);
                 }
             }
-            
+
             List<ETramo> subTramos = new List<ETramo>();
-            
+
             for (int e = posOrigen; e <= posdestino; e++)
             {
                 subTramos.Add(tramos.ElementAt(e));
             }
-            
+
             int cosotP = 0;
 
             foreach (var s in subTramos)
             {
                 cosotP = cosotP + iTramo.valorVigente(s.IdLinea, s.IdParada);
             }
-            
-            EParametro epara = iParametro.getAllParametros().Last();
-            Console.WriteLine("valor esperado" + epara.Valor);
-            Console.WriteLine("Costo pasaje" + cosotP);
 
-            if (epara.Valor > cosotP)
-            {
-                return false;
-            }
-
-            return true;
+            return cosotP;
         }
-
-
     }
 }

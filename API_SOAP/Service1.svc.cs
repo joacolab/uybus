@@ -73,6 +73,25 @@ namespace API_SOAP
         {
             return blu.canSelectSeat(IdLinea, idParadaOrigen, idParadaDestino);
         }
+
+        public int precioDelPasaje(int IdLinea, int idParadaOrigen, int idParadaDestino)
+        {
+            return blu.precioDelPasaje(IdLinea, idParadaOrigen, idParadaDestino);
+        }
+
+        public void comprarPasaje(int IdViaje, int UserId, int paradaOId, int paradaDId, int TipoDocumento, string Documento, int Asiento)
+        {
+            string tp;
+            if (TipoDocumento == 1)
+            {
+                tp = "CI";
+            }
+            else 
+            {
+                tp = "Credencial";
+            }
+           blu.comprarPasaje(IdViaje,UserId, paradaOId, paradaDId,tp,Documento,Asiento);
+        }
     }
 }
 

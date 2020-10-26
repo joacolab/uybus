@@ -29,6 +29,9 @@ namespace API_SOAP
         bool canSelectSeat(int IdLinea, int idParadaOrigen, int idParadaDestino);
 
         [OperationContract]
+        int precioDelPasaje(int IdLinea, int idParadaOrigen, int idParadaDestino);
+
+        [OperationContract]
         List<int> GetAsientos(int fechaSelected);
         // List<ESalida> GetFechasViajes()
         [OperationContract]
@@ -40,6 +43,10 @@ namespace API_SOAP
 
         [OperationContract]
         string GetData(int value);
+
+        [OperationContract]
+        void comprarPasaje(int IdViaje, int UserId, int paradaOId, int paradaDId, int TipoDocumento, string Documento, int Asiento);
+
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);

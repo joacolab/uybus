@@ -35,6 +35,6 @@ namespace BuisnessLayer.interfaces
         /// <param name="idParada"></param>
         /// <returns>Matriculas de proximos vehiculos</returns>
         List<DTOproxVehiculo> proximoVehiculo(int idUsuario, int idParada);
-        
+        int precioDelPasaje(int idLinea, int idParadaOrigen, int idParadaDestino);
     }
 }

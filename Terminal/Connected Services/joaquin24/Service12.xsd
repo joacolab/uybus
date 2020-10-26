@@ -60,6 +60,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="precioDelPasaje">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdLinea" type="xs:int" />
+        <xs:element minOccurs="0" name="idParadaOrigen" type="xs:int" />
+        <xs:element minOccurs="0" name="idParadaDestino" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="precioDelPasajeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="precioDelPasajeResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetAsientos">
     <xs:complexType>
       <xs:sequence>
@@ -114,6 +130,24 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="GetDataResult" nillable="true" type="xs:string" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="comprarPasaje">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdViaje" type="xs:int" />
+        <xs:element minOccurs="0" name="UserId" type="xs:int" />
+        <xs:element minOccurs="0" name="paradaOId" type="xs:int" />
+        <xs:element minOccurs="0" name="paradaDId" type="xs:int" />
+        <xs:element minOccurs="0" name="TipoDocumento" type="xs:int" />
+        <xs:element minOccurs="0" name="Documento" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Asiento" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="comprarPasajeResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="GetDataUsingDataContract">
