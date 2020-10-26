@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -60,18 +61,66 @@ namespace Terminal
         private void btnComprar_Click(object sender, RoutedEventArgs e)
         {
             Service1Client s = new Service1Client();
-            s.comprarPasaje(fechaSelected.IdViaje, -1, paradaOSelected.IdParada, paradaDSelected.IdParada, TipoDocumento, Documento, AsientoSelected);
+            Documento = tbDoc.Text;
+            if (TipoDocumento == 1)
+            {
+                if (validar(1))
+                {
+        
+                    s.comprarPasaje(fechaSelected.IdViaje, -1, paradaOSelected.IdParada, paradaDSelected.IdParada, TipoDocumento, Documento, AsientoSelected);
 
-            MessageBox.Show(
-                    "Muchas gracias por usar nuestro sistema",
-                    "Pasaje comprado",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information
-                );
 
-            this.Hide();
-            new MainWindow().ShowDialog();
-            this.Show();
+                    MessageBox.Show(
+                            "Muchas gracias por usar nuestro sistema",
+                            "Pasaje comprado",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information
+                        );
+                    Environment.Exit(0);
+                   // this.Hide();
+                    //new MainWindow().ShowDialog();
+                    //this.Show();
+                }
+                else
+                {
+                    MessageBox.Show(
+                      "Ingrese Cédula correctamente \n Ejemplo: 12345678",
+                      "Error",
+                      MessageBoxButton.OK,
+                      MessageBoxImage.Error
+                  );
+                }
+            }
+            else
+            {
+                if (validar(2))
+                {
+
+                    s.comprarPasaje(fechaSelected.IdViaje, -1, paradaOSelected.IdParada, paradaDSelected.IdParada, TipoDocumento, Documento, AsientoSelected);
+
+
+                    MessageBox.Show(
+                            "Muchas gracias por usar nuestro sistema",
+                            "Pasaje comprado",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information
+                        );
+                    Environment.Exit(0);
+                    //this.Hide();
+                    //new MainWindow().ShowDialog();
+                    //this.Show();
+                }
+                else
+                {
+                    MessageBox.Show(
+                      "Ingrese Credencial correctamente \n Ejemplo: ABC1234",
+                      "Error",
+                      MessageBoxButton.OK,
+                      MessageBoxImage.Error
+                  );
+                }
+            }
+
         }
 
         private void rbtnCI_Click(object sender, RoutedEventArgs e)
@@ -89,9 +138,35 @@ namespace Terminal
             
         }
 
+        private bool validar(int TipoDoc)
+        {
+
+            if (TipoDoc == 1)
+            {
+
+                var regex = new Regex(@"^[0-9]{8}$");
+                if (!regex.IsMatch(tbDoc.Text))
+                {
+                    return false;
+                }
+                return true;
+            }
+            else
+            {
+                var regex = new Regex(@"^[A-Z]{3}[0-9]{4}$");
+                if (!regex.IsMatch(tbDoc.Text))
+                {
+                    return false;
+                }
+                return true;
+            }
+
+        }
+
+
         private void tbDoc_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Documento = tbDoc.Text;
+   
             btnComprar.IsEnabled = true;
         }
 
