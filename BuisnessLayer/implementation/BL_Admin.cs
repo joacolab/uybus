@@ -50,10 +50,10 @@ namespace BuisnessLayer.implementation
             return iSalida.addSalida(Matricula, idLinea, horaInicio, idConductor);
         }
 
-        public ETramo crearTramos(int idParada, int idLinea, int tiempoEst, int precio, DateTime FechaEntradaVigencia)
+        public ETramo crearTramos(int idParada, int idLinea, int tiempoEst, int  orden, int precio, DateTime FechaEntradaVigencia)
         {
             ETramo et = new ETramo();
-            et = iTramo.addTramo(tiempoEst, idLinea, idParada);
+            et = iTramo.addTramo(tiempoEst, idLinea, idParada, orden);
             iPrecio.addPrecio(precio, FechaEntradaVigencia, idLinea, idParada);
             return et;
         }

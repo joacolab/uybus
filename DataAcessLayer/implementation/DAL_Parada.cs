@@ -25,6 +25,15 @@ namespace DataAcessLayer.implementation
             {
                 using (uybusEntities db = new uybusEntities())
                 {
+                    //Chequea si existe la parada. Sí ya existe no la crea
+                    var paradas = db.Parada;
+                    foreach (var p in paradas)
+                    {
+                        if (p.Nombre == nombre)
+                        {
+                            return null;
+                        }
+                    }
                     Parada parada = new Parada();
                     parada.Nombre = nombre;
                     parada.Lat = lat;

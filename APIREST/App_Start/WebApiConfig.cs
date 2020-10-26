@@ -19,6 +19,15 @@ namespace APIREST
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            /*
+           config.Routes.MapHttpRoute(
+               name: "CrearLinea",
+               routeTemplate: "api/crear-linea"    ,
+               defaults: new { controller = "Admin", action = "crearLinea"  }
+           );
+            */
+
         }
     }
 }

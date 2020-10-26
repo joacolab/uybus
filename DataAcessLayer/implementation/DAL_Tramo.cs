@@ -11,7 +11,7 @@ namespace DataAcessLayer.implementation
 {
     public class DAL_Tramo : IDAL_Tramo
     {
-        public ETramo addTramo(int tiempoEstimado, int idLinea, int idParada)
+        public ETramo addTramo(int tiempoEstimado, int idLinea, int idParada, int orden)
         {
             try
             {
@@ -21,6 +21,7 @@ namespace DataAcessLayer.implementation
                     t.TiempoEstimado = tiempoEstimado;
                     t.IdParada = idParada;
                     t.IdLinea = idLinea;
+                    t.Orden = orden;
                     db.Tramo.Add(t);
                     db.SaveChanges();
 

@@ -29,7 +29,7 @@ namespace BuisnessLayer.interfaces
 
         ELinea crearLinea(string nombre);
 
-        ETramo crearTramos(int idParada, int idLinea, int tiempoEst, int precio, DateTime FechaEntradaVigencia);
+        ETramo crearTramos(int idParada, int idLinea, int tiempoEst, int orden, int precio, DateTime FechaEntradaVigencia);
 
         /// <summary>
         /// aniade la fecha de vencimiento de libreta de conducir al condutor

@@ -9,7 +9,7 @@ namespace DataAcessLayer.interfaces
 {
     public interface IDAL_Tramo
     {
-        ETramo addTramo(int tiempoEstimado, int idLinea, int idParada);
+        ETramo addTramo(int tiempoEstimado, int idLinea, int idParada, int orden);
         List<ETramo> getAllTramos();
         ETramo getTramos(int idLinea, int idParada);
 

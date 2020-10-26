@@ -50,10 +50,10 @@ insert into vehiculo VALUES('MAT6548','Campione Invictus 1200','Comil', 40);
 insert into vehiculo VALUES('MAU7645','Sbelto Doppio 1202','Comil', 42);
 
 insert into tramo VALUES(1, 1, 0, 1);
-insert into tramo VALUES(1, 2, 1300, 2);
-insert into tramo VALUES(1, 3, 1300, 3);
-insert into tramo VALUES(1, 4, 1300, 4);
-insert into tramo VALUES(1, 5, 1300, 5);
+insert into tramo VALUES(1, 2, 20, 2);
+insert into tramo VALUES(1, 3, 30, 3);
+insert into tramo VALUES(1, 4, 50, 4);
+insert into tramo VALUES(1, 5, 65, 5);
 
 insert into tramo VALUES(2, 5, 0, 1);
 insert into tramo VALUES(2, 4, 1300, 2);
@@ -67,6 +67,9 @@ insert into tramo VALUES(3, 7, 1300, 3);
 insert into tramo VALUES(3, 8, 1300, 4);
 insert into tramo VALUES(3, 9, 1300, 5);
 insert into tramo VALUES(3, 5, 1300, 6);
+
+use master;
+
 
 insert into tramo VALUES(4, 5, 0, 1);
 insert into tramo VALUES(4, 9, 1300, 2);

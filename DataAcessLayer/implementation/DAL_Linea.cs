@@ -23,10 +23,14 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Linea linea = new Linea();
-                    linea.Nombre = nombre;
-                    db.Linea.Add(linea);
-                    db.SaveChanges();
-                    return Converter.lineaAElinea(linea);
+                    if (db.Linea.Where(d => d.Nombre == nombre).First() == null)
+                    {
+                        linea.Nombre = nombre;
+                        db.Linea.Add(linea);
+                        db.SaveChanges();
+                        return Converter.lineaAElinea(linea);
+                    }
+                    return null;
                 }
             }
             catch (Exception e)
