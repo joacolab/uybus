@@ -1,4 +1,5 @@
 ﻿using BuisnessLayer.interfaces;
+using DataAcessLayer;
 using DataAcessLayer.implementation;
 using DataAcessLayer.interfaces;
 using Share.DTOs;
@@ -25,7 +26,7 @@ namespace BuisnessLayer.implementation
         private IDAL_Parada iParada;
         private IDAL_Llegada iLlegada;
         private IDAL_Vehiculo iVehiculo;
-
+        
 
         public BL_Usuario(IDAL_Persona _iPersona, IDAL_Usuario _iUsuario, IDAL_Linea _iLinea, IDAL_Salida _iSalida, IDAL_Tramo _iTramo, IDAL_Viaje _iViaje, IDAL_Pasaje _iPasaje, IDAL_Parametro _iParametro, IDAL_Parada _iParada, IDAL_Llegada _iLlegada, IDAL_Vehiculo _iVehiculo)
         {
@@ -54,7 +55,7 @@ namespace BuisnessLayer.implementation
         /// <returns></returns>
         public EPasaje comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, string tipoDoc, string documento, int asiento)
         {
-
+            
             EViaje ev = iViaje.getViaje(idViaje);
             ESalida es = iSalida.getSalidas(ev.IdSalida);
             ELinea el = iLinea.getLinea(es.IdLinea);
@@ -91,7 +92,7 @@ namespace BuisnessLayer.implementation
             EParametro epara = iParametro.getAllParametros().Last();
             
             if (epara.Valor > cosotP) asiento = -1;
-            Console.WriteLine(cosotP);
+      
             EPasaje ep = new EPasaje();
             if (idUsuario == -1) //Usuario NOO logeado
             {
@@ -199,6 +200,166 @@ namespace BuisnessLayer.implementation
             }
 
             return proxVs;
+        }
+
+        public List<ELinea> listarLineas()
+        {
+            return iLinea.getAllLineas();
+        }
+
+        public List<ESalida> GetSalidas(int lineaSelected)
+        {
+            List<ESalida> salidas = new List<ESalida>();
+            foreach (var salida in iLinea.getLinea(lineaSelected).Salida.ToList())
+            {
+                if (salida.Viaje.ToList().Count > 0) 
+                {
+                   salidas.Add(salida);
+                }
+            }
+            return salidas;
+        }
+
+
+
+        public List<EViaje> GetFechasViajes(int IdSalida) 
+        {
+            return iSalida.getSalidas(IdSalida).Viaje.ToList();
+        }
+
+        public List<EParada> listarParadas(int IdLinea)
+        {
+            List<EParada> lstParadas = new List<EParada>();
+            ELinea linea =  iLinea.getLinea(IdLinea);
+            List<ETramo> lstTramos = linea.Tramo.ToList();
+
+            List<ETramo> SortedList = lstTramos.OrderBy(o => o.Orden).ToList();
+
+            int ultimoTramo = SortedList.Count() -1;
+
+            SortedList.RemoveAt(ultimoTramo);
+
+            foreach (var tramo in SortedList)
+            {
+                lstParadas.Add(iParada.getParada(tramo.IdParada));
+            }
+            return lstParadas;
+        }
+
+        public List<EParada> listarParadasD(int IdLinea, int IdParada)
+        {
+
+            ETramo tramoOrigen = new ETramo();
+            ELinea linea = iLinea.getLinea(IdLinea);
+
+            List<EParada> lstParadas = new List<EParada>();
+            List<ETramo> lstTramos = linea.Tramo.ToList();
+            // int con el primero y pasarle un range (ese int, last tramo -1)
+
+            List<ETramo> SortedList = lstTramos.OrderBy(o => o.Orden).ToList();
+            foreach (var item in SortedList)
+            {
+                if (item.IdLinea == IdLinea && item.IdParada == IdParada)
+                {
+                    tramoOrigen = item;
+                }
+            }
+            int indexOrigen = SortedList.IndexOf(tramoOrigen) + 1;
+
+           
+            int Largo = SortedList.Count();
+
+
+            List<ETramo> tramosF = new List<ETramo>();
+            for (int i = indexOrigen; i < Largo; i++)
+            {
+                tramosF.Add(SortedList.ElementAt(i));
+
+            }
+
+            foreach (var tramo in tramosF)
+            {
+                lstParadas.Add(iParada.getParada(tramo.IdParada));
+            }
+            return lstParadas;
+        }
+        /*
+                public List<EViaje> GetViajes(int IdSalida)
+                {
+                    return iSalida.getSalidas(IdSalida).Viaje.ToList();
+                }
+        */
+        public List<int> GetAsientos(int fechaSelected)
+        {
+            EViaje viaje = iViaje.getViaje(fechaSelected);
+            ESalida salida = iSalida.getSalidas(viaje.IdSalida);
+            EVehiculo vehiculo =  iVehiculo.getVehiculos(salida.IdVehiculo);
+            int cantidadDeAsientos = vehiculo.CantAsientos;
+            List<EPasaje> lstPasajes = viaje.Pasaje.ToList();
+
+            List<int> lstPasajesOcupados = new List<int>();
+
+            foreach (var pasaje in lstPasajes)
+            {
+                if (pasaje.Asientos != null)
+                {
+                   lstPasajesOcupados.Add((int)pasaje.Asientos);
+                }
+            }
+            List<int> listaTotal = new List<int>();
+            for (int i = 1; i <= cantidadDeAsientos; i++)
+            {
+                listaTotal.Add(i);
+            }
+            List<int> asientosLibres = listaTotal.Except(lstPasajesOcupados).ToList();
+            return asientosLibres;
+        }
+        public bool canSelectSeat(int IdLinea, int idParadaOrigen, int idParadaDestino) 
+        {
+            int cosotP = precioDelPasaje(IdLinea, idParadaOrigen, idParadaDestino);
+            EParametro epara = iParametro.getAllParametros().Last();
+            if (epara.Valor > cosotP)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public int precioDelPasaje(int IdLinea, int idParadaOrigen, int idParadaDestino)
+        {
+            ELinea el = iLinea.getLinea(IdLinea);
+            List<ETramo> tramos = el.Tramo.ToList<ETramo>();
+
+            int posOrigen = -1;
+            int posdestino = -1;
+            foreach (var t in tramos)
+            {
+                if (t.IdLinea == el.IdLinea && t.IdParada == idParadaOrigen)
+                {
+                    posOrigen = tramos.IndexOf(t);
+                }
+                if (t.IdLinea == el.IdLinea && t.IdParada == idParadaDestino)
+                {
+                    posdestino = tramos.IndexOf(t);
+                }
+            }
+
+            List<ETramo> subTramos = new List<ETramo>();
+
+            for (int e = posOrigen; e <= posdestino; e++)
+            {
+                subTramos.Add(tramos.ElementAt(e));
+            }
+
+            int cosotP = 0;
+
+            foreach (var s in subTramos)
+            {
+                cosotP = cosotP + iTramo.valorVigente(s.IdLinea, s.IdParada);
+            }
+
+            return cosotP;
         }
     }
 }

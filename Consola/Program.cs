@@ -1,19 +1,7 @@
-﻿using DataAcessLayer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using BuisnessLayer.implementation;
+﻿using BuisnessLayer.implementation;
 using BuisnessLayer.interfaces;
-using Share.entities;
-using Share.enums;
-using System.Runtime.InteropServices;
-using System.Threading;
-using Share.DTOs;
-using DataAcessLayer.interfaces;
 using DataAcessLayer.implementation;
+using System;
 
 namespace Consola
 {
@@ -22,11 +10,11 @@ namespace Consola
         static void Main(string[] args)
         {
             IBL_Admin bla = new BL_Admin(new DAL_Linea(), new DAL_Parada(), new DAL_Salida(), new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
-            IBL_Usuario blu = new BL_Usuario(new DAL_Persona(), new DAL_Usuario(), new DAL_Linea(),new DAL_Salida(),new DAL_Tramo(), new DAL_Viaje(),new DAL_Pasaje(),new DAL_Parametro(), new DAL_Parada(), new DAL_Llegada(), new DAL_Vehiculo()) ;
-            IBL_Invitado bli = new BL_Invitado( new DAL_Persona(), new DAL_Usuario());
-            IBL_General blg = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(),new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo());   
+            IBL_Usuario blu = new BL_Usuario(new DAL_Persona(), new DAL_Usuario(), new DAL_Linea(), new DAL_Salida(), new DAL_Tramo(), new DAL_Viaje(), new DAL_Pasaje(), new DAL_Parametro(), new DAL_Parada(), new DAL_Llegada(), new DAL_Vehiculo());
+            IBL_Invitado bli = new BL_Invitado(new DAL_Persona(), new DAL_Usuario());
+            IBL_General blg = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo());
             IBL_Conductor blc = new BL_Conductor(new DAL_Viaje(), new DAL_Pasaje());
-            IBL_SuperAdmin bls = new BL_SuperAdmin(new DAL_Persona(), new DAL_Usuario(), new DAL_Admin(), new DAL_Conductor(), new DAL_Llegada(), new DAL_Parada(), new DAL_Salida(), new DAL_Vehiculo(), new DAL_Viaje()) ;
+            IBL_SuperAdmin bls = new BL_SuperAdmin(new DAL_Persona(), new DAL_Usuario(), new DAL_Admin(), new DAL_Conductor(), new DAL_Llegada(), new DAL_Parada(), new DAL_Salida(), new DAL_Vehiculo(), new DAL_Viaje());
 
             // ----------------- Testeado -------------------
             //EUsuario eu = bli.registrarse("55615808", "carlos@gmail.com", "1234", 1, "Carlos", "Mauro","Gonzalez","Perez");//testeado
@@ -77,7 +65,13 @@ namespace Consola
 
             // ----------------- Falta testear -------------------
 
+            //foreach (var item in blu.GetFechasViajes(1))
+            //{
+            //  Console.WriteLine(item.IdSalida);
 
+            // }
+
+            blu.canSelectSeat(1, 1, 2);
 
             Console.WriteLine("\nPrecione Enter  para finalizar.");
             Console.Read();

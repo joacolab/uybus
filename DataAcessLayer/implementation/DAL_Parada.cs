@@ -77,6 +77,30 @@ namespace DataAcessLayer.implementation
             }
         }
 
+        /*
+        public List<EParada> getAllParadasDeUnaLinea(int linea)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    List<EParada> lstEParada = new List<EParada>();
+                    var Paradas = db.Parada;
+                    foreach (var p in Paradas)
+                    {
+                        EParada ep = Converter.paradaAEParada(p);
+                        lstEParada.Add(ep);
+                    }
+                    return lstEParada;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error en DAL_Parada. Método: getAllParadas " + e.Message);
+                throw e;
+            }
+        }
+        */
         /// <summary>
         /// Busca una Parada en la BD por su id y retorna un EParada
         /// </summary>
