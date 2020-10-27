@@ -3,6 +3,7 @@ using DataAcessLayer.interfaces;
 using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,27 @@ namespace DataAcessLayer.implementation
                 throw e;
             }
 
+        }
+
+        public ELinea editLinea(int IdLinea, string nombre, List<Tramo> tramos)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Linea el = db.Linea.Find(IdLinea);
+                    el.Nombre = nombre;
+                    el.Tramo = tramos;
+                    db.Entry(el).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return Converter.lineaAElinea(el);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>

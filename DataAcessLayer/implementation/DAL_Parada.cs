@@ -3,6 +3,7 @@ using DataAcessLayer.interfaces;
 using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,28 @@ namespace DataAcessLayer.implementation
             }
         }
 
+        public EParada editParada(int parada, string nombre, double lat, double lon)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Parada p = db.Parada.Find(parada);
+                    p.Nombre = nombre;
+                    p.Lat = lat;
+                    p.Long = lon;
+                    db.Entry(p).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return Converter.paradaAEParada(p);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         /// <summary>
         /// Obtiene todas las paradas de la BD
         /// </summary>
@@ -77,30 +100,6 @@ namespace DataAcessLayer.implementation
             }
         }
 
-        /*
-        public List<EParada> getAllParadasDeUnaLinea(int linea)
-        {
-            try
-            {
-                using (uybusEntities db = new uybusEntities())
-                {
-                    List<EParada> lstEParada = new List<EParada>();
-                    var Paradas = db.Parada;
-                    foreach (var p in Paradas)
-                    {
-                        EParada ep = Converter.paradaAEParada(p);
-                        lstEParada.Add(ep);
-                    }
-                    return lstEParada;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error en DAL_Parada. Método: getAllParadas " + e.Message);
-                throw e;
-            }
-        }
-        */
         /// <summary>
         /// Busca una Parada en la BD por su id y retorna un EParada
         /// </summary>

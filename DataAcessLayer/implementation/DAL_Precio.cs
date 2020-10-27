@@ -33,10 +33,6 @@ namespace DataAcessLayer.implementation
                 throw ex;
 
             }
-
-
-
-
         }
 
         public List<EPrecio> getAllPrecios()

@@ -30,7 +30,6 @@ namespace DataAcessLayer.implementation
             {
                 Console.WriteLine("Error en DAL_SuperAdmin, en addSuperAdmin" + ex.Message);
                 throw ex;
-
             }
         }
 
@@ -49,7 +48,7 @@ namespace DataAcessLayer.implementation
 
                         SuperAdmin supa = db.SuperAdmin.Find(p.Id);
                         ESuperAdmin Esupa = new ESuperAdmin();
-                        Esupa.Id = supa.Id; ///////////////dudbear
+                        Esupa.Id = supa.Id; 
                         lstEp.Add(Esupa);
                     }
                     return lstEp;

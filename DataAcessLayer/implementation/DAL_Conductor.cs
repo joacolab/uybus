@@ -113,5 +113,26 @@ namespace DataAcessLayer.implementation
                 throw e;
             }
         }
+
+        public EConductor editConductor(int idConductor, DateTime FechaVenc)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Conductor conductor = db.Conductor.Find(idConductor);
+                    conductor.VencimientoLicencia = FechaVenc;
+                    db.Entry(conductor).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return Converter.conductorAEConductor(conductor);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error en DAL_Conductor. Método: addFechaVenLib " + e.Message);
+                throw e;
+            }
+        }
     }
 }

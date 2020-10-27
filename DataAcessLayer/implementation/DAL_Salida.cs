@@ -3,6 +3,7 @@ using DataAcessLayer.interfaces;
 using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,29 @@ namespace DataAcessLayer.implementation
                 Console.WriteLine("Error en DAL_Salida, en addSalida" + ex.Message);
                 throw ex;
 
+            }
+        }
+
+        public ESalida editSalida(int IdSalida, TimeSpan HoraInicio, int IdConductor, string IdVehiculo, int IdLinea)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Salida s = db.Salida.Find(IdSalida);
+                    s.HoraInicio = HoraInicio;
+                    s.IdConductor = IdConductor;
+                    s.IdVehiculo = IdVehiculo;
+                    s.IdLinea = IdLinea;
+                    db.Entry(s).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return Converter.salidaAESalida(s);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
             }
         }
 
@@ -75,8 +99,6 @@ namespace DataAcessLayer.implementation
                 Console.WriteLine("Error en DAL_Salida, en getSalida " + ex.Message);
                 throw ex;
             }
-
-
         }
     }
 }

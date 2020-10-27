@@ -12,5 +12,7 @@ namespace DataAcessLayer.interfaces
         EParada addParada(string nombre, double lat, double lon);
         List<EParada> getAllParadas();
         EParada getParada(int parada);
+
+        EParada editParada(int parada, string nombre, double lat, double lon);
     }
 }

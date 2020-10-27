@@ -58,7 +58,19 @@ namespace DataAcessLayer.implementation
         /// <returns>Objeto de tipo Parámetro</returns>
         public EParametro getParametros(int idParametro)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Parametro parametro = db.Parametro.Find(idParametro);
+                    return Converter.parametroAEParametro(parametro);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error en DAL_Parada. Método: getParada " + e.Message);
+                throw e;
+            }
         }
 
     }

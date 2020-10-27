@@ -12,7 +12,6 @@ namespace DataAcessLayer.interfaces
         ELinea addLinea(string nombre);
         List<ELinea> getAllLineas();
         ELinea getLinea(int idLinea);
-
-
+        ELinea editLinea(int IdLinea, string nombre);
     }
 }

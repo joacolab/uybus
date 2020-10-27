@@ -120,5 +120,28 @@ namespace DataAcessLayer.implementation
                 throw ex;
             }
         }
+
+        public EViaje editViaje(int idViaje, bool finalizdo, DateTime Fecha, int IdSalida)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Viaje v = db.Viaje.Find(idViaje);
+                    if (finalizdo) v.Finalizado = 1;
+                    else v.Finalizado = 0;
+                    v.Fecha = Fecha;
+                    v.IdSalida = IdSalida;
+                    db.Entry(v).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return Converter.viajeAEViaje(v);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

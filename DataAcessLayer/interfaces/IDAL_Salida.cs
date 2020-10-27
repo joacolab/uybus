@@ -13,5 +13,7 @@ namespace DataAcessLayer.interfaces
         List<ESalida> getAllSalidas();
         ESalida getSalidas(int idSalida);
 
+        ESalida editSalida(int IdSalida, TimeSpan HoraInicio, int IdConductor, string IdVehiculo, int IdLinea);
+
     }
 }

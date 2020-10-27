@@ -14,6 +14,8 @@ namespace DataAcessLayer.interfaces
         EConductor getConductor(int idConductor);
 
         void updateFechaVencLib(int idConductor, DateTime FechaVenc);
+
+        EConductor editConductor(int idConductor, DateTime FechaVenc);
        
 
     }
