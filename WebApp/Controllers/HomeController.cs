@@ -54,6 +54,11 @@ namespace WebApp.Controllers
             }
         }
         
+        public ActionResult nuevoVehiculo()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult nuevoVehiculo(EVehiculo vehiculo)
         {
