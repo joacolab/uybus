@@ -24,7 +24,7 @@ namespace BuisnessLayer.interfaces
         List<EViaje> crearViajes(DateTime fechaInicio, DateTime fechaFinal, List<Dias> diasSemana, int idSalida);
         EVehiculo crearVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos);
         EVehiculo editarVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos);
-
+        List<EVehiculo> getAllVehiculos();
         EParada crearParada(string nombre, double lat, double lon);
 
         ELinea crearLinea(string nombre);

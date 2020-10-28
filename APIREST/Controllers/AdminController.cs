@@ -48,6 +48,14 @@ namespace APIREST.Controllers
             
         }
 
+        
+        [HttpGet]
+        [Route("GetAll/Vehiculos")]
+        List<EVehiculo> GetAllVehiculos()
+        {
+            return cAdmin.getAllVehiculos();
+        }
+
         [HttpPut]
         [Route("editar/vehiculo")]
         EVehiculo editarVehiculos(string Marca, string Modelo, string Matricula, int cantAsientos)

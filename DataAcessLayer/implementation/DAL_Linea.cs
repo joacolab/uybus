@@ -51,6 +51,7 @@ namespace DataAcessLayer.implementation
                     Linea el = db.Linea.Find(IdLinea);
                     el.Nombre = nombre;
                     el.Tramo = tramos;
+                    
                     db.Entry(el).State = EntityState.Modified;
                     db.SaveChanges();
 

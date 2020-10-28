@@ -133,5 +133,10 @@ namespace BuisnessLayer.implementation
         {
             iConductor.updateFechaVencLib(idUsuario, venLibreta);
         }
+
+        public List<EVehiculo> getAllVehiculos()
+        {
+            return iVehiculo.getAllVehiculos();
+        }
     }
 }
