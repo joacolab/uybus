@@ -2,11 +2,14 @@
 using BuisnessLayer.interfaces;
 using DataAcessLayer.implementation;
 using System;
+using System.IO;
+using System.Net;
 
 namespace Consola
 {
     class Program
     {
+       
         static void Main(string[] args)
         {
             IBL_Admin bla = new BL_Admin(new DAL_Linea(), new DAL_Parada(), new DAL_Salida(), new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
@@ -71,7 +74,9 @@ namespace Consola
 
             // }
 
-            blu.canSelectSeat(1, 1, 2);
+            //blu.canSelectSeat(1, 1, 2);
+
+
 
             Console.WriteLine("\nPrecione Enter  para finalizar.");
             Console.Read();

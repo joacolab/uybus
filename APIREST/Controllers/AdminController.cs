@@ -20,6 +20,7 @@ namespace APIREST.Controllers
         IBL_Admin cAdmin = new BL_Admin(new DAL_Linea(), new DAL_Parada(), new DAL_Salida(), 
         new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
 
+        //----------------------------------Viajes----------------------------------------
         [HttpPost]
         [Route("crear/viajes")]
         public List<EViaje> crearViajes(DateTime fechaInicio, DateTime fechaFinal, List<Dias> diasSemana, int idSalida)
@@ -27,14 +28,12 @@ namespace APIREST.Controllers
             List<EViaje> viajes = cAdmin.crearViajes(fechaInicio, fechaFinal, diasSemana, idSalida);
             return viajes;
         }
-
-
+        //----------------------------------vehiculo-------------------------------------
         [HttpPost]
         [Route("crear/vehiculo")]
         [ResponseType(typeof(EVehiculo))]
         public EVehiculo crearVehiculos(string Marca, string Modelo, string Matricula, int cantAsientos)
         {
-            
             try
             {
                 EVehiculo ev = cAdmin.crearVehiculos(Marca, Modelo, Matricula, cantAsientos);
@@ -42,18 +41,17 @@ namespace APIREST.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
-            
         }
 
-        
+        //https://localhost:44330/admin/traer/vehiculos
         [HttpGet]
-        [Route("GetAll/Vehiculos")]
-        List<EVehiculo> GetAllVehiculos()
+        [Route("traer/vehiculos")]
+        [ResponseType(typeof(List<EVehiculo>))]
+        public IHttpActionResult GetAllVehiculos()
         {
-            return cAdmin.getAllVehiculos();
+            return Ok(cAdmin.getAllVehiculos());
         }
 
         [HttpPut]
@@ -62,8 +60,17 @@ namespace APIREST.Controllers
         {
             return cAdmin.editarVehiculos(Marca, Modelo, Matricula, cantAsientos);
         }
-
+        //------------------------------------parada----------------------------------
         //funciona
+        //https://localhost:44330/admin/crear/parada
+        /*
+         {
+            "IdParada" : "",
+            "Nombre" : "MontevideoPrueba",
+            "Lat" : "-32,23",
+            "Long" : "79,12"
+        }
+        */
         [HttpPost]
         [Route("crear/parada")]
         [ResponseType(typeof(EParada))]
@@ -104,7 +111,7 @@ namespace APIREST.Controllers
                 return NotFound();
             }
         }
-
+        //-------------------------------linea----------------------------------------
         //funciona
         [HttpPost]
         [Route("crear/linea")]
@@ -132,7 +139,7 @@ namespace APIREST.Controllers
                 return NotFound();
             }
         }
-
+        //----------------------------tramo-------------------------------------------
         [HttpPost]
         [Route("crear/tramo")]
         [ResponseType(typeof(ETramo))]
@@ -148,7 +155,7 @@ namespace APIREST.Controllers
                 return Content(HttpStatusCode.BadRequest, "No se créo el tramo");
             }
         }
-
+        //-----------------------------conductor------------------------------------------
         [HttpPut]
         [Route("editar/conductor")]
         void gestionConductores(int idUsuario, DateTime venLibreta)
