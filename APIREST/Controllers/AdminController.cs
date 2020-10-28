@@ -30,6 +30,7 @@ namespace APIREST.Controllers
         }
         //----------------------------------vehiculo-------------------------------------
         //https://localhost:44330/admin/crear/vehiculo
+        // funciona
         /*
         {
             "Matricula" : "MDS342"
@@ -69,7 +70,8 @@ namespace APIREST.Controllers
         }
 
         //https://localhost:44330/admin/traer/vehiculo
-        //SAF3465
+        //funciona
+        //https://localhost:44330/admin/traer/vehiculo?Matricula=SAF3465
         [HttpGet]
         [Route("traer/vehiculo")]
         [ResponseType(typeof(List<EVehiculo>))]
@@ -79,6 +81,7 @@ namespace APIREST.Controllers
         }
 
         //https://localhost:44330/admin/traer/vehiculos
+        //funciona
         [HttpGet]
         [Route("traer/vehiculos")]
         [ResponseType(typeof(List<EVehiculo>))]
@@ -87,12 +90,71 @@ namespace APIREST.Controllers
             return Ok(cAdmin.getAllVehiculos());
         }
 
+
+        //Funciona
+        /*
+        https://localhost:44330/admin/editar/vehiculo
+        https://localhost:44330/admin/editar/vehiculo?Matricula=MDS342
+
+        {
+            "Matricula" : "MDS342",
+            "Modelo" : "Modelo",
+            "Marca" : "marraca",
+            "CantAsientos" : 4
+        }
+        */
+        /*
         [HttpPut]
         [Route("editar/vehiculo")]
-        EVehiculo editarVehiculos(string Marca, string Modelo, string Matricula, int cantAsientos)
+        [ResponseType(typeof(EVehiculo))]
+        public IHttpActionResult editarVehiculos(string Matricula, [FromBody] EVehiculo vehiculo)
         {
-            return cAdmin.editarVehiculos(Marca, Modelo, Matricula, cantAsientos);
+            try
+            {
+                EVehiculo ev = cAdmin.editarVehiculos(vehiculo.Marca, vehiculo.Modelo, Matricula, vehiculo.CantAsientos);
+                if (ev != null)
+                {
+                    return Ok(ev);
+                }
+                return Content(HttpStatusCode.NotFound, "La matricula ya existe");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
+        */
+
+
+
+
+        //https://localhost:44330/admin/editar/vehiculo?Matricula=SAF3465&Modelo=e&Marca=e&CantAsientos=11
+
+        [HttpGet]
+        [Route("editar/vehiculo")]
+        [ResponseType(typeof(EVehiculo))]
+        public IHttpActionResult editarVehiculos(string Matricula, string Modelo, string Marca, int CantAsientos)
+        {
+            try
+            {
+                EVehiculo ev = cAdmin.editarVehiculos(Marca, Modelo, Matricula, CantAsientos);
+                if (ev != null)
+                {
+                    return Ok(ev);
+                }
+                return Content(HttpStatusCode.NotFound, "La matricula ya existe");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+
+
+
+
+
         //------------------------------------parada----------------------------------
         //funciona
         //https://localhost:44330/admin/crear/parada

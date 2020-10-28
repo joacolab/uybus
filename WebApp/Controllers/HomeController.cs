@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebSockets;
 
 namespace WebApp.Controllers
 {
@@ -77,6 +78,51 @@ namespace WebApp.Controllers
             ModelState.AddModelError(string.Empty, "Error, contactese con el administrador (Juan)");
             return View(vehiculo);
         }
+
+        /*
+        public ActionResult editarVehiculo()
+        {
+            return View();
+        }
+        */
+        public ActionResult editarVehiculo(string matricula)
+        {
+            EVehiculo vehiculo = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44330/admin/editar/vehiculo");
+                var responeTask = client.GetAsync(matricula);
+                responeTask.Wait();
+                var result = responeTask.Result;
+                if(result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<EVehiculo>();
+                    readTask.Wait();
+                    vehiculo = readTask.Result;
+                }
+            }
+            return View(vehiculo);
+        }
+
+        /*
+        [HttpPost] //igual usamos Post aunnque sea put, no cambiar (julio)
+        public ActionResult editarVehiculo(EVehiculo vehiculo)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44330/");
+                var putTask = client.PutAsJsonAsync($"admin/editar/vehiculo/{vehiculo.Matricula}", vehiculo);
+                putTask.Wait();
+                var result = putTask.Result;
+                if(result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(vehiculo);
+        }
+        */
+
 
         public ActionResult About()
         {

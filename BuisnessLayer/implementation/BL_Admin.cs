@@ -92,19 +92,6 @@ namespace BuisnessLayer.implementation
                     }
                 }
             }
-            /*
-            for (int e = 0; e <= canDias; e++)
-            {
-                foreach (var d in dias)
-                {
-                    if (incio.AddDays(e).DayOfWeek.ToString() == diasToDays(d))
-                    {
-                        resultado.Add(incio.AddDays(e));
-                        break;
-                    }
-                }
-            }
-            */
             return resultado;
         }
         public List<EViaje> crearViajes(DateTime fechaInicio, DateTime fechaFinal, List<Dias> diasSemana, int idSalida)
@@ -124,9 +111,9 @@ namespace BuisnessLayer.implementation
             return viajes;
         }
 
-        public EVehiculo editarVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos)
+        public EVehiculo editarVehiculos(string Marca, string Modelo, string Matricula, int cantAsientos)
         {
-            return iVehiculo.editVehiculo(Matrícula, Marca, Modelo, cantAsientos);
+            return iVehiculo.editVehiculo(Matricula, Marca, Modelo, cantAsientos);
         }
 
         public void gestionConductores(int idUsuario, DateTime venLibreta)
