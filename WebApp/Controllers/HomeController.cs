@@ -2,7 +2,9 @@
 using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -50,6 +52,25 @@ namespace WebApp.Controllers
                 //returning the employee list to view  
                 return View(EmpInfo);
             }
+        }
+        
+        [HttpPost]
+        public ActionResult nuevoVehiculo(EVehiculo vehiculo)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44330/admin/crear/vehiculo");
+                var postTask = client.PostAsJsonAsync<EVehiculo>("vehiculo", vehiculo);
+                postTask.Wait();
+                var result = postTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            ModelState.AddModelError(string.Empty, "Error, contactese con el administrador (Juan)");
+            return View(vehiculo);
         }
 
         public ActionResult About()

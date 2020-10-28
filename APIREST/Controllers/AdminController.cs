@@ -17,7 +17,7 @@ namespace APIREST.Controllers
     [RoutePrefix("admin")]
     public class AdminController : ApiController
     {
-        IBL_Admin cAdmin = new BL_Admin(new DAL_Linea(), new DAL_Parada(), new DAL_Salida(), 
+        IBL_Admin cAdmin = new BL_Admin(new DAL_Linea(), new DAL_Parada(), new DAL_Salida(),
         new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
 
         //----------------------------------Viajes----------------------------------------
@@ -29,23 +29,43 @@ namespace APIREST.Controllers
             return viajes;
         }
         //----------------------------------vehiculo-------------------------------------
-
-
-
+        //https://localhost:44330/admin/crear/vehiculo
+        /*
+        {
+            "Matricula" : "MDS342"
+            "Modelo" : "Modelo"
+            "Marca" : "marca"
+            "CantAsientos" : 4
+            "Salida" : []
+        }
+        */
         [HttpPost]
         [Route("crear/vehiculo")]
         [ResponseType(typeof(EVehiculo))]
-        public EVehiculo crearVehiculos(string Marca, string Modelo, string Matricula, int cantAsientos)
+        public IHttpActionResult crearVehiculos([FromBody] EVehiculo vehiculo)
         {
+            
             try
             {
-                EVehiculo ev = cAdmin.crearVehiculos(Marca, Modelo, Matricula, cantAsientos);
-                return ev;
+                if (String.IsNullOrEmpty(vehiculo.Marca) || String.IsNullOrEmpty(vehiculo.Modelo) || String.IsNullOrEmpty(vehiculo.Matricula) )
+                {
+                    return Content(HttpStatusCode.BadRequest, "No se creó el nuevo vehiculo, parametros no validos.");
+                }
+                else
+                {
+                    EVehiculo ev = cAdmin.crearVehiculos(vehiculo.Marca, vehiculo.Modelo, vehiculo.Matricula, vehiculo.CantAsientos);
+                    if (ev != null)
+                    {
+                        return Ok(ev);
+                    }
+                    return Content(HttpStatusCode.NotFound, "La matricula ya existe");
+                }
             }
             catch (Exception)
             {
-                throw;
+                return NotFound();
             }
+
         }
 
         //https://localhost:44330/admin/traer/vehiculo
