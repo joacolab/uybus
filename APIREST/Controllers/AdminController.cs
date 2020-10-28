@@ -29,6 +29,9 @@ namespace APIREST.Controllers
             return viajes;
         }
         //----------------------------------vehiculo-------------------------------------
+
+
+
         [HttpPost]
         [Route("crear/vehiculo")]
         [ResponseType(typeof(EVehiculo))]
@@ -43,6 +46,16 @@ namespace APIREST.Controllers
             {
                 throw;
             }
+        }
+
+        //https://localhost:44330/admin/traer/vehiculo
+        //SAF3465
+        [HttpGet]
+        [Route("traer/vehiculo")]
+        [ResponseType(typeof(List<EVehiculo>))]
+        public IHttpActionResult GetAllVehiculos(string matricula)
+        {
+            return Ok(cAdmin.getVehiculo(matricula)); //sin sus salidas
         }
 
         //https://localhost:44330/admin/traer/vehiculos

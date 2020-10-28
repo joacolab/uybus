@@ -25,6 +25,8 @@ namespace BuisnessLayer.interfaces
         EVehiculo crearVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos);
         EVehiculo editarVehiculos(string Marca, string Modelo, string Matrícula, int cantAsientos);
         List<EVehiculo> getAllVehiculos();
+
+        EVehiculo getVehiculo(string matricula);
         EParada crearParada(string nombre, double lat, double lon);
 
         ELinea crearLinea(string nombre);

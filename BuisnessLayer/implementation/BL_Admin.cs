@@ -139,5 +139,11 @@ namespace BuisnessLayer.implementation
             return iVehiculo.getAllVehiculos();
         }
 
+        public EVehiculo getVehiculo(string matricula)
+        {
+            EVehiculo ev = iVehiculo.getVehiculos(matricula);
+            ev.Salida = new List<ESalida>();
+            return ev;
+        }
     }
 }
