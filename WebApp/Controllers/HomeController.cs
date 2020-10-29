@@ -79,12 +79,14 @@ namespace WebApp.Controllers
             return View(vehiculo);
         }
 
-        /*
+        
         public ActionResult editarVehiculo()
         {
             return View();
         }
-        */
+        
+
+        /*
         public ActionResult editarVehiculo(string matricula)
         {
             EVehiculo vehiculo = null;
@@ -103,9 +105,10 @@ namespace WebApp.Controllers
             }
             return View(vehiculo);
         }
+        */
 
-        /*
-        [HttpPost] //igual usamos Post aunnque sea put, no cambiar (julio)
+        
+        [HttpPost] //igual usamos Post aunnque sea put
         public ActionResult editarVehiculo(EVehiculo vehiculo)
         {
             using (var client = new HttpClient())
@@ -121,7 +124,7 @@ namespace WebApp.Controllers
             }
             return View(vehiculo);
         }
-        */
+        
 
 
         public ActionResult About()

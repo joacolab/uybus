@@ -93,19 +93,19 @@ namespace APIREST.Controllers
 
         //Funciona
         /*
-        https://localhost:44330/admin/editar/vehiculo
+        https://localhost:44330/admin/editar/vehiculo/SAF3465
         https://localhost:44330/admin/editar/vehiculo?Matricula=MDS342
 
         {
-            "Matricula" : "MDS342",
+            "Matricula" : "SAF3465",
             "Modelo" : "Modelo",
-            "Marca" : "marraca",
+            "Marca" : "Marraca",
             "CantAsientos" : 4
         }
         */
-        /*
+
         [HttpPut]
-        [Route("editar/vehiculo")]
+        [Route("editar/vehiculo/{Matricula}")]
         [ResponseType(typeof(EVehiculo))]
         public IHttpActionResult editarVehiculos(string Matricula, [FromBody] EVehiculo vehiculo)
         {
@@ -123,11 +123,11 @@ namespace APIREST.Controllers
                 return NotFound();
             }
         }
-        */
+        
 
 
 
-
+        /*
         //https://localhost:44330/admin/editar/vehiculo?Matricula=SAF3465&Modelo=e&Marca=e&CantAsientos=11
 
         [HttpGet]
@@ -149,6 +149,7 @@ namespace APIREST.Controllers
                 return NotFound();
             }
         }
+        */
 
 
 
