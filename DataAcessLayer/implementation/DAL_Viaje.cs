@@ -121,7 +121,7 @@ namespace DataAcessLayer.implementation
             }
         }
 
-        public EViaje editViaje(int idViaje, bool finalizdo, DateTime Fecha, TimeSpan HoraInicioReal, int IdSalida)
+        public EViaje editViaje(int idViaje, bool finalizdo, DateTime Fecha, TimeSpan? HoraInicioReal, int IdSalida)
         {
             try
             {

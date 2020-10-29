@@ -22,8 +22,7 @@ namespace APIREST.Controllers
 
         //----------------------------------Viajes----------------------------------------
         // https://localhost:44330/admin/crear/viajes
-
-        //
+        //funciona
         /*
             {
             "fechaInicio" : "02/03/2020",
@@ -74,6 +73,7 @@ namespace APIREST.Controllers
         }
 
         //https://localhost:44330/admin/editar/viaje/3
+        //funciona
         /*
             {
                 "IdViaje" : 3,
@@ -85,14 +85,15 @@ namespace APIREST.Controllers
         
         */
         [HttpPut]
-        [Route("editar/viaje/{IdViaje}")]
+        [Route("editar/viaje/{IdViaje}")]              
         [ResponseType(typeof(EViaje))]
         public IHttpActionResult editarViaje(int IdViaje, [FromBody] DTOViaje viaje)
         {
             try
             {
-          
-                EViaje v = cAdmin.editarViaje(viaje.IdViaje,viaje.Finalizado, Convert.ToDateTime(viaje.Fecha), TimeSpan.Parse(viaje.HoraInicioReal), viaje.IdSalida);
+                TimeSpan? FIR = null;
+                if (viaje.HoraInicioReal != null) FIR = TimeSpan.Parse(viaje.HoraInicioReal);
+                EViaje v = cAdmin.editarViaje(viaje.IdViaje,viaje.Finalizado, Convert.ToDateTime(viaje.Fecha), FIR, viaje.IdSalida);
 
                 if (v != null)
                 {

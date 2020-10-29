@@ -117,7 +117,7 @@ namespace BuisnessLayer.implementation
         }
 
 
-        public EViaje editarViaje(int IdViaje, bool Finalizado, DateTime Fecha, TimeSpan HoraInicioReal, int IdSalida)
+        public EViaje editarViaje(int IdViaje, bool Finalizado, DateTime Fecha, TimeSpan? HoraInicioReal, int IdSalida)
         {
             return iViaje.editViaje(IdViaje, Finalizado, Fecha, HoraInicioReal, IdSalida);
         }

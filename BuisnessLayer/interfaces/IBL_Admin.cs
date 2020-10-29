@@ -45,6 +45,6 @@ namespace BuisnessLayer.interfaces
 
         List<EViaje> getAllViaje();
 
-        EViaje editarViaje(int IdViaje, bool Finalizado, DateTime Fecha, TimeSpan HoraInicioReal, int IdSalida);
+        EViaje editarViaje(int IdViaje, bool Finalizado, DateTime Fecha, TimeSpan? HoraInicioReal, int IdSalida);
     }
 }
