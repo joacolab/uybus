@@ -116,6 +116,13 @@ namespace BuisnessLayer.implementation
             return iVehiculo.editVehiculo(Matricula, Marca, Modelo, cantAsientos);
         }
 
+
+        public EViaje editarViaje(int IdViaje, bool Finalizado, DateTime Fecha, TimeSpan HoraInicioReal, int IdSalida)
+        {
+            return iViaje.editViaje(IdViaje, Finalizado, Fecha, HoraInicioReal, IdSalida);
+        }
+
+
         public void gestionConductores(int idUsuario, DateTime venLibreta)
         {
             iConductor.updateFechaVencLib(idUsuario, venLibreta);
@@ -132,5 +139,11 @@ namespace BuisnessLayer.implementation
             ev.Salida = new List<ESalida>();
             return ev;
         }
+
+        public List<EViaje> getAllViaje()
+        {
+            return iViaje.getAllViajes();  
+        }
+
     }
 }

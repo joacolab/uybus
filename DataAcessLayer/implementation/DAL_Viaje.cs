@@ -121,7 +121,7 @@ namespace DataAcessLayer.implementation
             }
         }
 
-        public EViaje editViaje(int idViaje, bool finalizdo, DateTime Fecha, int IdSalida)
+        public EViaje editViaje(int idViaje, bool finalizdo, DateTime Fecha, TimeSpan HoraInicioReal, int IdSalida)
         {
             try
             {
@@ -132,6 +132,7 @@ namespace DataAcessLayer.implementation
                     else v.Finalizado = 0;
                     v.Fecha = Fecha;
                     v.IdSalida = IdSalida;
+                    v.HoraInicioReal = HoraInicioReal;
                     db.Entry(v).State = EntityState.Modified;
                     db.SaveChanges();
 

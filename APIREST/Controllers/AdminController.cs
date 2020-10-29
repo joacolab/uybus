@@ -21,24 +21,106 @@ namespace APIREST.Controllers
         new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
 
         //----------------------------------Viajes----------------------------------------
+        // https://localhost:44330/admin/crear/viajes
+
+        //
+        /*
+            {
+            "fechaInicio" : "02/03/2020",
+            "fechaFinal" : "02/04/2020",
+            "diasSemana" : [1,2,3,4,5],
+            "idSalida" : 2
+            }
+        */
         [HttpPost]
         [Route("crear/viajes")]
-        public List<EViaje> crearViajes(DateTime fechaInicio, DateTime fechaFinal, List<Dias> diasSemana, int idSalida)
+        [ResponseType(typeof(List<EViaje>))]
+        public IHttpActionResult crearViajes([FromBody] DTOCrearViajes dTOCV)
         {
-            List<EViaje> viajes = cAdmin.crearViajes(fechaInicio, fechaFinal, diasSemana, idSalida);
-            return viajes;
+            try
+            {
+                if (dTOCV == null) 
+                {
+                    return Content(HttpStatusCode.BadRequest, "No se crearon los viajes, parametros no validos.");
+                }
+                List<Dias> LSTDias = new List<Dias>();
+                foreach (var dia in dTOCV.diasSemana)
+                {
+                    LSTDias.Add((Dias)dia);
+                }
+
+                 List<EViaje> viajes = cAdmin.crearViajes(Convert.ToDateTime(dTOCV.fechaInicio), Convert.ToDateTime(dTOCV.fechaFinal), LSTDias, dTOCV.idSalida);
+
+                if (viajes != null)
+                {
+                    return Ok(viajes);
+                }
+                return Content(HttpStatusCode.NotFound, "Los viajes no se han podido crear");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
+
+        //funciona
+        //https://localhost:44330/admin/traer/viajes
+        [HttpGet]
+        [Route("traer/viajes")]
+        [ResponseType(typeof(List<EViaje>))]
+        public IHttpActionResult GetAllViajes()
+        {
+            return Ok(cAdmin.getAllViaje());
+        }
+
+        //https://localhost:44330/admin/editar/viaje/3
+        /*
+            {
+                "IdViaje" : 3,
+                "Finalizado" : false,
+                "Fecha" : "2020-12-04",
+                "HoraInicioReal" : "08:01:00",
+                "IdSalida" : 1
+            } 
+        
+        */
+        [HttpPut]
+        [Route("editar/viaje/{IdViaje}")]
+        [ResponseType(typeof(EViaje))]
+        public IHttpActionResult editarViaje(int IdViaje, [FromBody] DTOViaje viaje)
+        {
+            try
+            {
+          
+                EViaje v = cAdmin.editarViaje(viaje.IdViaje,viaje.Finalizado, Convert.ToDateTime(viaje.Fecha), TimeSpan.Parse(viaje.HoraInicioReal), viaje.IdSalida);
+
+                if (v != null)
+                {
+                    return Ok(v);
+                }
+                return Content(HttpStatusCode.NotFound, "el viaje seleccionado ya existe");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+
+
+
+
         //----------------------------------vehiculo-------------------------------------
         //https://localhost:44330/admin/crear/vehiculo
         // funciona
         /*
-        {
+         * {
             "Matricula" : "MDS342"
             "Modelo" : "Modelo"
             "Marca" : "marca"
             "CantAsientos" : 4
             "Salida" : []
-        }
+            }
         */
         [HttpPost]
         [Route("crear/vehiculo")]
@@ -69,16 +151,17 @@ namespace APIREST.Controllers
 
         }
 
-        //https://localhost:44330/admin/traer/vehiculo
+     /*   //https://localhost:44330/admin/traer/vehiculo
         //funciona
         //https://localhost:44330/admin/traer/vehiculo?Matricula=SAF3465
         [HttpGet]
         [Route("traer/vehiculo")]
         [ResponseType(typeof(List<EVehiculo>))]
-        public IHttpActionResult GetAllVehiculos(string matricula)
+        public IHttpActionResult GetVehiculo(string matricula)
         {
             return Ok(cAdmin.getVehiculo(matricula)); //sin sus salidas
         }
+     */
 
         //https://localhost:44330/admin/traer/vehiculos
         //funciona

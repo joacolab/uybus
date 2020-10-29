@@ -15,6 +15,6 @@ namespace DataAcessLayer.interfaces
         EViaje iniciarViaje(int idViaje, TimeSpan HoraInicioReal);
         void finalizarViaje(int idViaje);
 
-        EViaje editViaje(int idViaje, bool finalizdo, DateTime Fecha, int IdSalida);
+        EViaje editViaje(int idViaje, bool finalizdo, DateTime Fecha, TimeSpan HoraInicioReal, int IdSalida);
     }
 }

@@ -42,5 +42,9 @@ namespace BuisnessLayer.interfaces
         void gestionConductores(int idUsuario, DateTime venLibreta);
 
         ESalida crearSalida(int idConductor, string Matricula, int idLinea, TimeSpan horaInicio);
+
+        List<EViaje> getAllViaje();
+
+        EViaje editarViaje(int IdViaje, bool Finalizado, DateTime Fecha, TimeSpan HoraInicioReal, int IdSalida);
     }
 }
