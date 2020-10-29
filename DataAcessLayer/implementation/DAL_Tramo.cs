@@ -18,6 +18,16 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Tramo t = new Tramo();
+
+                    var l = db.Tramo;
+                    foreach (var p in l)
+                    {
+                        if (p.IdParada == idParada && p.IdLinea == idLinea)
+                        {
+                            return null;
+                        }
+                    }
+
                     t.TiempoEstimado = tiempoEstimado;
                     t.IdParada = idParada;
                     t.IdLinea = idLinea;

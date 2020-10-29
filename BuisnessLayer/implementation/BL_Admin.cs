@@ -39,10 +39,17 @@ namespace BuisnessLayer.implementation
         {
             return iLinea.addLinea(nombre);
         }
-
+        public List<EParada> getAllParada()
+        {
+            return iParada.getAllParadas(); ;
+        }
         public EParada crearParada(string nombre, double lat, double lon)
         {
             return iParada.addParada(nombre, lat, lon);
+        }
+        public EParada editarParada(int parada, string nombre, double lat, double lon)
+        {
+            return iParada.editParada(parada, nombre, lat, lon);
         }
 
         public ESalida crearSalida(int idConductor, string Matricula, int idLinea, TimeSpan horaInicio)

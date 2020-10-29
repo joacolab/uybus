@@ -107,10 +107,6 @@ namespace APIREST.Controllers
             }
         }
 
-
-
-
-
         //----------------------------------vehiculo-------------------------------------
         //https://localhost:44330/admin/crear/vehiculo
         // funciona
@@ -207,9 +203,6 @@ namespace APIREST.Controllers
                 return NotFound();
             }
         }
-        
-
-
 
         /*
         //https://localhost:44330/admin/editar/vehiculo?Matricula=SAF3465&Modelo=e&Marca=e&CantAsientos=11
@@ -235,12 +228,8 @@ namespace APIREST.Controllers
         }
         */
 
-
-
-
-
-
         //------------------------------------parada----------------------------------
+
         //funciona
         //https://localhost:44330/admin/crear/parada
         /*
@@ -291,7 +280,55 @@ namespace APIREST.Controllers
                 return NotFound();
             }
         }
+
+        //https://localhost:44330/admin/traer/paradas
+        //funciona
+        [HttpGet]
+        [Route("traer/paradas")]
+        [ResponseType(typeof(EParada))]
+        public IHttpActionResult GetAllParada()
+        {
+            return Ok(cAdmin.getAllParada());
+        }
+
+        /* funciona
+           https://localhost:44330/admin/editar/parada/1
+           {
+                "IdParada" : "1",
+                "Nombre" : "Nueva",
+                "Lat" : "-34.999999",
+                "Long" : "34.111111"
+           }
+           */
+
+        [HttpPut]
+        [Route("editar/parada/{IdParada}")]
+        [ResponseType(typeof(EParada))]
+        public IHttpActionResult editarParada(int IdParada, [FromBody] EParada parada)
+        {
+            try
+            {
+                EParada p = cAdmin.editarParada(parada.IdParada, parada.Nombre, parada.Lat, parada.Long);
+                if (p != null)
+                {
+                    return Ok(p);
+                }
+                return Content(HttpStatusCode.NotFound, "La parada ya existe");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
         //-------------------------------linea----------------------------------------
+        //
+        //https://localhost:44330/admin/crear/linea
+        /*
+         {
+            "Nombre" : "Esta"
+        }
+        */
         //funciona
         [HttpPost]
         [Route("crear/linea")]
@@ -316,7 +353,8 @@ namespace APIREST.Controllers
             }
             catch (Exception)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound, "aaaaaaaaaaa existe");
+                //return NotFound();
             }
         }
         //----------------------------tramo-------------------------------------------

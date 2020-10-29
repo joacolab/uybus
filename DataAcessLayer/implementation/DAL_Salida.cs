@@ -19,6 +19,16 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Salida sal = new Salida();
+
+                    var l = db.Salida;
+                    foreach (var p in l)
+                    {
+                        if (p.HoraInicio == horaInicio)
+                        {
+                            return null;
+                        }
+                    }
+
                     sal.IdVehiculo = matricula;
                     sal.IdLinea = linea;
                     sal.HoraInicio = horaInicio;
