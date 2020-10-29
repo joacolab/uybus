@@ -69,9 +69,6 @@ insert into tramo VALUES(3, 8, 1300, 4);
 insert into tramo VALUES(3, 9, 1300, 5);
 insert into tramo VALUES(3, 5, 1300, 6);
 
-use master;
-
-
 insert into tramo VALUES(4, 5, 0, 1);
 insert into tramo VALUES(4, 9, 1300, 2);
 insert into tramo VALUES(4, 8, 1300, 3);
