@@ -48,7 +48,27 @@ namespace DataAcessLayer.implementation
                 throw ex;
             }
         }
+        
+        public List<EPersona> getAllPersona()
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    List<EPersona> sltPer = new List<EPersona>();
 
+                    foreach (var p in db.Persona)
+                    {
+                        sltPer.Add(Converter.personaAEpersona(p));
+                    }
+                    return sltPer;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
         public EPersona getPersona(int id)
         {
             try

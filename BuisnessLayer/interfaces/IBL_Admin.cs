@@ -1,4 +1,5 @@
-﻿using Share.entities;
+﻿using Share.DTOs;
+using Share.entities;
 using Share.enums;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,11 @@ namespace BuisnessLayer.interfaces
 
         ETramo getTramo(int IdParada, int IdLinea);
 
+        List<ETramo> getAllTramos();
+        ETramo editarTramo(int IdLinea, int IdParada, DTOTramo tramo);
 
+        List<EConductor> GetAllConductores();
+        ESalida editarSalida(int IdSalida, TimeSpan HoraInicio, int IdConductor, string IdVehiculo, int IdLinea);
+        List<ESalida> GetAlSalidas();
     }
 }

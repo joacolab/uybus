@@ -75,7 +75,7 @@ namespace DataAcessLayer.implementation
             {
                 using (uybusEntities db = new uybusEntities())
                 {
-                    List<ESalida> lstEp = null;
+                    List<ESalida> lstEp = new List<ESalida>();
 
                     var salidas = db.Salida;
 

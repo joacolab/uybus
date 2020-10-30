@@ -1,6 +1,7 @@
 ﻿using BuisnessLayer.interfaces;
 using DataAcessLayer.implementation;
 using DataAcessLayer.interfaces;
+using Share.DTOs;
 using Share.entities;
 using Share.enums;
 using System;
@@ -166,7 +167,32 @@ namespace BuisnessLayer.implementation
         public ETramo getTramo(int IdParada, int IdLinea) 
         {
             return iTramo.getTramos(IdLinea, IdLinea);
-        } 
+        }
 
+        public List<ETramo> getAllTramos()
+        {
+            return iTramo.getAllTramos();
+        }
+
+        public ETramo editarTramo(int IdLinea, int IdParada, DTOTramo tramo)
+        {
+            return iTramo.editarTramo(IdLinea, IdParada, tramo);
+        }
+
+        public List<EConductor> GetAllConductores()
+        {
+            return iConductor.getAllConductores();
+        }
+
+        public ESalida editarSalida(int IdSalida, TimeSpan HoraInicio, int IdConductor, string IdVehiculo, int IdLinea)
+        {
+            return iSalida.editSalida(IdSalida, HoraInicio, IdConductor, IdVehiculo, IdLinea);
+        }
+
+
+        public List<ESalida> GetAlSalidas()
+        {
+            return iSalida.getAllSalidas();
+        }
     }
 }

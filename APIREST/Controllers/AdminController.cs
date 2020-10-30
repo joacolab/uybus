@@ -286,7 +286,7 @@ namespace APIREST.Controllers
         //funciona
         [HttpGet]
         [Route("traer/paradas")]
-        [ResponseType(typeof(EParada))]
+        [ResponseType(typeof(List<EParada>))]
         public IHttpActionResult GetAllParada()
         {
             return Ok(cAdmin.getAllParada());
@@ -356,8 +356,7 @@ namespace APIREST.Controllers
             }
             catch (Exception)
             {
-                return Content(HttpStatusCode.NotFound, "aaaaaaaaaaa existe");
-                //return NotFound();
+                return NotFound();
             }
         }
 
@@ -366,7 +365,7 @@ namespace APIREST.Controllers
         //funciona
         [HttpGet]
         [Route("traer/linea")]
-        [ResponseType(typeof(ELinea))]
+        [ResponseType(typeof(List<ELinea>))]
         public IHttpActionResult GetAllLineas()
         {
             return Ok(cAdmin.getAllLineas());
@@ -401,11 +400,11 @@ namespace APIREST.Controllers
         }
 
         //----------------------------tramo-------------------------------------------
-        //
+        //funciona
         //https://localhost:44330/admin/crear/tramo
         /*
          {
-            "IdParada" : 1,
+            "IdParada" : 10,
             "IdLinea" : 1,
             "Orden" : 6,
             "TiempoEstimado": 1200,
@@ -438,19 +437,165 @@ namespace APIREST.Controllers
             }
         }
 
-        //-----------------------------conductor------------------------------------------
-        [HttpPut]
-        [Route("editar/conductor")]
-        void gestionConductores(int idUsuario, DateTime venLibreta)
+        //https://localhost:44330/admin/traer/tramo
+        //funciona
+        [HttpGet]
+        [Route("traer/tramo")]
+        [ResponseType(typeof(List<ETramo>))]
+        public IHttpActionResult GetAllTramos()
         {
-            cAdmin.gestionConductores(idUsuario, venLibreta);
+            return Ok(cAdmin.getAllTramos());
         }
 
+        //https://localhost:44330/admin/editar/linea/1/1
+        /*Funciona
+         {
+            "IdParada" : 1,
+            "IdLinea" : 1,
+            "Orden" : 6,
+            "TiempoEstimado": 3000,
+            "Precio" : 100,
+            "FechaEntradaVigencia" : "2020-12-04"
+        }
+        */
+        [HttpPut]
+        [Route("editar/linea/{IdLinea}/{IdParada}")]
+        [ResponseType(typeof(ETramo))]
+        public IHttpActionResult editarTramo(int IdLinea, int IdParada, [FromBody] DTOTramo tramo)
+        {
+            try
+            {
+                ETramo t = cAdmin.editarTramo(IdLinea, IdParada, tramo);
+                if (t != null)
+                {
+                    return Ok(t);
+                }
+                return Content(HttpStatusCode.NotFound, "El tramo ya existe");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+        //-----------------------------Salida------------------------------------------
+        //
+        //https://localhost:44330/admin/crear/salida
+        /*
+         {
+            "IdConductor": 7,
+            "IdVehiculo" : "MAT6548",
+            "IdLinea" : 1
+            "HoraInicio" : "08:01:00"
+        }
+        */
         [HttpPost]
         [Route("crear/salida")]
-        ESalida crearSalida(int idConductor, string Matricula, int idLinea, TimeSpan horaInicio)
+        [ResponseType(typeof(ESalida))]
+        public IHttpActionResult crearSaida([FromBody] DTOSalida dtoSal)
         {
-            return crearSalida(idConductor, Matricula, idLinea, horaInicio);
+
+            try
+            {
+                ESalida sal = cAdmin.crearSalida(dtoSal.IdConductor, dtoSal.IdVehiculo, dtoSal.IdLinea, TimeSpan.Parse(dtoSal.HoraInicio));
+                if (dtoSal != null)
+                {
+                    return Ok(dtoSal);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.BadRequest, "No se créo la salida");
+                }
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
+        }
+
+
+
+
+        //https://localhost:44330/admin/traer/salida
+        //funciona
+        [HttpGet]
+        [Route("traer/salida")]
+        [ResponseType(typeof(List<ESalida>))]
+        public IHttpActionResult GetAlSalidas()
+        {
+            return Ok(cAdmin.GetAlSalidas());
+        }
+
+
+        /* funciona
+           https://localhost:44330/admin/editar/salida/1
+
+
+
+        {
+            "IdSalida" : 1,
+            "IdConductor": 7,
+            "IdVehiculo" : "MAT6548",
+            "IdLinea" : 1
+            "HoraInicio" : "08:01:00",
+        }
+               
+           */
+
+        [HttpPut]
+        [Route("editar/salida/{IdSalida}")]
+        [ResponseType(typeof(ESalida))]
+        public IHttpActionResult F(int IdSalida, [FromBody] DTOSalida salida)
+        {
+            try
+            {
+                ESalida li = cAdmin.editarSalida(salida.IdSalida, TimeSpan.Parse(salida.HoraInicio), salida.IdConductor, salida.IdVehiculo, salida.IdLinea);
+
+                if (li != null)
+                {
+                    return Ok(li);
+                }
+                return Content(HttpStatusCode.NotFound, "La salida ya existe");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+        //-----------------------------conductor------------------------------------------
+
+
+        //https://localhost:44330/admin/traer/Conductores
+        //funciona
+        [HttpGet]
+        [Route("traer/Conductores")]
+        [ResponseType(typeof(List<EConductor>))]
+        public IHttpActionResult GetAllConductores()
+        {
+            return Ok(cAdmin.GetAllConductores());
+        }
+
+        //https://localhost:44330/admin/editar/conductor/7
+        /*Funciona
+         {
+            "VencimientoLicencia": "2021-02-02"
+        }
+        */
+        [HttpPut]
+        [Route("editar/conductor/{Id}")]
+        [ResponseType(typeof(EConductor))]
+        public IHttpActionResult gestionConductores(int Id, [FromBody] string venLibreta)
+        {
+            try
+            {
+                cAdmin.gestionConductores(Id, Convert.ToDateTime(venLibreta));
+                return Ok();
+                
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
 
     }

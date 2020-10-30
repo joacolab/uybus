@@ -1,4 +1,5 @@
-﻿using Share.entities;
+﻿using Share.DTOs;
+using Share.entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace DataAcessLayer.interfaces
         ETramo addTramo(int tiempoEstimado, int idLinea, int idParada, int orden);
         List<ETramo> getAllTramos();
         ETramo getTramos(int idLinea, int idParada);
-
+        ETramo editarTramo(int IdLinea, int IdParada, DTOTramo tramo);
         int valorVigente(int idLinea, int idParada);
     }
 }

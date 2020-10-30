@@ -21,6 +21,18 @@ namespace APIREST.Controllers
         IBL_SuperAdmin cSuperAdmin = new BL_SuperAdmin(new DAL_Persona(), new DAL_Usuario(), new DAL_Admin(), new DAL_Conductor(),
     new DAL_Llegada(), new DAL_Parada(), new DAL_Salida(), new DAL_Vehiculo(), new DAL_Viaje());
 
+
+
+        //https://localhost:44330/super-admin/traer/Personas
+        //funciona
+        [HttpGet]
+        [Route("traer/Personas")]
+        [ResponseType(typeof(List<EPersona>))]
+        public IHttpActionResult GetAllPersonas()
+        {
+            return Ok(cSuperAdmin.GetAllPersonas());
+        }
+
         //---------------------------------- Asignar Rol ---------------------------------------------------------
         /* Funciona:
          * Copiar el siguiente codigo y ejecutarlo el el gitbash:
