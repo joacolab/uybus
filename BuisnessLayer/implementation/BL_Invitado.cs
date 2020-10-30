@@ -23,6 +23,10 @@ namespace BuisnessLayer.implementation
         public EUsuario registrarse(string Documento, string Correo, string Password, int TipoDocumento, string pNombre, string sNombre, string pApellido, string sApellido)
         {
             EPersona ep = iPersona.addPersona(Documento, Correo, Password, TipoDocumento, pNombre, sNombre, pApellido, sApellido);
+            if (ep == null)
+            {
+                return null;
+            }
             EUsuario eu = iUsuario.addUsuario(ep.id);
             return eu;
         }

@@ -18,6 +18,14 @@ namespace DataAcessLayer.implementation
             {
                 using (uybusEntities db = new uybusEntities())
                 {
+                    var personas = db.Persona;
+                    foreach (var per in personas)
+                    {
+                        if (per.Documento == Documento)
+                        {
+                            return null;
+                        }
+                    }
                     Persona p = new Persona();
                     p.Documento = Documento;
                     p.Correo = Correo;
