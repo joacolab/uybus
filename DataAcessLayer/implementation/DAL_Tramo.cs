@@ -1,8 +1,10 @@
 ﻿using DataAcessLayer.conversores;
 using DataAcessLayer.interfaces;
+using Share.DTOs;
 using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,6 +107,30 @@ namespace DataAcessLayer.implementation
             lst2.OrderBy(r => r.FechaEntradaVigencia);
 
             return lst2.Last().Precio1;
+        }
+
+        public ETramo editarTramo(int IdLinea, int IdParada, DTOTramo tramo)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+
+                    Tramo t = db.Tramo.Find(IdLinea, IdParada);
+
+                    t.TiempoEstimado = tramo.TiempoEstimado;
+                    t.IdParada = IdParada;
+                    t.IdLinea = IdLinea;
+                    t.Orden = tramo.Orden;
+                    db.Entry(t).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Converter.tramoAETramo(t);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
