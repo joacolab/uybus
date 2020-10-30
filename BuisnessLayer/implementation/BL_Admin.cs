@@ -152,5 +152,21 @@ namespace BuisnessLayer.implementation
             return iViaje.getAllViajes();  
         }
 
+        public List<ELinea> getAllLineas() 
+        {
+            return iLinea.getAllLineas();
+        }
+
+
+        public ELinea editarLinea(int IdLinea, string Nombre)
+        {
+            return iLinea.editLinea(IdLinea, Nombre);
+        }
+
+        public ETramo getTramo(int IdParada, int IdLinea) 
+        {
+            return iTramo.getTramos(IdLinea, IdLinea);
+        } 
+
     }
 }

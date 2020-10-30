@@ -11,6 +11,7 @@ using DataAcessLayer.implementation;
 using Share.entities;
 using Share.enums;
 using Share.DTOs;
+using System.Reflection;
 
 namespace APIREST.Controllers
 {
@@ -291,6 +292,8 @@ namespace APIREST.Controllers
             return Ok(cAdmin.getAllParada());
         }
 
+     
+
         /* funciona
            https://localhost:44330/admin/editar/parada/1
            {
@@ -357,22 +360,84 @@ namespace APIREST.Controllers
                 //return NotFound();
             }
         }
+
+
+        //https://localhost:44330/admin/traer/linea
+        //funciona
+        [HttpGet]
+        [Route("traer/linea")]
+        [ResponseType(typeof(ELinea))]
+        public IHttpActionResult GetAllLineas()
+        {
+            return Ok(cAdmin.getAllLineas());
+        }
+
+
+
+        /* funciona
+           https://localhost:44330/admin/editar/linea/1
+
+                "Nueva"
+           */
+
+        [HttpPut]
+        [Route("editar/linea/{IdLinea}")]
+        [ResponseType(typeof(ELinea))]
+        public IHttpActionResult editarLinea(int IdLinea, [FromBody] string Nombre)
+        {
+            try
+            {
+                ELinea li = cAdmin.editarLinea(IdLinea,Nombre);
+                if (li != null)
+                {
+                    return Ok(li);
+                }
+                return Content(HttpStatusCode.NotFound, "La linea ya existe");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
         //----------------------------tramo-------------------------------------------
+        //
+        //https://localhost:44330/admin/crear/tramo
+        /*
+         {
+            "IdParada" : 1,
+            "IdLinea" : 1,
+            "Orden" : 6,
+            "TiempoEstimado": 1200,
+            "Precio" : 54,
+            "FechaEntradaVigencia" : "2020-12-04"
+        }
+        */
         [HttpPost]
         [Route("crear/tramo")]
         [ResponseType(typeof(ETramo))]
         public IHttpActionResult crearTramos([FromBody] DTOTramoPrecio dtoTramoPrecio)
         {
-            ETramo etramo = cAdmin.crearTramos(dtoTramoPrecio.IdParada , dtoTramoPrecio.IdLinea, dtoTramoPrecio.Orden , dtoTramoPrecio.TiempoEstimado, dtoTramoPrecio.Precio , dtoTramoPrecio.FechaEntradaVigencia); 
-            if(etramo != null)
+
+            try
             {
-                return Ok(etramo);
+                ETramo etramo = cAdmin.crearTramos(dtoTramoPrecio.IdParada, dtoTramoPrecio.IdLinea, dtoTramoPrecio.Orden, dtoTramoPrecio.TiempoEstimado, dtoTramoPrecio.Precio, Convert.ToDateTime(dtoTramoPrecio.FechaEntradaVigencia));
+                if (etramo != null)
+                {
+                    return Ok(etramo);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.BadRequest, "No se créo el tramo");
+                }
             }
-            else
+            catch (Exception)
             {
-                return Content(HttpStatusCode.BadRequest, "No se créo el tramo");
+
+                return NotFound();
             }
         }
+
         //-----------------------------conductor------------------------------------------
         [HttpPut]
         [Route("editar/conductor")]

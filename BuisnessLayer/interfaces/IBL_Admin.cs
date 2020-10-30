@@ -45,7 +45,15 @@ namespace BuisnessLayer.interfaces
         ESalida crearSalida(int idConductor, string Matricula, int idLinea, TimeSpan horaInicio);
 
         List<EViaje> getAllViaje();
+  
+        List<ELinea> getAllLineas();
 
         EViaje editarViaje(int IdViaje, bool Finalizado, DateTime Fecha, TimeSpan? HoraInicioReal, int IdSalida);
+
+        ELinea editarLinea(int IdLinea, string Nombre);
+
+        ETramo getTramo(int IdParada, int IdLinea);
+
+
     }
 }

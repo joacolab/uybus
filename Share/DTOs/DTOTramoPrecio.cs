@@ -13,6 +13,6 @@ namespace Share.DTOs
         public int Orden { get; set; }
         public int TiempoEstimado { get; set; } 
         public int Precio { get; set; }
-        public DateTime FechaEntradaVigencia { get; set; }
+        public string FechaEntradaVigencia { get; set; }
     }
 }
