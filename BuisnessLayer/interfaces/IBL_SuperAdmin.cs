@@ -13,6 +13,8 @@ namespace BuisnessLayer.interfaces
     {
         List<DTOubicacion> ubicarVehiculo();
 
+        List<EPersona> GetAllPersonas();
+
         /// <summary>
         /// 
         /// </summary>

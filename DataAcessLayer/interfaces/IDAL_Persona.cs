@@ -10,6 +10,7 @@ namespace DataAcessLayer.interfaces
 {
     public interface IDAL_Persona
     {
+        List<EPersona> getAllPersona();
         List<Rol> getRol(int id);
         EPersona getPersona(int id);
         EPersona addPersona(string Documento, string Correo, string Password, int TipoDocumento, string pNombre, string sNombre, string pApellido, string sApellido);

@@ -57,6 +57,11 @@ namespace BuisnessLayer.implementation
             return ep;
         }
 
+        public List<EPersona> GetAllPersonas()
+        {
+            return iPersona.getAllPersona();
+        }
+
         public List<DTOubicacion> ubicarVehiculo()
         {
             List<DTOubicacion> lstDto = new List<DTOubicacion>();
