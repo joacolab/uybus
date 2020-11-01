@@ -1,16 +1,16 @@
 ﻿@model Share.entities.EVehiculo
 
 @{
-    ViewBag.Title = "nuevoVehiculo";
+    ViewBag.Title = "crearVehiculo";
 }
 
 <h2>Nuevo Vehiculo</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>EVehiculo</h4>
         <hr />
@@ -56,7 +56,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("ver vehiculos", "traerVehiculos")
 </div>
 
 @section Scripts {

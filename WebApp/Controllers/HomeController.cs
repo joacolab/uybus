@@ -16,12 +16,29 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        /*
+
         public ActionResult Index()
         {
             return View();
         }
-        */
+
+        public RedirectToRouteResult Admin()
+        {
+            return RedirectToAction("Index", "Admin");
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+
+
+
+
+        /*
         //Hosted web API REST Service base url  
         string Baseurl = "https://localhost:44330/admin/";
         public async Task<ActionResult> Index()
@@ -107,7 +124,7 @@ namespace WebApp.Controllers
         }
         */
 
-        
+        /*
         [HttpPost] //igual usamos Post aunnque sea put
         public ActionResult editarVehiculo(EVehiculo vehiculo)
         {
@@ -125,20 +142,6 @@ namespace WebApp.Controllers
             return View(vehiculo);
         }
         
-
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        */
     }
 }
