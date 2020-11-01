@@ -14,6 +14,7 @@ namespace WebApp.Proxys
     {
         public string Baseurl = "https://localhost:44330/admin/";
 
+        //-----------------------------Vehiculo----------------------------------
         public async Task<List<EVehiculo>> getAllVehiculos()
         {
             List<EVehiculo> eVehiculos = new List<EVehiculo>();
@@ -53,9 +54,14 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 var putTask = client.PutAsJsonAsync($"editar/vehiculo/{vehiculo.Matricula}", vehiculo);
                 putTask.Wait();
-                var result = putTask.Result;
+                //var result = putTask.Result;
             }
             return vehiculo;
         }
+
+        //-----------------------------Viaje----------------------------------
+
+
+
     }
 }

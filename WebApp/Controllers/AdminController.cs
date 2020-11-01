@@ -23,15 +23,28 @@ namespace WebApp.Controllers
             return View(Task.Run(() => pxa.getAllVehiculos()).Result);
         }
 
+        public ActionResult crearVehiculo()
+        {
+            return View("traerVehiculos");
+        }
+
+        [HttpPost]
         public ActionResult crearVehiculo(EVehiculo vehiculo)
         {
             return View(pxa.crearVehiculo(vehiculo));
         }
 
+        
+        public ActionResult editarVehiculo()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult editarVehiculo(EVehiculo vehiculo)
         {
-            return View(pxa.editarVehiculo(vehiculo));
-            //return RedirectToAction("Index");
+            pxa.editarVehiculo(vehiculo);
+            return RedirectToAction("traerVehiculos");
         }
     }
 }
