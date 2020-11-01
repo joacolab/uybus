@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Share.DTOs;
 using Share.entities;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,48 @@ namespace WebApp.Proxys
         }
 
         //-----------------------------Viaje----------------------------------
+        public async Task<List<EViaje>> getAllViajes()
+        {
+            List<EViaje> eViajes = new List<EViaje>();
 
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("traer/viajes");
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                    eViajes = JsonConvert.DeserializeObject<List<EViaje>>(EmpResponse);
+                }
+                return eViajes;
+            }
+        }
+
+        public void  crearViajes(DTOCrearViajes viaje)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl + "crear/viajes");
+                var postTask = client.PostAsJsonAsync<DTOCrearViajes>("viaje", viaje);
+                postTask.Wait();
+                var result = postTask.Result;
+            }
+        }
+
+        public void editarVehiculo(DTOViaje viaje)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                var putTask = client.PutAsJsonAsync($"editar/viajes/{viaje.IdViaje}", viaje);
+                putTask.Wait();
+                //var result = putTask.Result;
+            }
+        }
+        //---------------------------------------------------------------------------------------------
 
 
     }
