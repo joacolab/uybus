@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc.Ajax;
 
 namespace WebApp.Proxys
 {
@@ -131,17 +132,23 @@ namespace WebApp.Proxys
                 return eParada;
             }
         }
-        /*
-        public void crearViajes(DTOCrearViajes viaje)
+        public void crearParada(DTOParada DTOparada)
         {
+            EParada parada = new EParada();
+            parada.IdParada = DTOparada.IdParada;
+            parada.Nombre = DTOparada.Nombre;
+          
+            parada.Lat = double.Parse(DTOparada.Lat);
+            parada.Long = double.Parse(DTOparada.Long);
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(Baseurl + "crear/viajes");
-                var postTask = client.PostAsJsonAsync<DTOCrearViajes>("viaje", viaje);
+                client.BaseAddress = new Uri(Baseurl + "crear/parada");
+                var postTask = client.PostAsJsonAsync<EParada>("parada", parada);
                 postTask.Wait();
                 var result = postTask.Result;
             }
         }
+        /*
 
         public void editarVehiculo(DTOViaje viaje)
         {
@@ -155,7 +162,7 @@ namespace WebApp.Proxys
         }
         */
 
-        //-------------------------------------paradas---------------------------------------
+        //-------------------------------------lineas---------------------------------------
         public async Task<List<ELinea>> GetAllLineas()
         {
             List<ELinea> eLineas = new List<ELinea>();
@@ -175,16 +182,7 @@ namespace WebApp.Proxys
                 return eLineas;
             }
         }
-         public void crearParada(EParada parada)
-         {
-             using (var client = new HttpClient())
-             {
-                 client.BaseAddress = new Uri(Baseurl + "crear/parada");
-                 var postTask = client.PostAsJsonAsync<EParada>("parada", parada);
-                 postTask.Wait();
-                 var result = postTask.Result;
-             }
-         }
+    
          /*
 
  public void editarVehiculo(DTOViaje viaje)

@@ -99,7 +99,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult crearParada(EParada parada)
+        public ActionResult crearParada(DTOParada parada)
         {
             pxa.crearParada(parada);
             return View("Index");
