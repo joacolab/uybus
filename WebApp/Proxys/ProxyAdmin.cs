@@ -137,9 +137,11 @@ namespace WebApp.Proxys
             EParada parada = new EParada();
             parada.IdParada = DTOparada.IdParada;
             parada.Nombre = DTOparada.Nombre;
-          
-            parada.Lat = double.Parse(DTOparada.Lat);
-            parada.Long = double.Parse(DTOparada.Long);
+
+            
+            parada.Lat = Double.Parse(DTOparada.Lat); //no anda
+            parada.Long = Double.Parse(DTOparada.Long); //no anda
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl + "crear/parada");
@@ -182,20 +184,30 @@ namespace WebApp.Proxys
                 return eLineas;
             }
         }
-    
-         /*
 
- public void editarVehiculo(DTOViaje viaje)
- {
-     using (var client = new HttpClient())
-     {
-         client.BaseAddress = new Uri(Baseurl);
-         var putTask = client.PutAsJsonAsync($"editar/viajes/{viaje.IdViaje}", viaje);
-         putTask.Wait();
-         //var result = putTask.Result;
-     }
- }
- */
+        /*
+         public void crearViajes(DTOCrearViajes viaje)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl + "crear/viajes");
+                var postTask = client.PostAsJsonAsync<DTOCrearViajes>("viaje", viaje);
+                postTask.Wait();
+                var result = postTask.Result;
+            }
+        }
+
+        public void editarVehiculo(DTOViaje viaje)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                var putTask = client.PutAsJsonAsync($"editar/viajes/{viaje.IdViaje}", viaje);
+                putTask.Wait();
+                //var result = putTask.Result;
+            }
+        }
+        */
 
         //----------------------------tramo---------------------NO FUNCIONA____#####___###
         public async Task<List<ETramo>> GetAllTramos()
@@ -218,33 +230,33 @@ namespace WebApp.Proxys
             }
         }
         /*
- public void crearViajes(DTOCrearViajes viaje)
- {
-     using (var client = new HttpClient())
-     {
-         client.BaseAddress = new Uri(Baseurl + "crear/viajes");
-         var postTask = client.PostAsJsonAsync<DTOCrearViajes>("viaje", viaje);
-         postTask.Wait();
-         var result = postTask.Result;
-     }
- }
+         public void crearViajes(DTOCrearViajes viaje)
+         {
+             using (var client = new HttpClient())
+             {
+                 client.BaseAddress = new Uri(Baseurl + "crear/viajes");
+                 var postTask = client.PostAsJsonAsync<DTOCrearViajes>("viaje", viaje);
+                 postTask.Wait();
+                 var result = postTask.Result;
+             }
+         }
 
- public void editarVehiculo(DTOViaje viaje)
- {
-     using (var client = new HttpClient())
-     {
-         client.BaseAddress = new Uri(Baseurl);
-         var putTask = client.PutAsJsonAsync($"editar/viajes/{viaje.IdViaje}", viaje);
-         putTask.Wait();
-         //var result = putTask.Result;
-     }
- }
- */
+         public void editarVehiculo(DTOViaje viaje)
+         {
+             using (var client = new HttpClient())
+             {
+                 client.BaseAddress = new Uri(Baseurl);
+                 var putTask = client.PutAsJsonAsync($"editar/viajes/{viaje.IdViaje}", viaje);
+                 putTask.Wait();
+                 //var result = putTask.Result;
+             }
+         }
+         */
 
         //-----------------------------Salida------------------------------------------
         
 
-               public async Task<List<ESalida>> GetAllSalida()
+        public async Task<List<ESalida>> GetAllSalida()
         {
             List<ESalida> eSalida = new List<ESalida>();
 
@@ -264,28 +276,28 @@ namespace WebApp.Proxys
             }
         }
         /*
- public void crearViajes(DTOCrearViajes viaje)
- {
-     using (var client = new HttpClient())
-     {
-         client.BaseAddress = new Uri(Baseurl + "crear/viajes");
-         var postTask = client.PostAsJsonAsync<DTOCrearViajes>("viaje", viaje);
-         postTask.Wait();
-         var result = postTask.Result;
-     }
- }
+         public void crearViajes(DTOCrearViajes viaje)
+         {
+             using (var client = new HttpClient())
+             {
+                 client.BaseAddress = new Uri(Baseurl + "crear/viajes");
+                 var postTask = client.PostAsJsonAsync<DTOCrearViajes>("viaje", viaje);
+                 postTask.Wait();
+                 var result = postTask.Result;
+             }
+         }
 
- public void editarVehiculo(DTOViaje viaje)
- {
-     using (var client = new HttpClient())
-     {
-         client.BaseAddress = new Uri(Baseurl);
-         var putTask = client.PutAsJsonAsync($"editar/viajes/{viaje.IdViaje}", viaje);
-         putTask.Wait();
-         //var result = putTask.Result;
-     }
- }
- */
+         public void editarVehiculo(DTOViaje viaje)
+         {
+             using (var client = new HttpClient())
+             {
+                 client.BaseAddress = new Uri(Baseurl);
+                 var putTask = client.PutAsJsonAsync($"editar/viajes/{viaje.IdViaje}", viaje);
+                 putTask.Wait();
+                 //var result = putTask.Result;
+             }
+         }
+         */
 
     }
 }

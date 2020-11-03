@@ -552,7 +552,7 @@ namespace APIREST.Controllers
         [HttpPut]
         [Route("editar/salida/{IdSalida}")]
         [ResponseType(typeof(ESalida))]
-        public IHttpActionResult F(int IdSalida, [FromBody] DTOSalida salida)
+        public IHttpActionResult editarSalida(int IdSalida, [FromBody] DTOSalida salida)
         {
             try
             {
