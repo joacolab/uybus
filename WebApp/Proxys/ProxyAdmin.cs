@@ -92,7 +92,7 @@ namespace WebApp.Proxys
             }
         }
 
-        public void editarVehiculo(DTOViaje viaje)
+        public void editarViaje(DTOViaje viaje)
         {
             using (var client = new HttpClient())
             {

@@ -1,4 +1,5 @@
-﻿using Share.entities;
+﻿using Share.DTOs;
+using Share.entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,29 +56,32 @@ namespace WebApp.Controllers
             return View(Task.Run(() => pxa.getAllViajes()).Result);
         }
 
-        /*
-         *      public ActionResult crearVehiculo()
+        
+        public ActionResult crearViaje()
         {
-            return View("traerVehiculos");
+            return View("traerViajes");
         }
 
         [HttpPost]
-        public ActionResult crearVehiculo(EVehiculo vehiculo)
+        public ActionResult crearViaje(DTOCrearViajes viaje)
         {
-            return View(pxa.crearVehiculo(vehiculo));
+            pxa.crearViajes(viaje);
+            return RedirectToAction("traerViajes");
         }
 
-        
-        public ActionResult editarVehiculo()
+        /*
+        public ActionResult editarVehiculo(int id)
         {
+            EViaje ev = new EViaje();
+            ev.IdViaje = id;
             return View();
         }
 
         [HttpPost]
-        public ActionResult editarVehiculo(EVehiculo vehiculo)
+        public ActionResult editarViaje(EViaje viaje)
         {
-            pxa.editarVehiculo(vehiculo);
-            return RedirectToAction("traerVehiculos");
+            pxa.editarViaje(viaje);
+            return RedirectToAction("traerViajes");
         }
          */
 
@@ -146,7 +150,7 @@ public ActionResult editarVehiculo(EVehiculo vehiculo)
         //----------------------------tramo-------------------------------------------
         public ActionResult traerTramo()
         {
-            return View(Task.Run(() => pxa.GetAllTramos().Result));
+            return View(Task.Run(() => pxa.GetAllTramos()).Result);
         }
         /*
 *      public ActionResult crearVehiculo()
@@ -178,7 +182,7 @@ public ActionResult editarVehiculo(EVehiculo vehiculo)
 
         public ActionResult traerSalida()
         {
-            return View(Task.Run(() => pxa.GetAllSalida().Result));
+            return View(Task.Run(() => pxa.GetAllSalida()).Result);
         }
                 /*
         *      public ActionResult crearVehiculo()

@@ -7,7 +7,7 @@
 <h2>traerViajes</h2>
 
 <p>
-    @Html.ActionLink("Nuevo Viaje", "Create")
+    @Html.ActionLink("Nuevo Viaje", "crearViaje")
 </p>
 <table class="table">
     <tr>
@@ -47,9 +47,7 @@
             @Html.DisplayFor(modelItem => item.IdSalida)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Editar", "editarViaje", new { id = item.IdViaje }) 
         </td>
     </tr>
 }
