@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Share.entities.EViaje>
+
+@{
+    ViewBag.Title = "traerViajes";
+}
+
+<h2>traerViajes</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Viaje", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdViaje)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Finalizado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraInicioReal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdSalida)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdViaje)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Finalizado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraInicioReal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdSalida)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
