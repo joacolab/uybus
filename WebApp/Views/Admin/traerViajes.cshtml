@@ -6,9 +6,6 @@
 
 <h2>traerViajes</h2>
 
-<p>
-    @Html.ActionLink("Nuevo Viaje", "crearViaje")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -38,7 +35,8 @@
             @Html.DisplayFor(modelItem => item.Finalizado)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
+            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Fecha))
+            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.HoraInicioReal)

@@ -55,7 +55,11 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 var putTask = client.PutAsJsonAsync($"editar/vehiculo/{vehiculo.Matricula}", vehiculo);
                 putTask.Wait();
-                //var result = putTask.Result;
+                var result = putTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    Console.WriteLine();
+                }
             }
             return vehiculo;
         }
@@ -81,14 +85,18 @@ namespace WebApp.Proxys
             }
         }
 
-        public void  crearViajes(DTOCrearViajes viaje)
+        public void crearViajes(DTOCrearViajes viajes)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl + "crear/viajes");
-                var postTask = client.PostAsJsonAsync<DTOCrearViajes>("viaje", viaje);
+                var postTask = client.PostAsJsonAsync<DTOCrearViajes>("viajes", viajes);
                 postTask.Wait();
                 var result = postTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    Console.WriteLine();
+                }
             }
         }
 

@@ -27,13 +27,14 @@ namespace WebApp.Controllers
 
         public ActionResult crearVehiculo()
         {
-            return View("traerVehiculos");
+            return View();
         }
 
         [HttpPost]
         public ActionResult crearVehiculo(EVehiculo vehiculo)
         {
-            return View(pxa.crearVehiculo(vehiculo));
+            pxa.crearVehiculo(vehiculo);
+            return RedirectToAction("traerVehiculos");
         }
 
         
@@ -59,14 +60,37 @@ namespace WebApp.Controllers
         
         public ActionResult crearViaje()
         {
-            return View("traerViajes");
+            return View();
         }
 
         [HttpPost]
-        public ActionResult crearViaje(DTOCrearViajes viaje)
+        public ActionResult crearViaje(DTOCrearViajes viajes)
         {
-            pxa.crearViajes(viaje);
-            return RedirectToAction("traerViajes");
+
+            /*
+            {
+            "fechaInicio" : "02/03/2020",
+            "fechaFinal" : "02/04/2020",
+            "lunes" : true,
+            "martes" : true,
+            "viernes" : true,
+            "idSalida" : 2
+            }
+        */
+
+            
+            /*
+            DTOCrearViajes viaje = new DTOCrearViajes();
+            viaje.fechaInicio = "02/03/2020";
+            viaje.fechaFinal = "02/04/2020";
+            viaje.lunes = true;
+            viaje.martes = true;
+            viaje.miercoles = true;
+            viaje.idSalida = 2;
+            */
+            pxa.crearViajes(viajes);
+
+            return RedirectToAction("Index");
         }
 
         /*

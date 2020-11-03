@@ -13,7 +13,20 @@ namespace Share.DTOs
 
         public string fechaFinal { get; set; }
 
-        public List<int> diasSemana { get; set; } = new List<int>();
+        public bool lunes { get; set; }
+
+        public bool martes { get; set; }
+
+        public bool miercoles { get; set; }
+
+        public bool jueves { get; set; }
+
+        public bool viernes { get; set; }
+
+        public bool sabado { get; set; }
+
+        public bool domingo { get; set; }
+
 
         public int idSalida { get; set; }
 

@@ -28,13 +28,15 @@ namespace APIREST.Controllers
             {
             "fechaInicio" : "02/03/2020",
             "fechaFinal" : "02/04/2020",
-            "diasSemana" : [1,2,3,4,5],
+            "lunes" : true,
+            "martes" : true,
+            "viernes" : true,
             "idSalida" : 2
             }
         */
         [HttpPost]
         [Route("crear/viajes")]
-        [ResponseType(typeof(List<EViaje>))]
+        //[ResponseType(typeof(List<EViaje>))]
         public IHttpActionResult crearViajes([FromBody] DTOCrearViajes dTOCV)
         {
             try
@@ -44,16 +46,21 @@ namespace APIREST.Controllers
                     return Content(HttpStatusCode.BadRequest, "No se crearon los viajes, parametros no validos.");
                 }
                 List<Dias> LSTDias = new List<Dias>();
-                foreach (var dia in dTOCV.diasSemana)
-                {
-                    LSTDias.Add((Dias)dia);
-                }
+
+                if (dTOCV.lunes) LSTDias.Add((Dias)1);
+                if (dTOCV.martes) LSTDias.Add((Dias)2);
+                if (dTOCV.miercoles) LSTDias.Add((Dias)3);
+                if (dTOCV.jueves) LSTDias.Add((Dias)4);
+                if (dTOCV.viernes) LSTDias.Add((Dias)5);
+                if (dTOCV.sabado) LSTDias.Add((Dias)6);
+                if (dTOCV.domingo) LSTDias.Add((Dias)7);
 
                  List<EViaje> viajes = cAdmin.crearViajes(Convert.ToDateTime(dTOCV.fechaInicio), Convert.ToDateTime(dTOCV.fechaFinal), LSTDias, dTOCV.idSalida);
 
                 if (viajes != null)
                 {
-                    return Ok(viajes);
+                    //return Ok(viajes);
+                    return Ok();
                 }
                 return Content(HttpStatusCode.NotFound, "Los viajes no se han podido crear");
             }
