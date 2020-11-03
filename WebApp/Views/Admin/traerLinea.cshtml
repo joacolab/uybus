@@ -7,7 +7,7 @@
 <h2>traerLinea</h2>
 
 <p>
-    @Html.ActionLink("Nueva Linea", "Create")
+    @Html.ActionLink("Nueva Linea", "crearLinea")
 </p>
 <table class="table">
     <tr>
@@ -20,20 +20,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdLinea)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLinea)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "editarLinea", new { id = item.IdLinea })
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+<div>
+    @Html.ActionLink("ir al inicio", "index")
+</div>

@@ -66,48 +66,25 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult crearViaje(DTOCrearViajes viajes)
         {
-
-            /*
-            {
-            "fechaInicio" : "02/03/2020",
-            "fechaFinal" : "02/04/2020",
-            "lunes" : true,
-            "martes" : true,
-            "viernes" : true,
-            "idSalida" : 2
-            }
-        */
-
-            
-            /*
-            DTOCrearViajes viaje = new DTOCrearViajes();
-            viaje.fechaInicio = "02/03/2020";
-            viaje.fechaFinal = "02/04/2020";
-            viaje.lunes = true;
-            viaje.martes = true;
-            viaje.miercoles = true;
-            viaje.idSalida = 2;
-            */
             pxa.crearViajes(viajes);
-
             return RedirectToAction("Index");
         }
 
-        /*
-        public ActionResult editarVehiculo(int id)
+        
+        public ActionResult editarViaje(int id)
         {
             EViaje ev = new EViaje();
             ev.IdViaje = id;
             return View();
         }
-
+        /*
         [HttpPost]
-        public ActionResult editarViaje(EViaje viaje)
+        public ActionResult editarViaje(DTOCrearViajes viajes)
         {
-            pxa.editarViaje(viaje);
+            pxa.editarViaje(viajes);
             return RedirectToAction("traerViajes");
         }
-         */
+        */
 
         //-----------------------------parada---------------------------------
         public ActionResult traerParadas()
@@ -115,19 +92,20 @@ namespace WebApp.Controllers
             return View(Task.Run(() => pxa.GetAllParada()).Result);
         }
 
-        /*
-        *      public ActionResult crearVehiculo()
+        
+        public ActionResult crearParada()
         {
-            return View("traerVehiculos");
+            return View();
         }
 
         [HttpPost]
-        public ActionResult crearVehiculo(EVehiculo vehiculo)
+        public ActionResult crearParada(EParada parada)
         {
-            return View(pxa.crearVehiculo(vehiculo));
+            pxa.crearParada(parada);
+            return View("Index");
         }
 
-
+        /*
         public ActionResult editarVehiculo()
         {
             return View();
@@ -140,6 +118,7 @@ namespace WebApp.Controllers
             return RedirectToAction("traerVehiculos");
         }
         */
+
         //-------------------------------linea----------------------------------------
 
         public ActionResult traerLinea()

@@ -7,7 +7,7 @@
 <h2>traerParadas</h2>
 
 <p>
-    @Html.ActionLink("Nueva Parada", "Create")
+    @Html.ActionLink("Nueva Parada", "crearParada")
 </p>
 <table class="table">
     <tr>
@@ -26,26 +26,31 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdParada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Long)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdParada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Long)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "editarParadas", new { id = item.IdParada }) 
+
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+<div>
+    @Html.ActionLink("ir al inicio", "index")
+</div>

@@ -4,10 +4,10 @@
     ViewBag.Title = "traerSalida";
 }
 
-<h2>traerSalida</h2>
+<h2>Salida</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nueva salida", "crearSalida")
 </p>
 <table class="table">
     <tr>
@@ -29,29 +29,33 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdSalida)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoraInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdConductor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdVehiculo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdLinea)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSalida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdConductor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdVehiculo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLinea)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "editarSalida", new { id = item.IdSalida}) 
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+<div>
+    @Html.ActionLink("ir al inicio", "index")
+</div>

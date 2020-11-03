@@ -4,7 +4,7 @@
     ViewBag.Title = "traerViajes";
 }
 
-<h2>traerViajes</h2>
+<h2>Viajes</h2>
 
 <table class="table">
     <tr>
@@ -26,28 +26,33 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdViaje)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Finalizado)
-        </td>
-        <td>
-            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Fecha))
-            
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoraInicioReal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdSalida)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "editarViaje", new { id = item.IdViaje }) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdViaje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Finalizado)
+            </td>
+            <td>
+                @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Fecha))
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraInicioReal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdSalida)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "editarViaje", new { id = item.IdViaje })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div>
+    @Html.ActionLink("ir al inicio", "index")
+</div>

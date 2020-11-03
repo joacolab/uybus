@@ -175,17 +175,17 @@ namespace WebApp.Proxys
                 return eLineas;
             }
         }
-        /*
- public void crearViajes(DTOCrearViajes viaje)
- {
-     using (var client = new HttpClient())
-     {
-         client.BaseAddress = new Uri(Baseurl + "crear/viajes");
-         var postTask = client.PostAsJsonAsync<DTOCrearViajes>("viaje", viaje);
-         postTask.Wait();
-         var result = postTask.Result;
-     }
- }
+         public void crearParada(EParada parada)
+         {
+             using (var client = new HttpClient())
+             {
+                 client.BaseAddress = new Uri(Baseurl + "crear/parada");
+                 var postTask = client.PostAsJsonAsync<EParada>("parada", parada);
+                 postTask.Wait();
+                 var result = postTask.Result;
+             }
+         }
+         /*
 
  public void editarVehiculo(DTOViaje viaje)
  {
