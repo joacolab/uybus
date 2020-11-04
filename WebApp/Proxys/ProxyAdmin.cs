@@ -134,18 +134,10 @@ namespace WebApp.Proxys
         }
         public void crearParada(DTOParada DTOparada)
         {
-            EParada parada = new EParada();
-            parada.IdParada = DTOparada.IdParada;
-            parada.Nombre = DTOparada.Nombre;
-
-            
-            parada.Lat = Double.Parse(DTOparada.Lat); //no anda
-            parada.Long = Double.Parse(DTOparada.Long); //no anda
-
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl + "crear/parada");
-                var postTask = client.PostAsJsonAsync<EParada>("parada", parada);
+                var postTask = client.PostAsJsonAsync<DTOParada>("parada", DTOparada);
                 postTask.Wait();
                 var result = postTask.Result;
             }
