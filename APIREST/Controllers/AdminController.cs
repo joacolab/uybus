@@ -511,7 +511,7 @@ namespace APIREST.Controllers
         [HttpPost]
         [Route("crear/salida")]
         [ResponseType(typeof(ESalida))]
-        public IHttpActionResult crearSaida([FromBody] DTOSalida dtoSal)
+        public IHttpActionResult crearSalida([FromBody] DTOSalida dtoSal)
         {
 
             try
