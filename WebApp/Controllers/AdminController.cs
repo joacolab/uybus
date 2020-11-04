@@ -67,24 +67,24 @@ namespace WebApp.Controllers
         public ActionResult crearViaje(DTOCrearViajes viajes)
         {
             pxa.crearViajes(viajes);
-            return RedirectToAction("Index");
+            return RedirectToAction("traerViajes");
         }
 
         
         public ActionResult editarViaje(int id)
         {
-            EViaje ev = new EViaje();
+            DTOViaje ev = new DTOViaje();
             ev.IdViaje = id;
-            return View();
+            return View(ev);
         }
-        /*
+        
         [HttpPost]
-        public ActionResult editarViaje(DTOCrearViajes viajes)
+        public ActionResult editarViaje(DTOViaje viajes)
         {
             pxa.editarViaje(viajes);
             return RedirectToAction("traerViajes");
         }
-        */
+        
 
         //-----------------------------parada---------------------------------
         public ActionResult traerParadas()
@@ -102,7 +102,7 @@ namespace WebApp.Controllers
         public ActionResult crearParada(DTOParada parada)
         {
             pxa.crearParada(parada);
-            return View("Index");
+            return RedirectToAction("traerParadas");
         }
 
         /*
@@ -125,31 +125,33 @@ namespace WebApp.Controllers
         {
             return View(Task.Run(() => pxa.GetAllLineas()).Result);
         }
+
+        
+        public ActionResult crearLinea()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult crearLinea(DTOLinea linea)
+        {
+            pxa.crearLinea(linea);
+            return RedirectToAction("traerLinea");
+        }
+
         /*
-*      public ActionResult crearVehiculo()
-{
-    return View("traerVehiculos");
-}
+        public ActionResult editarVehiculo()
+        {
+            return View();
+        }
 
-[HttpPost]
-public ActionResult crearVehiculo(EVehiculo vehiculo)
-{
-    return View(pxa.crearVehiculo(vehiculo));
-}
-
-
-public ActionResult editarVehiculo()
-{
-    return View();
-}
-
-[HttpPost]
-public ActionResult editarVehiculo(EVehiculo vehiculo)
-{
-    pxa.editarVehiculo(vehiculo);
-    return RedirectToAction("traerVehiculos");
-}
-*/
+        [HttpPost]
+        public ActionResult editarVehiculo(EVehiculo vehiculo)
+        {
+            pxa.editarVehiculo(vehiculo);
+            return RedirectToAction("traerVehiculos");
+        }
+        */
         //----------------------------tramo-------------------------------------------
         public ActionResult traerTramo()
         {

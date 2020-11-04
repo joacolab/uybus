@@ -211,6 +211,8 @@
     <Content Include="Views\Admin\traerTramo.cshtml" />
     <Content Include="Views\Admin\crearViaje.cshtml" />
     <Content Include="Views\Admin\crearParada.cshtml" />
+    <Content Include="Views\Admin\editarViaje.cshtml" />
+    <Content Include="Views\Admin\crearLinea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
