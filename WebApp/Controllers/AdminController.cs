@@ -105,19 +105,21 @@ namespace WebApp.Controllers
             return RedirectToAction("traerParadas");
         }
 
-        /*
-        public ActionResult editarVehiculo()
+        
+        public ActionResult editarParada(int id)
         {
-            return View();
+            DTOParada p = new DTOParada();
+            p.IdParada = id;
+            return View(p);
         }
 
         [HttpPost]
-        public ActionResult editarVehiculo(EVehiculo vehiculo)
+        public ActionResult editarParada(DTOParada parada)
         {
-            pxa.editarVehiculo(vehiculo);
-            return RedirectToAction("traerVehiculos");
+            pxa.editarParada(parada);
+            return RedirectToAction("traerParadas");
         }
-        */
+        
 
         //-------------------------------linea----------------------------------------
 

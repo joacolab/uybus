@@ -144,17 +144,17 @@ namespace WebApp.Proxys
         }
         
 
-        public void editarVehiculo(DTOViaje viaje)
+        public void editarParada(DTOParada parada)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
-                var putTask = client.PutAsJsonAsync($"editar/viajes/{viaje.IdViaje}", viaje);
+                var putTask = client.PutAsJsonAsync($"editar/parada/{parada.IdParada}", parada);
                 putTask.Wait();
                 //var result = putTask.Result;
             }
         }
-        
+
 
         //-------------------------------------lineas---------------------------------------
         public async Task<List<ELinea>> GetAllLineas()

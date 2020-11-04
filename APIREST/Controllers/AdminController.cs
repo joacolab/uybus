@@ -314,11 +314,24 @@ namespace APIREST.Controllers
         [HttpPut]
         [Route("editar/parada/{IdParada}")]
         [ResponseType(typeof(EParada))]
-        public IHttpActionResult editarParada(int IdParada, [FromBody] EParada parada)
+        public IHttpActionResult editarParada(int IdParada, [FromBody] DTOParada parada)
         {
             try
             {
-                EParada p = cAdmin.editarParada(parada.IdParada, parada.Nombre, parada.Lat, parada.Long);
+                double longitud;
+                double latitud;
+
+                if (!Double.TryParse(parada.Lat, out latitud))
+                {
+                    return Content(HttpStatusCode.NotFound, "La latitude no tiene el formato correcto");
+                }
+                // Si no puede convertir la longitud responde un 404
+                if (!Double.TryParse(parada.Long, out longitud))
+                {
+                    return Content(HttpStatusCode.NotFound, "La longitud no tiene el formato correcto");
+                }
+
+                EParada p = cAdmin.editarParada(parada.IdParada, parada.Nombre, latitud, longitud);
                 if (p != null)
                 {
                     return Ok(p);
