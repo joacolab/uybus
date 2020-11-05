@@ -4,7 +4,7 @@
     ViewBag.Title = "traerParadas";
 }
 
-<h2>traerParadas</h2>
+<h2>Paradas</h2>
 
 <p>
     @Html.ActionLink("Nueva Parada", "crearParada")
@@ -42,7 +42,7 @@
                 @Html.DisplayFor(modelItem => item.Long)
             </td>
             <td>
-                @Html.ActionLink("Editar", "editarParadas", new { id = item.IdParada }) 
+                @Html.ActionLink("Editar", "editarParada", new { id = item.IdParada }) 
 
             </td>
         </tr>

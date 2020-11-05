@@ -67,24 +67,24 @@ namespace WebApp.Controllers
         public ActionResult crearViaje(DTOCrearViajes viajes)
         {
             pxa.crearViajes(viajes);
-            return RedirectToAction("Index");
+            return RedirectToAction("traerViajes");
         }
 
         
         public ActionResult editarViaje(int id)
         {
-            EViaje ev = new EViaje();
+            DTOViaje ev = new DTOViaje();
             ev.IdViaje = id;
-            return View();
+            return View(ev);
         }
-        /*
+        
         [HttpPost]
-        public ActionResult editarViaje(DTOCrearViajes viajes)
+        public ActionResult editarViaje(DTOViaje viajes)
         {
             pxa.editarViaje(viajes);
             return RedirectToAction("traerViajes");
         }
-        */
+        
 
         //-----------------------------parada---------------------------------
         public ActionResult traerParadas()
@@ -102,22 +102,24 @@ namespace WebApp.Controllers
         public ActionResult crearParada(DTOParada parada)
         {
             pxa.crearParada(parada);
-            return View("Index");
+            return RedirectToAction("traerParadas");
         }
 
-        /*
-        public ActionResult editarVehiculo()
+        
+        public ActionResult editarParada(int id)
         {
-            return View();
+            DTOParada p = new DTOParada();
+            p.IdParada = id;
+            return View(p);
         }
 
         [HttpPost]
-        public ActionResult editarVehiculo(EVehiculo vehiculo)
+        public ActionResult editarParada(DTOParada parada)
         {
-            pxa.editarVehiculo(vehiculo);
-            return RedirectToAction("traerVehiculos");
+            pxa.editarParada(parada);
+            return RedirectToAction("traerParadas");
         }
-        */
+        
 
         //-------------------------------linea----------------------------------------
 
@@ -125,61 +127,69 @@ namespace WebApp.Controllers
         {
             return View(Task.Run(() => pxa.GetAllLineas()).Result);
         }
-        /*
-*      public ActionResult crearVehiculo()
-{
-    return View("traerVehiculos");
-}
 
-[HttpPost]
-public ActionResult crearVehiculo(EVehiculo vehiculo)
-{
-    return View(pxa.crearVehiculo(vehiculo));
-}
+        
+        public ActionResult crearLinea()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult crearLinea(DTOLinea linea)
+        {
+            pxa.crearLinea(linea);
+            return RedirectToAction("traerLinea");
+        }
 
-public ActionResult editarVehiculo()
-{
-    return View();
-}
+        
+        public ActionResult editarLinea(int id)
+        {
+            DTOLinea p = new DTOLinea();
+            p.IdLinea = id;
+            return View(p);
+        }
 
-[HttpPost]
-public ActionResult editarVehiculo(EVehiculo vehiculo)
-{
-    pxa.editarVehiculo(vehiculo);
-    return RedirectToAction("traerVehiculos");
-}
-*/
+        [HttpPost]
+        public ActionResult editarLinea(DTOLinea linea)
+        {
+            pxa.editarLinea(linea);
+            return RedirectToAction("traerLinea");
+        }
+        
         //----------------------------tramo-------------------------------------------
         public ActionResult traerTramo()
         {
             return View(Task.Run(() => pxa.GetAllTramos()).Result);
         }
-        /*
-*      public ActionResult crearVehiculo()
-{
-    return View("traerVehiculos");
-}
+        
+        public ActionResult crearTramo()
+        {
+            return View();
+        }
 
-[HttpPost]
-public ActionResult crearVehiculo(EVehiculo vehiculo)
-{
-    return View(pxa.crearVehiculo(vehiculo));
-}
+        [HttpPost]
+        public ActionResult crearTramo(DTOTramoPrecio dtoTramoPrecio)
+        {
+            pxa.crearTramo(dtoTramoPrecio);
+            return RedirectToAction("traerTramo");
+        }
 
+             
+        public ActionResult editarTramo(int id, int id2)
+        {
+            DTOTramo p = new DTOTramo();
+            p.IdLinea = id2;
+            p.IdParada = id;
+            return View(p);
+        }
 
-public ActionResult editarVehiculo()
-{
-    return View();
-}
-
-[HttpPost]
-public ActionResult editarVehiculo(EVehiculo vehiculo)
-{
-    pxa.editarVehiculo(vehiculo);
-    return RedirectToAction("traerVehiculos");
-}
-*/
+        [HttpPost]
+        public ActionResult editarTramo(DTOTramo tramo)
+        {
+            pxa.editarTramo(tramo);
+            return RedirectToAction("traerTramo");
+        }
+        
 
         //-----------------------------Salida------------------------------------------
 
@@ -187,31 +197,88 @@ public ActionResult editarVehiculo(EVehiculo vehiculo)
         {
             return View(Task.Run(() => pxa.GetAllSalida()).Result);
         }
-                /*
-        *      public ActionResult crearVehiculo()
-        {
-            return View("traerVehiculos");
-        }
-
-        [HttpPost]
-        public ActionResult crearVehiculo(EVehiculo vehiculo)
-        {
-            return View(pxa.crearVehiculo(vehiculo));
-        }
-
-
-        public ActionResult editarVehiculo()
+               
+        public ActionResult crearSalida()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult editarVehiculo(EVehiculo vehiculo)
+        public ActionResult crearSalida(DTOSalida salida)
         {
-            pxa.editarVehiculo(vehiculo);
-            return RedirectToAction("traerVehiculos");
+            pxa.crearSalida(salida);
+            return RedirectToAction("traerSalida");
         }
-        */  
+        
+
+        public ActionResult editarSalida(int id)
+        {
+            DTOSalida p = new DTOSalida();
+            p.IdSalida = id;
+            return View(p);
+        }
+
+        [HttpPost]
+        public ActionResult editarSalida(DTOSalida salida)
+        {
+            pxa.editarSalida(salida);
+            return RedirectToAction("traerSalida");
+        }
+        //----------------Conductor------------------------------------
+
+
+        public ActionResult traerConductores()
+        {
+            return View(Task.Run(() => pxa.GetAllConductores()).Result);
+        }
+
+
+        public ActionResult editarConductor(int id)
+        {
+            EConductor p = new EConductor();
+            p.Id = id;
+            return View(p);
+        }
+
+        [HttpPost]
+        public ActionResult editarConductor(EConductor conductor)
+        {
+            pxa.editarConductor(conductor);
+            return RedirectToAction("traerConductores");
+        }
+
+        //----------------------------reporte utilidad ------------------------------
+
+
+        public ActionResult reporteUtilidad()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult reporteUtilidad(DTOUtilidad utilidad)
+        {
+         
+            if (utilidad.fechaDesde == null) utilidad.fechaDesde = "1900,01,01";
+            if (utilidad.fechaHasat == null) utilidad.fechaHasat = "1900,01,01";
+            DTOUtilidadFinal ut = new DTOUtilidadFinal();
+            float result = Task.Run(() => pxa.reporteUtilidad(utilidad)).Result;
+            ut.Valor = result;
+            return RedirectToAction("verUtilidad", ut);
+        }
+
+
+        public ActionResult verUtilidad(DTOUtilidadFinal result)
+        {
+            return View(result);
+        }
+
+
+        //-----------------------------reporte pasaje -------------------------------
+
+
+
+
 
     }
 }

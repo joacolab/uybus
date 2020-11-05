@@ -21,6 +21,8 @@ namespace APIREST.Controllers
         IBL_Admin cAdmin = new BL_Admin(new DAL_Linea(), new DAL_Parada(), new DAL_Salida(),
         new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
 
+        IBL_General cGeneral = new BL_General(new DAL_Viaje(),new DAL_Llegada(),new DAL_Salida(), new DAL_Linea(),new DAL_Tramo(),new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo());
+
         //----------------------------------Viajes----------------------------------------
         // https://localhost:44330/admin/crear/viajes
         //funciona
@@ -314,11 +316,24 @@ namespace APIREST.Controllers
         [HttpPut]
         [Route("editar/parada/{IdParada}")]
         [ResponseType(typeof(EParada))]
-        public IHttpActionResult editarParada(int IdParada, [FromBody] EParada parada)
+        public IHttpActionResult editarParada(int IdParada, [FromBody] DTOParada parada)
         {
             try
             {
-                EParada p = cAdmin.editarParada(parada.IdParada, parada.Nombre, parada.Lat, parada.Long);
+                double longitud;
+                double latitud;
+
+                if (!Double.TryParse(parada.Lat, out latitud))
+                {
+                    return Content(HttpStatusCode.NotFound, "La latitude no tiene el formato correcto");
+                }
+                // Si no puede convertir la longitud responde un 404
+                if (!Double.TryParse(parada.Long, out longitud))
+                {
+                    return Content(HttpStatusCode.NotFound, "La longitud no tiene el formato correcto");
+                }
+
+                EParada p = cAdmin.editarParada(parada.IdParada, parada.Nombre, latitud, longitud);
                 if (p != null)
                 {
                     return Ok(p);
@@ -498,7 +513,7 @@ namespace APIREST.Controllers
         [HttpPost]
         [Route("crear/salida")]
         [ResponseType(typeof(ESalida))]
-        public IHttpActionResult crearSaida([FromBody] DTOSalida dtoSal)
+        public IHttpActionResult crearSalida([FromBody] DTOSalida dtoSal)
         {
 
             try
@@ -604,6 +619,43 @@ namespace APIREST.Controllers
                 return NotFound();
             }
         }
+
+        //----------------------------reporte utilidad ------------------------------
+        //----------------------Linea salida fechas viajes pueden ser BLANK
+
+        //https://localhost:44330/admin/reporteUtilidad
+        /*
+         {
+            "IdViaje": 1,
+            "fechaDesde" : "2021-02-02",
+            "fechaHasat" : "2021-02-02",
+            "linea" : 1,
+            "salida" : 1
+        }
+        */
+        [HttpPost]
+        [Route("reporteUtilidad")]
+        [ResponseType(typeof(float))]
+        public IHttpActionResult reporteUtilidad([FromBody] DTOUtilidad utilidad)
+        {
+
+            try
+            {
+                float utili = cGeneral.reporteUtilidad(utilidad.idViaje,Convert.ToDateTime(utilidad.fechaDesde),Convert.ToDateTime(utilidad.fechaHasat),utilidad.linea,utilidad.salida);
+        
+                    return Ok(utili);
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
+        }
+
+
+
+
+        //-----------------------------reporte pasaje -------------------------------
 
     }
 }

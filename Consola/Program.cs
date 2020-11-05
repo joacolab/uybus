@@ -1,7 +1,9 @@
 ﻿using BuisnessLayer.implementation;
 using BuisnessLayer.interfaces;
 using DataAcessLayer.implementation;
+using Share.DTOs;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
@@ -41,7 +43,8 @@ namespace Consola
             //blc.iniciarViaje(1, new TimeSpan(20,0,0)); //testeado
             //blg.finalizarViaje(1);//testeado
 
-            /*List<DTOubicacion> lstdto = bls.ubicarVehiculo();
+            /*
+            List<DTOubicacion> lstdto = bls.ubicarVehiculo();
             foreach (var l in lstdto)
             {
                 Console.WriteLine(l.hora + " " + l.lat +" "+ l.lon +" "+ l.matricula);//testeado

@@ -85,23 +85,5 @@ https://localhost:44330/invitado/registrarse
                 return NotFound();
             }
         }
-
-        /*
-        //https://localhost:44366/foo?id=2
-        [HttpGet]
-        [Route("foo")]
-        public int Get(int id)
-        {
-            return id;
-        }
-
-        //https://localhost:44366/foo2?id=3
-        [HttpPost]
-        [Route("foo2")]
-        public int Post(int id)
-        {
-            return id;
-        }
-        */
     }
 }

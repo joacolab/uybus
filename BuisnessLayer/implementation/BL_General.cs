@@ -123,7 +123,7 @@ namespace BuisnessLayer.implementation
 
             return costoPasaje;
         }
-        private float utilidadPorViaje(int idViaje, List<DateTime> fechas)
+        private float utilidadPorViaje(int idViaje)
         {
             int cantAsientos = iVehiculo.getVehiculos(iSalida.getSalidas(iViaje.getViaje(idViaje).IdSalida).IdVehiculo).CantAsientos;
             int idLinea = iSalida.getSalidas(iViaje.getViaje(idViaje).IdSalida).IdLinea;
@@ -145,12 +145,23 @@ namespace BuisnessLayer.implementation
             float utilidad = (float)costoPasajes / (float)maxUtilidad;
             return utilidad;
         }
+
+
         private float utilidadPorSalida(int salida, List<DateTime> fechas)
         {
-            float costo = 0;
-            foreach (var viaje in iSalida.getSalidas(salida).Viaje.ToList())
+            List<EViaje> viajesValidos = new List<EViaje>();
+
+            foreach (var tViaje in iViaje.getAllViajes())
             {
-                costo = costo + utilidadPorViaje(viaje.IdViaje, fechas);
+                foreach (var viaje in iSalida.getSalidas(salida).Viaje.ToList())
+                {
+                    if (DateTime.Compare(tViaje.Fecha, viaje.Fecha) == 0) viajesValidos.Add(viaje);
+                }
+            }
+            float costo = 0;
+            foreach (var viaje in viajesValidos)
+            {
+                costo = costo + utilidadPorViaje(viaje.IdViaje);
             }
             return costo;
         }
@@ -166,11 +177,13 @@ namespace BuisnessLayer.implementation
         public float reporteUtilidad(int idViaje, DateTime fechaDesde, DateTime fechaHasat, int linea, int salida)
         {
 
-            List<DateTime> fechas = obtenerFechas(fechaDesde, fechaHasat);
+            if (DateTime.Compare(fechaDesde, Convert.ToDateTime("1900,01,01")) == 0 || DateTime.Compare(fechaHasat, Convert.ToDateTime("1900,01,01")) == 0) return utilidadPorViaje(idViaje);
 
+
+            List<DateTime> fechas = obtenerFechas(fechaDesde, fechaHasat);
             if (linea != -1) return utilidadPorLinea(linea, fechas);
             if (salida != -1) return utilidadPorSalida(salida, fechas);
-            if (idViaje != -1) return utilidadPorViaje(idViaje, fechas);
+            if (idViaje != -1) return utilidadPorViaje(idViaje);
             throw new Exception("Error en los parametros");
 
 

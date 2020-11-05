@@ -33,6 +33,17 @@ namespace APIREST.Controllers
             return Ok(cSuperAdmin.GetAllPersonas());
         }
 
+        //-------------------------------ubicarVehiculo------------------------------------------
+        //https://localhost:44330/super-admin/ubicarVehiculo
+
+        [HttpGet]
+        [Route("ubicarVehiculo")]
+        [ResponseType(typeof(List<DTOubicacion>))]
+        public IHttpActionResult ubicarVehiculo()
+        {
+            return Ok(cSuperAdmin.ubicarVehiculo());
+        }
+
         //---------------------------------- Asignar Rol ---------------------------------------------------------
         /* Funciona:
          * Copiar el siguiente codigo y ejecutarlo el el gitbash:
@@ -48,32 +59,8 @@ namespace APIREST.Controllers
         {
             try
             {
-                int id, rol;
 
-                if (!int.TryParse(IdPersona.ToString(), out id))
-                {
-                    return Content(HttpStatusCode.BadRequest, "¡El id '" + IdPersona.ToString() + "' de la url no es válido!");
-                }
-                if (!int.TryParse(PersonaRol.idPersona.ToString(), out id))
-                {
-                    return Content(HttpStatusCode.BadRequest, "¡El id '" + PersonaRol.idPersona.ToString() + "' del json no es válido!");
-                }
-                if (!int.TryParse(PersonaRol.rol.ToString(), out rol))
-                {
-                    return Content(HttpStatusCode.BadRequest, "¡El rol '" + PersonaRol.rol.ToString() + "' del json no es válido!");
-                }
-                if (IdPersona != PersonaRol.idPersona)
-                {
-                    return Content(HttpStatusCode.BadRequest, "¡El id de la url no coincide con el del json");
-                }
-                Rol rolRecibido = (Rol)PersonaRol.rol;
-
-                if (!Enum.IsDefined(typeof(Rol), rolRecibido))
-                {
-                    return Content(HttpStatusCode.BadRequest, "¡El rol ingresado no es válido!");
-                }
-
-                EPersona ePersona = cSuperAdmin.asignarRol(IdPersona, rolRecibido);
+                EPersona ePersona = cSuperAdmin.asignarRol(IdPersona, (Rol)PersonaRol.rol);
                 if (ePersona == null)
                 {
                     return Content(HttpStatusCode.BadRequest, "¡Error al intentar asignar un nuevo rol!");
@@ -85,5 +72,10 @@ namespace APIREST.Controllers
                 return NotFound();
             }
         }
+
+
+
+
+
     }
 }
