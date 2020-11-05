@@ -324,6 +324,21 @@ namespace WebApp.Proxys
                 //var result = putTask.Result;
             }
         }
+        //_-----------------------------------Reporte Utilidad-------------------------------------
+
+
+        public async Task<float> reporteUtilidad(DTOUtilidad reporteUtilidad)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl + "reporteUtilidad");
+                var postTask = await client.PostAsJsonAsync<DTOUtilidad>("reporteUtilidad", reporteUtilidad);
+                return await postTask.Content.ReadAsAsync<float>();
+            }
+        }
+        
+
+
 
     }
 }

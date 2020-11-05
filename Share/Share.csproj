@@ -53,6 +53,8 @@
     <Compile Include="DTOs\DTOTramo.cs" />
     <Compile Include="DTOs\DTOTramoPrecio.cs" />
     <Compile Include="DTOs\DTOubicacion.cs" />
+    <Compile Include="DTOs\DTOUtilidad.cs" />
+    <Compile Include="DTOs\DTOUtilidadFinal.cs" />
     <Compile Include="DTOs\DTOViaje.cs" />
     <Compile Include="entities\EAdmin.cs" />
     <Compile Include="entities\EConductor.cs" />

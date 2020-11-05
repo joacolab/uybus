@@ -23,5 +23,7 @@ namespace WebApp.Proxys
                 var result = postTask.Result;
             }
         }
+        //------------------------------iniciar sesion (correo , password)-------
+        //-----------------------------devuelve : todos los datos del usuario mas el rol
     }
 }

@@ -247,12 +247,37 @@ namespace WebApp.Controllers
             return RedirectToAction("traerConductores");
         }
 
-        //----------------------------reporte utilidad -----------------------
+        //----------------------------reporte utilidad ------------------------------
+
+
+        public ActionResult reporteUtilidad()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult reporteUtilidad(DTOUtilidad utilidad)
+        {
+         
+            if (utilidad.fechaDesde == null) utilidad.fechaDesde = "1900,01,01";
+            if (utilidad.fechaHasat == null) utilidad.fechaHasat = "1900,01,01";
+            DTOUtilidadFinal ut = new DTOUtilidadFinal();
+            float result = Task.Run(() => pxa.reporteUtilidad(utilidad)).Result;
+            ut.Valor = result;
+            return RedirectToAction("verUtilidad", ut);
+        }
+
+
+        public ActionResult verUtilidad(DTOUtilidadFinal result)
+        {
+            return View(result);
+        }
+
 
         //-----------------------------reporte pasaje -------------------------------
 
 
-        
+
 
 
     }

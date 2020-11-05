@@ -231,6 +231,8 @@
     <Content Include="Views\SuperAdmin\traerPersonas.cshtml" />
     <Content Include="Views\SuperAdmin\asignarRol.cshtml" />
     <Content Include="Views\SuperAdmin\traerVehiculos.cshtml" />
+    <Content Include="Views\Admin\reporteUtilidad.cshtml" />
+    <Content Include="Views\Admin\verUtilidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
