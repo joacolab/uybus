@@ -247,6 +247,9 @@ namespace WebApp.Controllers
             return RedirectToAction("traerConductores");
         }
 
+        //----------------------------reporte utilidad -----------------------
+
+        //-----------------------------reporte pasaje -------------------------------
 
 
         

@@ -48,7 +48,30 @@ namespace WebApp.Proxys
         }
 
 
+
+
+        public async Task<List<DTOubicacion>> ubicarVehiculo()
+        {
+            List<DTOubicacion> ubicaciones = new List<DTOubicacion>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("ubicarVehiculo");
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                    ubicaciones = JsonConvert.DeserializeObject<List<DTOubicacion>>(EmpResponse);
+                }
+                return ubicaciones;
+            }
+        }
+
         
+
 
 
     }

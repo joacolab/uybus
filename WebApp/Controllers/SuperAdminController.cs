@@ -43,5 +43,21 @@ namespace WebApp.Controllers
             return RedirectToAction("traerPersonas");
         }
 
+        //---------------------------ubicarvehiculo-----------------------------
+
+
+        public ActionResult traerVehiculos()
+        {
+            return View(Task.Run(() => pxsa.ubicarVehiculo()).Result);
+        }
+
+
+
+        
+
+
+
+
+
     }
 }

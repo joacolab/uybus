@@ -230,6 +230,7 @@
     <Content Include="Views\SuperAdmin\Index.cshtml" />
     <Content Include="Views\SuperAdmin\traerPersonas.cshtml" />
     <Content Include="Views\SuperAdmin\asignarRol.cshtml" />
+    <Content Include="Views\SuperAdmin\traerVehiculos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
