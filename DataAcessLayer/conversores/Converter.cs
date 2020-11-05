@@ -216,6 +216,7 @@ namespace DataAcessLayer.conversores
         static public EUsuario usuarioAEUsuario(Usuario u)
         {
             EUsuario eu = new EUsuario();
+            if (u == null) return null; //Si viene un null retorna un null
             eu.Id = u.Id;
             List<EPasaje> lst = new List<EPasaje>();
             foreach (var s in u.Pasaje)
@@ -301,6 +302,7 @@ namespace DataAcessLayer.conversores
         }
         static public EViaje viajeAEViaje(Viaje vi)
         {
+            if (vi == null) return null; //Si recibe un null retorna null
             EViaje Evi = new EViaje();
             Evi.IdViaje = vi.IdViaje;
             Evi.Finalizado = vi.Finalizado;

@@ -57,10 +57,12 @@ namespace BuisnessLayer.implementation
         {
             
             EViaje ev = iViaje.getViaje(idViaje);
+            if (ev == null) return null; //Si no encuentra el viaje retorna null
             ESalida es = iSalida.getSalidas(ev.IdSalida);
+            if (es == null) return null; //Si no encuentra una salida retorna null
             ELinea el = iLinea.getLinea(es.IdLinea);
+            if (el == null) return null; //Si no encuentra una linea retorna null
             List<ETramo> tramos = el.Tramo.ToList<ETramo>();
-
             int posOrigen = -1;
             int posdestino = -1;
             foreach (var t in tramos)
@@ -182,6 +184,8 @@ namespace BuisnessLayer.implementation
             }
 
             List<EViaje> misViajs = new List<EViaje>();
+            EUsuario usuario = iUsuario.getUsuario(idUsuario);
+            if (usuario == null) return null;
             foreach (var pasaje in iUsuario.getUsuario(idUsuario).Pasaje.ToList())
             {
                 misViajs.Add(iViaje.getViaje(pasaje.IdViaje));
