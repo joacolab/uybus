@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Share.entities.EConductor>
+
+@{
+    ViewBag.Title = "traerConductores";
+}
+
+<h2>Conductores</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VencimientoLicencia)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id)
+    </td>
+    <td>
+        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.VencimientoLicencia))
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "editarConductor", new { id = item.Id })
+    </td>
+</tr>
+}
+
+
+</table>
+<div>
+    @Html.ActionLink("ir al inicio", "index")
+</div>

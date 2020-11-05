@@ -219,6 +219,8 @@
     <Content Include="Views\Admin\editarSalida.cshtml" />
     <Content Include="Views\Admin\crearTramo.cshtml" />
     <Content Include="Views\Admin\editarTramo.cshtml" />
+    <Content Include="Views\Admin\traerConductores.cshtml" />
+    <Content Include="Views\Admin\editarConductor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

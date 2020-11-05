@@ -293,8 +293,37 @@ namespace WebApp.Proxys
          }
         //-----------------------------Asignar Fecha Libreta Conductor------------------------------------------
 
-        //-----------------------------Crear Precio------------------------------------------
 
+        public async Task<List<EConductor>> GetAllConductores()
+        {
+            List<EConductor> eConductor = new List<EConductor>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("traer/Conductores");
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                    eConductor = JsonConvert.DeserializeObject<List<EConductor>>(EmpResponse);
+                }
+                return eConductor;
+            }
+        }
+        public void editarConductor(EConductor conductor)
+        {
+            
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                var putTask = client.PutAsJsonAsync($"editar/conductor/{conductor.Id}", conductor.VencimientoLicencia.ToString());
+                putTask.Wait();
+                //var result = putTask.Result;
+            }
+        }
 
     }
 }

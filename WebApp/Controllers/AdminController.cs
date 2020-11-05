@@ -224,7 +224,33 @@ namespace WebApp.Controllers
             pxa.editarSalida(salida);
             return RedirectToAction("traerSalida");
         }
-         
+        //----------------Conductor------------------------------------
+
+
+        public ActionResult traerConductores()
+        {
+            return View(Task.Run(() => pxa.GetAllConductores()).Result);
+        }
+
+
+        public ActionResult editarConductor(int id)
+        {
+            EConductor p = new EConductor();
+            p.Id = id;
+            return View(p);
+        }
+
+        [HttpPost]
+        public ActionResult editarConductor(EConductor conductor)
+        {
+            pxa.editarConductor(conductor);
+            return RedirectToAction("traerConductores");
+        }
+
+
+
+        
+
 
     }
 }
