@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Share.entities.EPersona>
+
+@{
+    ViewBag.Title = "traerPersonas";
+}
+
+<h2>Asignar roles</h2>
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Documento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Correo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pApellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sApellido)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Documento)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Correo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.pNombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.sNombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.pApellido)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.sApellido)
+    </td>
+    <td>
+        @Html.ActionLink("Asignar Rol", "asignarRol", new { id = item.id })
+    </td>
+</tr>
+}
+
+</table>

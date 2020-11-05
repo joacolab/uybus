@@ -30,6 +30,15 @@ namespace WebApp.Controllers
         {
             return RedirectToAction("Index", "invitado");
         }
+        public RedirectToRouteResult superAdmin()
+        {
+            return RedirectToAction("Index", "superAdmin");
+        }
+
+
+
+
+        
 
         public ActionResult About()
         {

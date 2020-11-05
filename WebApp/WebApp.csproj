@@ -160,12 +160,14 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvitadoController.cs" />
+    <Compile Include="Controllers\SuperAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxys\ProxyAdmin.cs" />
     <Compile Include="Proxys\ProxyInvitado.cs" />
+    <Compile Include="Proxys\ProxySuperAdmin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -225,6 +227,9 @@
     <Content Include="Views\Admin\editarConductor.cshtml" />
     <Content Include="Views\Invitado\Index.cshtml" />
     <Content Include="Views\Invitado\registrarse.cshtml" />
+    <Content Include="Views\SuperAdmin\Index.cshtml" />
+    <Content Include="Views\SuperAdmin\traerPersonas.cshtml" />
+    <Content Include="Views\SuperAdmin\asignarRol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

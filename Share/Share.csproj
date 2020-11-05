@@ -48,6 +48,7 @@
     <Compile Include="DTOs\DTOPersonaRol.cs" />
     <Compile Include="DTOs\DTOproxVehiculo.cs" />
     <Compile Include="DTOs\DTORegistro.cs" />
+    <Compile Include="DTOs\DTORolPersona.cs" />
     <Compile Include="DTOs\DTOSalida.cs" />
     <Compile Include="DTOs\DTOTramo.cs" />
     <Compile Include="DTOs\DTOTramoPrecio.cs" />
