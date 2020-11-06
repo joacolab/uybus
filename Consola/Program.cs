@@ -43,13 +43,13 @@ namespace Consola
             //blc.iniciarViaje(1, new TimeSpan(20,0,0)); //testeado
             //blg.finalizarViaje(1);//testeado
 
-            /*
+            
             List<DTOubicacion> lstdto = bls.ubicarVehiculo();
             foreach (var l in lstdto)
             {
                 Console.WriteLine(l.hora + " " + l.lat +" "+ l.lon +" "+ l.matricula);//testeado
             }
-            */
+            
             // EPasaje ep = blu.comprarPasaje(1, 2, 1, 2, "null", "null", 2); //testeado
             //EPasaje ep = blu.comprarPasaje(1, -1, 6, 3, "CI", "4333873-7", 2); //testeado
             //Console.WriteLine(blc.verificarPasaje(1, 1));//testeado

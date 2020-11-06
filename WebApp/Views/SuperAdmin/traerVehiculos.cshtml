@@ -19,6 +19,9 @@
             @Html.DisplayNameFor(model => model.hora)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.matricula)
         </th>
         <th></th>
@@ -26,24 +29,35 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.lat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.hora)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.matricula)
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.lat)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.lon)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.hora)
+    </td>
+    <td>
+        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.fecha))
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.matricula)
+    </td>
+</tr>
     }
 
 </table>
-<div id='map' style='width: 400px; height: 300px;'></div>
+<div id='map' style='width: 900px; height: 400px;'></div>
+
+<style>
+    .mapboxgl-ctrl-logo {
+        display: none !important;
+    }
+    
+</style>
+
 <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybG9zMzI0NzYzMjdldTNoeSIsImEiOiJja2g0azBva20wN29rMnRwY3N6NGs3cWxkIn0.naBthzo1TI6Gy--GPzmYEA';
 
@@ -58,16 +72,23 @@
         zoom: 7
     });
 
-     
+   
 
-    @for(var i = 0; i < 1 ; i++)
+    function sinC(str) {
+        return str.replace(",",".");
+    }
+
+    @foreach (var item in Model)
     {
-         <Text> let TerminalSanJose = new mapboxgl.Marker({ draggable: false }).setLngLat([-56.7155999, -34.333592]).addTo(map); </Text> 
+
+        <Text> new mapboxgl.Marker({ draggable: false }).setLngLat([sinC("@item.lon"), sinC("@item.lat")]).setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h3> Matricula: ' + "@item.matricula" + '</h3><p> Hora: ' + "@item.hora" + '</p>')).addTo(map); </Text>
+
     }
 
 
-   // let TerminalSanJose = new mapboxgl.Marker({draggable: false}).setLngLat([-56.7155999, -34.333592]).addTo(map);
-    //let PuntaValdez = new mapboxgl.Marker({draggable: false}).setLngLat([-56.700948, -34.585873]).addTo(map);
-    //let Libertad = new mapboxgl.Marker({draggable: false}).setLngLat([-56.617723, -34.639545]).addTo(map);
+
+
+    //let TerminalSanJose = new mapboxgl.Marker({ draggable: false }).setLngLat([-56.7155999, -34.333592]).setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h3>' + "aaaaaa" + '</h3><p>' + "aaaaaaaaaa" + '</p>')).addTo(map);
+    
 
 </script>
