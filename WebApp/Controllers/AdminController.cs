@@ -276,8 +276,17 @@ namespace WebApp.Controllers
 
         //-----------------------------reporte pasaje -------------------------------
 
+        public ActionResult reportePasaje()
+        {
+            return View();
+        }
 
-
+        [HttpPost]
+        public ActionResult reportePasaje(DTOreportePasaje repoPasaje)
+        {
+            List<EPasaje> result = Task.Run(() => pxa.reportedePasaje(repoPasaje)).Result;
+            return View("verReportePasaje", result);
+        }
 
 
     }

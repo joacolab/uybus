@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Share.entities.EPasaje>
+
+@{
+    ViewBag.Title = "verReportePasaje";
+}
+
+<h2>Reporte de pasajes vendidos</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdPasaje)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Asientos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Documento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoDocuemtno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdViaje)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdParadaDestino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdParadaOrigen)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdPasaje)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asientos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Documento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoDocuemtno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdViaje)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdParadaDestino)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdParadaOrigen)
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("ir al inicio", "Index")
+</div>

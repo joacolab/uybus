@@ -233,6 +233,8 @@
     <Content Include="Views\SuperAdmin\traerVehiculos.cshtml" />
     <Content Include="Views\Admin\reporteUtilidad.cshtml" />
     <Content Include="Views\Admin\verUtilidad.cshtml" />
+    <Content Include="Views\Admin\reportePasaje.cshtml" />
+    <Content Include="Views\Admin\verReportePasaje.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

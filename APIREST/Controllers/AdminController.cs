@@ -657,5 +657,41 @@ namespace APIREST.Controllers
 
         //-----------------------------reporte pasaje -------------------------------
 
+        //https://localhost:44330/admin/reportePasaje
+        /*
+         {
+            "fechaDesde" : "2020-12-01",
+            "fechaHasta" : "2020-12-04",
+            "linea" : 1,
+            "salida" : -1,
+            "viaje": -1
+        }
+        */
+        [HttpPost]
+        [Route("reportePasaje")]
+        [ResponseType(typeof(List<EPasaje>))]
+        public IHttpActionResult reportePasaje([FromBody] DTOreportePasaje repoPasaje)
+        {
+
+            try
+            {
+                string strfechaDesde = repoPasaje.fechaDesde;
+                string strfechaHasta = repoPasaje.fechaHasta;
+                if (repoPasaje.fechaDesde == null || repoPasaje.fechaHasta == null)
+                {
+                    strfechaDesde = "1900,01,01";
+                    strfechaHasta = "1900,01,01";
+                }
+                List<EPasaje> EPasajes = cGeneral.reposrtesPasajes(Convert.ToDateTime(strfechaDesde), Convert.ToDateTime(strfechaHasta), repoPasaje.linea, repoPasaje.salida, repoPasaje.viaje);
+
+                return Ok(EPasajes);
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
+        }
+
     }
 }
