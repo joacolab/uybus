@@ -88,12 +88,16 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult documento(DTOComprarPasaje pasaje)
+        public ActionResult documento(DTOCompPasaje p)
         {
+            DTOComprarPasaje pasaje = new DTOComprarPasaje();
+
             pasaje.idViaje = (int)Session["idViaje"];
             pasaje.idParadaOrigen = (int)Session["idPOrigen"];
             pasaje.idParadaDestino = (int)Session["idPDestino"];
             pasaje.asiento = (int)Session["asiento"];
+            pasaje.documento = p.documento;
+            pasaje.tipoDoc = p.tipoDoc.ToString();
 
             pasaje.idUsuario = -1; //usuario no logeado, arreglar esto <<<<---------!!!!--------------
 
