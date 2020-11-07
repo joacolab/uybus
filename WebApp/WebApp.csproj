@@ -161,6 +161,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvitadoController.cs" />
     <Compile Include="Controllers\SuperAdminController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -168,6 +169,7 @@
     <Compile Include="Proxys\ProxyAdmin.cs" />
     <Compile Include="Proxys\ProxyInvitado.cs" />
     <Compile Include="Proxys\ProxySuperAdmin.cs" />
+    <Compile Include="Proxys\ProxyUsuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -235,6 +237,14 @@
     <Content Include="Views\Admin\verUtilidad.cshtml" />
     <Content Include="Views\Admin\reportePasaje.cshtml" />
     <Content Include="Views\Admin\verReportePasaje.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\traerLineas.cshtml" />
+    <Content Include="Views\Usuario\selectLinea.cshtml" />
+    <Content Include="Views\Usuario\selectPOrigen.cshtml" />
+    <Content Include="Views\Usuario\selectPDestino.cshtml" />
+    <Content Include="Views\Usuario\selecSalida.cshtml" />
+    <Content Include="Views\Usuario\selecViaje.cshtml" />
+    <Content Include="Views\Usuario\documento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
