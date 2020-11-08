@@ -7,6 +7,8 @@ using Share.entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -98,9 +100,10 @@ namespace BuisnessLayer.implementation
             EPasaje ep = new EPasaje();
             if (idUsuario == -1) //Usuario NOO logeado
             {
-
-              
                 ep = iPasaje.addPasaje(asiento, documento, tipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
+
+                //esto no va, es una prueba, codigo pelotas
+                enviarCorreo("suarezjoaquinluis@gmail.com");//generar pdf con codigo QR y enviarlo 
             }
             else //Usuario Logeado
             {
@@ -110,10 +113,31 @@ namespace BuisnessLayer.implementation
                 else strTipoDoc = "Credencial";
 
                 ep = iPasaje.addPasaje(asiento, epe.Documento, strTipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
-                
+                enviarCorreo(iPersona.getPersona(idUsuario).Correo);//generar pdf con codigo QR y enviarlo 
             }
+
+
             return ep;
            
+        }
+
+        private void enviarCorreo(string correo)//generar pdf con codigo QR y enviarlo 
+        {
+
+            using (MailMessage emailMessage = new MailMessage())
+            {
+                emailMessage.From = new MailAddress("Marcelo.Rodriguez.07.11.2020@gmail.com", "Administrador");
+                emailMessage.To.Add(new MailAddress(correo, "Pasajero")); //correo del pasajero
+                emailMessage.Subject = "UruguayBus";
+                emailMessage.Body = "BODY";
+                emailMessage.Priority = MailPriority.Normal;
+                using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    MailClient.EnableSsl = true;
+                    MailClient.Credentials = new System.Net.NetworkCredential("Marcelo.Rodriguez.07.11.2020@gmail.com", "E%D5,d4%..T4dt5ry");
+                    MailClient.Send(emailMessage);
+                }
+            }
         }
 
         private int getOrd(List<ETramo> tramos, int ord)

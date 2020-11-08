@@ -65,7 +65,11 @@ namespace WebApp.Controllers
             int idL = (int)Session["idLinea"];
             int idPo = (int)Session["idPOrigen"];
             int idPD = (int)Session["idPDestino"];
-            ViewBag.Message = Task.Run(() => pxu.costoPasaje(idL, idPo, idPD)).Result;
+
+            int costo = Task.Run(() => pxu.costoPasaje(idL, idPo, idPD)).Result;
+            Session["costo"] = costo;
+            ViewBag.Message = costo;
+
             return RedirectToAction("documento");
             //return View("documento");//ingresar docu y tipoDocu
         }
@@ -77,13 +81,25 @@ namespace WebApp.Controllers
             int idL = (int)Session["idLinea"];
             int idPo = (int)Session["idPOrigen"];
             int idPD = (int)Session["idPDestino"];
-            ViewBag.Message = Task.Run(() => pxu.costoPasaje(idL, idPo, idPD)).Result;
+
+
+            int costo = Task.Run(() => pxu.costoPasaje(idL, idPo, idPD)).Result;
+            Session["costo"] = costo;
+            ViewBag.Message = costo;
+
             return RedirectToAction("documento");
             //return View("documento");//ingresar docu y tipoDocu
         }
 
         public ActionResult documento() 
         {
+            int idL = (int)Session["idLinea"];
+            int idPo = (int)Session["idPOrigen"];
+            int idPD = (int)Session["idPDestino"];
+            int costo = Task.Run(() => pxu.costoPasaje(idL, idPo, idPD)).Result;
+            Session["costo"] = costo;
+            ViewBag.Message = costo;
+
             return View();
         }
 
@@ -95,7 +111,10 @@ namespace WebApp.Controllers
             pasaje.idViaje = (int)Session["idViaje"];
             pasaje.idParadaOrigen = (int)Session["idPOrigen"];
             pasaje.idParadaDestino = (int)Session["idPDestino"];
-            pasaje.asiento = (int)Session["asiento"];
+
+            if(Session["asiento"] == null) pasaje.asiento = -1;
+            else pasaje.asiento = (int)Session["asiento"];
+            
             pasaje.documento = p.documento;
             pasaje.tipoDoc = p.tipoDoc.ToString();
 
