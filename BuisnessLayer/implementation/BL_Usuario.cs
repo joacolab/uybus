@@ -196,19 +196,21 @@ namespace BuisnessLayer.implementation
                 foreach (var miV in misViajs)
                 {
                     DTOproxVehiculo proxV = new DTOproxVehiculo();
+                    proxV.linea = iLinea.getLinea(iSalida.getSalidas(miV.IdSalida).IdLinea).Nombre;
                     proxV.Vehiculo = iVehiculo.getVehiculos(iSalida.getSalidas(viaje.IdSalida).IdVehiculo);
                     if (viaje.IdViaje == miV.IdViaje) proxV.reservado = true;
                     else proxV.reservado = false;
                     proxVs.Add(proxV);
                 }
             }
-
+            
             List<DTOproxVehiculo> proximos = proxVs
                   .GroupBy(p => p.Vehiculo.Matricula)
                   .Select(g => g.First())
                   .ToList();
 
             return proximos;
+            
         }
 
         public List<ELinea> listarLineas()

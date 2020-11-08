@@ -11,7 +11,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Vehiculo.Matricula)
+            Matricula
+        </th>
+        <th>
+            Linea
         </th>
 
     </tr>
@@ -29,13 +32,16 @@
         }
 
     </td>
-    
-    
+    <th>
+        <h3> @Html.DisplayFor(modelItem => item.linea)</h3>
+    </th>
+
+
 </tr>
 }
 
 </table>
 
 <div>
-    @Html.ActionLink("ir al inicio", "index")
+    @Html.ActionLink("Atrás", "proxVehiculos")
 </div>
