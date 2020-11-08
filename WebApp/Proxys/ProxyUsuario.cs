@@ -55,7 +55,7 @@ namespace WebApp.Proxys
             }
         }
 
-        public async Task<List<EParada>> listarParadas(int IdLinea)
+        public async Task<List<EParada>> listarParadasDestino(int IdLinea, int IdParada)
         {
             List<EParada> eparada = new List<EParada>();
 
@@ -64,7 +64,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage Res = await client.GetAsync("listar/paradas/" + IdLinea);
+                HttpResponseMessage Res = await client.GetAsync("listar/pdestino/" + IdLinea +"/"+ IdParada);
 
                 if (Res.IsSuccessStatusCode)
                 {

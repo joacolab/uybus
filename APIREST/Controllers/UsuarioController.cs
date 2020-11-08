@@ -60,6 +60,25 @@ namespace APIREST.Controllers
             }
         }
 
+        /* funciona
+         * curl -v -k -H 'Content-Type: application/json' https://localhost:44330/usuario/listar/paradas/1
+         */
+        [HttpGet]
+        [Route("listar/pdestino/{IdLinea}/{IdParada}")]
+        [ResponseType(typeof(List<EParada>))]
+        public IHttpActionResult listarParadasDestino(int IdLinea, int IdParada)
+        {
+            try
+            {
+                List<EParada> paradas = cUsuario.listarParadasD(IdLinea, IdParada);
+                return Ok(paradas);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
         /* Funciona
          * Sin probar, porque no hay datos
          * curl -v -k -H 'Content-Type: application/json' https://localhost:44330/usuario/listar/salidas/1

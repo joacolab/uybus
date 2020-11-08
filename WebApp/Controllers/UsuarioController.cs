@@ -26,7 +26,7 @@ namespace WebApp.Controllers
         public ActionResult selectLinea(int id) // id de la linea seleccionada
         {
             Session["idLinea"] = id; //me guardo la linea para despues
-            return View(Task.Run(() => pxu.listarParadas(id)).Result); //se listan las paradas O, de esa linea
+            return View(Task.Run(() => pxu.listarParadasOrigen(id)).Result); //se listan las paradas O, de esa linea
         }
 
         public ActionResult selectPOrigen(int id) // id de la parada de origen
@@ -34,7 +34,7 @@ namespace WebApp.Controllers
             Session["idPOrigen"] = id; //me guardo la paradaO para despues
             int idLinea = (int)Session["idLinea"]; //obtengo el idLinea, de la session
 
-            return View(Task.Run(() => pxu.listarParadas(idLinea)).Result);//se listan las paradas D, de esa linea
+            return View(Task.Run(() => pxu.listarParadasDestino(idLinea, id)).Result);//se listan las paradas D, de esa linea
         }
 
         public ActionResult selectPDestino(int id) // id de la parada de destino
@@ -102,6 +102,8 @@ namespace WebApp.Controllers
             pasaje.idUsuario = -1; //usuario no logeado, arreglar esto <<<<---------!!!!--------------
 
             pxu.comprarPasaje(pasaje); // se complra el pasaje
+            Session.Clear();//flush session
+
             return RedirectToAction("Index");
             //return View("Index");
         }
