@@ -2,10 +2,13 @@
 using DataAcessLayer;
 using DataAcessLayer.implementation;
 using DataAcessLayer.interfaces;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Share.DTOs;
 using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -103,7 +106,7 @@ namespace BuisnessLayer.implementation
                 ep = iPasaje.addPasaje(asiento, documento, tipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
 
                 //esto no va, es una prueba, codigo pelotas
-                enviarCorreo("suarezjoaquinluis@gmail.com");//generar pdf con codigo QR y enviarlo 
+                enviarCorreo("Marcelo.Rodriguez.07.11.2020@gmail.com", ep.IdPasaje);//generar pdf con codigo QR y enviarlo 
             }
             else //Usuario Logeado
             {
@@ -113,15 +116,25 @@ namespace BuisnessLayer.implementation
                 else strTipoDoc = "Credencial";
 
                 ep = iPasaje.addPasaje(asiento, epe.Documento, strTipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
-                enviarCorreo(iPersona.getPersona(idUsuario).Correo);//generar pdf con codigo QR y enviarlo 
+                enviarCorreo(iPersona.getPersona(idUsuario).Correo, ep.IdPasaje);//generar pdf con codigo QR y enviarlo 
             }
 
 
             return ep;
            
         }
-
-        private void enviarCorreo(string correo)//generar pdf con codigo QR y enviarlo 
+        private void getPdfconQR(int IDPasaje)
+        {
+            Document doc = new Document(PageSize.A4);
+            PdfWriter.GetInstance(doc, new FileStream(@"C:\pasaje.pdf",FileMode.Create));
+            doc.Open();
+            BarcodeQRCode barcodeWrcode = new BarcodeQRCode(IDPasaje.ToString(), 1000,1000,null);
+            Image codeQRImga = barcodeWrcode.GetImage();
+            codeQRImga.ScaleAbsolute(200,200);
+            doc.Add(codeQRImga);
+            doc.Close();
+        }
+        private void enviarCorreo(string correo, int IDPasaje)//generar pdf con codigo QR y enviarlo 
         {
 
             using (MailMessage emailMessage = new MailMessage())
@@ -129,7 +142,9 @@ namespace BuisnessLayer.implementation
                 emailMessage.From = new MailAddress("Marcelo.Rodriguez.07.11.2020@gmail.com", "Administrador");
                 emailMessage.To.Add(new MailAddress(correo, "Pasajero")); //correo del pasajero
                 emailMessage.Subject = "UruguayBus";
-                emailMessage.Body = "BODY";
+                emailMessage.Body = "";
+                getPdfconQR(IDPasaje);
+                emailMessage.Attachments.Add(new Attachment(@"C:\pasaje.pdf"));
                 emailMessage.Priority = MailPriority.Normal;
                 using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))
                 {
