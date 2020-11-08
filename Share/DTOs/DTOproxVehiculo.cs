@@ -11,5 +11,6 @@ namespace Share.DTOs
     {
         public EVehiculo Vehiculo { get; set; }
         public bool reservado { get; set; }
+
     }
 }

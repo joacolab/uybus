@@ -203,7 +203,12 @@ namespace BuisnessLayer.implementation
                 }
             }
 
-            return proxVs;
+            List<DTOproxVehiculo> proximos = proxVs
+                  .GroupBy(p => p.Vehiculo.Matricula)
+                  .Select(g => g.First())
+                  .ToList();
+
+            return proximos;
         }
 
         public List<ELinea> listarLineas()
@@ -231,7 +236,46 @@ namespace BuisnessLayer.implementation
             return iSalida.getSalidas(IdSalida).Viaje.ToList();
         }
 
-        public List<EParada> listarParadas(int IdLinea)
+        private List<EParada> sinPuntas( ELinea linea)
+        {
+            List<EParada> lstParadas = new List<EParada>();
+
+            List<ETramo> lstTramos = linea.Tramo.ToList();
+
+            List<ETramo> SortedList = lstTramos.OrderBy(o => o.Orden).ToList();
+
+            int ultimoTramo = SortedList.Count() - 1;
+
+            SortedList.RemoveAt(ultimoTramo);
+            SortedList.RemoveAt(0);
+
+            foreach (var tramo in SortedList)
+            {
+                lstParadas.Add(iParada.getParada(tramo.IdParada));
+            }
+            return lstParadas;
+        }
+
+        public List<EParada> sinTerminales() //todas la paradas menos las terminales.
+        {
+            List<EParada> sinTerminales = new List<EParada>();
+            foreach (var linea in iLinea.getAllLineas())
+            {
+                foreach (var parada in sinPuntas(linea))
+                {
+                    sinTerminales.Add(parada);
+                }
+            }
+            List<EParada> sinTerNiRep = sinTerminales
+                  .GroupBy(p => p.IdParada)
+                  .Select(g => g.First())
+                  .ToList();
+
+            //List<EParada> sinTerNiRep = sinTerminales.Distinct().ToList();
+            return sinTerNiRep;
+        }
+
+        public List<EParada> listarParadas(int IdLinea) //todas la paradas menos la terminal de salida
         {
             List<EParada> lstParadas = new List<EParada>();
             ELinea linea =  iLinea.getLinea(IdLinea);
@@ -250,7 +294,7 @@ namespace BuisnessLayer.implementation
             return lstParadas;
         }
 
-        public List<EParada> listarParadasD(int IdLinea, int IdParada)
+        public List<EParada> listarParadasD(int IdLinea, int IdParada)//todas la paradas menos la terminal de llegada
         {
 
             ETramo tramoOrigen = new ETramo();

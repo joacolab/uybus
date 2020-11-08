@@ -80,15 +80,10 @@
 
     @foreach (var item in Model)
     {
-
         <Text> new mapboxgl.Marker({ draggable: false }).setLngLat([sinC("@item.lon"), sinC("@item.lat")]).setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h3> Matricula: ' + "@item.matricula" + '</h3><p> Hora: ' + "@item.hora" + '</p>')).addTo(map); </Text>
-
     }
 
+    //let TerminalSanJose = new mapboxgl.Marker({ draggable: false }).setLngLat([lat, lon]).setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h3>' + "aaaaaa" + '</h3><p>' + "aaaaaaaaaa" + '</p>')).addTo(map);
 
-
-
-    //let TerminalSanJose = new mapboxgl.Marker({ draggable: false }).setLngLat([-56.7155999, -34.333592]).setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h3>' + "aaaaaa" + '</h3><p>' + "aaaaaaaaaa" + '</p>')).addTo(map);
-    
 
 </script>

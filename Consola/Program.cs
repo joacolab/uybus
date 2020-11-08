@@ -49,7 +49,7 @@ namespace Consola
             {
                 Console.WriteLine(l.hora + " " + l.lat +" "+ l.lon +" "+ l.matricula);//testeado
             }*/
-            
+
             // EPasaje ep = blu.comprarPasaje(1, 2, 1, 2, "null", "null", 2); //testeado
             //EPasaje ep = blu.comprarPasaje(1, -1, 6, 3, "CI", "4333873-7", 2); //testeado
             //Console.WriteLine(blc.verificarPasaje(1, 1));//testeado
@@ -78,6 +78,11 @@ namespace Consola
             // }
 
             //blu.canSelectSeat(1, 1, 2);
+            /*
+            foreach (var item in blu.sinTerminales())
+            {
+                Console.WriteLine(item.IdParada);
+            }*/
 
 
 

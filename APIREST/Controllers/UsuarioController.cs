@@ -180,6 +180,25 @@ namespace APIREST.Controllers
         }
 
         /* funciona
+         * Sin Probar
+         * curl -v -k https://localhost:44330/usuario/paradas/1/1
+         */
+        [HttpGet]
+        [Route("sinterminal")]
+        public IHttpActionResult sinTerminal()
+        {
+            try
+            {
+                List<EParada> paradas = cUsuario.sinTerminales();
+                return Ok(paradas);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        /* funciona
             curl -v -X POST -k -H 'Content-Type: application/json; charset=utf-8' \
             -d '{"idViaje":2, "idUsuario":1, "idParadaOrigen":2, "idParadaDestino":4, "tipoDoc":1, "documento":"87779994", "asiento":12}' \
             https://localhost:44330/usuario/comprar

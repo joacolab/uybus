@@ -108,6 +108,21 @@ namespace WebApp.Controllers
             //return View("Index");
         }
 
+        //----------------proximos vehiculos-----------------
+        public ActionResult proxVehiculos()
+        {
+            return View(Task.Run(() => pxu.sinterminal()).Result);
+        }
+
+        public ActionResult verVehiculoP(int id)
+        {
+            Session["idUsuario"] = 2; // arreglar esto <<<< --------------------- !!!!!
+            int idUsuario = (int)Session["idUsuario"]; // esto no iria
+            return View(Task.Run(() => pxu.proximoVehiculo(idUsuario,id)).Result);
+        }
+        
+
+
 
 
 

@@ -187,5 +187,46 @@ namespace WebApp.Proxys
         }
 
 
+        //----------------------proximo vehiculo-------------------
+        public async Task<List<EParada>> sinterminal()
+        {
+            List<EParada> eparada = new List<EParada>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("sinterminal");
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var respuesta = Res.Content.ReadAsStringAsync().Result;
+                    eparada = JsonConvert.DeserializeObject<List<EParada>>(respuesta);
+                }
+                return eparada;
+            }
+        }
+        public async Task<List<DTOproxVehiculo>> proximoVehiculo(int IdUsuario, int IdParada)
+        {
+            List<DTOproxVehiculo> lstVeiculosProximos = new List<DTOproxVehiculo>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("proximos/" + IdUsuario + "/" + IdParada );
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var respuesta = Res.Content.ReadAsStringAsync().Result;
+                    lstVeiculosProximos = JsonConvert.DeserializeObject<List<DTOproxVehiculo>>(respuesta);
+                }
+                return lstVeiculosProximos;
+            }
+        }
+
+
     }
 }
