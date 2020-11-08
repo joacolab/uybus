@@ -106,7 +106,11 @@ namespace BuisnessLayer.implementation
                 ep = iPasaje.addPasaje(asiento, documento, tipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
 
                 //esto no va, es una prueba, codigo pelotas
-                enviarCorreo("Marcelo.Rodriguez.07.11.2020@gmail.com", ep.IdPasaje);//generar pdf con codigo QR y enviarlo 
+                //enviarCorreo("juan.alvarez@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo 
+                //enviarCorreo("julio.arrieta@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
+                //enviarCorreo("lucas.garrido@utec.edu.uy", "https://4.bp.blogspot.com/_xukD7iTXxKo/R6kUSmPim-I/AAAAAAAAAFg/JDYuhXlPdHA/s320/perros+culiando.jpg");//generar pdf con codigo QR y enviarlo
+                //enviarCorreo("gustavo.cerdena@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
+                //enviarCorreo("suarezjoaquinluis@gmail.com", "https://4.bp.blogspot.com/_xukD7iTXxKo/R6kUSmPim-I/AAAAAAAAAFg/JDYuhXlPdHA/s320/perros+culiando.jpg");//generar pdf con codigo QR y enviarlo
             }
             else //Usuario Logeado
             {
@@ -116,40 +120,40 @@ namespace BuisnessLayer.implementation
                 else strTipoDoc = "Credencial";
 
                 ep = iPasaje.addPasaje(asiento, epe.Documento, strTipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
-                enviarCorreo(iPersona.getPersona(idUsuario).Correo, ep.IdPasaje);//generar pdf con codigo QR y enviarlo 
+                enviarCorreo(iPersona.getPersona(idUsuario).Correo, ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo 
             }
 
 
             return ep;
            
         }
-        private void getPdfconQR(int IDPasaje)
+        private void getPdfconQR(string IDPasaje)
         {
             Document doc = new Document(PageSize.A4);
-            PdfWriter.GetInstance(doc, new FileStream(@"C:\pasaje.pdf",FileMode.Create));
+            PdfWriter.GetInstance(doc, new FileStream(@"C:\Users\Usuario\Desktop\pasaje.pdf", FileMode.Create));
             doc.Open();
-            BarcodeQRCode barcodeWrcode = new BarcodeQRCode(IDPasaje.ToString(), 1000,1000,null);
+            BarcodeQRCode barcodeWrcode = new BarcodeQRCode(IDPasaje, 1000,1000,null);
             Image codeQRImga = barcodeWrcode.GetImage();
             codeQRImga.ScaleAbsolute(200,200);
             doc.Add(codeQRImga);
             doc.Close();
         }
-        private void enviarCorreo(string correo, int IDPasaje)//generar pdf con codigo QR y enviarlo 
+        private void enviarCorreo(string correo, string IDPasaje)//generar pdf con codigo QR y enviarlo 
         {
 
             using (MailMessage emailMessage = new MailMessage())
             {
-                emailMessage.From = new MailAddress("Marcelo.Rodriguez.07.11.2020@gmail.com", "Administrador");
+                emailMessage.From = new MailAddress("UruguayBus.2020@gmail.com", "UruguayBus");
                 emailMessage.To.Add(new MailAddress(correo, "Pasajero")); //correo del pasajero
                 emailMessage.Subject = "UruguayBus";
                 emailMessage.Body = "";
                 getPdfconQR(IDPasaje);
-                emailMessage.Attachments.Add(new Attachment(@"C:\pasaje.pdf"));
+                emailMessage.Attachments.Add(new Attachment(@"C:\Users\Usuario\Desktop\pasaje.pdf"));
                 emailMessage.Priority = MailPriority.Normal;
                 using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))
                 {
                     MailClient.EnableSsl = true;
-                    MailClient.Credentials = new System.Net.NetworkCredential("Marcelo.Rodriguez.07.11.2020@gmail.com", "E%D5,d4%..T4dt5ry");
+                    MailClient.Credentials = new System.Net.NetworkCredential("UruguayBus.2020@gmail.com", "E4#r6%t,#.2E5g8");
                     MailClient.Send(emailMessage);
                 }
             }
