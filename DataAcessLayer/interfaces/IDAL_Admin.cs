@@ -10,6 +10,8 @@ namespace DataAcessLayer.interfaces
     public interface IDAL_Admin
     {
         EAdmin addAdmin(int idPersona);
+
+        EAdmin getAdmin(int id);
         List<EPersona> getAllAdmin();
 
     }

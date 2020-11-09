@@ -66,6 +66,10 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Usuario u = db.Usuario.Find(idUsuario);
+                    if (u==null)
+                    {
+                        return null;
+                    }
                     EUsuario eu = new EUsuario();
                     eu = Converter.usuarioAEUsuario(u);
                     return eu;

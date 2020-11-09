@@ -169,6 +169,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxys\ProxyAdmin.cs" />
     <Compile Include="Proxys\ProxyConductor.cs" />
+    <Compile Include="Proxys\ProxyGeneral.cs" />
     <Compile Include="Proxys\ProxyInvitado.cs" />
     <Compile Include="Proxys\ProxySuperAdmin.cs" />
     <Compile Include="Proxys\ProxyUsuario.cs" />
@@ -255,6 +256,8 @@
     <Content Include="Views\Conductor\traerParadas.cshtml" />
     <Content Include="Views\Conductor\verificarP.cshtml" />
     <Content Include="Views\Conductor\pasajeValido.cshtml" />
+    <Content Include="Views\Home\Login2.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

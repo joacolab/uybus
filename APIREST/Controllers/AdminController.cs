@@ -21,7 +21,7 @@ namespace APIREST.Controllers
         IBL_Admin cAdmin = new BL_Admin(new DAL_Linea(), new DAL_Parada(), new DAL_Salida(),
         new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
 
-        IBL_General cGeneral = new BL_General(new DAL_Viaje(),new DAL_Llegada(),new DAL_Salida(), new DAL_Linea(),new DAL_Tramo(),new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo());
+        IBL_General cGeneral = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo(), new DAL_Persona(), new DAL_Admin(), new DAL_Conductor(), new DAL_SuperAdmin());
 
         //----------------------------------Viajes----------------------------------------
         // https://localhost:44330/admin/crear/viajes
