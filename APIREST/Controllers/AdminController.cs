@@ -158,18 +158,6 @@ namespace APIREST.Controllers
 
         }
 
-     /*   //https://localhost:44330/admin/traer/vehiculo
-        //funciona
-        //https://localhost:44330/admin/traer/vehiculo?Matricula=SAF3465
-        [HttpGet]
-        [Route("traer/vehiculo")]
-        [ResponseType(typeof(List<EVehiculo>))]
-        public IHttpActionResult GetVehiculo(string matricula)
-        {
-            return Ok(cAdmin.getVehiculo(matricula)); //sin sus salidas
-        }
-     */
-
         //https://localhost:44330/admin/traer/vehiculos
         //funciona
         [HttpGet]
@@ -214,29 +202,6 @@ namespace APIREST.Controllers
             }
         }
 
-        /*
-        //https://localhost:44330/admin/editar/vehiculo?Matricula=SAF3465&Modelo=e&Marca=e&CantAsientos=11
-
-        [HttpGet]
-        [Route("editar/vehiculo")]
-        [ResponseType(typeof(EVehiculo))]
-        public IHttpActionResult editarVehiculos(string Matricula, string Modelo, string Marca, int CantAsientos)
-        {
-            try
-            {
-                EVehiculo ev = cAdmin.editarVehiculos(Marca, Modelo, Matricula, CantAsientos);
-                if (ev != null)
-                {
-                    return Ok(ev);
-                }
-                return Content(HttpStatusCode.NotFound, "La matricula ya existe");
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-        }
-        */
 
         //------------------------------------parada----------------------------------
 

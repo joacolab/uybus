@@ -40,6 +40,11 @@ namespace WebApp.Controllers
             return RedirectToAction("Index", "usuario");
         }
 
+        public RedirectToRouteResult conductor()
+        {
+            return RedirectToAction("Index", "conductor");
+        }
+
 
 
 
