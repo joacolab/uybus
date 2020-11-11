@@ -263,23 +263,64 @@ namespace WebApp.Controllers
         }
 
         //----------------------------reporte utilidad ------------------------------
+        public ActionResult SelectreporteU()
+        {
+            return View();
+        }
 
+        public ActionResult reporteV()
+        {
+            Session["reporte"] = "v";
+            return RedirectToAction("reporteUtilidad");
+        }
+
+        public ActionResult reporteS()
+        {
+            Session["reporte"] = "s";
+            return RedirectToAction("reporteUtilidad");
+        }
+
+        public ActionResult reporteL()
+        {
+            Session["reporte"] = "l";
+            return RedirectToAction("reporteUtilidad");
+        }
 
         public ActionResult reporteUtilidad()
         {
+            if (Session["reporte"].ToString() == "v") ViewBag.Message = "v";
+            if (Session["reporte"].ToString() == "s") ViewBag.Message = "s";
+            if (Session["reporte"].ToString() == "l") ViewBag.Message = "l";
             return View();
         }
 
         [HttpPost]
         public ActionResult reporteUtilidad(DTOUtilidad utilidad)
         {
-         
+            if (Session["reporte"].ToString() == "v")
+            {
+                utilidad.linea=-1;
+                utilidad.salida=-1;
+            }
+            if (Session["reporte"].ToString() == "s")
+            {
+                utilidad.idViaje = -1;
+                utilidad.linea = -1;
+            }
+            if (Session["reporte"].ToString() == "l")
+            {
+                utilidad.idViaje = -1;
+                utilidad.salida = -1;
+            }
+
             if (utilidad.fechaDesde == null) utilidad.fechaDesde = "1900,01,01";
             if (utilidad.fechaHasat == null) utilidad.fechaHasat = "1900,01,01";
             DTOUtilidadFinal ut = new DTOUtilidadFinal();
             float result = Task.Run(() => pxa.reporteUtilidad(utilidad)).Result;
-            ut.Valor = result;
+            ut.Valor = result*100;
             return RedirectToAction("verUtilidad", ut);
+
+
         }
 
 
@@ -291,14 +332,54 @@ namespace WebApp.Controllers
 
         //-----------------------------reporte pasaje -------------------------------
 
+        public ActionResult selectRepP()
+        {
+            return View();
+        }
+
+        public ActionResult reportePV()
+        {
+            Session["reporteP"] = "v";
+            return RedirectToAction("reportePasaje");
+        }
+
+        public ActionResult reportePS()
+        {
+            Session["reporteP"] = "s";
+            return RedirectToAction("reportePasaje");
+        }
+
+        public ActionResult reportePL()
+        {
+            Session["reporteP"] = "l";
+            return RedirectToAction("reportePasaje");
+        }
         public ActionResult reportePasaje()
         {
+            if (Session["reporteP"].ToString() == "v") ViewBag.Message = "v";
+            if (Session["reporteP"].ToString() == "s") ViewBag.Message = "s";
+            if (Session["reporteP"].ToString() == "l") ViewBag.Message = "l";
             return View();
         }
 
         [HttpPost]
         public ActionResult reportePasaje(DTOreportePasaje repoPasaje)
         {
+            if (Session["reporteP"].ToString() == "v")
+            {
+                repoPasaje.linea = -1;
+                repoPasaje.salida = -1;
+            }
+            if (Session["reporteP"].ToString() == "s")
+            {
+                repoPasaje.viaje = -1;
+                repoPasaje.linea = -1;
+            }
+            if (Session["reporteP"].ToString() == "l")
+            {
+                repoPasaje.viaje = -1;
+                repoPasaje.salida = -1;
+            }
             List<EPasaje> result = Task.Run(() => pxa.reportedePasaje(repoPasaje)).Result;
             return View("verReportePasaje", result);
         }
