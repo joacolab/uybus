@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Share.entities.EConductor>
+
+@{
+    ViewBag.Title = "traerCondSallida";
+}
+
+<h2>Seleccione conductor</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Id del Conductor
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id)
+    </td>
+
+    <td>
+        @Html.ActionLink("Seleccionar", "listVeic", new { id = item.Id })
+    </td>
+</tr>
+}
+
+</table>

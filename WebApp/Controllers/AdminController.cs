@@ -212,15 +212,41 @@ namespace WebApp.Controllers
         {
             return View(Task.Run(() => pxa.GetAllSalida()).Result);
         }
-               
-        public ActionResult crearSalida()
+        //-------------------crear salida--------------------
+        //listar lineas------
+        //listar vehiculos----
+        //listar conductores--
+
+        public ActionResult traerCondSallida()
         {
+            return View(Task.Run(() => pxa.GetAllConductores()).Result);
+        }
+
+        public ActionResult listVeic(int id) //id del conductor, se listan los veiculos
+        {
+            Session["conductorId"] = id;
+            return View(Task.Run(() => pxa.getAllVehiculos()).Result);
+        }
+
+        public ActionResult selecLine(string id) //matricula, se listan las lineas
+        {
+            Session["veiculoMat"] = id;
+            return View(Task.Run(() => pxa.GetAllLineas()).Result);
+        }
+        
+
+        public ActionResult crearSalida(int id)//id salida
+        {
+            Session["lineId"] = id;
             return View();
         }
 
         [HttpPost]
         public ActionResult crearSalida(DTOSalida salida)
         {
+            salida.IdLinea = (int)Session["lineId"];
+            salida.IdVehiculo = Session["veiculoMat"].ToString();
+            salida.IdConductor = (int)Session["conductorId"];
             pxa.crearSalida(salida);
             return RedirectToAction("traerSalida");
         }
