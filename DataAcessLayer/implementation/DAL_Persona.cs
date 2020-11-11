@@ -21,7 +21,7 @@ namespace DataAcessLayer.implementation
                     var personas = db.Persona;
                     foreach (var per in personas)
                     {
-                        if (per.Documento == Documento)
+                        if (per.Documento == Documento || per.Correo == Correo)
                         {
                             return null;
                         }
