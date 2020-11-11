@@ -92,20 +92,6 @@ namespace WebApp.Controllers
             return View(Task.Run(() => pxa.GetAllParada()).Result);
         }
 
-        
-        public ActionResult crearParada()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult crearParada(DTOParada parada)
-        {
-            pxa.crearParada(parada);
-            return RedirectToAction("traerParadas");
-        }
-
-        
         public ActionResult editarParada(int id)
         {
             DTOParada p = new DTOParada();
@@ -137,11 +123,74 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult crearLinea(DTOLinea linea)
         {
-            pxa.crearLinea(linea);
-            return RedirectToAction("traerLinea");
+            Session["Nuevalinea"] = pxa.crearLinea(linea);
+
+            //ELinea el = (ELinea)Session["Nuevalinea"];
+
+            return RedirectToAction("asignarParada");
+            //return RedirectToAction("traerLinea");
         }
 
-        
+        public ActionResult asignarParada()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult asignarParada(DTOTramoParada tp)
+        {
+            if (!tp.isFinal)
+            {
+                DTOParada par = new DTOParada();
+                par.IdParada = tp.IdParada;
+                par.Lat = tp.Lat;
+                par.Long = tp.Long;
+                par.Nombre = tp.Nombre;
+                EParada ep = pxa.crearParada(par);
+                DTOTramoPrecio tpre = new DTOTramoPrecio();
+                ELinea el = (ELinea)Session["Nuevalinea"];
+                tpre.IdLinea = el.IdLinea;
+                tpre.IdParada = ep.IdParada;
+                tpre.Orden =tp.Orden;
+                tpre.TiempoEstimado = tp.TiempoEstimado;
+
+                if (tp.isOrigen)
+                {
+                    tpre.FechaEntradaVigencia = "2000-01-01";
+                    tpre.Precio = 0;
+                }
+                else
+                {
+                    tpre.FechaEntradaVigencia = tp.FechaEntradaVigencia;
+                    tpre.Precio = tp.Precio;
+                }
+
+                pxa.crearTramo(tpre);
+                return View();
+            }
+            else
+            {
+                DTOParada par = new DTOParada();
+                par.IdParada = tp.IdParada;
+                par.Lat = tp.Lat;
+                par.Long = tp.Long;
+                par.Nombre = tp.Nombre;
+                EParada ep = pxa.crearParada(par);
+                DTOTramoPrecio tpre = new DTOTramoPrecio();
+                ELinea el = (ELinea)Session["Nuevalinea"];
+                tpre.IdLinea = el.IdLinea;
+                tpre.IdParada = ep.IdParada;
+                tpre.Orden = tp.Orden;
+                tpre.TiempoEstimado = tp.TiempoEstimado;
+                tpre.FechaEntradaVigencia = tp.FechaEntradaVigencia;
+                tpre.Precio = tp.Precio;
+                pxa.crearTramo(tpre);
+
+                return RedirectToAction("Index");
+            }
+        }
+
+
         public ActionResult editarLinea(int id)
         {
             DTOLinea p = new DTOLinea();
@@ -154,40 +203,6 @@ namespace WebApp.Controllers
         {
             pxa.editarLinea(linea);
             return RedirectToAction("traerLinea");
-        }
-        
-        //----------------------------tramo-------------------------------------------
-        public ActionResult traerTramo()
-        {
-            return View(Task.Run(() => pxa.GetAllTramos()).Result);
-        }
-        
-        public ActionResult crearTramo()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult crearTramo(DTOTramoPrecio dtoTramoPrecio)
-        {
-            pxa.crearTramo(dtoTramoPrecio);
-            return RedirectToAction("traerTramo");
-        }
-
-             
-        public ActionResult editarTramo(int id, int id2)
-        {
-            DTOTramo p = new DTOTramo();
-            p.IdLinea = id2;
-            p.IdParada = id;
-            return View(p);
-        }
-
-        [HttpPost]
-        public ActionResult editarTramo(DTOTramo tramo)
-        {
-            pxa.editarTramo(tramo);
-            return RedirectToAction("traerTramo");
         }
         
 

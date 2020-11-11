@@ -17,8 +17,7 @@ namespace WebApp.Proxys
             
             using (var client = new HttpClient())
             {
-                var httpClient = new HttpClient();
-                var task = httpClient.PostAsJsonAsync(Baseurl + "login", log)
+                var task = client.PostAsJsonAsync(Baseurl + "login", log)
                          .ContinueWith(x => x.Result.Content.ReadAsAsync<bool>().Result);
                 task.Wait();
                 bool response = task.Result;

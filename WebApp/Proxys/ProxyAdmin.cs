@@ -132,7 +132,7 @@ namespace WebApp.Proxys
                 return eParada;
             }
         }
-        public void crearParada(DTOParada DTOparada)
+        public EParada crearParada(DTOParada DTOparada)
         {
             using (var client = new HttpClient())
             {
@@ -140,6 +140,8 @@ namespace WebApp.Proxys
                 var postTask = client.PostAsJsonAsync<DTOParada>("parada", DTOparada);
                 postTask.Wait();
                 var result = postTask.Result;
+
+                return result.Content.ReadAsAsync<EParada>().Result;
             }
         }
         
@@ -177,7 +179,7 @@ namespace WebApp.Proxys
             }
         }
  
-         public void crearLinea(DTOLinea linea)
+         public ELinea crearLinea(DTOLinea linea)
          {
             using (var client = new HttpClient())
             {
@@ -185,8 +187,13 @@ namespace WebApp.Proxys
                 var postTask = client.PostAsJsonAsync<DTOLinea>("linea", linea);
                 postTask.Wait();
                 var result = postTask.Result;
+
+                return result.Content.ReadAsAsync<ELinea>().Result;
             }
+            
          }
+
+
 
         
         public void editarLinea(DTOLinea linea)
@@ -222,7 +229,7 @@ namespace WebApp.Proxys
             }
         }
     
-         public void crearTramo(DTOTramoPrecio tramo)
+         public ETramo crearTramo(DTOTramoPrecio tramo)
          {
              using (var client = new HttpClient())
 
@@ -231,7 +238,9 @@ namespace WebApp.Proxys
                  var postTask = client.PostAsJsonAsync< DTOTramoPrecio> ("tramo", tramo);
                  postTask.Wait();
                  var result = postTask.Result;
-             }
+
+                return result.Content.ReadAsAsync<ETramo>().Result;
+            }
          }
         
 

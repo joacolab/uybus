@@ -56,6 +56,7 @@
     <Compile Include="DTOs\DTORolPersona.cs" />
     <Compile Include="DTOs\DTOSalida.cs" />
     <Compile Include="DTOs\DTOTramo.cs" />
+    <Compile Include="DTOs\DTOTramoParada.cs" />
     <Compile Include="DTOs\DTOTramoPrecio.cs" />
     <Compile Include="DTOs\DTOubicacion.cs" />
     <Compile Include="DTOs\DTOUtilidad.cs" />

@@ -1,0 +1,133 @@
+﻿@model Share.DTOs.DTOTramoParada
+
+@{
+    ViewBag.Title = "asignarParada";
+}
+
+<h2>Ingrese parada</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Lat,"Latitud", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Lat, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Lat, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Long, "Longitud", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Long, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Long, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Orden, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Orden, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Orden, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.isOrigen,"¿Es la parada de origen?", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.isOrigen, new { htmlAttributes = new { id = "isOrigen", @onclick = "buttonValue()" } } )
+                @Html.ValidationMessageFor(model => model.isOrigen, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function buttonValue() {
+            var val = document.getElementById("isOrigen").value;
+            if (val == 'true') {
+                document.getElementById("el1").style.display = 'none';
+                document.getElementById("el2").style.display = 'none';
+                document.getElementById("el3").style.display = 'none';
+                document.getElementById("el4").style.display = 'none';
+                document.getElementById("isOrigen").value = false;
+            } else {
+                document.getElementById("el1").style.display = 'block';
+                document.getElementById("el2").style.display = 'block';
+                document.getElementById("el3").style.display = 'block';
+                document.getElementById("el4").style.display = 'block';
+                document.getElementById("isOrigen").value = true;
+            }
+
+        }
+
+
+    </script>
+
+    
+    <div class="form-group" id="el1">
+        @Html.LabelFor(model => model.TiempoEstimado,"Tiempo estimado (minutos)", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TiempoEstimado, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TiempoEstimado, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group" id="el2">
+        @Html.LabelFor(model => model.Precio,"Precio (UYU)", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" id="el3">
+        @Html.LabelFor(model => model.FechaEntradaVigencia,"Entrada en vigencia", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FechaEntradaVigencia, new { htmlAttributes = new { @class = "form-control", @type="Date" } })
+            @Html.ValidationMessageFor(model => model.FechaEntradaVigencia, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" id="el4">
+        @Html.LabelFor(model => model.isFinal,"¿Es la parada Final?", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.isFinal)
+                @Html.ValidationMessageFor(model => model.isFinal, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Agregar" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("ir al inicio", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
