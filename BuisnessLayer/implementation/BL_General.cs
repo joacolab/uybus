@@ -159,21 +159,16 @@ namespace BuisnessLayer.implementation
 
         private float utilidadPorSalida(int salida, List<DateTime> fechas)
         {
-            List<EViaje> viajesValidos = new List<EViaje>();
-
-            foreach (var tViaje in iViaje.getAllViajes())
+            float costo = 0;
+            foreach (var viaje in iSalida.getSalidas(salida).Viaje.ToList())
             {
-                foreach (var viaje in iSalida.getSalidas(salida).Viaje.ToList())
+                if (fechas.Contains(viaje.Fecha))
                 {
-                    if (DateTime.Compare(tViaje.Fecha, viaje.Fecha) == 0) viajesValidos.Add(viaje);
+                    costo = costo + utilidadPorViaje(viaje.IdViaje);
                 }
             }
-            float costo = 0;
-            foreach (var viaje in viajesValidos)
-            {
-                costo = costo + utilidadPorViaje(viaje.IdViaje);
-            }
             return costo;
+ 
         }
         private float utilidadPorLinea(int linea, List<DateTime> fechas)
         {
