@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApp.Proxys;
+using MercadoPago;
+using MercadoPago.Resources;
+using MercadoPago.DataStructures.Preference;
+using MercadoPago.Common;
 
 namespace WebApp.Controllers
 {
@@ -123,6 +127,8 @@ namespace WebApp.Controllers
             pasaje.tipoDoc = p.tipoDoc.ToString();
 
             pasaje.idUsuario = -1; //usuario no logeado, arreglar esto <<<<---------!!!!--------------
+            pxu.comprarPasaje(pasaje); // se complra el pasaje
+            Session.Clear();//flush session
 
             if (Session["idPersona"] != null)
             {
@@ -150,6 +156,58 @@ namespace WebApp.Controllers
             Session["idUsuario"] = 2; // arreglar esto <<<< --------------------- !!!!!
             int idUsuario = (int)Session["idUsuario"]; // esto no iria
             return View(Task.Run(() => pxu.proximoVehiculo(idUsuario,id)).Result);
+        }
+
+        private void realizarPago()
+        {
+
+            Payer pagodor = new Payer()
+            {
+                Name = "Charles",
+                Surname = "Luevano",
+                Email = "charles@hotmail.com",
+                Phone = new Phone()
+                {
+                    AreaCode = "",
+                    Number = "949 128 866"
+                },
+
+                Identification = new Identification()
+                {
+                    Type = "DNI",
+                    Number = "12345678"
+                },
+
+                Address = new Address()
+                {
+                    StreetName = "Cuesta Miguel Armendáriz",
+                    StreetNumber = int.Parse("1004"),
+                    ZipCode = "11020"
+                }
+            };
+            // Agrega credenciales
+            MercadoPago.SDK.AccessToken = "TEST-7973387597353528-111100-22a223faad023d7803c3d6cbcd7842e8-247519004";
+            // Crea un objeto de preferencia
+            Preference preference = new Preference();
+            // Crea un ítem en la preferencia
+            preference.Items.Add(
+              new Item()
+              {
+                  Title = "Mi producto",
+                  Quantity = 1,
+                  CurrencyId = CurrencyId.UYU,
+                  UnitPrice = (decimal)75.56
+              }
+            );
+            //define las urls de retorno
+            preference.BackUrls = new BackUrls()
+            {
+                Success = "https://www.tu-sitio/success",
+                Failure = "http://www.tu-sitio/failure",
+                Pending = "http://www.tu-sitio/pendings"
+            };
+            preference.AutoReturn = AutoReturnType.approved;
+            preference.Save();
         }
         
 
