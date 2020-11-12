@@ -13,7 +13,6 @@ namespace WebApp.Controllers
     public class AdminController : Controller
     {
         private ProxyAdmin pxa = new ProxyAdmin();
-
         public ActionResult Index()
         {
             return View();
@@ -111,26 +110,44 @@ namespace WebApp.Controllers
 
         public ActionResult traerLinea()
         {
+            Session["Nuevalinea"] = null;
+            Session["selecParadaId"] = null;
+            Session["errorNLinea"] = null;
+            Session["ordenParada"] = null;
             return View(Task.Run(() => pxa.GetAllLineas()).Result);
         }
 
         
         public ActionResult crearLinea()
         {
+            if (Session["errorNLinea"]!=null)
+            {
+                ViewBag.Message = Session["errorNLinea"];
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult crearLinea(DTOLinea linea)
         {
+            foreach (var li in Task.Run(() => pxa.GetAllLineas()).Result)
+            {
+                if (linea.Nombre == li.Nombre)
+                {
+                    Session["errorNLinea"] = "Ya existe una linea con ese nombre";
+                    return RedirectToAction("crearLinea");
+                }
+            }
             Session["Nuevalinea"] = pxa.crearLinea(linea).IdLinea;
-
             return RedirectToAction("traerParadaL");//lista las paradas
         }
 
         public ActionResult traerParadaL()
         {
-            return View(Task.Run(() => pxa.GetAllParada()).Result);
+
+            List<EParada> paradas = Task.Run(() => pxa.GetAllParada()).Result;
+
+            return View(paradas);
         }
 
         public ActionResult asignarParada(int id)
@@ -142,22 +159,33 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult asignarParada(DTOTramoParada tp)
         {
+            if (Session["ordenParada"]==null)
+            {
+                Session["ordenParada"] = 2;
+            }
+
             if (!tp.isFinal)
             {
 
                 DTOTramoPrecio tpre = new DTOTramoPrecio();
                 tpre.IdLinea = (int)Session["Nuevalinea"];
                 tpre.IdParada = (int)Session["selecParadaId"];
-                tpre.Orden =tp.Orden;
+                //tpre.Orden =tp.Orden;
 
                 if (tp.isOrigen)
                 {
+                    tpre.Orden = 1;
+
                     tpre.TiempoEstimado = 0;
                     tpre.FechaEntradaVigencia = "2000-01-01";
                     tpre.Precio = 0;
                 }
                 else
                 {
+
+                    tpre.Orden = (int)Session["ordenParada"];
+                    Session["ordenParada"] = (int)Session["ordenParada"] + 1;
+
                     tpre.TiempoEstimado = tp.TiempoEstimado;
                     tpre.FechaEntradaVigencia = tp.FechaEntradaVigencia;
                     tpre.Precio = tp.Precio;
@@ -171,12 +199,15 @@ namespace WebApp.Controllers
                 DTOTramoPrecio tpre = new DTOTramoPrecio();
                 tpre.IdLinea = (int)Session["Nuevalinea"];
                 tpre.IdParada = (int)Session["selecParadaId"];
-                tpre.Orden = tp.Orden;
+                tpre.Orden = (int)Session["ordenParada"];
                 tpre.TiempoEstimado = tp.TiempoEstimado;
                 tpre.FechaEntradaVigencia = tp.FechaEntradaVigencia;
                 tpre.Precio = tp.Precio;
                 pxa.crearTramo(tpre);
-
+                Session["ordenParada"] = null;
+                Session["Nuevalinea"] = null;
+                Session["selecParadaId"] = null;
+                Session["errorNLinea"] = null;
                 return RedirectToAction("Index");
             }
         }
