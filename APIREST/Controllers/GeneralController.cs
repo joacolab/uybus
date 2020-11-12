@@ -17,6 +17,7 @@ namespace APIREST.Controllers
     {
         IBL_General cGeneral = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo(), new DAL_Persona(), new DAL_Admin(), new DAL_Conductor(), new DAL_SuperAdmin());
 
+
         //----------------------------------Viajes----------------------------------------
         // https://localhost:44330/general/login
         //funciona

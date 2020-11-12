@@ -9,8 +9,31 @@ using System.Threading.Tasks;
 
 namespace DataAcessLayer.implementation
 {
+
     public class DAL_Usuario : IDAL_Usuario
     {
+        public bool verificarCorreo(string email)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    var personas = db.Persona;
+                    foreach (var per in personas)
+                    {
+                        if (per.Correo == email)
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
         public EUsuario addUsuario(int idPersona)
         {
             try

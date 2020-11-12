@@ -110,7 +110,7 @@ namespace BuisnessLayer.implementation
                 enviarCorreo("julio.arrieta@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
                 //enviarCorreo("lucas.garrido@utec.edu.uy", "https://4.bp.blogspot.com/_xukD7iTXxKo/R6kUSmPim-I/AAAAAAAAAFg/JDYuhXlPdHA/s320/perros+culiando.jpg");//generar pdf con codigo QR y enviarlo
                 //enviarCorreo("gustavo.cerdena@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
-                //enviarCorreo("suarezjoaquinluis@gmail.com", "https://4.bp.blogspot.com/_xukD7iTXxKo/R6kUSmPim-I/AAAAAAAAAFg/JDYuhXlPdHA/s320/perros+culiando.jpg");//generar pdf con codigo QR y enviarlo
+                enviarCorreo("karloxx09@gmail.com", "asfsfsf");//generar pdf con codigo QR y enviarlo
             }
             else //Usuario Logeado
             {
@@ -123,15 +123,16 @@ namespace BuisnessLayer.implementation
                 enviarCorreo(iPersona.getPersona(idUsuario).Correo, ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo 
             }
 
-
             return ep;
            
         }
         private void getPdfconQR(string IDPasaje)
         {
             Document doc = new Document(PageSize.A4);
-            string path = Directory.GetCurrentDirectory();
-            PdfWriter.GetInstance(doc, new FileStream( path + @"pdf\pasaje.pdf", FileMode.Create));
+            //string path = Directory.GetCurrentDirectory();
+            //PdfWriter.GetInstance(doc, new FileStream( path + @"pdf\pasaje.pdf", FileMode.Create));
+            string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
+            PdfWriter.GetInstance(doc, new FileStream(outputFile, FileMode.Create));
             doc.Open();
             BarcodeQRCode barcodeWrcode = new BarcodeQRCode(IDPasaje, 1000,1000,null);
             Image codeQRImga = barcodeWrcode.GetImage();
@@ -151,6 +152,8 @@ namespace BuisnessLayer.implementation
                 getPdfconQR(IDPasaje);
                 string path = Directory.GetCurrentDirectory();
                 emailMessage.Attachments.Add(new Attachment(path + @"\pdf\pasaje.pdf"));
+                string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
+                emailMessage.Attachments.Add(new Attachment(outputFile));
                 emailMessage.Priority = MailPriority.Normal;
                 using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))
                 {

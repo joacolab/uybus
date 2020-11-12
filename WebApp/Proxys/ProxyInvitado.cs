@@ -11,7 +11,15 @@ namespace WebApp.Proxys
     {
         public string Baseurl = "https://localhost:44330/invitado/";
 
-
+        public bool existEmail(string correo)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.PostAsJsonAsync(Baseurl + "verificar", correo).Result;
+                bool returnValue = response.Content.ReadAsAsync<bool>().Result;
+                return returnValue;
+            }
+        }
 
         public void crearPersona(EPersona registrarse)
         {
