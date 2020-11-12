@@ -104,6 +104,10 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Conductor conductor = db.Conductor.Find(idConductor);
+                    if (conductor == null)
+                    {
+                        return null;
+                    }
                     return Converter.conductorAEConductor(conductor);
                 }
             }

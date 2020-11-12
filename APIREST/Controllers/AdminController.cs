@@ -21,7 +21,7 @@ namespace APIREST.Controllers
         IBL_Admin cAdmin = new BL_Admin(new DAL_Linea(), new DAL_Parada(), new DAL_Salida(),
         new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
 
-        IBL_General cGeneral = new BL_General(new DAL_Viaje(),new DAL_Llegada(),new DAL_Salida(), new DAL_Linea(),new DAL_Tramo(),new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo());
+        IBL_General cGeneral = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo(), new DAL_Persona(), new DAL_Admin(), new DAL_Conductor(), new DAL_SuperAdmin());
 
         //----------------------------------Viajes----------------------------------------
         // https://localhost:44330/admin/crear/viajes
@@ -158,18 +158,6 @@ namespace APIREST.Controllers
 
         }
 
-     /*   //https://localhost:44330/admin/traer/vehiculo
-        //funciona
-        //https://localhost:44330/admin/traer/vehiculo?Matricula=SAF3465
-        [HttpGet]
-        [Route("traer/vehiculo")]
-        [ResponseType(typeof(List<EVehiculo>))]
-        public IHttpActionResult GetVehiculo(string matricula)
-        {
-            return Ok(cAdmin.getVehiculo(matricula)); //sin sus salidas
-        }
-     */
-
         //https://localhost:44330/admin/traer/vehiculos
         //funciona
         [HttpGet]
@@ -214,29 +202,6 @@ namespace APIREST.Controllers
             }
         }
 
-        /*
-        //https://localhost:44330/admin/editar/vehiculo?Matricula=SAF3465&Modelo=e&Marca=e&CantAsientos=11
-
-        [HttpGet]
-        [Route("editar/vehiculo")]
-        [ResponseType(typeof(EVehiculo))]
-        public IHttpActionResult editarVehiculos(string Matricula, string Modelo, string Marca, int CantAsientos)
-        {
-            try
-            {
-                EVehiculo ev = cAdmin.editarVehiculos(Marca, Modelo, Matricula, CantAsientos);
-                if (ev != null)
-                {
-                    return Ok(ev);
-                }
-                return Content(HttpStatusCode.NotFound, "La matricula ya existe");
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-        }
-        */
 
         //------------------------------------parada----------------------------------
 
@@ -656,6 +621,42 @@ namespace APIREST.Controllers
 
 
         //-----------------------------reporte pasaje -------------------------------
+
+        //https://localhost:44330/admin/reportePasaje
+        /*
+         {
+            "fechaDesde" : "2020-12-01",
+            "fechaHasta" : "2020-12-04",
+            "linea" : 1,
+            "salida" : -1,
+            "viaje": -1
+        }
+        */
+        [HttpPost]
+        [Route("reportePasaje")]
+        [ResponseType(typeof(List<EPasaje>))]
+        public IHttpActionResult reportePasaje([FromBody] DTOreportePasaje repoPasaje)
+        {
+
+            try
+            {
+                string strfechaDesde = repoPasaje.fechaDesde;
+                string strfechaHasta = repoPasaje.fechaHasta;
+                if (repoPasaje.fechaDesde == null || repoPasaje.fechaHasta == null)
+                {
+                    strfechaDesde = "1900,01,01";
+                    strfechaHasta = "1900,01,01";
+                }
+                List<EPasaje> EPasajes = cGeneral.reposrtesPasajes(Convert.ToDateTime(strfechaDesde), Convert.ToDateTime(strfechaHasta), repoPasaje.linea, repoPasaje.salida, repoPasaje.viaje);
+
+                return Ok(EPasajes);
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
+        }
 
     }
 }

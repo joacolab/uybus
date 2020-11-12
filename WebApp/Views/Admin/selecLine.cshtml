@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Share.entities.ELinea>
+
+@{
+    ViewBag.Title = "selecLine";
+}
+
+<h2>Seleccione linea</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Seleccionar", "crearSalida", new {  id=item.IdLinea  }) 
+        </td>
+    </tr>
+}
+
+</table>

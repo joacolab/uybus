@@ -2,11 +2,16 @@
 using DataAcessLayer;
 using DataAcessLayer.implementation;
 using DataAcessLayer.interfaces;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Share.DTOs;
 using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -98,9 +103,14 @@ namespace BuisnessLayer.implementation
             EPasaje ep = new EPasaje();
             if (idUsuario == -1) //Usuario NOO logeado
             {
-
-              
                 ep = iPasaje.addPasaje(asiento, documento, tipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
+
+                //esto no va, es una prueba, codigo pelotas
+                //enviarCorreo("juan.alvarez@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo 
+                //enviarCorreo("julio.arrieta@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
+                //enviarCorreo("lucas.garrido@utec.edu.uy", "https://4.bp.blogspot.com/_xukD7iTXxKo/R6kUSmPim-I/AAAAAAAAAFg/JDYuhXlPdHA/s320/perros+culiando.jpg");//generar pdf con codigo QR y enviarlo
+                //enviarCorreo("gustavo.cerdena@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
+                //enviarCorreo("suarezjoaquinluis@gmail.com", "https://4.bp.blogspot.com/_xukD7iTXxKo/R6kUSmPim-I/AAAAAAAAAFg/JDYuhXlPdHA/s320/perros+culiando.jpg");//generar pdf con codigo QR y enviarlo
             }
             else //Usuario Logeado
             {
@@ -110,10 +120,43 @@ namespace BuisnessLayer.implementation
                 else strTipoDoc = "Credencial";
 
                 ep = iPasaje.addPasaje(asiento, epe.Documento, strTipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
-                
+                enviarCorreo(iPersona.getPersona(idUsuario).Correo, ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo 
             }
+
+
             return ep;
            
+        }
+        private void getPdfconQR(string IDPasaje)
+        {
+            Document doc = new Document(PageSize.A4);
+            PdfWriter.GetInstance(doc, new FileStream(@"C:\Users\Usuario\Desktop\pasaje.pdf", FileMode.Create));
+            doc.Open();
+            BarcodeQRCode barcodeWrcode = new BarcodeQRCode(IDPasaje, 1000,1000,null);
+            Image codeQRImga = barcodeWrcode.GetImage();
+            codeQRImga.ScaleAbsolute(200,200);
+            doc.Add(codeQRImga);
+            doc.Close();
+        }
+        private void enviarCorreo(string correo, string IDPasaje)//generar pdf con codigo QR y enviarlo 
+        {
+
+            using (MailMessage emailMessage = new MailMessage())
+            {
+                emailMessage.From = new MailAddress("UruguayBus.2020@gmail.com", "UruguayBus");
+                emailMessage.To.Add(new MailAddress(correo, "Pasajero")); //correo del pasajero
+                emailMessage.Subject = "UruguayBus";
+                emailMessage.Body = "";
+                getPdfconQR(IDPasaje);
+                emailMessage.Attachments.Add(new Attachment(@"C:\Users\Usuario\Desktop\pasaje.pdf"));
+                emailMessage.Priority = MailPriority.Normal;
+                using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    MailClient.EnableSsl = true;
+                    MailClient.Credentials = new System.Net.NetworkCredential("UruguayBus.2020@gmail.com", "E4#r6%t,#.2E5g8");
+                    MailClient.Send(emailMessage);
+                }
+            }
         }
 
         private int getOrd(List<ETramo> tramos, int ord)
@@ -196,14 +239,21 @@ namespace BuisnessLayer.implementation
                 foreach (var miV in misViajs)
                 {
                     DTOproxVehiculo proxV = new DTOproxVehiculo();
+                    proxV.linea = iLinea.getLinea(iSalida.getSalidas(miV.IdSalida).IdLinea).Nombre;
                     proxV.Vehiculo = iVehiculo.getVehiculos(iSalida.getSalidas(viaje.IdSalida).IdVehiculo);
                     if (viaje.IdViaje == miV.IdViaje) proxV.reservado = true;
                     else proxV.reservado = false;
                     proxVs.Add(proxV);
                 }
             }
+            
+            List<DTOproxVehiculo> proximos = proxVs
+                  .GroupBy(p => p.Vehiculo.Matricula)
+                  .Select(g => g.First())
+                  .ToList();
 
-            return proxVs;
+            return proximos;
+            
         }
 
         public List<ELinea> listarLineas()
@@ -231,7 +281,46 @@ namespace BuisnessLayer.implementation
             return iSalida.getSalidas(IdSalida).Viaje.ToList();
         }
 
-        public List<EParada> listarParadas(int IdLinea)
+        private List<EParada> sinPuntas( ELinea linea)
+        {
+            List<EParada> lstParadas = new List<EParada>();
+
+            List<ETramo> lstTramos = linea.Tramo.ToList();
+
+            List<ETramo> SortedList = lstTramos.OrderBy(o => o.Orden).ToList();
+
+            int ultimoTramo = SortedList.Count() - 1;
+
+            SortedList.RemoveAt(ultimoTramo);
+            SortedList.RemoveAt(0);
+
+            foreach (var tramo in SortedList)
+            {
+                lstParadas.Add(iParada.getParada(tramo.IdParada));
+            }
+            return lstParadas;
+        }
+
+        public List<EParada> sinTerminales() //todas la paradas menos las terminales.
+        {
+            List<EParada> sinTerminales = new List<EParada>();
+            foreach (var linea in iLinea.getAllLineas())
+            {
+                foreach (var parada in sinPuntas(linea))
+                {
+                    sinTerminales.Add(parada);
+                }
+            }
+            List<EParada> sinTerNiRep = sinTerminales
+                  .GroupBy(p => p.IdParada)
+                  .Select(g => g.First())
+                  .ToList();
+
+            //List<EParada> sinTerNiRep = sinTerminales.Distinct().ToList();
+            return sinTerNiRep;
+        }
+
+        public List<EParada> listarParadas(int IdLinea) //todas la paradas menos la terminal de salida
         {
             List<EParada> lstParadas = new List<EParada>();
             ELinea linea =  iLinea.getLinea(IdLinea);
@@ -250,7 +339,7 @@ namespace BuisnessLayer.implementation
             return lstParadas;
         }
 
-        public List<EParada> listarParadasD(int IdLinea, int IdParada)
+        public List<EParada> listarParadasD(int IdLinea, int IdParada)//todas la paradas menos la terminal de llegada
         {
 
             ETramo tramoOrigen = new ETramo();

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Share.entities.EViaje>
+
+@{
+    ViewBag.Title = "traerViajes";
+}
+
+<h2>Seleccione Viaje</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Id Viaje
+        </th>
+        <th>
+            Fecha
+        </th>
+        <th>
+            Hora real de Inicio
+        </th>
+        <th>
+            Id Salida
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    @if (@item.Finalizado == 0)
+    {
+        <td>
+            @Html.DisplayFor(modelItem => item.IdViaje)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraInicioReal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdSalida)
+        </td>
+    }
+
+    <td>
+        @Html.ActionLink("Seleccionar", "iniciarViaje", new {  id=item.IdViaje })
+    </td>
+</tr>
+}
+
+</table>

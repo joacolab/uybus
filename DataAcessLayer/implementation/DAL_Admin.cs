@@ -34,6 +34,30 @@ namespace DataAcessLayer.implementation
             }
         }
 
+        public EAdmin getAdmin(int id)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    Admin adm = db.Admin.Find(id);
+                    if (adm==null)
+                    {
+                        return null;
+                    }
+                    EAdmin ed = new EAdmin();
+                    ed.Id = adm.Id;
+
+                    return ed;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error en DAL_Conductor. Método: getConductor " + e.Message);
+                throw e;
+            }
+        }
+
         public List<EPersona> getAllAdmin()
         {
             try

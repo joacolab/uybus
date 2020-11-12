@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Share.DTOs;
 using Share.entities;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,50 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebSockets;
+using WebApp.Proxys;
 
 namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-
+        private ProxyGeneral pxg = new ProxyGeneral();
         public ActionResult Index()
         {
             return View();
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(DTOLogForm logf)
+        {
+            DTOLogin log = new DTOLogin();
+
+            log.email = logf.email;
+            log.password = logf.password;
+            log.rol = logf.rol.ToString();
+
+            /*DTOLogin log = new DTOLogin();
+            log.email = "ConductorGuille@gmail.com";
+            log.password = "1234";
+            log.rol = "Conductor";*/
+
+            bool res = pxg.iniciarSesion(log);
+            if (!res)
+            {
+                ViewBag.Message = "Usuario no registrado";
+                return View();
+            }
+            else
+            {
+
+                return View("Index");
+            }
+        }
+
 
         public RedirectToRouteResult Admin()
         {
@@ -35,10 +70,20 @@ namespace WebApp.Controllers
             return RedirectToAction("Index", "superAdmin");
         }
 
+        public RedirectToRouteResult usuario()
+        {
+            return RedirectToAction("Index", "usuario");
+        }
+
+        public RedirectToRouteResult conductor()
+        {
+            return RedirectToAction("Index", "conductor");
+        }
 
 
 
-        
+
+
 
         public ActionResult About()
         {

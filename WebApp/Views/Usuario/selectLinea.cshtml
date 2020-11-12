@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Share.entities.EParada>
+
+@{
+    ViewBag.Title = "ViewselectLinea";
+}
+
+<h2>Seleccione parada de origen</h2>
+
+<table class="table">
+    <tr>
+        
+        <th>
+            Paradas:
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Seleccionar", "selectPOrigen", new { id=item.IdParada })
+        </td>
+    </tr>
+}
+
+</table>

@@ -68,6 +68,10 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     SuperAdmin supa = db.SuperAdmin.Find(idSuperAdmin);
+                    if (supa == null)
+                    {
+                        return null;
+                    }
                     ESuperAdmin Esupa = new ESuperAdmin();
                     Esupa.Id = supa.Id;
                     return Esupa;

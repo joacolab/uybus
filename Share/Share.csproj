@@ -41,17 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\DTOCompPasaje.cs" />
     <Compile Include="DTOs\DTOComprarPasaje.cs" />
     <Compile Include="DTOs\DTOCrearViajes.cs" />
     <Compile Include="DTOs\DTOLinea.cs" />
+    <Compile Include="DTOs\DTOLogForm.cs" />
+    <Compile Include="DTOs\DTOLogin.cs" />
     <Compile Include="DTOs\DTOParada.cs" />
     <Compile Include="DTOs\DTOPersona.cs" />
     <Compile Include="DTOs\DTOPersonaRol.cs" />
     <Compile Include="DTOs\DTOproxVehiculo.cs" />
     <Compile Include="DTOs\DTORegistro.cs" />
+    <Compile Include="DTOs\DTOreportePasaje.cs" />
     <Compile Include="DTOs\DTORolPersona.cs" />
     <Compile Include="DTOs\DTOSalida.cs" />
     <Compile Include="DTOs\DTOTramo.cs" />
+    <Compile Include="DTOs\DTOTramoParada.cs" />
     <Compile Include="DTOs\DTOTramoPrecio.cs" />
     <Compile Include="DTOs\DTOubicacion.cs" />
     <Compile Include="DTOs\DTOUtilidad.cs" />

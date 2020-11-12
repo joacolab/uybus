@@ -10,6 +10,7 @@ namespace BuisnessLayer.interfaces
 {
     public interface IBL_Usuario
     {
+        List<EParada> sinTerminales();
         List<ELinea> listarLineas();
         List<EParada> listarParadas(int IdLinea);
 

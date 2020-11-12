@@ -62,28 +62,65 @@ namespace BuisnessLayer.implementation
             return iPersona.getAllPersona();
         }
 
+        public DTOubicacion ultimaFechaYHora(string matricula, List<DTOubicacion> lstdto)
+        {
+            List<DTOubicacion> ve = new List<DTOubicacion>();
+            foreach (var item in lstdto)
+            {
+                if (item.matricula == matricula)
+                {
+                    ve.Add(item);
+                }
+            }
+            DTOubicacion ultimaFecha = ve.OrderByDescending(x => x.fecha).FirstOrDefault();
+
+
+            List<DTOubicacion> vev = new List<DTOubicacion>();
+            foreach (var item in lstdto)
+            {
+                if (item.matricula == ultimaFecha.matricula && item.fecha == ultimaFecha.fecha)
+                {
+                    vev.Add(item);
+                }
+            }
+
+            DTOubicacion ultimaHora = vev.OrderByDescending(x => x.hora).FirstOrDefault();
+
+            return ultimaHora;
+        }
         public List<DTOubicacion> ubicarVehiculo()
         {
             List<DTOubicacion> lstDto = new List<DTOubicacion>();
+
             List<ELlegada> lstLL = iLlegada.getAllLlegadas();
 
             foreach (var l in lstLL)
             {
-                /*
-                EViaje evi = iViaje.getViaje(l.idViaje);
-                ESalida esa = iSalida.getSalidas(evi.IdSalida);
-                EVehiculo eve = iVehiculo.getVehiculos(esa.IdVehiculo);
-                string mat = eve.Matricula;
-                */
                 DTOubicacion dtou = new DTOubicacion();
 
                 dtou.matricula = iVehiculo.getVehiculos(iSalida.getSalidas(iViaje.getViaje(l.idViaje).IdSalida).IdVehiculo).Matricula;
                 dtou.lat = iParada.getParada(l.idParada).Lat;
                 dtou.lon = iParada.getParada(l.idParada).Long;
                 dtou.hora = l.hora;
+                dtou.fecha = l.fecha;
                 lstDto.Add(dtou);
             }
-            return lstDto;
+
+            List<string> matriculas = new List<string>();
+            foreach (var dtoo in lstDto)
+            {
+                matriculas.Add(dtoo.matricula);
+            }
+            List<string> matriculasUncas = matriculas.Distinct().ToList();
+
+            List<DTOubicacion> lstdtoFinal = new List<DTOubicacion>();
+            foreach (var matU in matriculasUncas)
+            {
+                DTOubicacion ultimaFechaYHoras = ultimaFechaYHora(matU, lstDto);
+                lstdtoFinal.Add(ultimaFechaYHoras);
+            }
+
+            return lstdtoFinal;
         }
     }
 }

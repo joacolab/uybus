@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Share.DTOs.DTOproxVehiculo>
+
+@{
+    ViewBag.Title = "verVehiculoP";
+}
+
+<h2>Próximos vehículos:</h2>
+
+<h4>Reservados en rojo.</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            Matricula
+        </th>
+        <th>
+            Linea
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @if (item.reservado)
+        {
+            <h3 style="color: rgb(255, 0, 0)"> @Html.DisplayFor(modelItem => item.Vehiculo.Matricula)</h3>
+        }
+        else
+        {
+            <h3> @Html.DisplayFor(modelItem => item.Vehiculo.Matricula)</h3>
+        }
+
+    </td>
+    <th>
+        <h3> @Html.DisplayFor(modelItem => item.linea)</h3>
+    </th>
+
+
+</tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Atrás", "proxVehiculos")
+</div>

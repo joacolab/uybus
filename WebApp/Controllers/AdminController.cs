@@ -92,20 +92,6 @@ namespace WebApp.Controllers
             return View(Task.Run(() => pxa.GetAllParada()).Result);
         }
 
-        
-        public ActionResult crearParada()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult crearParada(DTOParada parada)
-        {
-            pxa.crearParada(parada);
-            return RedirectToAction("traerParadas");
-        }
-
-        
         public ActionResult editarParada(int id)
         {
             DTOParada p = new DTOParada();
@@ -137,11 +123,74 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult crearLinea(DTOLinea linea)
         {
-            pxa.crearLinea(linea);
-            return RedirectToAction("traerLinea");
+            Session["Nuevalinea"] = pxa.crearLinea(linea);
+
+            //ELinea el = (ELinea)Session["Nuevalinea"];
+
+            return RedirectToAction("asignarParada");
+            //return RedirectToAction("traerLinea");
         }
 
-        
+        public ActionResult asignarParada()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult asignarParada(DTOTramoParada tp)
+        {
+            if (!tp.isFinal)
+            {
+                DTOParada par = new DTOParada();
+                par.IdParada = tp.IdParada;
+                par.Lat = tp.Lat;
+                par.Long = tp.Long;
+                par.Nombre = tp.Nombre;
+                EParada ep = pxa.crearParada(par);
+                DTOTramoPrecio tpre = new DTOTramoPrecio();
+                ELinea el = (ELinea)Session["Nuevalinea"];
+                tpre.IdLinea = el.IdLinea;
+                tpre.IdParada = ep.IdParada;
+                tpre.Orden =tp.Orden;
+                tpre.TiempoEstimado = tp.TiempoEstimado;
+
+                if (tp.isOrigen)
+                {
+                    tpre.FechaEntradaVigencia = "2000-01-01";
+                    tpre.Precio = 0;
+                }
+                else
+                {
+                    tpre.FechaEntradaVigencia = tp.FechaEntradaVigencia;
+                    tpre.Precio = tp.Precio;
+                }
+
+                pxa.crearTramo(tpre);
+                return View();
+            }
+            else
+            {
+                DTOParada par = new DTOParada();
+                par.IdParada = tp.IdParada;
+                par.Lat = tp.Lat;
+                par.Long = tp.Long;
+                par.Nombre = tp.Nombre;
+                EParada ep = pxa.crearParada(par);
+                DTOTramoPrecio tpre = new DTOTramoPrecio();
+                ELinea el = (ELinea)Session["Nuevalinea"];
+                tpre.IdLinea = el.IdLinea;
+                tpre.IdParada = ep.IdParada;
+                tpre.Orden = tp.Orden;
+                tpre.TiempoEstimado = tp.TiempoEstimado;
+                tpre.FechaEntradaVigencia = tp.FechaEntradaVigencia;
+                tpre.Precio = tp.Precio;
+                pxa.crearTramo(tpre);
+
+                return RedirectToAction("Index");
+            }
+        }
+
+
         public ActionResult editarLinea(int id)
         {
             DTOLinea p = new DTOLinea();
@@ -156,40 +205,6 @@ namespace WebApp.Controllers
             return RedirectToAction("traerLinea");
         }
         
-        //----------------------------tramo-------------------------------------------
-        public ActionResult traerTramo()
-        {
-            return View(Task.Run(() => pxa.GetAllTramos()).Result);
-        }
-        
-        public ActionResult crearTramo()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult crearTramo(DTOTramoPrecio dtoTramoPrecio)
-        {
-            pxa.crearTramo(dtoTramoPrecio);
-            return RedirectToAction("traerTramo");
-        }
-
-             
-        public ActionResult editarTramo(int id, int id2)
-        {
-            DTOTramo p = new DTOTramo();
-            p.IdLinea = id2;
-            p.IdParada = id;
-            return View(p);
-        }
-
-        [HttpPost]
-        public ActionResult editarTramo(DTOTramo tramo)
-        {
-            pxa.editarTramo(tramo);
-            return RedirectToAction("traerTramo");
-        }
-        
 
         //-----------------------------Salida------------------------------------------
 
@@ -197,15 +212,41 @@ namespace WebApp.Controllers
         {
             return View(Task.Run(() => pxa.GetAllSalida()).Result);
         }
-               
-        public ActionResult crearSalida()
+        //-------------------crear salida--------------------
+        //listar lineas------
+        //listar vehiculos----
+        //listar conductores--
+
+        public ActionResult traerCondSallida()
         {
+            return View(Task.Run(() => pxa.GetAllConductores()).Result);
+        }
+
+        public ActionResult listVeic(int id) //id del conductor, se listan los veiculos
+        {
+            Session["conductorId"] = id;
+            return View(Task.Run(() => pxa.getAllVehiculos()).Result);
+        }
+
+        public ActionResult selecLine(string id) //matricula, se listan las lineas
+        {
+            Session["veiculoMat"] = id;
+            return View(Task.Run(() => pxa.GetAllLineas()).Result);
+        }
+        
+
+        public ActionResult crearSalida(int id)//id salida
+        {
+            Session["lineId"] = id;
             return View();
         }
 
         [HttpPost]
         public ActionResult crearSalida(DTOSalida salida)
         {
+            salida.IdLinea = (int)Session["lineId"];
+            salida.IdVehiculo = Session["veiculoMat"].ToString();
+            salida.IdConductor = (int)Session["conductorId"];
             pxa.crearSalida(salida);
             return RedirectToAction("traerSalida");
         }
@@ -248,23 +289,64 @@ namespace WebApp.Controllers
         }
 
         //----------------------------reporte utilidad ------------------------------
+        public ActionResult SelectreporteU()
+        {
+            return View();
+        }
 
+        public ActionResult reporteV()
+        {
+            Session["reporte"] = "v";
+            return RedirectToAction("reporteUtilidad");
+        }
+
+        public ActionResult reporteS()
+        {
+            Session["reporte"] = "s";
+            return RedirectToAction("reporteUtilidad");
+        }
+
+        public ActionResult reporteL()
+        {
+            Session["reporte"] = "l";
+            return RedirectToAction("reporteUtilidad");
+        }
 
         public ActionResult reporteUtilidad()
         {
+            if (Session["reporte"].ToString() == "v") ViewBag.Message = "v";
+            if (Session["reporte"].ToString() == "s") ViewBag.Message = "s";
+            if (Session["reporte"].ToString() == "l") ViewBag.Message = "l";
             return View();
         }
 
         [HttpPost]
         public ActionResult reporteUtilidad(DTOUtilidad utilidad)
         {
-         
+            if (Session["reporte"].ToString() == "v")
+            {
+                utilidad.linea=-1;
+                utilidad.salida=-1;
+            }
+            if (Session["reporte"].ToString() == "s")
+            {
+                utilidad.idViaje = -1;
+                utilidad.linea = -1;
+            }
+            if (Session["reporte"].ToString() == "l")
+            {
+                utilidad.idViaje = -1;
+                utilidad.salida = -1;
+            }
+
             if (utilidad.fechaDesde == null) utilidad.fechaDesde = "1900,01,01";
             if (utilidad.fechaHasat == null) utilidad.fechaHasat = "1900,01,01";
             DTOUtilidadFinal ut = new DTOUtilidadFinal();
             float result = Task.Run(() => pxa.reporteUtilidad(utilidad)).Result;
-            ut.Valor = result;
+            ut.Valor = result*100;
             return RedirectToAction("verUtilidad", ut);
+
+
         }
 
 
@@ -276,8 +358,57 @@ namespace WebApp.Controllers
 
         //-----------------------------reporte pasaje -------------------------------
 
+        public ActionResult selectRepP()
+        {
+            return View();
+        }
 
+        public ActionResult reportePV()
+        {
+            Session["reporteP"] = "v";
+            return RedirectToAction("reportePasaje");
+        }
 
+        public ActionResult reportePS()
+        {
+            Session["reporteP"] = "s";
+            return RedirectToAction("reportePasaje");
+        }
+
+        public ActionResult reportePL()
+        {
+            Session["reporteP"] = "l";
+            return RedirectToAction("reportePasaje");
+        }
+        public ActionResult reportePasaje()
+        {
+            if (Session["reporteP"].ToString() == "v") ViewBag.Message = "v";
+            if (Session["reporteP"].ToString() == "s") ViewBag.Message = "s";
+            if (Session["reporteP"].ToString() == "l") ViewBag.Message = "l";
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult reportePasaje(DTOreportePasaje repoPasaje)
+        {
+            if (Session["reporteP"].ToString() == "v")
+            {
+                repoPasaje.linea = -1;
+                repoPasaje.salida = -1;
+            }
+            if (Session["reporteP"].ToString() == "s")
+            {
+                repoPasaje.viaje = -1;
+                repoPasaje.linea = -1;
+            }
+            if (Session["reporteP"].ToString() == "l")
+            {
+                repoPasaje.viaje = -1;
+                repoPasaje.salida = -1;
+            }
+            List<EPasaje> result = Task.Run(() => pxa.reportedePasaje(repoPasaje)).Result;
+            return View("verReportePasaje", result);
+        }
 
 
     }

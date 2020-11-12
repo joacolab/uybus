@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "pasajeValido";
+}
+
+<h2>Validas del pasaje:</h2>
+
+@{
+    var data = ViewBag.Message;
+}
+<br>
+@if (@data)
+{
+    <h2>El Pasaje es Valido </h2>
+}
+else
+{
+    <h2 style="color: rgb(255, 0, 0)">El Pasaje no es Valido </h2>
+}
+
+<br>
+<div>
+    @Html.ActionLink("Atrás", "traerParadas")
+</div>
+
+

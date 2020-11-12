@@ -17,7 +17,7 @@ namespace Consola
             IBL_Admin bla = new BL_Admin(new DAL_Linea(), new DAL_Parada(), new DAL_Salida(), new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
             IBL_Usuario blu = new BL_Usuario(new DAL_Persona(), new DAL_Usuario(), new DAL_Linea(), new DAL_Salida(), new DAL_Tramo(), new DAL_Viaje(), new DAL_Pasaje(), new DAL_Parametro(), new DAL_Parada(), new DAL_Llegada(), new DAL_Vehiculo());
             IBL_Invitado bli = new BL_Invitado(new DAL_Persona(), new DAL_Usuario());
-            IBL_General blg = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo());
+            IBL_General blg = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo(), new DAL_Persona(), new DAL_Admin(), new DAL_Conductor(), new DAL_SuperAdmin());
             IBL_Conductor blc = new BL_Conductor(new DAL_Viaje(), new DAL_Pasaje());
             IBL_SuperAdmin bls = new BL_SuperAdmin(new DAL_Persona(), new DAL_Usuario(), new DAL_Admin(), new DAL_Conductor(), new DAL_Llegada(), new DAL_Parada(), new DAL_Salida(), new DAL_Vehiculo(), new DAL_Viaje());
 
@@ -48,8 +48,8 @@ namespace Consola
             foreach (var l in lstdto)
             {
                 Console.WriteLine(l.hora + " " + l.lat +" "+ l.lon +" "+ l.matricula);//testeado
-            }
-            */
+            }*/
+
             // EPasaje ep = blu.comprarPasaje(1, 2, 1, 2, "null", "null", 2); //testeado
             //EPasaje ep = blu.comprarPasaje(1, -1, 6, 3, "CI", "4333873-7", 2); //testeado
             //Console.WriteLine(blc.verificarPasaje(1, 1));//testeado
@@ -78,6 +78,11 @@ namespace Consola
             // }
 
             //blu.canSelectSeat(1, 1, 2);
+            /*
+            foreach (var item in blu.sinTerminales())
+            {
+                Console.WriteLine(item.IdParada);
+            }*/
 
 
 

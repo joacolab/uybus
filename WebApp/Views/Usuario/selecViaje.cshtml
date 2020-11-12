@@ -1,0 +1,30 @@
+﻿@model IEnumerable<int>
+@{
+    ViewBag.Title = "selecViaje";
+}
+
+
+<h2>Seleccione asiento</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            asiento
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item)
+            </td>
+            <td>
+                @Html.ActionLink("Seleccionar", "selectAsiento", new { id = item })
+            </td>
+        </tr>
+    }
+
+</table>

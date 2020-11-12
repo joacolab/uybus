@@ -60,7 +60,27 @@ namespace APIREST.Controllers
             }
         }
 
-        /* Sin probar, porque no hay datos
+        /* funciona
+         * curl -v -k -H 'Content-Type: application/json' https://localhost:44330/usuario/listar/paradas/1
+         */
+        [HttpGet]
+        [Route("listar/pdestino/{IdLinea}/{IdParada}")]
+        [ResponseType(typeof(List<EParada>))]
+        public IHttpActionResult listarParadasDestino(int IdLinea, int IdParada)
+        {
+            try
+            {
+                List<EParada> paradas = cUsuario.listarParadasD(IdLinea, IdParada);
+                return Ok(paradas);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        /* Funciona
+         * Sin probar, porque no hay datos
          * curl -v -k -H 'Content-Type: application/json' https://localhost:44330/usuario/listar/salidas/1
          */
         [HttpGet]
@@ -79,8 +99,9 @@ namespace APIREST.Controllers
             }
         }
 
-        /* Sin probar, porque no hay datos
-         * curl -v -k -H 'Content-Type: application/json' https://localhost:44330/usuario/listar/salidas/1
+        /* funciona
+         * Sin probar, porque no hay datos
+         * curl -v -k -H 'Content-Type: application/json' https://localhost:44330/usuario/listar/viajes/1
          */
         [HttpGet]
         [Route("listar/viajes/{IdSalida}")]
@@ -99,17 +120,18 @@ namespace APIREST.Controllers
         }
 
 
-        /* Salta una excepcion
-         * curl -v -k -H 'Content-Type: application/json' https://localhost:44330/usuario/listar/asientos/{fecha}
+        /* funicona
+         * Salta una excepcion
+         * curl -v -k -H 'Content-Type: application/json' https://localhost:44330/usuario/listar/asientos/idViaje
          */
         [HttpGet]
-        [Route("listar/asientos/{fechaSelected}")]
+        [Route("listar/asientos/{idViaje}")]
         [ResponseType(typeof(List<int>))]
-        public IHttpActionResult GetAsientos(int fechaSelected)
+        public IHttpActionResult GetAsientos(int idViaje)
         {
             try
             {
-                List<int> asisentos = cUsuario.GetAsientos(fechaSelected);
+                List<int> asisentos = cUsuario.GetAsientos(idViaje);
                 return Ok(asisentos);
             }
             catch (Exception)
@@ -118,11 +140,12 @@ namespace APIREST.Controllers
             }
         }
 
-        /* Sin Probar
-         * curl -v -k https://localhost:44330/usuario/cancelar/{IdLinea}/{IdParadaOrigen}/{IdParadaDestino}
+        /* funciona
+         * Sin Probar
+         * curl -v -k https://localhost:44330/usuario/asiento/1/1/5
          */
         [HttpGet]
-        [Route("cancelar/{IdLinea}/{IdParadaOrigen}/{IdParadaDestino}")]
+        [Route("asiento/{IdLinea}/{IdParadaOrigen}/{IdParadaDestino}")]
         [ResponseType(typeof(bool))]
         public IHttpActionResult canSelectSeat(int IdLinea, int IdParadaOrigen, int IdParadaDestino)
         {
@@ -137,11 +160,12 @@ namespace APIREST.Controllers
             }
         }
 
-        /* Sin Probar
-         * curl -v -k https://localhost:44330/usuario/listar/{IdLinea}/{IdParadaOrigen}/{IdParadaDestino}
+        /* funciona
+         * Sin Probar
+         * curl -v -k https://localhost:44330/usuario/paradas/1/1
          */
         [HttpGet]
-        [Route("listar/{IdLinea}/{idParadaOrigen}/{idParadaDestino}")]
+        [Route("paradas/{IdLinea}/{IdParada}")]
         public IHttpActionResult listarParadasD(int IdLinea, int IdParada)
         {
             try
@@ -155,13 +179,41 @@ namespace APIREST.Controllers
             }
         }
 
-        /* Falta probar
+        /* funciona
+         * Sin Probar
+         * curl -v -k https://localhost:44330/usuario/paradas/1/1
+         */
+        [HttpGet]
+        [Route("sinterminal")]
+        public IHttpActionResult sinTerminal()
+        {
+            try
+            {
+                List<EParada> paradas = cUsuario.sinTerminales();
+                return Ok(paradas);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        /* funciona
             curl -v -X POST -k -H 'Content-Type: application/json; charset=utf-8' \
             -d '{"idViaje":2, "idUsuario":1, "idParadaOrigen":2, "idParadaDestino":4, "tipoDoc":1, "documento":"87779994", "asiento":12}' \
-            https://localhost:44330/usuario/comprar-pasaje 
+            https://localhost:44330/usuario/comprar
+            {
+                "idViaje":1,
+                "idUsuario":2,
+                "idParadaOrigen":1,
+                "idParadaDestino":2,
+                "tipoDoc":"null",
+                "documento":"null",
+                "asiento":2
+            }
          */
         [HttpPost]
-        [Route("comprar-pasaje")]
+        [Route("comprar")]
         [ResponseType(typeof(EPasaje))]
         public IHttpActionResult comprarPasaje([FromBody]DTOComprarPasaje p)
         {
@@ -178,9 +230,10 @@ namespace APIREST.Controllers
             }
         }
 
-
+        //funciona
+        //https://localhost:44330/usuario/proximos/2/3
         [HttpGet]
-        [Route("listar/proximos-vehiculos/{IdUsuario}/{IdParada}")]
+        [Route("proximos/{IdUsuario}/{IdParada}")]
         [ResponseType(typeof(List<DTOproxVehiculo>))]
         public IHttpActionResult proximoVehiculo(int IdUsuario, int IdParada)
         {
@@ -196,7 +249,8 @@ namespace APIREST.Controllers
             }
         }
 
-
+        //funciona
+        //https://localhost:44330/usuario/precio/1/1/2
         [HttpGet]
         [Route("precio/{IdLinea}/{IdParadaOrigen}/{IdParadaDestino}")]
         public IHttpActionResult precioDelPasaje(int IdLinea, int IdParadaOrigen, int IdParadaDestino)

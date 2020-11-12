@@ -132,7 +132,7 @@ namespace WebApp.Proxys
                 return eParada;
             }
         }
-        public void crearParada(DTOParada DTOparada)
+        public EParada crearParada(DTOParada DTOparada)
         {
             using (var client = new HttpClient())
             {
@@ -140,6 +140,8 @@ namespace WebApp.Proxys
                 var postTask = client.PostAsJsonAsync<DTOParada>("parada", DTOparada);
                 postTask.Wait();
                 var result = postTask.Result;
+
+                return result.Content.ReadAsAsync<EParada>().Result;
             }
         }
         
@@ -177,7 +179,7 @@ namespace WebApp.Proxys
             }
         }
  
-         public void crearLinea(DTOLinea linea)
+         public ELinea crearLinea(DTOLinea linea)
          {
             using (var client = new HttpClient())
             {
@@ -185,8 +187,13 @@ namespace WebApp.Proxys
                 var postTask = client.PostAsJsonAsync<DTOLinea>("linea", linea);
                 postTask.Wait();
                 var result = postTask.Result;
+
+                return result.Content.ReadAsAsync<ELinea>().Result;
             }
+            
          }
+
+
 
         
         public void editarLinea(DTOLinea linea)
@@ -222,7 +229,7 @@ namespace WebApp.Proxys
             }
         }
     
-         public void crearTramo(DTOTramoPrecio tramo)
+         public ETramo crearTramo(DTOTramoPrecio tramo)
          {
              using (var client = new HttpClient())
 
@@ -231,7 +238,9 @@ namespace WebApp.Proxys
                  var postTask = client.PostAsJsonAsync< DTOTramoPrecio> ("tramo", tramo);
                  postTask.Wait();
                  var result = postTask.Result;
-             }
+
+                return result.Content.ReadAsAsync<ETramo>().Result;
+            }
          }
         
 
@@ -324,7 +333,7 @@ namespace WebApp.Proxys
                 //var result = putTask.Result;
             }
         }
-        //_-----------------------------------Reporte Utilidad-------------------------------------
+        //------------------------------------Reporte Utilidad-------------------------------------
 
 
         public async Task<float> reporteUtilidad(DTOUtilidad reporteUtilidad)
@@ -336,8 +345,16 @@ namespace WebApp.Proxys
                 return await postTask.Content.ReadAsAsync<float>();
             }
         }
-        
-
+        //------------------------------------Reporte de pasajes------------------------------------
+        public async Task<List<EPasaje>> reportedePasaje(DTOreportePasaje reportePasaje)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl + "reportePasaje");
+                var postTask = await client.PostAsJsonAsync<DTOreportePasaje>("reportePasaje", reportePasaje);
+                return await postTask.Content.ReadAsAsync<List<EPasaje>>();
+            }
+        }
 
 
     }

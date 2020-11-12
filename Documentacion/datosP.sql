@@ -76,8 +76,8 @@ insert into tramo VALUES(4, 7, 1300, 4);
 insert into tramo VALUES(4, 6, 1300, 5);
 insert into tramo VALUES(4, 1, 1300, 6);
 
-insert into precio VALUES(41, '2018-01-01', 1, 1);
-insert into precio VALUES(43, '2019-01-01', 1, 1);
+insert into precio VALUES(0, '2018-01-01', 1, 1);
+insert into precio VALUES(0, '2019-01-01', 1, 1);
 
 insert into precio VALUES(41, '2018-01-01', 1, 2);
 insert into precio VALUES(43, '2019-01-01', 1, 2);
@@ -92,20 +92,20 @@ insert into precio VALUES(41, '2018-01-01', 1, 5);
 insert into precio VALUES(43, '2019-01-01', 1, 5);
 
 
-insert into precio VALUES(40, '2018-01-01', 2, 5);
+insert into precio VALUES(0, '2018-01-01', 2, 5);
 insert into precio VALUES(40, '2018-01-01', 2, 4);
 insert into precio VALUES(40, '2018-01-01', 2, 3);
 insert into precio VALUES(40, '2018-01-01', 2, 2);
 insert into precio VALUES(40, '2018-01-01', 2, 1);
 
-insert into precio VALUES(38, '2019-01-01', 3, 1);
+insert into precio VALUES(0, '2019-01-01', 3, 1);
 insert into precio VALUES(38, '2019-01-01', 3, 6);
 insert into precio VALUES(38, '2019-01-01', 3, 7);
 insert into precio VALUES(38, '2019-01-01', 3, 8);
 insert into precio VALUES(38, '2019-01-01', 3, 9);
 insert into precio VALUES(38, '2019-01-01', 3, 5);
 
-insert into precio VALUES(38, '2019-01-01', 4, 5);
+insert into precio VALUES(0, '2019-01-01', 4, 5);
 insert into precio VALUES(38, '2019-01-01', 4, 9);
 insert into precio VALUES(38, '2019-01-01', 4, 8);
 insert into precio VALUES(38, '2019-01-01', 4, 7);
@@ -177,3 +177,5 @@ insert into pasaje VALUES(NULL, '87643576','CI', NULL, 1, 2, 1);
 
 insert into llegada VALUES(2, 1, '08:22:00.000','2020-12-03');
 insert into llegada VALUES(2, 2, '10:22:00.000','2020-12-03');
+insert into llegada VALUES(2, 17, '10:22:00.000','2020-12-03');
+insert into llegada VALUES(4, 18, '10:22:00.000','2020-12-03');

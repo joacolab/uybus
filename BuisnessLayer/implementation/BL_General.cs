@@ -23,8 +23,13 @@ namespace BuisnessLayer.implementation
         private IDAL_Pasaje iPasaje;
         private IDAL_Usuario iUsuario;
         private IDAL_Vehiculo iVehiculo;
+        private IDAL_Persona iPersona;
 
-        public BL_General(IDAL_Viaje _iViaje, IDAL_Llegada _iLllegada, IDAL_Salida _iSalida,IDAL_Linea _iLinea, IDAL_Tramo _iTramo,IDAL_Parada _iParada,IDAL_Pasaje _iPasaje, IDAL_Usuario _iUsuario, IDAL_Vehiculo _iVehiculo)
+        private IDAL_Admin iAdmin;
+        private IDAL_Conductor iConductor;
+        private IDAL_SuperAdmin iSuperAd;
+
+        public BL_General(IDAL_Viaje _iViaje, IDAL_Llegada _iLllegada, IDAL_Salida _iSalida,IDAL_Linea _iLinea, IDAL_Tramo _iTramo,IDAL_Parada _iParada,IDAL_Pasaje _iPasaje, IDAL_Usuario _iUsuario, IDAL_Vehiculo _iVehiculo, IDAL_Persona _iPersona, IDAL_Admin _iAdmin, IDAL_Conductor _iConductor, IDAL_SuperAdmin _iSuperAd)
         {
             iViaje = _iViaje;
             iLllegada = _iLllegada;
@@ -35,6 +40,11 @@ namespace BuisnessLayer.implementation
             iPasaje = _iPasaje;
             iUsuario = _iUsuario;
             iVehiculo = _iVehiculo;
+            iPersona = _iPersona;
+            iAdmin = _iAdmin;
+            iConductor = _iConductor;
+            iSuperAd = _iSuperAd;
+
         }
 
         public ELlegada CrearLlegada(int idParada, int idViaje, TimeSpan hora)
@@ -149,21 +159,16 @@ namespace BuisnessLayer.implementation
 
         private float utilidadPorSalida(int salida, List<DateTime> fechas)
         {
-            List<EViaje> viajesValidos = new List<EViaje>();
-
-            foreach (var tViaje in iViaje.getAllViajes())
+            float costo = 0;
+            foreach (var viaje in iSalida.getSalidas(salida).Viaje.ToList())
             {
-                foreach (var viaje in iSalida.getSalidas(salida).Viaje.ToList())
+                if (fechas.Contains(viaje.Fecha))
                 {
-                    if (DateTime.Compare(tViaje.Fecha, viaje.Fecha) == 0) viajesValidos.Add(viaje);
+                    costo = costo + utilidadPorViaje(viaje.IdViaje);
                 }
             }
-            float costo = 0;
-            foreach (var viaje in viajesValidos)
-            {
-                costo = costo + utilidadPorViaje(viaje.IdViaje);
-            }
             return costo;
+ 
         }
         private float utilidadPorLinea(int linea, List<DateTime> fechas)
         {
@@ -279,6 +284,100 @@ namespace BuisnessLayer.implementation
                 if (viaje == -1) return pasajeDeFechas(fechas);
             }
              throw new Exception("Error en los parametros");
+        }
+
+        public bool iniciarSesion(string email, string password, string rol)
+        {
+            bool res=false;
+            EPersona ep = new EPersona();
+            foreach (var item in iPersona.getAllPersona())
+            {
+                if (item.Correo == email && item.Password == password)
+                {
+                    ep = item;
+                    break;
+                }
+            }
+            if (rol== "Usuario")
+            {
+                EUsuario eu = null;
+                try
+                {
+                    eu = iUsuario.getUsuario(ep.id);
+                }
+                catch (Exception)
+                {
+                }
+                if (eu!=null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            if (rol == "Conductor")
+            {
+                EConductor eu = null;
+                try
+                {
+                    eu = iConductor.getConductor(ep.id);
+                }
+                catch (Exception)
+                {
+                }
+                if (eu != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            if (rol == "Admin")
+            {
+                EAdmin eu = null;
+                try
+                {
+                    eu = iAdmin.getAdmin(ep.id);
+                }
+                catch (Exception)
+                {
+                }
+                if (eu != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            if (rol == "SuperAdmin")
+            {
+                ESuperAdmin eu = null;
+                try
+                {
+                    eu = iSuperAd.getSuperAdmin(ep.id);
+                }
+                catch (Exception)
+                {
+                }
+                if (eu != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return res;
         }
     }
 }
