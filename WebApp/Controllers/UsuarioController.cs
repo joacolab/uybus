@@ -15,6 +15,10 @@ namespace WebApp.Controllers
 
         public ActionResult Index()
         {
+            if (Session["pNombre"] != null && Session["pApellido"] != null)
+            {
+                ViewBag.nombreUsu = Session["pNombre"].ToString() + " " + Session["pApellido"].ToString();
+            }
             return View();
         }
 
@@ -120,8 +124,16 @@ namespace WebApp.Controllers
 
             pasaje.idUsuario = -1; //usuario no logeado, arreglar esto <<<<---------!!!!--------------
 
-            pxu.comprarPasaje(pasaje); // se complra el pasaje
-            Session.Clear();//flush session
+            if (Session["idPersona"] != null)
+            {
+                pasaje.idUsuario = (int)Session["idPersona"];
+                pxu.comprarPasaje(pasaje);
+            }
+            else
+            {
+                pasaje.idUsuario = -1; //usuario no logeado, arreglar esto <<<<---------!!!!--------------
+                pxu.comprarPasaje(pasaje);
+            }
 
             return RedirectToAction("Index");
             //return View("Index");

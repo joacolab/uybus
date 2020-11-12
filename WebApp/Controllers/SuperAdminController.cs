@@ -16,6 +16,10 @@ namespace WebApp.Controllers
         // GET: SuperAdmin
         public ActionResult Index()
         {
+            if (Session["pNombre"] != null && Session["pApellido"] != null)
+            {
+                ViewBag.nombreUsu = Session["pNombre"].ToString() + " " + Session["pApellido"].ToString();
+            }
             return View();
         }
 

@@ -4,16 +4,19 @@
 
 <div class="jumbotron">
     <h1>Bienvenido Invitado</h1>
-    <h3>@Html.ActionLink("Iniciar sesión", "login")</h3>
-
-    <h3>@Html.ActionLink("Adminstracion", "admin")</h3>
-    <h3>@Html.ActionLink("Registro", "invitado")</h3>
-    <h3>@Html.ActionLink("SuperAdmin", "superAdmin")</h3>
-    <h3>@Html.ActionLink("Usuario", "usuario")</h3>
-    <h3>@Html.ActionLink("Conductor", "conductor")</h3>
 </div>
 
 <br>
+
+<div class="row" style="height:300px">
+    <div class="col-md-4">
+        <h3 class="btn btn-default">@Html.ActionLink("Iniciar sesión", "login")</h3>
+        <h3 class="btn btn-default">@Html.ActionLink("Registro", "invitado")</h3>
+    </div>
+    <div class="col-md-8">
+    </div>
+</div>
+
 
 <div class="row">
     <div class="col-md-4">

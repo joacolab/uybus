@@ -22,10 +22,17 @@
                 @Html.ActionLink("UruguayBus", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                 </ul>
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Registrarse", "registrarse", "Home", htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Iniciar sesión", "Login", "Home", htmlAttributes: new { id = "loginLink" })</li> 
+                    <li>@Html.ActionLink("Cerrar sesión", "cerrarSesion", "Home", htmlAttributes: new { id = "cerrar" })</li>
+                </ul>
+   
+
             </div>
         </div>
     </div>

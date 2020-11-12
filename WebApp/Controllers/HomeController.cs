@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Share.DTOs;
 using Share.entities;
+using Share.enums;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,6 +20,7 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private ProxyGeneral pxg = new ProxyGeneral();
+
         public ActionResult Index()
         {
             return View();
@@ -27,6 +29,12 @@ namespace WebApp.Controllers
         public ActionResult Login()
         {
             return View();
+        }
+
+        public ActionResult cerrarSesion()
+        {
+            Session.Clear();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -43,20 +51,58 @@ namespace WebApp.Controllers
             log.password = "1234";
             log.rol = "Conductor";*/
 
-            bool res = pxg.iniciarSesion(log);
-            if (!res)
+            EPersona res = pxg.iniciarSesion(log);
+            if (res.pNombre=="Error")
             {
                 ViewBag.Message = "Usuario no registrado";
                 return View();
             }
             else
             {
+                if (res.pNombre == "ErrorRol")
+                {
+                    ViewBag.Message = "Rol Incorrecto";
+                    return View();
+                }
+                else
+                {
+                    Session["idPersona"] = res.id;
+                    Session["pNombre"] = res.pNombre;
+                    Session["sNombre"] = res.sNombre;
+                    Session["pApellido"] = res.pApellido;
+                    Session["sApellido"] = res.sApellido;
+                    Session["Correo"] = res.Correo;
+                    Session["Password"] = res.Password;
 
-                return View("Index");
+                    Rol r = (Rol)res.TipoDocumento;
+                    Session["TipoDocumento"] = r.ToString();
+
+                    Session["Documento"] = res.Documento;
+                    Session["Rol"] = log.rol;
+
+                    if (log.rol=="Admin")
+                    {
+                        return RedirectToAction("admin");
+                    }
+                    if (log.rol == "SuperAdmin")
+                    {
+                        return RedirectToAction("superAdmin");
+                    }
+                    if (log.rol== "Usuario")
+                    {
+                        return RedirectToAction("usuario");
+                    }
+                    if (log.rol == "Conductor")
+                    {
+                        return RedirectToAction("conductor");
+                    }
+                    return RedirectToAction("Index");
+
+                }
             }
         }
 
-
+        
         public RedirectToRouteResult Admin()
         {
             return RedirectToAction("Index", "Admin");

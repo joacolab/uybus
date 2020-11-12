@@ -291,9 +291,12 @@ namespace BuisnessLayer.implementation
              throw new Exception("Error en los parametros");
         }
 
-        public bool iniciarSesion(string email, string password, string rol)
+        public EPersona iniciarSesion(string email, string password, string rol)
         {
-            bool res=false;
+
+            EPersona res = new EPersona();
+            res.pNombre = "Error";
+
             EPersona ep = new EPersona();
             foreach (var item in iPersona.getAllPersona())
             {
@@ -315,11 +318,12 @@ namespace BuisnessLayer.implementation
                 }
                 if (eu!=null)
                 {
-                    return true;
+                    return ep;
                 }
                 else
                 {
-                    return false;
+                    ep.pNombre = "ErrorRol";
+                    return ep;
                 }
             }
 
@@ -335,11 +339,12 @@ namespace BuisnessLayer.implementation
                 }
                 if (eu != null)
                 {
-                    return true;
+                    return ep;
                 }
                 else
                 {
-                    return false;
+                    ep.pNombre = "ErrorRol";
+                    return ep;
                 }
             }
             if (rol == "Admin")
@@ -354,11 +359,12 @@ namespace BuisnessLayer.implementation
                 }
                 if (eu != null)
                 {
-                    return true;
+                    return ep;
                 }
                 else
                 {
-                    return false;
+                    ep.pNombre = "ErrorRol";
+                    return ep;
                 }
             }
 
@@ -374,11 +380,12 @@ namespace BuisnessLayer.implementation
                 }
                 if (eu != null)
                 {
-                    return true;
+                    return ep;
                 }
                 else
                 {
-                    return false;
+                    ep.pNombre = "ErrorRol";
+                    return ep;
                 }
             }
 
