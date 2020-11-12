@@ -48,7 +48,17 @@ namespace WebApp.Controllers
 
         public ActionResult traerVehiculos()
         {
-            return View(Task.Run(() => pxsa.ubicarVehiculo()).Result);
+            List<DTOubicacion> ubics = Task.Run(() => pxsa.ubicarVehiculo()).Result;
+
+            double shift = 0.00001; //corrimineto
+            foreach (var u in ubics)
+            {
+                u.lat = u.lat + shift;
+                u.lon = u.lon + shift;
+                shift = shift + shift;
+            }
+
+            return View(ubics);
         }
 
 

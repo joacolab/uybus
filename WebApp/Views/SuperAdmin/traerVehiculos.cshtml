@@ -29,27 +29,27 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.lat)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.lon)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.hora)
-    </td>
-    <td>
-        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.fecha))
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.matricula)
-    </td>
-</tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.lat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hora)
+        </td>
+        <td>
+            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.fecha))
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.matricula)
+        </td>
+    </tr>
     }
 
 </table>
-<div id='map' style='width: 900px; height: 400px;'></div>
+<div id='map' style='width: 950px; height: 400px;'></div>
 
 <style>
     .mapboxgl-ctrl-logo {
@@ -72,7 +72,7 @@
         zoom: 7
     });
 
-   
+
 
     function sinC(str) {
         return str.replace(",",".");
@@ -80,6 +80,7 @@
 
     @foreach (var item in Model)
     {
+
         <Text> new mapboxgl.Marker({ draggable: false }).setLngLat([sinC("@item.lon"), sinC("@item.lat")]).setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h3> Matricula: ' + "@item.matricula" + '</h3><p> Hora: ' + "@item.hora" + '</p>')).addTo(map); </Text>
     }
 
