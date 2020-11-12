@@ -123,16 +123,19 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult crearLinea(DTOLinea linea)
         {
-            Session["Nuevalinea"] = pxa.crearLinea(linea);
+            Session["Nuevalinea"] = pxa.crearLinea(linea).IdLinea;
 
-            //ELinea el = (ELinea)Session["Nuevalinea"];
-
-            return RedirectToAction("asignarParada");
-            //return RedirectToAction("traerLinea");
+            return RedirectToAction("traerParadaL");//lista las paradas
         }
 
-        public ActionResult asignarParada()
+        public ActionResult traerParadaL()
         {
+            return View(Task.Run(() => pxa.GetAllParada()).Result);
+        }
+
+        public ActionResult asignarParada(int id)
+        {
+            Session["selecParadaId"] = id;
             return View();
         }
 
@@ -141,45 +144,33 @@ namespace WebApp.Controllers
         {
             if (!tp.isFinal)
             {
-                DTOParada par = new DTOParada();
-                par.IdParada = tp.IdParada;
-                par.Lat = tp.Lat;
-                par.Long = tp.Long;
-                par.Nombre = tp.Nombre;
-                EParada ep = pxa.crearParada(par);
+
                 DTOTramoPrecio tpre = new DTOTramoPrecio();
-                ELinea el = (ELinea)Session["Nuevalinea"];
-                tpre.IdLinea = el.IdLinea;
-                tpre.IdParada = ep.IdParada;
+                tpre.IdLinea = (int)Session["Nuevalinea"];
+                tpre.IdParada = (int)Session["selecParadaId"];
                 tpre.Orden =tp.Orden;
-                tpre.TiempoEstimado = tp.TiempoEstimado;
 
                 if (tp.isOrigen)
                 {
+                    tpre.TiempoEstimado = 0;
                     tpre.FechaEntradaVigencia = "2000-01-01";
                     tpre.Precio = 0;
                 }
                 else
                 {
+                    tpre.TiempoEstimado = tp.TiempoEstimado;
                     tpre.FechaEntradaVigencia = tp.FechaEntradaVigencia;
                     tpre.Precio = tp.Precio;
                 }
 
                 pxa.crearTramo(tpre);
-                return View();
+                return RedirectToAction("traerParadaL");
             }
             else
             {
-                DTOParada par = new DTOParada();
-                par.IdParada = tp.IdParada;
-                par.Lat = tp.Lat;
-                par.Long = tp.Long;
-                par.Nombre = tp.Nombre;
-                EParada ep = pxa.crearParada(par);
                 DTOTramoPrecio tpre = new DTOTramoPrecio();
-                ELinea el = (ELinea)Session["Nuevalinea"];
-                tpre.IdLinea = el.IdLinea;
-                tpre.IdParada = ep.IdParada;
+                tpre.IdLinea = (int)Session["Nuevalinea"];
+                tpre.IdParada = (int)Session["selecParadaId"];
                 tpre.Orden = tp.Orden;
                 tpre.TiempoEstimado = tp.TiempoEstimado;
                 tpre.FechaEntradaVigencia = tp.FechaEntradaVigencia;
@@ -212,10 +203,6 @@ namespace WebApp.Controllers
         {
             return View(Task.Run(() => pxa.GetAllSalida()).Result);
         }
-        //-------------------crear salida--------------------
-        //listar lineas------
-        //listar vehiculos----
-        //listar conductores--
 
         public ActionResult traerCondSallida()
         {

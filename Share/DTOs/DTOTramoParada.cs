@@ -8,10 +8,6 @@ namespace Share.DTOs
 {
     public class DTOTramoParada
     {
-        public int IdParada { get; set; }
-        public string Nombre { get; set; }
-        public string Lat { get; set; }
-        public string Long { get; set; }
 
         public int IdLinea { get; set; }
         public int Orden { get; set; }
