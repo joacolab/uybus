@@ -36,8 +36,18 @@ namespace WebApp.Controllers
             per.pApellido = persona.pApellido;
             per.sApellido = persona.sApellido;
 
-            pxi.crearPersona(per);
-            return RedirectToAction("Index");
+
+            if (pxi.existEmail(persona.Correo))
+            {
+                ViewBag.Message = "El correo ya existe.";
+                return View();
+            }
+            else
+            {
+                pxi.crearPersona(per);
+                return RedirectToAction("Index");
+            }
+
         }
 
 

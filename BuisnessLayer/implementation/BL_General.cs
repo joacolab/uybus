@@ -47,6 +47,11 @@ namespace BuisnessLayer.implementation
 
         }
 
+        public bool correoUnico(string email)
+        {
+            return iUsuario.verificarCorreo(email);
+        }
+
         public ELlegada CrearLlegada(int idParada, int idViaje, TimeSpan hora)
         {
             return iLllegada.addLlegada(idParada, idViaje, hora);

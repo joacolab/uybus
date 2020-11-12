@@ -255,7 +255,6 @@
     <Content Include="Views\Conductor\traerParadas.cshtml" />
     <Content Include="Views\Conductor\verificarP.cshtml" />
     <Content Include="Views\Conductor\pasajeValido.cshtml" />
-    <Content Include="Views\Home\Login2.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Admin\asignarParada.cshtml" />
     <Content Include="Views\Admin\editarParada.cshtml" />

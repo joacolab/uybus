@@ -9,6 +9,7 @@ namespace DataAcessLayer.interfaces
 {
     public interface IDAL_Usuario
     {
+        bool verificarCorreo(string email);
         EUsuario addUsuario(int idPersona);
         List<EUsuario> getAllUsuarios();
         EUsuario getUsuario(int idUsuario);

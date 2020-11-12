@@ -177,5 +177,4 @@ insert into pasaje VALUES(NULL, '87643576','CI', NULL, 1, 2, 1);
 
 insert into llegada VALUES(2, 1, '08:22:00.000','2020-12-03');
 insert into llegada VALUES(2, 2, '10:22:00.000','2020-12-03');
-insert into llegada VALUES(2, 17, '10:22:00.000','2020-12-03');
-insert into llegada VALUES(4, 18, '10:22:00.000','2020-12-03');
+
