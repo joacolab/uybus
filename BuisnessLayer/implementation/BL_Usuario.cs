@@ -107,7 +107,7 @@ namespace BuisnessLayer.implementation
 
                 //esto no va, es una prueba, codigo pelotas
                 //enviarCorreo("juan.alvarez@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo 
-                //enviarCorreo("julio.arrieta@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
+                enviarCorreo("julio.arrieta@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
                 //enviarCorreo("lucas.garrido@utec.edu.uy", "https://4.bp.blogspot.com/_xukD7iTXxKo/R6kUSmPim-I/AAAAAAAAAFg/JDYuhXlPdHA/s320/perros+culiando.jpg");//generar pdf con codigo QR y enviarlo
                 //enviarCorreo("gustavo.cerdena@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
                 //enviarCorreo("suarezjoaquinluis@gmail.com", "https://4.bp.blogspot.com/_xukD7iTXxKo/R6kUSmPim-I/AAAAAAAAAFg/JDYuhXlPdHA/s320/perros+culiando.jpg");//generar pdf con codigo QR y enviarlo
@@ -130,7 +130,8 @@ namespace BuisnessLayer.implementation
         private void getPdfconQR(string IDPasaje)
         {
             Document doc = new Document(PageSize.A4);
-            PdfWriter.GetInstance(doc, new FileStream(@"C:\Users\Usuario\Desktop\pasaje.pdf", FileMode.Create));
+            string path = Directory.GetCurrentDirectory();
+            PdfWriter.GetInstance(doc, new FileStream( path + @"pdf\pasaje.pdf", FileMode.Create));
             doc.Open();
             BarcodeQRCode barcodeWrcode = new BarcodeQRCode(IDPasaje, 1000,1000,null);
             Image codeQRImga = barcodeWrcode.GetImage();
@@ -148,7 +149,8 @@ namespace BuisnessLayer.implementation
                 emailMessage.Subject = "UruguayBus";
                 emailMessage.Body = "";
                 getPdfconQR(IDPasaje);
-                emailMessage.Attachments.Add(new Attachment(@"C:\Users\Usuario\Desktop\pasaje.pdf"));
+                string path = Directory.GetCurrentDirectory();
+                emailMessage.Attachments.Add(new Attachment(path + @"\pdf\pasaje.pdf"));
                 emailMessage.Priority = MailPriority.Normal;
                 using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))
                 {
