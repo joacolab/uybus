@@ -58,14 +58,22 @@ namespace WebApp.Controllers
         }
 
         
-        public ActionResult crearViaje()
+
+        public ActionResult traerSalidasV()
         {
+            return View(Task.Run(() => pxa.GetAllSalida()).Result);
+        }
+
+        public ActionResult crearViaje(int id)
+        {
+            Session["salidaSelcs"] = id;
             return View();
         }
 
         [HttpPost]
         public ActionResult crearViaje(DTOCrearViajes viajes)
         {
+            viajes.idSalida =(int)Session["salidaSelcs"];
             pxa.crearViajes(viajes);
             return RedirectToAction("traerViajes");
         }
