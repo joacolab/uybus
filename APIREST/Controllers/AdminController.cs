@@ -407,7 +407,7 @@ namespace APIREST.Controllers
 
             try
             {
-                ETramo etramo = cAdmin.crearTramos(dtoTramoPrecio.IdParada, dtoTramoPrecio.IdLinea, dtoTramoPrecio.Orden, dtoTramoPrecio.TiempoEstimado, dtoTramoPrecio.Precio, Convert.ToDateTime(dtoTramoPrecio.FechaEntradaVigencia));
+                ETramo etramo = cAdmin.crearTramos(dtoTramoPrecio.IdParada, dtoTramoPrecio.IdLinea, dtoTramoPrecio.TiempoEstimado, dtoTramoPrecio.Orden, dtoTramoPrecio.Precio, Convert.ToDateTime(dtoTramoPrecio.FechaEntradaVigencia));
                 if (etramo != null)
                 {
                     return Ok(etramo);

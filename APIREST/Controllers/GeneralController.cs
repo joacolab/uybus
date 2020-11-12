@@ -2,6 +2,7 @@
 using BuisnessLayer.interfaces;
 using DataAcessLayer.implementation;
 using Share.DTOs;
+using Share.entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace APIREST.Controllers
         */
         [HttpPost]
         [Route("login")]
-        [ResponseType(typeof(bool))]
+        [ResponseType(typeof(EPersona))]
         public IHttpActionResult iniciarSesion([FromBody] DTOLogin log)
         {
             try
@@ -40,7 +41,7 @@ namespace APIREST.Controllers
                     return Content(HttpStatusCode.BadRequest, "No.");
                 }
 
-                bool res = cGeneral.iniciarSesion(log.email, log.password, log.rol);
+                EPersona res = cGeneral.iniciarSesion(log.email, log.password, log.rol);
 
                 return Ok(res);
 

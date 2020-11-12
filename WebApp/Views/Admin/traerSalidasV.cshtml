@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Share.entities.ESalida>
+
+@{
+    ViewBag.Title = "traerSalidasV";
+}
+
+<h2>Seleccione salida</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdSalida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdConductor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdVehiculo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdLinea)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdSalida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdConductor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdVehiculo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdLinea)
+        </td>
+        <td>
+            @Html.ActionLink("Seleccionar", "crearViaje", new {  id=item.IdSalida }) 
+        </td>
+    </tr>
+}
+
+</table>

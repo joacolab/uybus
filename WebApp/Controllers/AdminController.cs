@@ -13,9 +13,13 @@ namespace WebApp.Controllers
     public class AdminController : Controller
     {
         private ProxyAdmin pxa = new ProxyAdmin();
-
+        private static List<int> idPars = new List<int>();
         public ActionResult Index()
         {
+            if(Session["pNombre"] != null && Session["pApellido"] != null)
+            {
+                ViewBag.nombreUsu = Session["pNombre"].ToString() + " " + Session["pApellido"].ToString();
+            }
             return View();
         }
         //---------------------------------------------------------------
@@ -58,14 +62,22 @@ namespace WebApp.Controllers
         }
 
         
-        public ActionResult crearViaje()
+
+        public ActionResult traerSalidasV()
         {
+            return View(Task.Run(() => pxa.GetAllSalida()).Result);
+        }
+
+        public ActionResult crearViaje(int id)
+        {
+            Session["salidaSelcs"] = id;
             return View();
         }
 
         [HttpPost]
         public ActionResult crearViaje(DTOCrearViajes viajes)
         {
+            viajes.idSalida =(int)Session["salidaSelcs"];
             pxa.crearViajes(viajes);
             return RedirectToAction("traerViajes");
         }
@@ -92,6 +104,38 @@ namespace WebApp.Controllers
             return View(Task.Run(() => pxa.GetAllParada()).Result);
         }
 
+
+
+        public ActionResult crearParada()
+        {
+            ViewBag.errorNP = "";
+            ViewBag.errorPP = "";
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult crearParada(DTOParada pa)
+        {
+            foreach (var parada in Task.Run(() => pxa.GetAllParada()).Result)
+            {
+                if (parada.Nombre == pa.Nombre)
+                {
+                    ViewBag.errorNP = "Ese nombre ya existe";
+                    return View();
+                }
+                if (parada.Lat.ToString() == pa.Lat && parada.Long.ToString() == pa.Long)
+                {
+                    ViewBag.errorPP = "Ya existe una parada en esa posición.";
+                    return View();
+                }
+            }
+
+            pxa.crearParada(pa);
+            return RedirectToAction("traerParadas");
+        }
+
+
+
         public ActionResult editarParada(int id)
         {
             DTOParada p = new DTOParada();
@@ -111,81 +155,127 @@ namespace WebApp.Controllers
 
         public ActionResult traerLinea()
         {
+            idPars.Clear();
+            Session["Nuevalinea"] = null;
+            Session["selecParadaId"] = null;
+            Session["errorNLinea"] = null;
+            Session["ordenParada"] = null;
             return View(Task.Run(() => pxa.GetAllLineas()).Result);
         }
 
         
         public ActionResult crearLinea()
         {
+            if (Session["errorNLinea"]!=null)
+            {
+                ViewBag.Message = Session["errorNLinea"];
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult crearLinea(DTOLinea linea)
         {
-            Session["Nuevalinea"] = pxa.crearLinea(linea);
-
-            //ELinea el = (ELinea)Session["Nuevalinea"];
-
-            return RedirectToAction("asignarParada");
-            //return RedirectToAction("traerLinea");
+            foreach (var li in Task.Run(() => pxa.GetAllLineas()).Result)
+            {
+                if (linea.Nombre == li.Nombre)
+                {
+                    Session["errorNLinea"] = "Ya existe una linea con ese nombre";
+                    return RedirectToAction("crearLinea");
+                }
+            }
+            Session["Nuevalinea"] = pxa.crearLinea(linea).IdLinea;
+            return RedirectToAction("traerParadaL");//lista las paradas
         }
 
-        public ActionResult asignarParada()
+        public ActionResult traerParadaL()
         {
+            List<EParada> retorno = new List<EParada>();
+
+            List<EParada> paradas = Task.Run(() => pxa.GetAllParada()).Result;
+            retorno.AddRange(paradas);
+
+            if (idPars.Count()>0)
+            {
+
+
+                foreach (var p in paradas)
+                {
+                    foreach (var ip in idPars)
+                    {
+                        if (p.IdParada == ip)
+                        {
+                            retorno.Remove(p);
+                        }
+                    }
+                }
+
+
+                return View(retorno);
+            }
+            return View(paradas);
+        }
+
+        public ActionResult asignarParada(int id)
+        {
+            Session["selecParadaId"] = id;
+            idPars.Add(id);
             return View();
         }
 
         [HttpPost]
         public ActionResult asignarParada(DTOTramoParada tp)
         {
+            if (Session["ordenParada"]==null)
+            {
+                Session["ordenParada"] = 2;
+            }
+
             if (!tp.isFinal)
             {
-                DTOParada par = new DTOParada();
-                par.IdParada = tp.IdParada;
-                par.Lat = tp.Lat;
-                par.Long = tp.Long;
-                par.Nombre = tp.Nombre;
-                EParada ep = pxa.crearParada(par);
+
                 DTOTramoPrecio tpre = new DTOTramoPrecio();
-                ELinea el = (ELinea)Session["Nuevalinea"];
-                tpre.IdLinea = el.IdLinea;
-                tpre.IdParada = ep.IdParada;
-                tpre.Orden =tp.Orden;
-                tpre.TiempoEstimado = tp.TiempoEstimado;
+                tpre.IdLinea = (int)Session["Nuevalinea"];
+                tpre.IdParada = (int)Session["selecParadaId"];
+                //tpre.Orden =tp.Orden;
 
                 if (tp.isOrigen)
                 {
+                    tpre.Orden = 1;
+
+                    tpre.TiempoEstimado = 0;
                     tpre.FechaEntradaVigencia = "2000-01-01";
                     tpre.Precio = 0;
                 }
                 else
                 {
+
+                    tpre.Orden = (int)Session["ordenParada"];
+                    Session["ordenParada"] = (int)Session["ordenParada"] + 1;
+
+                    tpre.TiempoEstimado = tp.TiempoEstimado;
                     tpre.FechaEntradaVigencia = tp.FechaEntradaVigencia;
                     tpre.Precio = tp.Precio;
                 }
 
                 pxa.crearTramo(tpre);
-                return View();
+                return RedirectToAction("traerParadaL");
             }
             else
             {
-                DTOParada par = new DTOParada();
-                par.IdParada = tp.IdParada;
-                par.Lat = tp.Lat;
-                par.Long = tp.Long;
-                par.Nombre = tp.Nombre;
-                EParada ep = pxa.crearParada(par);
                 DTOTramoPrecio tpre = new DTOTramoPrecio();
-                ELinea el = (ELinea)Session["Nuevalinea"];
-                tpre.IdLinea = el.IdLinea;
-                tpre.IdParada = ep.IdParada;
-                tpre.Orden = tp.Orden;
+                tpre.IdLinea = (int)Session["Nuevalinea"];
+                tpre.IdParada = (int)Session["selecParadaId"];
+                tpre.Orden = (int)Session["ordenParada"];
                 tpre.TiempoEstimado = tp.TiempoEstimado;
                 tpre.FechaEntradaVigencia = tp.FechaEntradaVigencia;
                 tpre.Precio = tp.Precio;
                 pxa.crearTramo(tpre);
-
+                Session["ordenParada"] = null;
+                Session["Nuevalinea"] = null;
+                Session["selecParadaId"] = null;
+                Session["errorNLinea"] = null;
+                idPars.Clear();
                 return RedirectToAction("Index");
             }
         }
@@ -212,10 +302,6 @@ namespace WebApp.Controllers
         {
             return View(Task.Run(() => pxa.GetAllSalida()).Result);
         }
-        //-------------------crear salida--------------------
-        //listar lineas------
-        //listar vehiculos----
-        //listar conductores--
 
         public ActionResult traerCondSallida()
         {

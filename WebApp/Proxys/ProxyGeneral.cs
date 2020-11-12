@@ -1,4 +1,5 @@
 ﻿using Share.DTOs;
+using Share.entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +13,15 @@ namespace WebApp.Proxys
     {
         public string Baseurl = "https://localhost:44330/general/";
 
-        public bool iniciarSesion(DTOLogin log)
+        public EPersona iniciarSesion(DTOLogin log)
         {
             
             using (var client = new HttpClient())
             {
                 var task = client.PostAsJsonAsync(Baseurl + "login", log)
-                         .ContinueWith(x => x.Result.Content.ReadAsAsync<bool>().Result);
+                         .ContinueWith(x => x.Result.Content.ReadAsAsync<EPersona>().Result);
                 task.Wait();
-                bool response = task.Result;
-                return response;
+                return task.Result;
 
             }
             
