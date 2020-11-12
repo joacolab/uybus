@@ -13,6 +13,7 @@ namespace WebApp.Controllers
     public class AdminController : Controller
     {
         private ProxyAdmin pxa = new ProxyAdmin();
+        private static List<int> idPars = new List<int>();
         public ActionResult Index()
         {
             return View();
@@ -91,6 +92,38 @@ namespace WebApp.Controllers
             return View(Task.Run(() => pxa.GetAllParada()).Result);
         }
 
+
+
+        public ActionResult crearParada()
+        {
+            ViewBag.errorNP = "";
+            ViewBag.errorPP = "";
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult crearParada(DTOParada pa)
+        {
+            foreach (var parada in Task.Run(() => pxa.GetAllParada()).Result)
+            {
+                if (parada.Nombre == pa.Nombre)
+                {
+                    ViewBag.errorNP = "Ese nombre ya existe";
+                    return View();
+                }
+                if (parada.Lat.ToString() == pa.Lat && parada.Long.ToString() == pa.Long)
+                {
+                    ViewBag.errorPP = "Ya existe una parada en esa posición.";
+                    return View();
+                }
+            }
+
+            pxa.crearParada(pa);
+            return RedirectToAction("traerParadas");
+        }
+
+
+
         public ActionResult editarParada(int id)
         {
             DTOParada p = new DTOParada();
@@ -110,6 +143,7 @@ namespace WebApp.Controllers
 
         public ActionResult traerLinea()
         {
+            idPars.Clear();
             Session["Nuevalinea"] = null;
             Session["selecParadaId"] = null;
             Session["errorNLinea"] = null;
@@ -144,15 +178,36 @@ namespace WebApp.Controllers
 
         public ActionResult traerParadaL()
         {
+            List<EParada> retorno = new List<EParada>();
 
             List<EParada> paradas = Task.Run(() => pxa.GetAllParada()).Result;
+            retorno.AddRange(paradas);
 
+            if (idPars.Count()>0)
+            {
+
+
+                foreach (var p in paradas)
+                {
+                    foreach (var ip in idPars)
+                    {
+                        if (p.IdParada == ip)
+                        {
+                            retorno.Remove(p);
+                        }
+                    }
+                }
+
+
+                return View(retorno);
+            }
             return View(paradas);
         }
 
         public ActionResult asignarParada(int id)
         {
             Session["selecParadaId"] = id;
+            idPars.Add(id);
             return View();
         }
 
@@ -208,6 +263,7 @@ namespace WebApp.Controllers
                 Session["Nuevalinea"] = null;
                 Session["selecParadaId"] = null;
                 Session["errorNLinea"] = null;
+                idPars.Clear();
                 return RedirectToAction("Index");
             }
         }

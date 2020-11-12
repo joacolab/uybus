@@ -6,7 +6,6 @@
 
 <h2>Ingrese parada</h2>
 
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -15,14 +14,11 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
-    
-
     <div class="form-group">
-        @Html.LabelFor(model => model.isOrigen,"¿Es la parada de origen?", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.isOrigen, "¿Es la parada de origen?", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
-                @Html.EditorFor(model => model.isOrigen, new { htmlAttributes = new { id = "isOrigen", @onclick = "buttonValue()" } } )
+                @Html.EditorFor(model => model.isOrigen, new { htmlAttributes = new { id = "isOrigen", @onclick = "buttonValue()" } })
                 @Html.ValidationMessageFor(model => model.isOrigen, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -50,9 +46,9 @@
 
     </script>
 
-    
+
     <div class="form-group" id="el1">
-        @Html.LabelFor(model => model.TiempoEstimado,"Tiempo estimado (minutos)", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.TiempoEstimado, "Tiempo estimado (minutos)", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.TiempoEstimado, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.TiempoEstimado, "", new { @class = "text-danger" })
@@ -62,7 +58,7 @@
 
 
     <div class="form-group" id="el2">
-        @Html.LabelFor(model => model.Precio,"Precio (UYU)", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Precio, "Precio (UYU)", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
@@ -70,15 +66,15 @@
     </div>
 
     <div class="form-group" id="el3">
-        @Html.LabelFor(model => model.FechaEntradaVigencia,"Entrada en vigencia", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.FechaEntradaVigencia, "Entrada en vigencia", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.FechaEntradaVigencia, new { htmlAttributes = new { @class = "form-control", @type="Date" } })
+            @Html.EditorFor(model => model.FechaEntradaVigencia, new { htmlAttributes = new { @class = "form-control", @type = "Date" } })
             @Html.ValidationMessageFor(model => model.FechaEntradaVigencia, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group" id="el4">
-        @Html.LabelFor(model => model.isFinal,"¿Es la parada Final?", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.isFinal, "¿Es la parada Final?", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
                 @Html.EditorFor(model => model.isFinal)

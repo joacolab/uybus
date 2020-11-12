@@ -20,6 +20,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                <h3 style="color: rgb(255,0,0)">@ViewBag.errorNP</h3>
             </div>
         </div>
 
@@ -28,6 +29,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Lat, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Lat, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
@@ -36,6 +38,7 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Long, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Long, "", new { @class = "text-danger" })
+                <h3 style="color: rgb(255,0,0)">@ViewBag.errorPP</h3>
             </div>
         </div>
 
