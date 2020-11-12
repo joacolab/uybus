@@ -122,24 +122,18 @@ namespace WebApp.Controllers
 
             if(Session["asiento"] == null) pasaje.asiento = -1;
             else pasaje.asiento = (int)Session["asiento"];
+
+            pasaje.documento = Session["Documento"].ToString();
+            pasaje.tipoDoc = Session["TipoDocumento"].ToString();
+
+
+            //Session.Clear();//flush session
+
+           
+            pasaje.idUsuario = (int)Session["idPersona"];
+            pxu.comprarPasaje(pasaje);
             
-            pasaje.documento = p.documento;
-            pasaje.tipoDoc = p.tipoDoc.ToString();
 
-            pasaje.idUsuario = -1; //usuario no logeado, arreglar esto <<<<---------!!!!--------------
-            pxu.comprarPasaje(pasaje); // se complra el pasaje
-            Session.Clear();//flush session
-
-            if (Session["idPersona"] != null)
-            {
-                pasaje.idUsuario = (int)Session["idPersona"];
-                pxu.comprarPasaje(pasaje);
-            }
-            else
-            {
-                pasaje.idUsuario = -1; //usuario no logeado, arreglar esto <<<<---------!!!!--------------
-                pxu.comprarPasaje(pasaje);
-            }
 
             return RedirectToAction("Index");
             //return View("Index");

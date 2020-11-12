@@ -101,13 +101,14 @@ namespace BuisnessLayer.implementation
             if (epara.Valor > cosotP) asiento = -1;
       
             EPasaje ep = new EPasaje();
+
             if (idUsuario == -1) //Usuario NOO logeado
             {
                 ep = iPasaje.addPasaje(asiento, documento, tipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
 
                 //esto no va, es una prueba, codigo pelotas
                 //enviarCorreo("juan.alvarez@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo 
-                enviarCorreo("julio.arrieta@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
+                //enviarCorreo("julio.arrieta@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
                 //enviarCorreo("lucas.garrido@utec.edu.uy", "https://4.bp.blogspot.com/_xukD7iTXxKo/R6kUSmPim-I/AAAAAAAAAFg/JDYuhXlPdHA/s320/perros+culiando.jpg");//generar pdf con codigo QR y enviarlo
                 //enviarCorreo("gustavo.cerdena@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
                 //enviarCorreo("karloxx09@gmail.com", "asfsfsf");//generar pdf con codigo QR y enviarlo
@@ -120,7 +121,11 @@ namespace BuisnessLayer.implementation
                 else strTipoDoc = "Credencial";
 
                 ep = iPasaje.addPasaje(asiento, epe.Documento, strTipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
-                enviarCorreo(iPersona.getPersona(idUsuario).Correo, ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo 
+
+                EPersona eper = iPersona.getPersona(idUsuario);
+                string correoE = eper.Correo;
+
+                enviarCorreo(correoE, ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo 
             }
 
             return ep;
@@ -131,6 +136,7 @@ namespace BuisnessLayer.implementation
             Document doc = new Document(PageSize.A4);
             //string path = Directory.GetCurrentDirectory();
             //PdfWriter.GetInstance(doc, new FileStream( path + @"pdf\pasaje.pdf", FileMode.Create));
+
             string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
             PdfWriter.GetInstance(doc, new FileStream(outputFile, FileMode.Create));
             doc.Open();
@@ -151,9 +157,11 @@ namespace BuisnessLayer.implementation
                 emailMessage.Body = "";
                 getPdfconQR(IDPasaje);
                 string path = Directory.GetCurrentDirectory();
-                emailMessage.Attachments.Add(new Attachment(path + @"\pdf\pasaje.pdf"));
+
+                //emailMessage.Attachments.Add(new Attachment(path + @"\pdf\pasaje.pdf"));
                 string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
                 emailMessage.Attachments.Add(new Attachment(outputFile));
+
                 emailMessage.Priority = MailPriority.Normal;
                 using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))
                 {

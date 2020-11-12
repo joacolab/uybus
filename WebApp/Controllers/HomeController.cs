@@ -74,7 +74,7 @@ namespace WebApp.Controllers
                     Session["Correo"] = res.Correo;
                     Session["Password"] = res.Password;
 
-                    Rol r = (Rol)res.TipoDocumento;
+                    TipoDoc r = (TipoDoc)res.TipoDocumento;
                     Session["TipoDocumento"] = r.ToString();
 
                     Session["Documento"] = res.Documento;
