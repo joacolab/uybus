@@ -125,18 +125,103 @@ namespace BuisnessLayer.implementation
                 EPersona eper = iPersona.getPersona(idUsuario);
                 string correoE = eper.Correo;
 
-                enviarCorreo(correoE, ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo 
+
+
+                enviarCorreo(correoE, ep.IdPasaje.ToString(), eper, ep, cosotP);//generar pdf con codigo QR y enviarlo 
             }
 
             return ep;
            
         }
-        private void getPdfconQR(string IDPasaje)
+        private void getPdfconQR(string IDPasaje, EPersona epersona, EPasaje epasaje, int costo)
         {
-            Document doc = new Document(PageSize.A4);
-            //string path = Directory.GetCurrentDirectory();
-            //PdfWriter.GetInstance(doc, new FileStream( path + @"pdf\pasaje.pdf", FileMode.Create));
+            string orign = iParada.getParada(epasaje.IdParadaOrigen).Nombre;
+            string destino = iParada.getParada(epasaje.IdParadaDestino).Nombre;
+            string linea = iLinea.getLinea(iSalida.getSalidas(iViaje.getViaje(epasaje.IdViaje).IdSalida).IdLinea).Nombre;
+            string matricula = iVehiculo.getVehiculos(iSalida.getSalidas(iViaje.getViaje(epasaje.IdViaje).IdSalida).IdVehiculo).Matricula;
+            string fechaViajeL = iViaje.getViaje(epasaje.IdViaje).Fecha.ToString();
 
+            string fechaViaje = fechaViajeL;
+            int index = fechaViaje.IndexOf(" ");
+            if (index > 0)
+                fechaViaje = fechaViaje.Substring(0, index);
+
+
+
+            string hora = iSalida.getSalidas(iViaje.getViaje(epasaje.IdViaje).IdSalida).HoraInicio.ToString();
+
+            Document doc = new Document(PageSize.A5, 18, 18, 16, 0);
+
+            string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
+            PdfWriter.GetInstance(doc, new FileStream(outputFile, FileMode.Create));
+
+            doc.Open();
+            BarcodeQRCode barcodeWrcode = new BarcodeQRCode(IDPasaje, 1000, 1000, null);
+            Image codeQRImga = barcodeWrcode.GetImage();
+            codeQRImga.ScaleAbsolute(200, 200);
+
+            string outputFile2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "uybus.png");
+            Image image = Image.GetInstance(outputFile2);
+            image.ScaleAbsoluteHeight(42.0f * 1.88f);
+            image.ScaleAbsoluteWidth(185.2f * 2.07f);
+            image.Alignment = Element.ALIGN_CENTER;
+            doc.Add(image);
+
+            BaseFont bf = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.WINANSI, BaseFont.EMBEDDED);
+
+            Font fontText = new Font(bf, 20, 0, BaseColor.BLACK);
+            Paragraph par1 = new Paragraph("Estimado pasajero, ha recibido su pasaje.", fontText);
+            par1.Alignment = Element.ALIGN_CENTER;
+            doc.Add(par1);
+
+            Font fontText2 = new Font(bf, 15, 0, BaseColor.BLACK);
+
+            Paragraph par0 = new Paragraph("UruguayBus 2020 le desea buen viaje.", fontText2);
+            par0.Alignment = Element.ALIGN_CENTER;
+            doc.Add(par0);
+
+            Paragraph p = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+            doc.Add(p);
+
+            Paragraph paragraphs = new Paragraph(new Phrase("Enviado: " + DateTime.Now.ToString()));
+            paragraphs.Alignment = Element.ALIGN_RIGHT;
+            doc.Add(paragraphs);
+
+            doc.Add(new Paragraph("Pasajero: "+ epersona.pNombre + " "+epersona.pApellido));
+            doc.Add(new Paragraph("Documento: "+ epersona.Documento));
+            if (epasaje.Asientos!=null)
+            {
+                if (epasaje.Asientos!=-1)
+                {
+                    doc.Add(new Paragraph("Asiento: " + epasaje.Asientos));
+                }
+            }
+
+            doc.Add(new Paragraph("Linea: " + linea));
+            doc.Add(new Paragraph("Origen: " + orign));
+            doc.Add(new Paragraph("Destino: " + destino));
+            doc.Add(new Paragraph("Salida: " + fechaViaje + " " + hora));
+            doc.Add(new Paragraph("Matricula: " + matricula));
+
+
+
+            doc.Add(new Paragraph("Costo: "+costo+" UYU"));
+
+            //doc.Add(new Chunk("\n"));
+
+            Paragraph p3 = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+            doc.Add(p3);
+
+            Font fontText4 = new Font(bf, 10, 0, BaseColor.BLACK);
+            doc.Add(new Paragraph("Presente el siguiente código QR al chofer.", fontText4));
+
+
+            codeQRImga.Alignment = Element.ALIGN_CENTER;
+            doc.Add(codeQRImga);
+
+            doc.Close();
+            /*
+            Document doc = new Document(PageSize.A4);
             string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
             PdfWriter.GetInstance(doc, new FileStream(outputFile, FileMode.Create));
             doc.Open();
@@ -145,8 +230,9 @@ namespace BuisnessLayer.implementation
             codeQRImga.ScaleAbsolute(200,200);
             doc.Add(codeQRImga);
             doc.Close();
+            */
         }
-        private void enviarCorreo(string correo, string IDPasaje)//generar pdf con codigo QR y enviarlo 
+        private void enviarCorreo(string correo, string IDPasaje, EPersona eepersona, EPasaje eepasaje, int costo)//generar pdf con codigo QR y enviarlo 
         {
 
             using (MailMessage emailMessage = new MailMessage())
@@ -155,7 +241,7 @@ namespace BuisnessLayer.implementation
                 emailMessage.To.Add(new MailAddress(correo, "Pasajero")); //correo del pasajero
                 emailMessage.Subject = "UruguayBus";
                 emailMessage.Body = "";
-                getPdfconQR(IDPasaje);
+                getPdfconQR(IDPasaje, eepersona, eepasaje, costo);
                 string path = Directory.GetCurrentDirectory();
 
                 //emailMessage.Attachments.Add(new Attachment(path + @"\pdf\pasaje.pdf"));

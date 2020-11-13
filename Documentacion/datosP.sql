@@ -2,7 +2,7 @@ insert into persona VALUES ('45634766','admin@gmail.com','1234',1,'Juan','Pedro'
 
 insert into persona VALUES ('95614576','karloxx09@gmail.com','1234',1,'Carlos','Mengano','Balbiani','Fulano'); 
 insert into persona VALUES ('56615766','suarezjoaquinluis@gmail.com','1234',1,'Joaquin','Mengano','Suarez','Fulano'); 
-insert into persona VALUES ('78665766','julioarrieta@gmail.com','1234',1,'Julio','Mengano','Arrieta','Fulano'); 
+insert into persona VALUES ('78665766','julioarrieta23@gmail.com','1234',1,'Julio','Mengano','Arrieta','Fulano'); 
 insert into persona VALUES ('56257665','ricardo@gmail.com','1234',1,'Ricardo','Pedro','Rocha','Rodriguez'); 
 insert into persona VALUES ('54653576','hernesto@gmail.com','1234',1,'Hernesto','Luciana','Arrieta','Tussy');
  
