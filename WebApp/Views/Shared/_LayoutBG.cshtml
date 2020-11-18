@@ -16,7 +16,11 @@
         display:none;
     }
 </style>
-<body >
+<body background="~/Content/Images/bg1.png" 
+      style="   background-repeat: no-repeat;
+                background-size: 100% 700px;
+                margin-bottom: 0;
+                padding-bottom: 0;">
 
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -36,7 +40,6 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Registrarse", "registrarse", "Home", htmlAttributes: new { id = "registerLink" })</li>
                     <li>@Html.ActionLink("Iniciar sesión", "Login", "Home", htmlAttributes: new { id = "loginLink" })</li>
-                    <li>@Html.ActionLink("Cerrar sesión", "cerrarSesion", "Home", htmlAttributes: new { id = "cerrar" })</li>
                 </ul>
 
 
@@ -46,7 +49,7 @@
     <div class="container body-content">
         @RenderBody()
     </div>
-    
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
