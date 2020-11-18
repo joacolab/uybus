@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_LayoutBG.cshtml";
+    Layout = "~/Views/Shared/_LayoutBGC.cshtml";
 }
 @{
     ViewBag.Title = "Index";
@@ -23,28 +23,26 @@
 
 <!--RESUMEN tramo y salida no andan ya que le paso un diccionario-->
 
-
-<div class="row ">
-
-    <div class="col-0 col-md-2"></div>
-
-    <div class="col-12 col-md-3">
-        <h2 style="color:azure">Comprar pasaje</h2>
-        <a href='@Url.Action("traerLineas", "Usuario")'>
-            <img src="~/Content/Images/CP.jpg" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
-        </a>
+<div class="container">
+    <div class="row">
+        <div class="text-center col-12 col-md-6">
+            <h2 style="color:azure">Comprar pasaje</h2>
+            <a href='@Url.Action("traerLineas", "Usuario")'>
+                <img src="~/Content/Images/CP.jpg" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
+            </a>
+        </div>
+        <div class="text-center col-12 col-md-6">
+            <h2 style="color:azure">Proximos vehiculos</h2>
+            <a href='@Url.Action("proxVehiculos", "Usuario")'>
+                <img src="~/Content/Images/PV.jpg" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
+            </a>
+        </div>
     </div>
-
-    <div class="col-0 col-md-2"></div>
-
-    <div class="col-12 col-md-5">
-        <h2 style="color:azure">Proximos vehiculos</h2>
-        <a href='@Url.Action("proxVehiculos", "Usuario")'>
-            <img src="~/Content/Images/PV.jpg" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
-        </a>
-    </div>
-
-
 </div>
+
+<br>
+
+
+
 
 
