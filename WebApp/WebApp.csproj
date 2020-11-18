@@ -219,7 +219,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Admin\crearVehiculo.cshtml" />
     <Content Include="Views\Admin\editarVehiculo.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
@@ -279,6 +278,7 @@
     <Content Include="Views\Admin\traerParadaL.cshtml" />
     <Content Include="Views\Admin\traerSalidasV.cshtml" />
     <Content Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

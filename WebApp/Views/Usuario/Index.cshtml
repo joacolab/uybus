@@ -3,8 +3,17 @@
     ViewBag.Title = "Index";
 }
 
-<div class="jumbotron">
-    <h1>Bienvenido @ViewBag.nombreUsu</h1>
+
+
+<div class="jumbotron" style="background-color: rgba(150,255,210,0.5);  text-align: center; margin-top: 50px">
+
+    <h1 style="
+        font-family: Segoe UI;
+        color: black;
+        font-size: 60px;
+        font-weight: 700;">
+        Bienvenido @ViewBag.nombreUsu
+    </h1>
 </div>
 
 <br>
@@ -12,12 +21,28 @@
 
 <!--RESUMEN tramo y salida no andan ya que le paso un diccionario-->
 
-<div class="row" style="height:300px">
-    <div class="col-md-4">
-        <h3 class="btn btn-default">@Html.ActionLink("Comprar pasaje", "traerLineas")</h3>
-        <h3 class="btn btn-default">@Html.ActionLink("Proximos vehiculos", "proxVehiculos")</h3>
+
+<div class="row ">
+
+    <div class="col-md-2"></div>
+
+    <div class="col-md-3">
+        <h2 style="color:azure">Comprar pasaje</h2>
+        <a href='@Url.Action("traerLineas", "Usuario")'>
+            <img src="~/Content/Images/Bus3.png" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
+        </a>
     </div>
-    <div class="col-md-8">
+
+    <div class="col-md-2"></div>
+
+    <div class="col-md-5">
+        <h2 style="color:azure">Proximos vehiculos</h2>
+        <a href='@Url.Action("proxVehiculos", "Usuario")'>
+            <img src="~/Content/Images/Bus3.png" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
+        </a>
     </div>
+
+
 </div>
+
 

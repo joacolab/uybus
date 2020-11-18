@@ -33,6 +33,12 @@ namespace WebApp.Controllers
             return View();
         }
 
+        public RedirectToRouteResult registrarse()
+        {
+            return RedirectToAction("registrarse", "Invitado");
+        }
+
+
         public ActionResult cerrarSesion()
         {
             Session.Clear();
@@ -47,11 +53,6 @@ namespace WebApp.Controllers
             log.email = logf.email;
             log.password = logf.password;
             log.rol = logf.rol.ToString();
-
-            /*DTOLogin log = new DTOLogin();
-            log.email = "ConductorGuille@gmail.com";
-            log.password = "1234";
-            log.rol = "Conductor";*/
 
             EPersona res = pxg.iniciarSesion(log);
             if (res.pNombre=="Error")
