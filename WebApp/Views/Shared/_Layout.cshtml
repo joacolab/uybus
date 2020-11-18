@@ -9,8 +9,19 @@
     @Scripts.Render("~/bundles/modernizr")
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="icon" href="~/Content/Images/icon.png" sizes="196x196" />
 </head>
-<body>
+<style type="text/css">
+    body::-webkit-scrollbar{
+        display:none;
+    }
+</style>
+<body background="~/Content/Images/bg1.png" 
+      style="   background-repeat: no-repeat;
+                background-size: 100% 700px;
+                margin-bottom: 0;
+                padding-bottom: 0;">
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -25,26 +36,27 @@
 
                 <ul class="nav navbar-nav">
                 </ul>
-                
+
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Registrarse", "registrarse", "Home", htmlAttributes: new { id = "registerLink" })</li>
-                    <li>@Html.ActionLink("Iniciar sesión", "Login", "Home", htmlAttributes: new { id = "loginLink" })</li> 
+                    <li>@Html.ActionLink("Iniciar sesión", "Login", "Home", htmlAttributes: new { id = "loginLink" })</li>
                     <li>@Html.ActionLink("Cerrar sesión", "cerrarSesion", "Home", htmlAttributes: new { id = "cerrar" })</li>
                 </ul>
-   
+
 
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - UruguayBus</p>
-        </footer>
     </div>
-    
-    
+
+    <br>
+    <footer style="background-color: rgb(36, 36, 36); height:50px; left:0; bottom:0; width:100%; color: white;margin-bottom:0; padding-bottom:0; text-align: center;">
+        <br>
+        <p>&copy; @DateTime.Now.Year - UruguayBus</p>
+    </footer>
+
     <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

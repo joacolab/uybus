@@ -2,40 +2,50 @@
     ViewBag.Title = "Index";
 }
 
-<div class="jumbotron">
-    <h1>Bienvenido Invitado</h1>
+
+
+
+<div class="jumbotron" style="background-color: rgba(150,255,210,0.5);  text-align: center; margin-top: 50px">
+    <h1 style="
+        font-family: Segoe UI;
+        color: black;
+        font-size: 60px;
+        font-weight: 700;">
+        UruguayBus 2020
+    </h1>
+    <h3 style="font-family: sans-serif;
+        color: black;
+        font-weight: 700;
+        font-size: 20px;
+        margin-top: 40px">
+        Nos encanta llevarte y traerte.
+    </h3>
 </div>
+
+
 
 <br>
-
-<div class="row" style="height:300px">
-    <div class="col-md-4">
-        <h3 class="btn btn-default">@Html.ActionLink("Iniciar sesión", "login")</h3>
-        <h3 class="btn btn-default">@Html.ActionLink("Registro", "invitado")</h3>
-    </div>
-    <div class="col-md-8">
-    </div>
+<div style="text-align:center; margin-bottom:100px">
+    <h2 style="font-family:sans-serif;  color: aquamarine; font-size:50px">Explora nuestra nueva flota</h2>
 </div>
-
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+        <img src="~/Content/Images/Bus3.png" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
+        <h2>Doble piso</h2>
+        <p style="width: 300px">
+            Con nuestra nueva flota de coches de doble piso disfruta de una vista panorámica en tu recorrido a la ciudad capitalina,
+            desde cualquier punto del interior del país.
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <img src="~/Content/Images/Bus2.png" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
+        <h2>Más de 40 asientos </h2>
+        <p style="width: 300px">Lleva a tus conocidos y compañero de clase o de oficina en un ómnibus amplio y concurrido, para no perderte de ningún momento con las personas con las que trabajas.</p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <img src="~/Content/Images/Bus1.png" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
+        <h2>Nuevo equipamiento</h2>
+        <p style="width: 300px">Comparta las mejores historias de instagram, con el Wifi de alta velocidad de abordo, cargue todo lo que necesita en su viaje en las nuevas y amplias bodegas inferiores, descargue lo que haga falta en los nuevos baños.</p>
     </div>
 </div>

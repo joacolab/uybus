@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ConductorController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvitadoController.cs" />
     <Compile Include="Controllers\SuperAdminController.cs" />
@@ -277,9 +278,11 @@
     <Content Include="Views\Admin\selecLine.cshtml" />
     <Content Include="Views\Admin\traerParadaL.cshtml" />
     <Content Include="Views\Admin\traerSalidasV.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

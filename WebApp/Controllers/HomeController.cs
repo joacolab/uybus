@@ -17,6 +17,8 @@ using WebApp.Proxys;
 
 namespace WebApp.Controllers
 {
+    [HandleError]
+
     public class HomeController : Controller
     {
         private ProxyGeneral pxg = new ProxyGeneral();
@@ -127,10 +129,6 @@ namespace WebApp.Controllers
         }
 
 
-
-
-
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -139,113 +137,5 @@ namespace WebApp.Controllers
         }
 
 
-
-
-
-        /*
-        //Hosted web API REST Service base url  
-        string Baseurl = "https://localhost:44330/admin/";
-        public async Task<ActionResult> Index()
-        {
-            List<EVehiculo> EmpInfo = new List<EVehiculo>();
-
-            using (var client = new HttpClient())
-            {
-                //Passing service base url  
-                client.BaseAddress = new Uri(Baseurl);
-
-                client.DefaultRequestHeaders.Clear();
-                //Define request data format  
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
-                HttpResponseMessage Res = await client.GetAsync("traer/vehiculos");
-
-                //Checking the response is successful or not which is sent using HttpClient  
-                if (Res.IsSuccessStatusCode)
-                {
-                    //Storing the response details recieved from web api   
-                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
-
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    EmpInfo = JsonConvert.DeserializeObject<List<EVehiculo>>(EmpResponse);
-
-                }
-                //returning the employee list to view  
-                return View(EmpInfo);
-            }
-        }
-        
-        public ActionResult nuevoVehiculo()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult nuevoVehiculo(EVehiculo vehiculo)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://localhost:44330/admin/crear/vehiculo");
-                var postTask = client.PostAsJsonAsync<EVehiculo>("vehiculo", vehiculo);
-                postTask.Wait();
-                var result = postTask.Result;
-
-                if (result.IsSuccessStatusCode)
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-            ModelState.AddModelError(string.Empty, "Error, contactese con el administrador (Juan)");
-            return View(vehiculo);
-        }
-
-        
-        public ActionResult editarVehiculo()
-        {
-            return View();
-        }
-        
-
-        /*
-        public ActionResult editarVehiculo(string matricula)
-        {
-            EVehiculo vehiculo = null;
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://localhost:44330/admin/editar/vehiculo");
-                var responeTask = client.GetAsync(matricula);
-                responeTask.Wait();
-                var result = responeTask.Result;
-                if(result.IsSuccessStatusCode)
-                {
-                    var readTask = result.Content.ReadAsAsync<EVehiculo>();
-                    readTask.Wait();
-                    vehiculo = readTask.Result;
-                }
-            }
-            return View(vehiculo);
-        }
-        */
-
-        /*
-        [HttpPost] //igual usamos Post aunnque sea put
-        public ActionResult editarVehiculo(EVehiculo vehiculo)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://localhost:44330/");
-                var putTask = client.PutAsJsonAsync($"admin/editar/vehiculo/{vehiculo.Matricula}", vehiculo);
-                putTask.Wait();
-                var result = putTask.Result;
-                if(result.IsSuccessStatusCode)
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-            return View(vehiculo);
-        }
-        
-        */
     }
 }
