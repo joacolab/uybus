@@ -1,46 +1,54 @@
 ﻿@model IEnumerable<Share.DTOs.DTOproxVehiculo>
-
+@{
+    Layout = "~/Views/Shared/_LayoutBGC.cshtml";
+}
 @{
     ViewBag.Title = "verVehiculoP";
 }
 
-<h2>Próximos vehículos:</h2>
+<h2 style="color:azure">Próximos vehículos:</h2>
 
-<h4>Reservados en rojo.</h4>
+<h4 style="color:azure">Reservados en rojo.</h4>
 
-<table class="table">
-    <tr>
-        <th>
-            Matricula
-        </th>
-        <th>
-            Linea
-        </th>
 
-    </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @if (item.reservado)
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr class="bg-primary">
+            <th scope="col">
+                Matricula
+            </th>
+            <th scope="col">
+                Linea
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
         {
-            <h3 style="color: rgb(255, 0, 0)"> @Html.DisplayFor(modelItem => item.Vehiculo.Matricula)</h3>
+            <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
+
+                <td>
+                    @if (item.reservado)
+                    {
+                        <h3 style="color: rgb(255, 0, 0)"> @Html.DisplayFor(modelItem => item.Vehiculo.Matricula)</h3>
+                    }
+                    else
+                    {
+                        <h3> @Html.DisplayFor(modelItem => item.Vehiculo.Matricula)</h3>
+                    }
+                </td>
+
+                <td >
+                    <h3> @Html.DisplayFor(modelItem => item.linea)</h3>
+                </td>
+            </tr>
         }
-        else
-        {
-            <h3> @Html.DisplayFor(modelItem => item.Vehiculo.Matricula)</h3>
-        }
-
-    </td>
-    <th>
-        <h3> @Html.DisplayFor(modelItem => item.linea)</h3>
-    </th>
-
-
-</tr>
-}
-
+    </tbody>
 </table>
+
 
 <div>
     @Html.ActionLink("Atrás", "proxVehiculos")

@@ -1,30 +1,43 @@
 ﻿@model IEnumerable<int>
 @{
-    ViewBag.Title = "selecViaje";
+    Layout = "~/Views/Shared/_LayoutBGC.cshtml";
+}
+@{
+    ViewBag.Title = "Asiento";
 }
 
 
-<h2>Seleccione asiento</h2>
+<h2 style="color:azure">Seleccione asiento</h2>
 
 
-<table class="table">
-    <tr>
-        <th>
-            asiento
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item)
-            </td>
-            <td>
-                @Html.ActionLink("Seleccionar", "selectAsiento", new { id = item })
-            </td>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr class="bg-primary">
+
+            <th scope="col">
+                asiento
+            </th>
+            <th scope="col"></th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
+                <td>
+                    @Html.DisplayFor(modelItem => item)
+                </td>
+                <td class="text-right">
+                    @Html.ActionLink("Seleccionar", "selectAsiento", new { id = item }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+<div>
+    @Html.ActionLink("Ir al inicio", "Index")
+</div>
+

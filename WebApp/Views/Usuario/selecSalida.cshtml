@@ -1,28 +1,40 @@
 ﻿@model IEnumerable<Share.entities.EViaje>
-
 @{
-    ViewBag.Title = "selecSalida";
+    Layout = "~/Views/Shared/_LayoutBGC.cshtml";
+}
+@{
+    ViewBag.Title = "Viaje";
 }
 
-<h2>Seleccione fecha del viaje</h2>
+<h2 style="color:azure">Seleccione fecha del viaje</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Fecha))
-        </td>
-        <td>
-            @Html.ActionLink("Seleccionar", "selecViaje", new {  id=item.IdViaje })
-        </td>
-    </tr>
-}
 
+<table class="table table-bordered">
+    <thead>
+        <tr class="bg-primary">
+
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
+                <td>
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Fecha))
+                </td>
+                <td class="text-right">
+                    @Html.ActionLink("Seleccionar", "selecViaje", new { id = item.IdViaje }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+<div>
+    @Html.ActionLink("Ir al inicio", "Index")
+</div>

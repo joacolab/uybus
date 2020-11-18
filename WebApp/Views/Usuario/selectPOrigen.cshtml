@@ -1,28 +1,46 @@
 ﻿@model IEnumerable<Share.entities.EParada>
-
 @{
-    ViewBag.Title = "ViewselectPOrigen";
+    Layout = "~/Views/Shared/_LayoutBGC.cshtml";
+}
+@{
+    ViewBag.Title = "Destino";
 }
 
-<h2>Seleccione parada de destino</h2>
+<h2 style="color:azure">Seleccione parada de destino</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            Paradas:
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Seleccionar", "selectPDestino", new {  id=item.IdParada  })
-        </td>
-    </tr>
-}
 
+
+<table class="table table-bordered">
+    <thead>
+        <tr class="bg-primary">
+
+            <th scope="col">
+                Paradas:
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td class="text-right">
+                    @Html.ActionLink("Seleccionar", "selectPDestino", new { id = item.IdParada }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
+
+<div>
+    @Html.ActionLink("Ir al inicio", "Index")
+</div>
+
+
+

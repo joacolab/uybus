@@ -1,27 +1,37 @@
 ﻿@model IEnumerable<Share.entities.ELinea>
-
 @{
-    ViewBag.Title = "ViewtraerLineas";
+    Layout = "~/Views/Shared/_LayoutBGC.cshtml";
+}
+@{
+    ViewBag.Title = "Linea";
 }
 
-<h2>Seleccione una linea</h2>
+<h2 style="color:azure">Seleccione una linea</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            Lineas:
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-bordered ">
+    <thead>
+        <tr class="bg-primary">
+            <th scope="col">
+                Lineas:
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td class="text-right">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Seleccionar", "selectLinea", new {  id=item.IdLinea })
-    </tr>
-}
-
+                @Html.ActionLink("Seleccionar", "selectLinea", new { id = item.IdLinea }, new { @class = "btn btn-primary" })
+            </tr>
+        }
+    </tbody>
 </table>
+
+<div>
+    @Html.ActionLink("Ir al inicio", "Index")
+</div>
