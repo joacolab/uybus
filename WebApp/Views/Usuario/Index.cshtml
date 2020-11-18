@@ -1,4 +1,6 @@
-﻿
+﻿@{
+    Layout = "~/Views/Shared/_LayoutBG.cshtml";
+}
 @{
     ViewBag.Title = "Index";
 }
@@ -24,21 +26,21 @@
 
 <div class="row ">
 
-    <div class="col-md-2"></div>
+    <div class="col-0 col-md-2"></div>
 
-    <div class="col-md-3">
+    <div class="col-12 col-md-3">
         <h2 style="color:azure">Comprar pasaje</h2>
         <a href='@Url.Action("traerLineas", "Usuario")'>
-            <img src="~/Content/Images/Bus3.png" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
+            <img src="~/Content/Images/CP.jpg" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
         </a>
     </div>
 
-    <div class="col-md-2"></div>
+    <div class="col-0 col-md-2"></div>
 
-    <div class="col-md-5">
+    <div class="col-12 col-md-5">
         <h2 style="color:azure">Proximos vehiculos</h2>
         <a href='@Url.Action("proxVehiculos", "Usuario")'>
-            <img src="~/Content/Images/Bus3.png" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
+            <img src="~/Content/Images/PV.jpg" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
         </a>
     </div>
 

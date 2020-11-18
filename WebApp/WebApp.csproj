@@ -223,7 +223,6 @@
     <Content Include="Views\Admin\editarVehiculo.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\traerVehiculos.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\traerViajes.cshtml" />
     <Content Include="Views\Admin\traerParadas.cshtml" />
