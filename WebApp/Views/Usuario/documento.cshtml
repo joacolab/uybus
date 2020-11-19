@@ -16,18 +16,20 @@
     <h1 style="color:azure">Costo del pasaje: @data $ </h1>
     <br>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()   
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <input type="submit" value="Comprar" class="btn btn-lg btn-primary" />
-    }
+    <form action="https://localhost:44383/Usuario/pago" method="POST">
+        <script src="https://www.mercadopago.com.uy/integrations/v1/web-tokenize-checkout.js"
+                data-public-key="TEST-80869768-294e-4b9b-9051-2362d31d1047"
+                data-transaction-amount=@data>
+        </script>
+    </form>
+
+
     <br>
-    
+
     <div>
         @Html.ActionLink("Ir al inicio", "Index")
     </div>
-        
+
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

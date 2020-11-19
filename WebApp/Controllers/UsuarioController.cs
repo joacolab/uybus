@@ -111,32 +111,21 @@ namespace WebApp.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult documento(DTOCompPasaje p)
+        public ActionResult pago()
         {
             DTOComprarPasaje pasaje = new DTOComprarPasaje();
-
             pasaje.idViaje = (int)Session["idViaje"];
             pasaje.idParadaOrigen = (int)Session["idPOrigen"];
             pasaje.idParadaDestino = (int)Session["idPDestino"];
-
-            if(Session["asiento"] == null) pasaje.asiento = -1;
+            if (Session["asiento"] == null) pasaje.asiento = -1;
             else pasaje.asiento = (int)Session["asiento"];
-
             pasaje.documento = Session["Documento"].ToString();
             pasaje.tipoDoc = Session["TipoDocumento"].ToString();
-
-
-            //Session.Clear();//flush session
-
-           
             pasaje.idUsuario = (int)Session["idPersona"];
-            pxu.comprarPasaje(pasaje);
-            
 
+            pxu.comprarPasaje(pasaje);
 
             return RedirectToAction("Index");
-            //return View("Index");
         }
 
         //----------------proximos vehiculos-----------------
