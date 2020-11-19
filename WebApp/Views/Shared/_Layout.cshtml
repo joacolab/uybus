@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("UruguayBus", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href='Index'class="navbar-brand">UruguayBus</a>
             </div>
             <div class="navbar-collapse collapse">
 
@@ -34,9 +34,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Registrarse", "registrarse", "Home", htmlAttributes: new { id = "registerLink" })</li>
-                    <li>@Html.ActionLink("Iniciar sesión", "Login", "Home", htmlAttributes: new { id = "loginLink" })</li>
-                    <li>@Html.ActionLink("Cerrar sesión", "cerrarSesion", "Home", htmlAttributes: new { id = "cerrar" })</li>
+                    <li><a href='@Url.Action("cerrarSesion", "Home")'>Cerrar sesión</a></li>
                 </ul>
 
 
