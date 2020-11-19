@@ -12,17 +12,29 @@ namespace BuisnessLayer.implementation
 {
     public class BL_Conductor : IBL_Conductor
     {
+        private IDAL_Llegada iLllegada;
         private IDAL_Viaje iViaje;
         private IDAL_Pasaje iPasaje;
+        private IDAL_Linea iLinea;
+        private IDAL_Salida iSalida;
+        private IDAL_Tramo iTramo;
 
-        public BL_Conductor(IDAL_Viaje _iViaje, IDAL_Pasaje _iPasaje)
+        public BL_Conductor(IDAL_Viaje _iViaje, IDAL_Pasaje _iPasaje, IDAL_Llegada _iLllegada, IDAL_Tramo _iTramo, IDAL_Salida _iSalida, IDAL_Linea _iLinea)
         {
             iViaje = _iViaje;
             iPasaje = _iPasaje;
+            iLllegada = _iLllegada;
+            iSalida = _iSalida;
+            iLinea = _iLinea;
+            iTramo = _iTramo;
         }
+
         public void iniciarViaje(int idViaje, TimeSpan horaInicioR)
         {
+
             iViaje.iniciarViaje(idViaje, horaInicioR);
+            int idP = iLinea.getLinea(iSalida.getSalidas(iViaje.getViaje(idViaje).IdSalida).IdLinea).Tramo.ToList().First().IdParada;
+            iLllegada.addLlegada(idP, idViaje, horaInicioR, iViaje.getViaje(idViaje).Fecha);
         }
 
         /// <summary>
@@ -36,27 +48,7 @@ namespace BuisnessLayer.implementation
             EPasaje ep = iPasaje.getPasajes(idPasaje);
             Console.WriteLine(idParada +" "+ ep.IdParadaOrigen);
             if (idParada== ep.IdParadaOrigen) return true;
-            else return false;
-
-            //EParada epDestino = iParada.getParada(ep.IdParadaDestino);
-            //EParada epOrigen = iParada.getParada(ep.IdParadaOrigen);
-
-            /*
-            EViaje ev = iViaje.getViaje(ep.IdViaje);
-            ESalida es = iSalida.getSalidas(ev.IdSalida);
-            ELinea el = iLinea.getLinea(es.IdLinea);
-
-            List<ETramo> tramos = el.Tramo.ToList<ETramo>(); //tramo es un ICollection<Etramo>
-
-            List<EParada> lstEp = new List<EParada>();
-            foreach (var t in tramos)
-            {
-                EParada epar = iParada.getParada(t.IdParada);
-                lstEp.Add(epar);
-            }
-            if (lstEp.Contains(epDestino) && lstEp.Contains(epOrigen)) return true;
-            else return false;
-            */
+            else return false; 
 
         }
     }

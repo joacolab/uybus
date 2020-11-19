@@ -9,7 +9,7 @@ namespace DataAcessLayer.interfaces
 {
     public interface IDAL_Llegada
     {
-        ELlegada addLlegada(int idParada, int idViaje, TimeSpan hora);
+        ELlegada addLlegada(int idParada, int idViaje, TimeSpan hora, DateTime fecha);
         List<ELlegada> getAllLlegadas();
         ELlegada getLlegada(int idParada, int idViaje);
     }

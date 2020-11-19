@@ -47,15 +47,93 @@ namespace BuisnessLayer.implementation
 
         }
 
+
         public bool correoUnico(string email)
         {
             return iUsuario.verificarCorreo(email);
         }
 
-        public ELlegada CrearLlegada(int idParada, int idViaje, TimeSpan hora)
+        private bool isFinalParada(int idParada, int idViaje)
         {
-            return iLllegada.addLlegada(idParada, idViaje, hora);
+            List<ETramo> trsDVje = iLinea.getLinea(iSalida.getSalidas(iViaje.getViaje(idViaje).IdSalida).IdLinea).Tramo.ToList();
+            ETramo tramo =  trsDVje.Last();
+            if (tramo.IdParada == idParada) return true;
+            return false;
+        }
+        private bool isUltima(int idUltParada, List<ETramo> tramos)
+        {
+            int cant = tramos.Count();
+            foreach (var t in tramos)
+            {
+                if(t.IdParada == idUltParada)
+                {
+                    if (t.Orden == cant)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        private int orden(int idUltParada, List<ETramo> tramos)
+        {
+            foreach (var t in tramos)
+            {
+                if (t.IdParada == idUltParada)
+                {
+                    return t.Orden;
+                }
+            }
+            return 0;
+        }
+
+        private EParada nextParada(int idUltParada, List<ETramo> tramos, int ord)
+        {
+            foreach (var t in tramos)
+            {
+                if (t.Orden==(ord+1))
+                {
+                    return iParada.getParada(t.IdParada);
+                }
+            }
+            EParada ep = new EParada();
+            return ep;
+        }
+        public ELlegada CrearLlegada(int idViaje, TimeSpan hora, DateTime fecha)
+        {
+            List<ETramo> tramos = iLinea.getLinea(iSalida.getSalidas(iViaje.getViaje(idViaje).IdSalida).IdLinea).Tramo.ToList();
             
+            List<EParada> paradas = new List<EParada>(); //todas las paradas del viaje
+            foreach (var tramo in tramos)
+            {
+                paradas.Add(iParada.getParada(tramo.IdParada));
+            }
+
+            List<ELlegada> llegadas = new List<ELlegada>(); //todas las llegadas del viaje
+            foreach (var llegada in iLllegada.getAllLlegadas())
+            {
+                if (llegada.idViaje == idViaje)
+                {
+                    llegadas.Add(iLllegada.getLlegada(llegada.idParada, llegada.idViaje));
+                }
+            }
+
+            int idUltParada = llegadas.Last().idParada; //ultima llegada por la que paso
+
+            EParada proxP = iParada.getParada(idUltParada);
+
+            int ord = orden(idUltParada, tramos);
+
+            if (!isUltima(idUltParada, tramos)) //0 si es la ultima
+            {
+                proxP = nextParada(idUltParada, tramos, ord);
+            }
+
+            if (isFinalParada(proxP.IdParada, idViaje))
+            {
+                iViaje.finalizarViaje(idViaje);
+            }
+            return iLllegada.addLlegada(proxP.IdParada, idViaje, hora, fecha);
         }
 
         public void finalizarViaje(int idViaje)

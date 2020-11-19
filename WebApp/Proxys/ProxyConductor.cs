@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Share.DTOs;
 using Share.entities;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,18 @@ namespace WebApp.Proxys
     public class ProxyConductor
     {
         public string Baseurl = "https://localhost:44330/conductor/";
+
+
+        public ELlegada llegada(DTOLegada llegada)
+        {
+            using (var client = new HttpClient())
+            {
+                var response = client.PostAsJsonAsync("https://localhost:44330/general/llegada", llegada).Result;
+                ELlegada returnValue = response.Content.ReadAsAsync<ELlegada>().Result;
+                return returnValue;
+            }
+
+        }
 
         public async Task<List<EViaje>> getAllViajes()
         {

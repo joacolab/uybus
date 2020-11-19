@@ -1,4 +1,5 @@
-﻿using Share.entities;
+﻿using Share.DTOs;
+using Share.entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace WebApp.Controllers
     public class ConductorController : Controller
     {
         private ProxyConductor pxc = new ProxyConductor();
+
         public ActionResult Index()
         {
             if (Session["pNombre"] != null && Session["pApellido"] != null)
@@ -20,6 +22,36 @@ namespace WebApp.Controllers
             }
             return View();
         }
+        //-------llegada----------
+        public ActionResult lstViajes()
+        {
+            List<EViaje> viajes = Task.Run(() => pxc.getAllViajes()).Result;
+            List<EViaje> iniciados = new List<EViaje>();
+            foreach (var viaje in viajes)
+            {
+                if((viaje.Finalizado==0 || viaje.Finalizado == null) && viaje.HoraInicioReal!=null) // si esta iniciado y no esta finalizado
+                {
+                    iniciados.Add(viaje);
+                }
+            }
+            return View(iniciados);
+        }
+
+        public ActionResult ingresarHF(int id)
+        {
+            DTOLegada lleg = new DTOLegada();
+            lleg.idViaje = id;
+            return View(lleg);
+
+        }
+
+        [HttpPost]
+        public ActionResult ingresarHF(DTOLegada llegada)
+        {
+            pxc.llegada(llegada);
+            return RedirectToAction("lstViajes");
+        }
+
         //-------iniciar viaje----------
         public ActionResult traerViajes()
         {

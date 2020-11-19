@@ -1,6 +1,7 @@
 ﻿using BuisnessLayer.implementation;
 using BuisnessLayer.interfaces;
 using DataAcessLayer.implementation;
+using Share.DTOs;
 using Share.entities;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace APIREST.Controllers
         IBL_Admin cAdmin = new BL_Admin(new DAL_Linea(), new DAL_Parada(), new DAL_Salida(),
         new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
 
-        IBL_Conductor iConductor = new BL_Conductor(new DAL_Viaje(), new DAL_Pasaje());
+        IBL_Conductor iConductor = new BL_Conductor(new DAL_Viaje(), new DAL_Pasaje(), new DAL_Llegada(), new DAL_Tramo(), new DAL_Salida(), new DAL_Linea());
+
         //-------------comienzo de viaje------------------
 
         //https://localhost:44330/conductor/traer/viajes

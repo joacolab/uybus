@@ -11,7 +11,7 @@ namespace DataAcessLayer.implementation
 {
     public class DAL_Llegada : IDAL_Llegada
     {
-        public ELlegada addLlegada(int idParada, int idViaje, TimeSpan hora)
+        public ELlegada addLlegada(int idParada, int idViaje, TimeSpan hora, DateTime fecha)
         {
             try
             {
@@ -21,6 +21,7 @@ namespace DataAcessLayer.implementation
                     ll.idParada = idParada;
                     ll.idViaje = idViaje;
                     ll.hora = hora;
+                    ll.fecha = fecha;
                     db.Llegada.Add(ll);
                     db.SaveChanges();
 

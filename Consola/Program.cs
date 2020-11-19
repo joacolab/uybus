@@ -18,7 +18,7 @@ namespace Consola
             IBL_Usuario blu = new BL_Usuario(new DAL_Persona(), new DAL_Usuario(), new DAL_Linea(), new DAL_Salida(), new DAL_Tramo(), new DAL_Viaje(), new DAL_Pasaje(), new DAL_Parametro(), new DAL_Parada(), new DAL_Llegada(), new DAL_Vehiculo());
             IBL_Invitado bli = new BL_Invitado(new DAL_Persona(), new DAL_Usuario());
             IBL_General blg = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo(), new DAL_Persona(), new DAL_Admin(), new DAL_Conductor(), new DAL_SuperAdmin());
-            IBL_Conductor blc = new BL_Conductor(new DAL_Viaje(), new DAL_Pasaje());
+            IBL_Conductor iConductor = new BL_Conductor(new DAL_Viaje(), new DAL_Pasaje(), new DAL_Llegada(), new DAL_Tramo(), new DAL_Salida(), new DAL_Linea());
             IBL_SuperAdmin bls = new BL_SuperAdmin(new DAL_Persona(), new DAL_Usuario(), new DAL_Admin(), new DAL_Conductor(), new DAL_Llegada(), new DAL_Parada(), new DAL_Salida(), new DAL_Vehiculo(), new DAL_Viaje());
 
             // ----------------- Testeado -------------------
@@ -83,6 +83,7 @@ namespace Consola
             {
                 Console.WriteLine(item.IdParada);
             }*/
+            //Console.WriteLine(blg.CrearLlegada(2,new TimeSpan(10,22,00), new DateTime(2020 , 12 , 03)));
 
 
 
