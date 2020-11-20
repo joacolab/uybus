@@ -15,36 +15,36 @@
             Fecha
         </th>
         <th>
-            Hora real de Inicio
-        </th>
-        <th>
             Id Salida
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
 <tr>
     @if (@item.Finalizado == 0)
     {
+
         <td>
             @Html.DisplayFor(modelItem => item.IdViaje)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoraInicioReal)
+            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Fecha))
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IdSalida)
         </td>
+        <td>
+            @Html.ActionLink("Seleccionar", "iniciarViaje", new { id = item.IdViaje })
+        </td>
+
     }
-
-    <td>
-        @Html.ActionLink("Seleccionar", "iniciarViaje", new {  id=item.IdViaje })
-    </td>
 </tr>
-}
+            }
 
-</table>
+        </table>
+
+<div>
+    @Html.ActionLink("Ir al inicio", "Index")
+</div>

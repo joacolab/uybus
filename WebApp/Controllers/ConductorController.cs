@@ -55,7 +55,16 @@ namespace WebApp.Controllers
         //-------iniciar viaje----------
         public ActionResult traerViajes()
         {
-            return View(Task.Run(() => pxc.getAllViajes()).Result);
+            List<EViaje> viajes = Task.Run(() => pxc.getAllViajes()).Result;
+            List<EViaje> retorno = new List<EViaje>();
+            foreach (var v in viajes)
+            {
+                if (v.HoraInicioReal==null)
+                {
+                    retorno.Add(v);
+                }
+            }
+            return View(retorno);
         }
 
         public ActionResult iniciarViaje(int id)
