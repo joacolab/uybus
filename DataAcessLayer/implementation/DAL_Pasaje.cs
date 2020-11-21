@@ -47,7 +47,7 @@ namespace DataAcessLayer.implementation
             {
                 using (uybusEntities db = new uybusEntities())
                 {
-                    List<EPasaje> lstEp = null;
+                    List<EPasaje> lstEp = new List<EPasaje>();
 
                     var Pasajes = db.Pasaje;
 

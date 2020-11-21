@@ -21,7 +21,29 @@ namespace APIREST.Controllers
         new DAL_Vehiculo(), new DAL_Conductor(), new DAL_Tramo(), new DAL_Precio(), new DAL_Viaje());
 
         IBL_Conductor iConductor = new BL_Conductor(new DAL_Viaje(), new DAL_Pasaje(), new DAL_Llegada(), new DAL_Tramo(), new DAL_Salida(), new DAL_Linea());
+        IBL_General cGeneral = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo(), new DAL_Persona(), new DAL_Admin(), new DAL_Conductor(), new DAL_SuperAdmin());
 
+
+        //-------------notificacion de profimidad---------
+        //List<EUsuario> notificacionProximidad(int Parada, int viaje)
+        
+        //https://localhost:44330/conductor/notifProximi/2/3
+        //funciona
+        [HttpGet]
+        [Route("notifProximi/{idParada}/{idviaje}")]
+        [ResponseType(typeof(List<EUsuario>))]
+        public IHttpActionResult notifProximi(int idParada, int idviaje)
+        {
+            try
+            {
+                return Ok(cGeneral.notificacionProximidad(idParada, idviaje));
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+        
         //-------------comienzo de viaje------------------
 
         //https://localhost:44330/conductor/traer/viajes

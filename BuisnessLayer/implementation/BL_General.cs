@@ -87,7 +87,7 @@ namespace BuisnessLayer.implementation
             return 0;
         }
 
-        private EParada nextParada(int idUltParada, List<ETramo> tramos, int ord)
+        private EParada nextParada(List<ETramo> tramos, int ord)
         {
             foreach (var t in tramos)
             {
@@ -126,7 +126,7 @@ namespace BuisnessLayer.implementation
 
             if (!isUltima(idUltParada, tramos)) //0 si es la ultima
             {
-                proxP = nextParada(idUltParada, tramos, ord);
+                proxP = nextParada(tramos, ord);
             }
 
             if (isFinalParada(proxP.IdParada, idViaje))
@@ -141,8 +141,29 @@ namespace BuisnessLayer.implementation
             iViaje.finalizarViaje(idViaje);
         }
 
+        private int nextParadaNot(int Parada, int viaje)
+        {
+            List<ETramo> tramos= iLinea.getLinea(iSalida.getSalidas(iViaje.getViaje(viaje).IdSalida).IdLinea).Tramo.ToList();
+            int ord = orden(Parada, tramos);
+            return nextParada(tramos, ord).IdParada;
+        }
         public List<EUsuario> notificacionProximidad(int Parada, int viaje)
         {
+            List<EUsuario> usuarios = new List<EUsuario>();
+            if (isFinalParada(Parada, viaje))
+            {
+                return usuarios;
+            }
+            int idNextP = nextParadaNot(Parada, viaje);
+            List<EPasaje> pasajes = iPasaje.getAllPasajes();
+            foreach (var pasaje in pasajes)
+            {
+                if (pasaje.IdParadaOrigen == idNextP && pasaje.IdUsuario!=null)
+                {
+                    usuarios.Add(iUsuario.getUsuario(pasaje.IdUsuario ?? default(int)));
+                }
+            }
+            /*
             List<EUsuario> usuarios = new List<EUsuario>();
             int idL = iSalida.getSalidas(iViaje.getViaje(viaje).IdSalida).IdLinea;
 
@@ -162,10 +183,14 @@ namespace BuisnessLayer.implementation
 
             foreach (var item in proximaParada.Pasaje.ToList())
             {
-                if (item.IdUsuario != null) usuarios.Add(iUsuario.getUsuario(item.IdUsuario ?? default(int)));
+                if (item.IdUsuario != null)
+                {
+                    usuarios.Add(iUsuario.getUsuario(item.IdUsuario ?? default(int)));
+                }
             }
-
+            */
             return usuarios;
+            
         }
 
         private int valorVigente(int idLinea, int idParada)
