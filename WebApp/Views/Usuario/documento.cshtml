@@ -14,9 +14,18 @@
 <div style="background-color: rgba(41, 104, 157,0.5);color: azure;margin:20px;padding:20px">
 
     <h1 style="color:azure">Costo del pasaje: @data $ </h1>
+
+
+    @if (ViewBag.ErrorPago != null)
+    {
+        if (ViewBag.ErrorPago)
+        {
+            <h3 style="color:red;">Algo salió mal en el pago, inténtalo de nuevo.</h3>
+        }
+    }
     <br>
 
-    <form action="https://localhost:44383/Usuario/pago" method="POST">
+    <form action="pago" method="POST">
         <script src="https://www.mercadopago.com.uy/integrations/v1/web-tokenize-checkout.js"
                 data-public-key="TEST-80869768-294e-4b9b-9051-2362d31d1047"
                 data-transaction-amount=@data>

@@ -1,4 +1,7 @@
-﻿using Share.DTOs;
+﻿using MercadoPago.Common;
+using MercadoPago.DataStructures.Payment;
+using MercadoPago.Resources;
+using Share.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApp.Proxys;
-using MercadoPago;
-using MercadoPago.Resources;
-using MercadoPago.DataStructures.Preference;
-using MercadoPago.Common;
+
 
 namespace WebApp.Controllers
 {
@@ -101,6 +101,14 @@ namespace WebApp.Controllers
 
         public ActionResult documento() 
         {
+            ViewBag.ErrorPago = false;
+            if (Session["ErrorPago"] != null)
+            {
+                if (Session["ErrorPago"].ToString() == "Error")
+                {
+                    ViewBag.ErrorPago = true;
+                }
+            }
             int idL = (int)Session["idLinea"];
             int idPo = (int)Session["idPOrigen"];
             int idPD = (int)Session["idPDestino"];
@@ -111,21 +119,51 @@ namespace WebApp.Controllers
             return View();
         }
 
-        public ActionResult pago()
+        public ActionResult pago(FormCollection pago)
         {
-            DTOComprarPasaje pasaje = new DTOComprarPasaje();
-            pasaje.idViaje = (int)Session["idViaje"];
-            pasaje.idParadaOrigen = (int)Session["idPOrigen"];
-            pasaje.idParadaDestino = (int)Session["idPDestino"];
-            if (Session["asiento"] == null) pasaje.asiento = -1;
-            else pasaje.asiento = (int)Session["asiento"];
-            pasaje.documento = Session["Documento"].ToString();
-            pasaje.tipoDoc = Session["TipoDocumento"].ToString();
-            pasaje.idUsuario = (int)Session["idPersona"];
+            try
+            {
+                MercadoPago.SDK.SetAccessToken("TEST-995817817198514-111820-6429e0e59a4e1b887c6d078d7b5a0e32-174046938");
+                Payment payment = new Payment()
+                {
+                    TransactionAmount = (int)Session["costo"],
+                    Token = pago["token"],
+                    Description = "Pago de pasaje",
+                    Installments = int.Parse(pago["installments"]),
+                    PaymentMethodId = pago["payment_method_id"],
+                    IssuerId = pago["issuer_id"],
+                    Payer = new Payer()
+                    {
+                        Email = "uruguaybus.2020@gmail.com"
+                    }
+                };
+                payment.Save();
+                if (payment.Status != PaymentStatus.approved)
+                {
+                    Session["ErrorPago"] = "Error";
+                    return RedirectToAction("documento");
+                }
 
-            pxu.comprarPasaje(pasaje);
+                DTOComprarPasaje pasaje = new DTOComprarPasaje();
+                pasaje.idViaje = (int)Session["idViaje"];
+                pasaje.idParadaOrigen = (int)Session["idPOrigen"];
+                pasaje.idParadaDestino = (int)Session["idPDestino"];
+                if (Session["asiento"] == null) pasaje.asiento = -1;
+                else pasaje.asiento = (int)Session["asiento"];
+                pasaje.documento = Session["Documento"].ToString();
+                pasaje.tipoDoc = Session["TipoDocumento"].ToString();
+                pasaje.idUsuario = (int)Session["idPersona"];
 
-            return RedirectToAction("Index");
+                pxu.comprarPasaje(pasaje);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                Session["ErrorPago"] = "Error";
+                return RedirectToAction("documento");
+            }
+            
         }
 
         //----------------proximos vehiculos-----------------

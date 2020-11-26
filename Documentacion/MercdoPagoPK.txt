@@ -7,9 +7,25 @@ tarjetas:
 5031 7557 3453 0604
 123
 11/25
+APRO
 
 4509 9535 6623 3704	
 123	
 11/25
+APRO
 
 CI: 32432443
+
+
+-------------------Susuarios---------------------
+
+APRO: Pago aprobado.
+CONT: Pago pendiente.
+OTHE: Rechazado por error general.
+CALL: Rechazado con validación para autorizar.
+FUND: Rechazado por monto insuficiente.
+SECU: Rechazado por código de seguridad inválido.
+EXPI: Rechazado por problema con la fecha de expiración.
+FORM: Rechazado por error en formulario.
+
+------------------------------------------------
