@@ -30,8 +30,8 @@ namespace APIREST.Controllers
         */
         [HttpPost]
         [Route("llegada")]
-        [ResponseType(typeof(EPersona))]
-        public IHttpActionResult iniciarSesion([FromBody] DTOLegada llegada)
+        [ResponseType(typeof(List<EUsuario>))]
+        public IHttpActionResult llegada([FromBody] DTOLegada llegada)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace APIREST.Controllers
                     return Content(HttpStatusCode.BadRequest, "No.");
                 }
 
-                ELlegada res = cGeneral.CrearLlegada(llegada.idViaje, TimeSpan.Parse(llegada.hora), Convert.ToDateTime(llegada.fecha));
+                List<EUsuario> res = cGeneral.CrearLlegada(llegada.idViaje, TimeSpan.Parse(llegada.hora), Convert.ToDateTime(llegada.fecha));
 
                 return Ok(res);
 

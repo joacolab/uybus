@@ -99,10 +99,10 @@ namespace BuisnessLayer.implementation
             EParada ep = new EParada();
             return ep;
         }
-        public ELlegada CrearLlegada(int idViaje, TimeSpan hora, DateTime fecha)
+        public List<EUsuario> CrearLlegada(int idViaje, TimeSpan hora, DateTime fecha)
         {
             List<ETramo> tramos = iLinea.getLinea(iSalida.getSalidas(iViaje.getViaje(idViaje).IdSalida).IdLinea).Tramo.ToList();
-            
+
             List<EParada> paradas = new List<EParada>(); //todas las paradas del viaje
             foreach (var tramo in tramos)
             {
@@ -127,13 +127,29 @@ namespace BuisnessLayer.implementation
             if (!isUltima(idUltParada, tramos)) //0 si es la ultima
             {
                 proxP = nextParada(tramos, ord);
-            }
 
-            if (isFinalParada(proxP.IdParada, idViaje))
-            {
-                iViaje.finalizarViaje(idViaje);
+                if (isFinalParada(proxP.IdParada, idViaje))
+                {
+                    iViaje.finalizarViaje(idViaje);
+                }
+
+                iLllegada.addLlegada(proxP.IdParada, idViaje, hora, fecha);
+
+                List<EUsuario> siguientesPjrs = notificacionProximidad(proxP.IdParada, idViaje);
+                return siguientesPjrs;
             }
-            return iLllegada.addLlegada(proxP.IdParada, idViaje, hora, fecha);
+            else
+            {
+                if (isFinalParada(proxP.IdParada, idViaje))
+                {
+                    iViaje.finalizarViaje(idViaje);
+                }
+
+                iLllegada.addLlegada(proxP.IdParada, idViaje, hora, fecha);
+
+                List<EUsuario> siguientesPjrs = new List<EUsuario>();
+                return siguientesPjrs;
+            }
         }
 
         public void finalizarViaje(int idViaje)
@@ -155,10 +171,11 @@ namespace BuisnessLayer.implementation
                 return usuarios;
             }
             int idNextP = nextParadaNot(Parada, viaje);
+            //int idNextP = Parada;
             List<EPasaje> pasajes = iPasaje.getAllPasajes();
             foreach (var pasaje in pasajes)
             {
-                if (pasaje.IdParadaOrigen == idNextP && pasaje.IdUsuario!=null)
+                if (pasaje.IdParadaOrigen == idNextP && pasaje.IdUsuario != null)
                 {
                     usuarios.Add(iUsuario.getUsuario(pasaje.IdUsuario ?? default(int)));
                 }
@@ -190,7 +207,7 @@ namespace BuisnessLayer.implementation
             }
             */
             return usuarios;
-            
+
         }
 
         private int valorVigente(int idLinea, int idParada)

@@ -48,7 +48,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult ingresarHF(DTOLegada llegada)
         {
-            pxc.llegada(llegada);
+            List<EUsuario> siguientes = pxc.llegada(llegada);
             return RedirectToAction("lstViajes");
         }
 

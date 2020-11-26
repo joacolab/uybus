@@ -16,12 +16,12 @@ namespace WebApp.Proxys
         public string Baseurl = "https://localhost:44330/conductor/";
 
 
-        public ELlegada llegada(DTOLegada llegada)
+        public List<EUsuario> llegada(DTOLegada llegada)
         {
             using (var client = new HttpClient())
             {
                 var response = client.PostAsJsonAsync("https://localhost:44330/general/llegada", llegada).Result;
-                ELlegada returnValue = response.Content.ReadAsAsync<ELlegada>().Result;
+                List<EUsuario> returnValue = response.Content.ReadAsAsync<List<EUsuario>>().Result;
                 return returnValue;
             }
 

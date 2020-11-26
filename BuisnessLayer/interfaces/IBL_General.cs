@@ -29,7 +29,7 @@ namespace BuisnessLayer.interfaces
         /// <returns></returns>
         List<EPasaje> reposrtesPasajes(DateTime fechaDesde, DateTime fechaHasat, int linea, int salida,int viaje);
 
-        ELlegada CrearLlegada(int idViaje, TimeSpan hora, DateTime fecha);
+        List<EUsuario> CrearLlegada(int idViaje, TimeSpan hora, DateTime fecha);
         List<EUsuario> notificacionProximidad(int Parada, int viaje);
         /// <summary>
         /// debuelbe 1, si el viaje con ese "idViaje", tiene todos los asientos del vehiculo ocupados, desde el origen hasta el final.
