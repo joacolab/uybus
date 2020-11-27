@@ -15,6 +15,7 @@ using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BuisnessLayer.implementation
 {
@@ -60,7 +61,6 @@ namespace BuisnessLayer.implementation
         /// <returns></returns>
         public EPasaje comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, string tipoDoc, string documento, int asiento)
         {
-            Console.WriteLine("dddddddddddddd");
 
             EViaje ev = iViaje.getViaje(idViaje);
             if (ev == null) return null; //Si no encuentra el viaje retorna null
@@ -147,8 +147,10 @@ namespace BuisnessLayer.implementation
             Document doc = new Document(PageSize.A5, 18, 18, 16, 0);
 
             //string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
-            string outputFile = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\pasaje.pdf");
-            
+            //string outputFile = Path.Combine(Environment.CurrentDirectory, @"pasaje.pdf");
+
+            string outputFile = HttpContext.Current.Server.MapPath(@"~/pasaje.pdf");
+
             PdfWriter.GetInstance(doc, new FileStream(outputFile, FileMode.Create));
 
             doc.Open();
@@ -157,6 +159,8 @@ namespace BuisnessLayer.implementation
             codeQRImga.ScaleAbsolute(200, 200);
 
             //string outputFile2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "uybus.png");
+
+            /*
             string outputFile2 = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\uybus.png");
 
             Image image = Image.GetInstance(outputFile2);
@@ -164,6 +168,7 @@ namespace BuisnessLayer.implementation
             image.ScaleAbsoluteWidth(185.2f * 2.07f);
             image.Alignment = Element.ALIGN_CENTER;
             doc.Add(image);
+            */
 
             BaseFont bf = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.WINANSI, BaseFont.EMBEDDED);
 
@@ -245,8 +250,8 @@ namespace BuisnessLayer.implementation
                 //emailMessage.Attachments.Add(new Attachment(path + @"\pdf\pasaje.pdf"));
 
                 //string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
-                string outputFile = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\pasaje.pdf");
- 
+                //string outputFile = Path.Combine(Environment.CurrentDirectory, @"pasaje.pdf");
+                string outputFile = HttpContext.Current.Server.MapPath(@"~/pasaje.pdf");
 
                 emailMessage.Attachments.Add(new Attachment(outputFile));
 

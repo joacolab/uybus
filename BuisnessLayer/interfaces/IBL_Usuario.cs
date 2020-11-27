@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BuisnessLayer.interfaces
 {
     public interface IBL_Usuario
