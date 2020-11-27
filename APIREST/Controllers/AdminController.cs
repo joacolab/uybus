@@ -355,7 +355,16 @@ namespace APIREST.Controllers
         [ResponseType(typeof(List<ELinea>))]
         public IHttpActionResult GetAllLineas()
         {
+            try
+            {
+
             return Ok(cAdmin.getAllLineas());
+            }
+            catch (Exception ex)
+            {
+
+                return Ok(ex.Message+"; "+ex.StackTrace);
+            }
         }
 
 
@@ -656,6 +665,16 @@ namespace APIREST.Controllers
 
                 return NotFound();
             }
+        }
+
+        //https://localhost:44330/admin/traer/Conductores
+        //funciona
+        [HttpGet]
+        [Route("ping")]
+        [ResponseType(typeof(List<EConductor>))]
+        public IHttpActionResult ping()
+        {
+            return Ok("Hola mundo");
         }
 
     }

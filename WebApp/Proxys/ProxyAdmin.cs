@@ -14,6 +14,7 @@ namespace WebApp.Proxys
 {
     public class ProxyAdmin
     {
+
         public string Baseurl = "https://localhost:44330/admin/";
 
         //-----------------------------Vehiculo----------------------------------
