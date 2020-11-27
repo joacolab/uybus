@@ -73,7 +73,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="pdf\pasaje.pdf" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="pdf\uybus.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

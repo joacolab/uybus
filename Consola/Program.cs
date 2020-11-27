@@ -2,6 +2,7 @@
 using BuisnessLayer.interfaces;
 using DataAcessLayer.implementation;
 using Share.DTOs;
+using Share.entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -51,7 +52,9 @@ namespace Consola
             }*/
 
             // EPasaje ep = blu.comprarPasaje(1, 2, 1, 2, "null", "null", 2); //testeado
-            //EPasaje ep = blu.comprarPasaje(1, -1, 6, 3, "CI", "4333873-7", 2); //testeado
+
+            EPasaje ep = blu.comprarPasaje(1, 2, 2, 5, "CI", "43338737", 18); //testeado
+
             //Console.WriteLine(blc.verificarPasaje(1, 1));//testeado
             //List<DTOproxVehiculo>  pv = blu.proximoVehiculo(2, 3);//testeado
 

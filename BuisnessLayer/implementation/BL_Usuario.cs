@@ -60,7 +60,8 @@ namespace BuisnessLayer.implementation
         /// <returns></returns>
         public EPasaje comprarPasaje(int idViaje, int idUsuario, int idParadaOrigen, int idParadaDestino, string tipoDoc, string documento, int asiento)
         {
-            
+            Console.WriteLine("dddddddddddddd");
+
             EViaje ev = iViaje.getViaje(idViaje);
             if (ev == null) return null; //Si no encuentra el viaje retorna null
             ESalida es = iSalida.getSalidas(ev.IdSalida);
@@ -105,13 +106,6 @@ namespace BuisnessLayer.implementation
             if (idUsuario == -1) //Usuario NOO logeado
             {
                 ep = iPasaje.addPasaje(asiento, documento, tipoDoc, idViaje, idParadaDestino, idParadaOrigen, idUsuario);
-
-                //esto no va, es una prueba, codigo pelotas
-                //enviarCorreo("juan.alvarez@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo 
-                //enviarCorreo("julio.arrieta@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
-                //enviarCorreo("lucas.garrido@utec.edu.uy", "https://4.bp.blogspot.com/_xukD7iTXxKo/R6kUSmPim-I/AAAAAAAAAFg/JDYuhXlPdHA/s320/perros+culiando.jpg");//generar pdf con codigo QR y enviarlo
-                //enviarCorreo("gustavo.cerdena@utec.edu.uy", ep.IdPasaje.ToString());//generar pdf con codigo QR y enviarlo
-                //enviarCorreo("karloxx09@gmail.com", "asfsfsf");//generar pdf con codigo QR y enviarlo
             }
             else //Usuario Logeado
             {
@@ -152,7 +146,9 @@ namespace BuisnessLayer.implementation
 
             Document doc = new Document(PageSize.A5, 18, 18, 16, 0);
 
-            string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
+            //string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
+            string outputFile = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\pasaje.pdf");
+            
             PdfWriter.GetInstance(doc, new FileStream(outputFile, FileMode.Create));
 
             doc.Open();
@@ -160,7 +156,9 @@ namespace BuisnessLayer.implementation
             Image codeQRImga = barcodeWrcode.GetImage();
             codeQRImga.ScaleAbsolute(200, 200);
 
-            string outputFile2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "uybus.png");
+            //string outputFile2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "uybus.png");
+            string outputFile2 = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\uybus.png");
+
             Image image = Image.GetInstance(outputFile2);
             image.ScaleAbsoluteHeight(42.0f * 1.88f);
             image.ScaleAbsoluteWidth(185.2f * 2.07f);
@@ -245,7 +243,11 @@ namespace BuisnessLayer.implementation
                 string path = Directory.GetCurrentDirectory();
 
                 //emailMessage.Attachments.Add(new Attachment(path + @"\pdf\pasaje.pdf"));
-                string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
+
+                //string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
+                string outputFile = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\pasaje.pdf");
+ 
+
                 emailMessage.Attachments.Add(new Attachment(outputFile));
 
                 emailMessage.Priority = MailPriority.Normal;
