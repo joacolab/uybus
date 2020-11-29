@@ -187,7 +187,10 @@ namespace BuisnessLayer.implementation
             Paragraph p = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
             doc.Add(p);
 
-            Paragraph paragraphs = new Paragraph(new Phrase("Enviado: " + DateTime.Now.ToString()));
+            DateTime ahora = DateTime.Now;
+            ahora = ahora.Subtract(new TimeSpan(03,0,0)); // seteo tiempo a estedos unidos
+
+            Paragraph paragraphs = new Paragraph(new Phrase("Enviado: " + ahora));
             paragraphs.Alignment = Element.ALIGN_RIGHT;
             doc.Add(paragraphs);
 
