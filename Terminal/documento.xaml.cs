@@ -64,10 +64,20 @@ namespace Terminal
             Documento = tbDoc.Text;
             if (TipoDocumento == 1)
             {
+               
                 if (validar(1))
                 {
-        
+
+                    try
+                    {
                     s.comprarPasaje(fechaSelected.IdViaje, -1, paradaOSelected.IdParada, paradaDSelected.IdParada, TipoDocumento, Documento, AsientoSelected);
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
 
 
                     MessageBox.Show(

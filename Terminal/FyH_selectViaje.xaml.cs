@@ -108,6 +108,7 @@ namespace Terminal
             }
             else
             {
+                fechaSelected = (EViaje)lsFs.SelectedValue;
                 btnSig.IsEnabled = true;
             }
         }
