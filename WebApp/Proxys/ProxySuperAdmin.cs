@@ -3,6 +3,7 @@ using Share.DTOs;
 using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -13,7 +14,8 @@ namespace WebApp.Proxys
 {
     public class ProxySuperAdmin
     {
-        public string Baseurl = "https://localhost:44330/super-admin/";
+        public string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "/super-admin/";
+        //public string Baseurl = "https://localhost:44330/super-admin/";
 
 
         public async Task<List<EPersona>> GetAllPersonas()

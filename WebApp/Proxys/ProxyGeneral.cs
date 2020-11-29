@@ -2,6 +2,7 @@
 using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ namespace WebApp.Proxys
 {
     public class ProxyGeneral
     {
-        public string Baseurl = "https://localhost:44330/general/";
+        public string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "/general/";
+        //public string Baseurl = "https://localhost:44330/general/";
 
         public EPersona iniciarSesion(DTOLogin log)
         {

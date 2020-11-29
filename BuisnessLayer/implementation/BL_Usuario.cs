@@ -82,25 +82,25 @@ namespace BuisnessLayer.implementation
                     posdestino = tramos.IndexOf(t);
                 }
             }
-            
+
             List<ETramo> subTramos = new List<ETramo>();
-            
+
             for (int e = posOrigen; e <= posdestino; e++)
             {
                 subTramos.Add(tramos.ElementAt(e));
             }
-            
+
             int cosotP = 0;
 
             foreach (var s in subTramos)
             {
                 cosotP = cosotP + iTramo.valorVigente(s.IdLinea, s.IdParada);
             }
-            
+
             EParametro epara = iParametro.getAllParametros().Last();
-            
+
             if (epara.Valor > cosotP) asiento = -1;
-      
+
             EPasaje ep = new EPasaje();
 
             if (idUsuario == -1) //Usuario NOO logeado
@@ -125,9 +125,9 @@ namespace BuisnessLayer.implementation
             }
 
             return ep;
-           
+
         }
-        private void getPdfconQR(string IDPasaje, EPersona epersona, EPasaje epasaje, int costo)
+        private MemoryStream getPdfconQR(string IDPasaje, EPersona epersona, EPasaje epasaje, int costo)
         {
             string orign = iParada.getParada(epasaje.IdParadaOrigen).Nombre;
             string destino = iParada.getParada(epasaje.IdParadaDestino).Nombre;
@@ -147,20 +147,21 @@ namespace BuisnessLayer.implementation
             Document doc = new Document(PageSize.A5, 18, 18, 16, 0);
 
             //string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
-            //string outputFile = Path.Combine(Environment.CurrentDirectory, @"pasaje.pdf");
+            //string outputFile = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\pasaje.pdf");
+            //string outputFile = HttpContext.Current.Server.MapPath(@"~/pasaje.pdf");
 
-            string outputFile = HttpContext.Current.Server.MapPath(@"~/pasaje.pdf");
+            MemoryStream ms = new MemoryStream();
+            PdfWriter pdf = PdfWriter.GetInstance(doc,ms);
 
-            PdfWriter.GetInstance(doc, new FileStream(outputFile, FileMode.Create));
+            //PdfWriter.GetInstance(doc, new FileStream(outputFile, FileMode.Create));
 
             doc.Open();
             BarcodeQRCode barcodeWrcode = new BarcodeQRCode(IDPasaje, 1000, 1000, null);
             Image codeQRImga = barcodeWrcode.GetImage();
             codeQRImga.ScaleAbsolute(200, 200);
 
-            //string outputFile2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "uybus.png");
-
             /*
+            //string outputFile2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "uybus.png");
             string outputFile2 = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\uybus.png");
 
             Image image = Image.GetInstance(outputFile2);
@@ -190,11 +191,11 @@ namespace BuisnessLayer.implementation
             paragraphs.Alignment = Element.ALIGN_RIGHT;
             doc.Add(paragraphs);
 
-            doc.Add(new Paragraph("Pasajero: "+ epersona.pNombre + " "+epersona.pApellido));
-            doc.Add(new Paragraph("Documento: "+ epersona.Documento));
-            if (epasaje.Asientos!=null)
+            doc.Add(new Paragraph("Pasajero: " + epersona.pNombre + " " + epersona.pApellido));
+            doc.Add(new Paragraph("Documento: " + epersona.Documento));
+            if (epasaje.Asientos != null)
             {
-                if (epasaje.Asientos!=-1)
+                if (epasaje.Asientos != -1)
                 {
                     doc.Add(new Paragraph("Asiento: " + epasaje.Asientos));
                 }
@@ -208,7 +209,7 @@ namespace BuisnessLayer.implementation
 
 
 
-            doc.Add(new Paragraph("Costo: "+costo+" UYU"));
+            doc.Add(new Paragraph("Costo: " + costo + " UYU"));
 
             //doc.Add(new Chunk("\n"));
 
@@ -222,7 +223,9 @@ namespace BuisnessLayer.implementation
             codeQRImga.Alignment = Element.ALIGN_CENTER;
             doc.Add(codeQRImga);
 
+            pdf.CloseStream = false;
             doc.Close();
+            ms.Position = 0;
             /*
             Document doc = new Document(PageSize.A4);
             string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
@@ -234,6 +237,7 @@ namespace BuisnessLayer.implementation
             doc.Add(codeQRImga);
             doc.Close();
             */
+            return ms;
         }
         private void enviarCorreo(string correo, string IDPasaje, EPersona eepersona, EPasaje eepasaje, int costo)//generar pdf con codigo QR y enviarlo 
         {
@@ -244,16 +248,17 @@ namespace BuisnessLayer.implementation
                 emailMessage.To.Add(new MailAddress(correo, "Pasajero")); //correo del pasajero
                 emailMessage.Subject = "UruguayBus";
                 emailMessage.Body = "";
-                getPdfconQR(IDPasaje, eepersona, eepasaje, costo);
-                string path = Directory.GetCurrentDirectory();
+                MemoryStream ms = getPdfconQR(IDPasaje, eepersona, eepasaje, costo);
+                //string path = Directory.GetCurrentDirectory();
 
                 //emailMessage.Attachments.Add(new Attachment(path + @"\pdf\pasaje.pdf"));
 
                 //string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
-                //string outputFile = Path.Combine(Environment.CurrentDirectory, @"pasaje.pdf");
-                string outputFile = HttpContext.Current.Server.MapPath(@"~/pasaje.pdf");
+                //string outputFile = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\pasaje.pdf");
+                //string outputFile = HttpContext.Current.Server.MapPath(@"~/pasaje.pdf");
 
-                emailMessage.Attachments.Add(new Attachment(outputFile));
+                //emailMessage.Attachments.Add(new Attachment(outputFile));
+                emailMessage.Attachments.Add(new Attachment(ms, "pasaje.pdf"));
 
                 emailMessage.Priority = MailPriority.Normal;
                 using (SmtpClient MailClient = new SmtpClient("smtp.gmail.com", 587))

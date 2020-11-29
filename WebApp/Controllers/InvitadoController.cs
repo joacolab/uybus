@@ -1,5 +1,6 @@
 ﻿using Share.DTOs;
 using Share.entities;
+using Share.enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace WebApp.Controllers
     public class InvitadoController : Controller
     {
         private ProxyInvitado pxi = new ProxyInvitado();
+        private ProxyGeneral pxg = new ProxyGeneral();
         // GET: Invitado
         public ActionResult Index()
         {
@@ -45,7 +47,30 @@ namespace WebApp.Controllers
             else
             {
                 pxi.crearPersona(per);
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+
+                DTOLogin log = new DTOLogin();
+
+                log.email = persona.Correo;
+                log.password = persona.Password;
+                log.rol = "Usuario";
+                EPersona res = pxg.iniciarSesion(log);
+
+                Session["idPersona"] = res.id;
+                Session["pNombre"] = res.pNombre;
+                Session["sNombre"] = res.sNombre;
+                Session["pApellido"] = res.pApellido;
+                Session["sApellido"] = res.sApellido;
+                Session["Correo"] = res.Correo;
+                Session["Password"] = res.Password;
+
+                TipoDoc r = (TipoDoc)res.TipoDocumento;
+                Session["TipoDocumento"] = r.ToString();
+
+                Session["Documento"] = res.Documento;
+                Session["Rol"] = log.rol;
+
+                return RedirectToAction("Index", "usuario");
             }
 
         }

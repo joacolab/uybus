@@ -1,6 +1,7 @@
 ﻿using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -9,7 +10,8 @@ namespace WebApp.Proxys
 {
     public class ProxyInvitado
     {
-        public string Baseurl = "https://localhost:44330/invitado/";
+        public string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "/invitado/";
+        //public string Baseurl = "https://localhost:44330/invitado/";
 
         public bool existEmail(string correo)
         {

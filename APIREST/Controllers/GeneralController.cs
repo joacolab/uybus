@@ -50,7 +50,7 @@ namespace APIREST.Controllers
                 return NotFound();
             }
         }
-        //----------------------------------Viajes----------------------------------------
+        //----------------------------------login----------------------------------------
         // https://localhost:44330/general/login
         //funciona
         /*

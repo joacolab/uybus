@@ -3,6 +3,7 @@ using Share.DTOs;
 using Share.entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -13,14 +14,16 @@ namespace WebApp.Proxys
 {
     public class ProxyConductor
     {
-        public string Baseurl = "https://localhost:44330/conductor/";
+        public string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "/conductor/";
 
+        //public string Baseurl = "https://localhost:44330/conductor/";
 
         public List<EUsuario> llegada(DTOLegada llegada)
         {
             using (var client = new HttpClient())
             {
-                var response = client.PostAsJsonAsync("https://localhost:44330/general/llegada", llegada).Result;
+                string URLespecial = ConfigurationManager.AppSettings["baseURL"] + "/general/llegada";
+                var response = client.PostAsJsonAsync(URLespecial, llegada).Result;
                 List<EUsuario> returnValue = response.Content.ReadAsAsync<List<EUsuario>>().Result;
                 return returnValue;
             }
