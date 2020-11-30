@@ -13,10 +13,12 @@ namespace WebApp.Controllers
     public class AdminController : Controller
     {
         private ProxyAdmin pxa = new ProxyAdmin();
-        private static List<int> idPars = new List<int>();
+        // private static List<int> idPars = new List<int>();
+
         public ActionResult Index()
         {
-            if(Session["pNombre"] != null && Session["pApellido"] != null)
+            Session["idPars"] = new List<int>();
+            if (Session["pNombre"] != null && Session["pApellido"] != null)
             {
                 ViewBag.nombreUsu = Session["pNombre"].ToString() + " " + Session["pApellido"].ToString();
             }
@@ -41,7 +43,7 @@ namespace WebApp.Controllers
             return RedirectToAction("traerVehiculos");
         }
 
-        
+
         public ActionResult editarVehiculo(string id)
         {
             EVehiculo ev = new EVehiculo();
@@ -61,7 +63,7 @@ namespace WebApp.Controllers
             return View(Task.Run(() => pxa.getAllViajes()).Result);
         }
 
-        
+
 
         public ActionResult traerSalidasV()
         {
@@ -77,26 +79,26 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult crearViaje(DTOCrearViajes viajes)
         {
-            viajes.idSalida =(int)Session["salidaSelcs"];
+            viajes.idSalida = (int)Session["salidaSelcs"];
             pxa.crearViajes(viajes);
             return RedirectToAction("traerViajes");
         }
 
-        
+
         public ActionResult editarViaje(int id)
         {
             DTOViaje ev = new DTOViaje();
             ev.IdViaje = id;
             return View(ev);
         }
-        
+
         [HttpPost]
         public ActionResult editarViaje(DTOViaje viajes)
         {
             pxa.editarViaje(viajes);
             return RedirectToAction("traerViajes");
         }
-        
+
 
         //-----------------------------parada---------------------------------
         public ActionResult traerParadas()
@@ -149,13 +151,14 @@ namespace WebApp.Controllers
             pxa.editarParada(parada);
             return RedirectToAction("traerParadas");
         }
-        
+
 
         //-------------------------------linea----------------------------------------
 
         public ActionResult traerLinea()
         {
-            idPars.Clear();
+            Session["idPars"] = new List<int>();
+            //idPars.Clear();
             Session["Nuevalinea"] = null;
             Session["selecParadaId"] = null;
             Session["errorNLinea"] = null;
@@ -163,10 +166,10 @@ namespace WebApp.Controllers
             return View(Task.Run(() => pxa.GetAllLineas()).Result);
         }
 
-        
+
         public ActionResult crearLinea()
         {
-            if (Session["errorNLinea"]!=null)
+            if (Session["errorNLinea"] != null)
             {
                 ViewBag.Message = Session["errorNLinea"];
             }
@@ -194,8 +197,9 @@ namespace WebApp.Controllers
 
             List<EParada> paradas = Task.Run(() => pxa.GetAllParada()).Result;
             retorno.AddRange(paradas);
+            List<int> idPars = (List<int>)Session["idPars"];
 
-            if (idPars.Count()>0)
+            if (idPars.Count() > 0)
             {
 
 
@@ -219,14 +223,17 @@ namespace WebApp.Controllers
         public ActionResult asignarParada(int id)
         {
             Session["selecParadaId"] = id;
+            List<int> idPars = (List<int>)Session["idPars"];
             idPars.Add(id);
+            Session["idPars"] = idPars;
+            //idPars.Add(id);
             return View();
         }
 
         [HttpPost]
         public ActionResult asignarParada(DTOTramoParada tp)
         {
-            if (Session["ordenParada"]==null)
+            if (Session["ordenParada"] == null)
             {
                 Session["ordenParada"] = 2;
             }
@@ -275,7 +282,7 @@ namespace WebApp.Controllers
                 Session["Nuevalinea"] = null;
                 Session["selecParadaId"] = null;
                 Session["errorNLinea"] = null;
-                idPars.Clear();
+                Session["idPars"] = new List<int>();
                 return RedirectToAction("Index");
             }
         }
@@ -294,7 +301,7 @@ namespace WebApp.Controllers
             pxa.editarLinea(linea);
             return RedirectToAction("traerLinea");
         }
-        
+
 
         //-----------------------------Salida------------------------------------------
 
@@ -319,7 +326,7 @@ namespace WebApp.Controllers
             Session["veiculoMat"] = id;
             return View(Task.Run(() => pxa.GetAllLineas()).Result);
         }
-        
+
 
         public ActionResult crearSalida(int id)//id salida
         {
@@ -336,7 +343,7 @@ namespace WebApp.Controllers
             pxa.crearSalida(salida);
             return RedirectToAction("traerSalida");
         }
-        
+
 
         public ActionResult editarSalida(int id)
         {
@@ -411,8 +418,8 @@ namespace WebApp.Controllers
         {
             if (Session["reporte"].ToString() == "v")
             {
-                utilidad.linea=-1;
-                utilidad.salida=-1;
+                utilidad.linea = -1;
+                utilidad.salida = -1;
             }
             if (Session["reporte"].ToString() == "s")
             {
@@ -429,7 +436,7 @@ namespace WebApp.Controllers
             if (utilidad.fechaHasat == null) utilidad.fechaHasat = "1900,01,01";
             DTOUtilidadFinal ut = new DTOUtilidadFinal();
             float result = Task.Run(() => pxa.reporteUtilidad(utilidad)).Result;
-            ut.Valor = result*100;
+            ut.Valor = result * 100;
             return RedirectToAction("verUtilidad", ut);
 
 
