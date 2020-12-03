@@ -6,10 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebApp.Autorisacion;
 using WebApp.Proxys;
 
 namespace WebApp.Controllers
 {
+    [HandleError]
+    [Autorizacion(admin = true)]
     public class AdminController : Controller
     {
         private ProxyAdmin pxa = new ProxyAdmin();
@@ -17,6 +20,7 @@ namespace WebApp.Controllers
 
         public ActionResult Index()
         {
+
             Session["idPars"] = new List<int>();
             if (Session["pNombre"] != null && Session["pApellido"] != null)
             {

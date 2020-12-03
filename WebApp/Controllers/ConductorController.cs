@@ -6,10 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebApp.Autorisacion;
 using WebApp.Proxys;
 
 namespace WebApp.Controllers
 {
+    [HandleError]
+    [Autorizacion(conductor = true)]
     public class ConductorController : Controller
     {
         private ProxyConductor pxc = new ProxyConductor();

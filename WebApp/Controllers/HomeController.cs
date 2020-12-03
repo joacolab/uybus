@@ -48,6 +48,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Login(DTOLogForm logf)
         {
+            Session.Clear();
             DTOLogin log = new DTOLogin();
 
             log.email = logf.email;

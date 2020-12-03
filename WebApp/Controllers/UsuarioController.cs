@@ -8,11 +8,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebApp.Autorisacion;
 using WebApp.Proxys;
 
 
 namespace WebApp.Controllers
 {
+    [HandleError]
+    [Autorizacion(usuario = true)]
     public class UsuarioController : Controller
     {
         private ProxyUsuario pxu = new ProxyUsuario();

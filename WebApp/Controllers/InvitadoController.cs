@@ -10,6 +10,7 @@ using WebApp.Proxys;
 
 namespace WebApp.Controllers
 {
+    [HandleError]
     public class InvitadoController : Controller
     {
         private ProxyInvitado pxi = new ProxyInvitado();
