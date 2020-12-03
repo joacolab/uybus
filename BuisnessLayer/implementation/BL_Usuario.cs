@@ -146,10 +146,6 @@ namespace BuisnessLayer.implementation
 
             Document doc = new Document(PageSize.A5, 18, 18, 16, 0);
 
-            //string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
-            //string outputFile = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\pasaje.pdf");
-            //string outputFile = HttpContext.Current.Server.MapPath(@"~/pasaje.pdf");
-
             MemoryStream ms = new MemoryStream();
             PdfWriter pdf = PdfWriter.GetInstance(doc,ms);
 
@@ -160,16 +156,16 @@ namespace BuisnessLayer.implementation
             Image codeQRImga = barcodeWrcode.GetImage();
             codeQRImga.ScaleAbsolute(200, 200);
 
-            /*
-            //string outputFile2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "uybus.png");
-            string outputFile2 = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\uybus.png");
+            
+            ////string outputFile2 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "uybus.png");
+            //string outputFile2 = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\uybus.png");
 
-            Image image = Image.GetInstance(outputFile2);
-            image.ScaleAbsoluteHeight(42.0f * 1.88f);
-            image.ScaleAbsoluteWidth(185.2f * 2.07f);
-            image.Alignment = Element.ALIGN_CENTER;
-            doc.Add(image);
-            */
+            //Image image = Image.GetInstance(outputFile2);
+            //image.ScaleAbsoluteHeight(42.0f * 1.88f);
+            //image.ScaleAbsoluteWidth(185.2f * 2.07f);
+            //image.Alignment = Element.ALIGN_CENTER;
+            //doc.Add(image);
+            
 
             BaseFont bf = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.WINANSI, BaseFont.EMBEDDED);
 
@@ -229,17 +225,7 @@ namespace BuisnessLayer.implementation
             pdf.CloseStream = false;
             doc.Close();
             ms.Position = 0;
-            /*
-            Document doc = new Document(PageSize.A4);
-            string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
-            PdfWriter.GetInstance(doc, new FileStream(outputFile, FileMode.Create));
-            doc.Open();
-            BarcodeQRCode barcodeWrcode = new BarcodeQRCode(IDPasaje, 1000,1000,null);
-            Image codeQRImga = barcodeWrcode.GetImage();
-            codeQRImga.ScaleAbsolute(200,200);
-            doc.Add(codeQRImga);
-            doc.Close();
-            */
+
             return ms;
         }
         private void enviarCorreo(string correo, string IDPasaje, EPersona eepersona, EPasaje eepasaje, int costo)//generar pdf con codigo QR y enviarlo 
@@ -252,15 +238,7 @@ namespace BuisnessLayer.implementation
                 emailMessage.Subject = "UruguayBus";
                 emailMessage.Body = "";
                 MemoryStream ms = getPdfconQR(IDPasaje, eepersona, eepasaje, costo);
-                //string path = Directory.GetCurrentDirectory();
 
-                //emailMessage.Attachments.Add(new Attachment(path + @"\pdf\pasaje.pdf"));
-
-                //string outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), @"pdf", "pasaje.pdf");
-                //string outputFile = Path.Combine(Environment.CurrentDirectory, @"..\..\..\BuisnessLayer\pdf\pasaje.pdf");
-                //string outputFile = HttpContext.Current.Server.MapPath(@"~/pasaje.pdf");
-
-                //emailMessage.Attachments.Add(new Attachment(outputFile));
                 emailMessage.Attachments.Add(new Attachment(ms, "pasaje.pdf"));
 
                 emailMessage.Priority = MailPriority.Normal;

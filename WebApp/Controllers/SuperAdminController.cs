@@ -14,6 +14,7 @@ namespace WebApp.Controllers
     [Autorizacion(superadmin = true)]
     public class SuperAdminController : Controller
     {
+        private ProxyAdmin pxa = new ProxyAdmin();
 
         private ProxySuperAdmin pxsa = new ProxySuperAdmin();
         // GET: SuperAdmin
@@ -55,6 +56,8 @@ namespace WebApp.Controllers
 
         public ActionResult traerVehiculos()
         {
+
+            ViewBag.ListaParada = Task.Run(() => pxa.GetAllParada()).Result;
             List<DTOubicacion> ubics = Task.Run(() => pxsa.ubicarVehiculo()).Result;
 
             double shift = 0.00001; //corrimineto
