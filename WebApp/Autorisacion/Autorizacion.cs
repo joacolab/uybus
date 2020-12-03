@@ -14,6 +14,8 @@ namespace WebApp.Autorisacion
         public bool usuario { get; set; } = false;
         public bool conductor { get; set; } = false;
 
+        public bool logeado { get; set; } = true;
+
         public Autorizacion(params string[] roles)
         {
             this.allowedroles = roles;
@@ -21,6 +23,11 @@ namespace WebApp.Autorisacion
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
+            if (!logeado)
+            {
+                return true;
+            }
+
             if (httpContext.Session["idPersona"] == null)
             {
                 httpContext.Session.Clear();

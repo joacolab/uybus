@@ -9,10 +9,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebSockets;
+using WebApp.Autorisacion;
 using WebApp.Proxys;
 
 namespace WebApp.Controllers
@@ -28,11 +31,13 @@ namespace WebApp.Controllers
             return View();
         }
 
+        [Autorizacion(logeado = false)]
         public ActionResult Login()
         {
             return View();
         }
 
+        [Autorizacion(logeado = false)]
         public RedirectToRouteResult registrarse()
         {
             return RedirectToAction("registrarse", "Invitado");
@@ -52,7 +57,15 @@ namespace WebApp.Controllers
             DTOLogin log = new DTOLogin();
 
             log.email = logf.email;
-            log.password = logf.password;
+
+            string source = logf.password;
+
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                string hash = GetHash(sha256Hash, source);
+                log.password = hash;
+            }
+
             log.rol = logf.rol.ToString();
 
             EPersona res = pxg.iniciarSesion(log);
@@ -105,8 +118,27 @@ namespace WebApp.Controllers
                 }
             }
         }
+        private static string GetHash(HashAlgorithm hashAlgorithm, string input)
+        {
 
-        
+            // Convert the input string to a byte array and compute the hash.
+            byte[] data = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            // Create a new Stringbuilder to collect the bytes
+            // and create a string.
+            var sBuilder = new StringBuilder();
+
+            // Loop through each byte of the hashed data
+            // and format each one as a hexadecimal string.
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            // Return the hexadecimal string.
+            return sBuilder.ToString();
+        }
+
         public RedirectToRouteResult Admin()
         {
             return RedirectToAction("Index", "Admin");

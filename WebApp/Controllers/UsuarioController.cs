@@ -177,8 +177,8 @@ namespace WebApp.Controllers
 
         public ActionResult verVehiculoP(int id)
         {
-            Session["idUsuario"] = 2; // arreglar esto <<<< --------------------- !!!!!
-            int idUsuario = (int)Session["idUsuario"]; // esto no iria
+            //Session["idUsuario"] = 2; // arreglar esto <<<< --------------------- !!!!!
+            int idUsuario = (int)Session["idPersona"]; // esto no iria
             return View(Task.Run(() => pxu.proximoVehiculo(idUsuario,id)).Result);
         }
 

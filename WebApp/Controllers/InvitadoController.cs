@@ -4,8 +4,11 @@ using Share.enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using WebApp.Autorisacion;
 using WebApp.Proxys;
 
 namespace WebApp.Controllers
@@ -20,9 +23,31 @@ namespace WebApp.Controllers
         {
             return View();
         }
+
+        [Autorizacion(logeado = false)]
         public ActionResult registrarse()
         {
             return View();
+        }
+        private static string GetHash(HashAlgorithm hashAlgorithm, string input)
+        {
+
+            // Convert the input string to a byte array and compute the hash.
+            byte[] data = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            // Create a new Stringbuilder to collect the bytes
+            // and create a string.
+            var sBuilder = new StringBuilder();
+
+            // Loop through each byte of the hashed data
+            // and format each one as a hexadecimal string.
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            // Return the hexadecimal string.
+            return sBuilder.ToString();
         }
 
         [HttpPost]
@@ -32,7 +57,19 @@ namespace WebApp.Controllers
             per.id = persona.id;
             per.Documento = persona.Documento;
             per.Correo = persona.Correo;
-            per.Password = persona.Password;
+
+            string source = persona.Password;
+
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                string hash = GetHash(sha256Hash, source);
+                per.Password = hash;
+            }
+
+
+
+
+
             per.TipoDocumento = (int)persona.TipoDocumento;
             per.pNombre = persona.pNombre;
             per.sNombre = persona.sNombre;
