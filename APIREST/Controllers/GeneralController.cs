@@ -1,4 +1,5 @@
-﻿using BuisnessLayer.implementation;
+﻿using APIREST.Token;
+using BuisnessLayer.implementation;
 using BuisnessLayer.interfaces;
 using DataAcessLayer.implementation;
 using Share.DTOs;
@@ -84,15 +85,26 @@ namespace APIREST.Controllers
                 }
 
                 EPersona res = cGeneral.iniciarSesion(log.email, log.password, log.rol);
+                DTOEpToken ept = new DTOEpToken();
+                ept.id = res.id;
+                ept.Password = "null";
+                ept.Correo = res.Correo;
+                ept.Documento = res.Documento;
+                ept.TipoDocumento = res.TipoDocumento;
+                ept.pNombre = res.pNombre;
+                ept.sNombre = res.sNombre;
+                ept.pApellido = res.pApellido;
+                ept.sApellido = res.sApellido;
+                ept.tokenJWT = TokenGenerator.GenerateTokenJwt(log.email);
 
-                return Ok(res);
+                return Ok(ept);
 
             }
             catch (Exception)
             {
                 return NotFound();
             }
-        }
+        } 
 
     }
 

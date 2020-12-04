@@ -68,7 +68,7 @@ namespace WebApp.Controllers
 
             log.rol = logf.rol.ToString();
 
-            EPersona res = pxg.iniciarSesion(log);
+            DTOEpToken res = pxg.iniciarSesion(log);
             if (res.pNombre=="Error")
             {
                 ViewBag.Message = "Usuario no registrado";

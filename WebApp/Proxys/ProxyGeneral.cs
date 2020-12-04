@@ -15,13 +15,13 @@ namespace WebApp.Proxys
         public string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "/general/";
         //public string Baseurl = "https://localhost:44330/general/";
 
-        public EPersona iniciarSesion(DTOLogin log)
+        public DTOEpToken iniciarSesion(DTOLogin log)
         {
             
             using (var client = new HttpClient())
             {
                 var task = client.PostAsJsonAsync(Baseurl + "login", log)
-                         .ContinueWith(x => x.Result.Content.ReadAsAsync<EPersona>().Result);
+                         .ContinueWith(x => x.Result.Content.ReadAsAsync<DTOEpToken>().Result);
                 task.Wait();
                 return task.Result;
 

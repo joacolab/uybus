@@ -44,6 +44,7 @@
     <Compile Include="DTOs\DTOCompPasaje.cs" />
     <Compile Include="DTOs\DTOComprarPasaje.cs" />
     <Compile Include="DTOs\DTOCrearViajes.cs" />
+    <Compile Include="DTOs\DTOEpToken.cs" />
     <Compile Include="DTOs\DTOLegada.cs" />
     <Compile Include="DTOs\DTOLinea.cs" />
     <Compile Include="DTOs\DTOLogForm.cs" />

@@ -92,7 +92,7 @@ namespace WebApp.Controllers
                 log.email = persona.Correo;
                 log.password = persona.Password;
                 log.rol = "Usuario";
-                EPersona res = pxg.iniciarSesion(log);
+                DTOEpToken res = pxg.iniciarSesion(log);
 
                 Session["idPersona"] = res.id;
                 Session["pNombre"] = res.pNombre;
@@ -100,7 +100,8 @@ namespace WebApp.Controllers
                 Session["pApellido"] = res.pApellido;
                 Session["sApellido"] = res.sApellido;
                 Session["Correo"] = res.Correo;
-                Session["Password"] = res.Password;
+                Session["Password"] = res.Password; //ojo que es "null"
+                Session["tokenJWT"] = res.tokenJWT; //cargo el token
 
                 TipoDoc r = (TipoDoc)res.TipoDocumento;
                 Session["TipoDocumento"] = r.ToString();
