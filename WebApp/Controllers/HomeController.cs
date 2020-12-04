@@ -89,7 +89,8 @@ namespace WebApp.Controllers
                     Session["pApellido"] = res.pApellido;
                     Session["sApellido"] = res.sApellido;
                     Session["Correo"] = res.Correo;
-                    Session["Password"] = res.Password;
+                    Session["Password"] = res.Password; //ojo que es "null"
+                    Session["tokenJWT"] = res.tokenJWT; //cargo el token
 
                     TipoDoc r = (TipoDoc)res.TipoDocumento;
                     Session["TipoDocumento"] = r.ToString();

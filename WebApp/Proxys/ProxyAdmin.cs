@@ -19,7 +19,7 @@ namespace WebApp.Proxys
         //public string Baseurl = "https://localhost:44330/admin/";
 
         //-----------------------------Vehiculo----------------------------------
-        public async Task<List<EVehiculo>> getAllVehiculos()
+        public async Task<List<EVehiculo>> getAllVehiculos(string tokenJWT)
         {
             List<EVehiculo> eVehiculos = new List<EVehiculo>();
 
@@ -28,6 +28,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("traer/vehiculos");
 
                 if (Res.IsSuccessStatusCode)

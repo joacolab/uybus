@@ -16,6 +16,7 @@ namespace WebApp.Controllers
     public class AdminController : Controller
     {
         private ProxyAdmin pxa = new ProxyAdmin();
+
         // private static List<int> idPars = new List<int>();
 
         public ActionResult Index()
@@ -32,7 +33,7 @@ namespace WebApp.Controllers
 
         public ActionResult traerVehiculos()
         {
-            return View(Task.Run(() => pxa.getAllVehiculos()).Result);
+            return View(Task.Run(() => pxa.getAllVehiculos(Session["tokenJWT"].ToString())).Result);
         }
 
         public ActionResult crearVehiculo()
@@ -322,7 +323,7 @@ namespace WebApp.Controllers
         public ActionResult listVeic(int id) //id del conductor, se listan los veiculos
         {
             Session["conductorId"] = id;
-            return View(Task.Run(() => pxa.getAllVehiculos()).Result);
+            return View(Task.Run(() => pxa.getAllVehiculos(Session["tokenJWT"].ToString())).Result);
         }
 
         public ActionResult selecLine(string id) //matricula, se listan las lineas
