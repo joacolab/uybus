@@ -14,8 +14,8 @@ using Share.enums;
 
 namespace APIREST.Controllers
 
-{ 
-
+{
+    [AllowAnonymous]
     [RoutePrefix("invitado")]
     public class InvitadoController : ApiController
     {
@@ -43,7 +43,7 @@ namespace APIREST.Controllers
             }
         }
 
-        //---------------------------------------- Asignar Rol ---------------------------------------------------------
+        //----------------------------------------  ---------------------------------------------------------
         /* Funciona:
         * Copiar el siguiente codigo y ejecutarlo el el gitbash:
         * 

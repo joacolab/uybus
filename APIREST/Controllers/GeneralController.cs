@@ -28,6 +28,7 @@ namespace APIREST.Controllers
                 "fecha": "2020-12-03"
             }
         */
+        [Authorize]
         [HttpPost]
         [Route("llegada")]
         [ResponseType(typeof(List<EUsuario>))]
@@ -50,6 +51,15 @@ namespace APIREST.Controllers
                 return NotFound();
             }
         }
+        
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("echoping")]
+        public IHttpActionResult EchoPing()
+        {
+            return Ok(true);
+        }
+
         //----------------------------------login----------------------------------------
         // https://localhost:44330/general/login
         //funciona
@@ -60,6 +70,7 @@ namespace APIREST.Controllers
                 "rol" : "Conductor"
             }
         */
+        [AllowAnonymous]
         [HttpPost]
         [Route("login")]
         [ResponseType(typeof(EPersona))]
