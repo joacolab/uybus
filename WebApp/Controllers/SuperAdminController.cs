@@ -30,7 +30,7 @@ namespace WebApp.Controllers
         
         public ActionResult traerPersonas()
         {
-          return View(Task.Run(() => pxsa.GetAllPersonas()).Result);
+          return View(Task.Run(() => pxsa.GetAllPersonas(Session["tokenJWT"].ToString())).Result);
         }
 
         public ActionResult asignarRol(int id)
@@ -47,7 +47,7 @@ namespace WebApp.Controllers
             per.idPersona = persona.idPersona;
             per.rol = (int)persona.rol;
 
-            pxsa.asignarRol(per);
+            pxsa.asignarRol(per, Session["tokenJWT"].ToString());
             return RedirectToAction("traerPersonas");
         }
 
@@ -58,7 +58,7 @@ namespace WebApp.Controllers
         {
 
             ViewBag.ListaParada = Task.Run(() => pxa.GetAllParada()).Result;
-            List<DTOubicacion> ubics = Task.Run(() => pxsa.ubicarVehiculo()).Result;
+            List<DTOubicacion> ubics = Task.Run(() => pxsa.ubicarVehiculo(Session["tokenJWT"].ToString())).Result;
 
             double shift = 0.00001; //corrimineto
             foreach (var u in ubics)
@@ -70,14 +70,6 @@ namespace WebApp.Controllers
 
             return View(ubics);
         }
-
-
-
-        
-
-
-
-
 
     }
 }

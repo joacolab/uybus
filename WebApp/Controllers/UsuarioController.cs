@@ -31,13 +31,13 @@ namespace WebApp.Controllers
 
         public ActionResult traerLineas()
         {
-            return View(Task.Run(() => pxu.listarLineas()).Result); // se listan las lineas
+            return View(Task.Run(() => pxu.listarLineas(Session["tokenJWT"].ToString())).Result); // se listan las lineas
         }
 
         public ActionResult selectLinea(int id) // id de la linea seleccionada
         {
             Session["idLinea"] = id; //me guardo la linea para despues
-            return View(Task.Run(() => pxu.listarParadasOrigen(id)).Result); //se listan las paradas O, de esa linea
+            return View(Task.Run(() => pxu.listarParadasOrigen(id, Session["tokenJWT"].ToString())).Result); //se listan las paradas O, de esa linea
         }
 
         public ActionResult selectPOrigen(int id) // id de la parada de origen
@@ -45,20 +45,20 @@ namespace WebApp.Controllers
             Session["idPOrigen"] = id; //me guardo la paradaO para despues
             int idLinea = (int)Session["idLinea"]; //obtengo el idLinea, de la session
 
-            return View(Task.Run(() => pxu.listarParadasDestino(idLinea, id)).Result);//se listan las paradas D, de esa linea
+            return View(Task.Run(() => pxu.listarParadasDestino(idLinea, id, Session["tokenJWT"].ToString())).Result);//se listan las paradas D, de esa linea
         }
 
         public ActionResult selectPDestino(int id) // id de la parada de destino
         {
             Session["idPDestino"] = id;//me guardo la paradaD para despues
             int idLinea = (int)Session["idLinea"]; //obtengo el idLinea, de la session
-            return View(Task.Run(() => pxu.listarSalidas(idLinea)).Result);//se listan las salidas de esa linea
+            return View(Task.Run(() => pxu.listarSalidas(idLinea, Session["tokenJWT"].ToString())).Result);//se listan las salidas de esa linea
         }
 
         public ActionResult selecSalida(int id) // id de la salida
         {
             Session["idSalida"] = id;//me guardo la salida para despues
-            return View(Task.Run(() => pxu.listarViajes(id)).Result);//se listan los viajes de esa salida
+            return View(Task.Run(() => pxu.listarViajes(id, Session["tokenJWT"].ToString())).Result);//se listan los viajes de esa salida
         }
 
         public ActionResult selecViaje(int id) // id del viaje
@@ -69,15 +69,15 @@ namespace WebApp.Controllers
             int idPOrigen = (int)Session["idPOrigen"];
             int idPDestino = (int)Session["idPDestino"];
 
-            if (Task.Run(() => pxu.canSelectSeat(idLinea, idPOrigen, idPDestino)).Result) //hay que ver si puede seleccionar un asiento
+            if (Task.Run(() => pxu.canSelectSeat(idLinea, idPOrigen, idPDestino, Session["tokenJWT"].ToString())).Result) //hay que ver si puede seleccionar un asiento
             {
-                return View(Task.Run(() => pxu.listarAsientos(id)).Result);//se listan los asientos de ese viaje
+                return View(Task.Run(() => pxu.listarAsientos(id, Session["tokenJWT"].ToString())).Result);//se listan los asientos de ese viaje
             }
             int idL = (int)Session["idLinea"];
             int idPo = (int)Session["idPOrigen"];
             int idPD = (int)Session["idPDestino"];
 
-            int costo = Task.Run(() => pxu.costoPasaje(idL, idPo, idPD)).Result;
+            int costo = Task.Run(() => pxu.costoPasaje(idL, idPo, idPD, Session["tokenJWT"].ToString())).Result;
             Session["costo"] = costo;
             ViewBag.Message = costo;
 
@@ -94,7 +94,7 @@ namespace WebApp.Controllers
             int idPD = (int)Session["idPDestino"];
 
 
-            int costo = Task.Run(() => pxu.costoPasaje(idL, idPo, idPD)).Result;
+            int costo = Task.Run(() => pxu.costoPasaje(idL, idPo, idPD, Session["tokenJWT"].ToString())).Result;
             Session["costo"] = costo;
             ViewBag.Message = costo;
 
@@ -115,7 +115,7 @@ namespace WebApp.Controllers
             int idL = (int)Session["idLinea"];
             int idPo = (int)Session["idPOrigen"];
             int idPD = (int)Session["idPDestino"];
-            int costo = Task.Run(() => pxu.costoPasaje(idL, idPo, idPD)).Result;
+            int costo = Task.Run(() => pxu.costoPasaje(idL, idPo, idPD, Session["tokenJWT"].ToString())).Result;
             Session["costo"] = costo;
             ViewBag.Message = costo;
 
@@ -157,7 +157,7 @@ namespace WebApp.Controllers
                 pasaje.tipoDoc = Session["TipoDocumento"].ToString();
                 pasaje.idUsuario = (int)Session["idPersona"];
 
-                pxu.comprarPasaje(pasaje);
+                pxu.comprarPasaje(pasaje, Session["tokenJWT"].ToString());
 
                 return RedirectToAction("Index");
             }
@@ -172,14 +172,14 @@ namespace WebApp.Controllers
         //----------------proximos vehiculos-----------------
         public ActionResult proxVehiculos()
         {
-            return View(Task.Run(() => pxu.sinterminal()).Result);
+            return View(Task.Run(() => pxu.sinterminal(Session["tokenJWT"].ToString())).Result);
         }
 
         public ActionResult verVehiculoP(int id)
         {
             //Session["idUsuario"] = 2; // arreglar esto <<<< --------------------- !!!!!
             int idUsuario = (int)Session["idPersona"]; // esto no iria
-            return View(Task.Run(() => pxu.proximoVehiculo(idUsuario,id)).Result);
+            return View(Task.Run(() => pxu.proximoVehiculo(idUsuario,id, Session["tokenJWT"].ToString())).Result);
         }
 
     }

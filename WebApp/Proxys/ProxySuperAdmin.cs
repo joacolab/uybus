@@ -18,7 +18,7 @@ namespace WebApp.Proxys
         //public string Baseurl = "https://localhost:44330/super-admin/";
 
 
-        public async Task<List<EPersona>> GetAllPersonas()
+        public async Task<List<EPersona>> GetAllPersonas(string tokenJWT)
         {
             List<EPersona> ePersona = new List<EPersona>();
 
@@ -27,6 +27,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("traer/Personas");
 
                 if (Res.IsSuccessStatusCode)
@@ -38,11 +39,12 @@ namespace WebApp.Proxys
             }
         }
 
-        public void asignarRol(DTOPersonaRol persona)
+        public void asignarRol(DTOPersonaRol persona, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var putTask = client.PutAsJsonAsync($"asignar-rol/{persona.idPersona}", persona);
                 putTask.Wait();
                 var result = putTask.Result;
@@ -52,7 +54,7 @@ namespace WebApp.Proxys
 
 
 
-        public async Task<List<DTOubicacion>> ubicarVehiculo()
+        public async Task<List<DTOubicacion>> ubicarVehiculo(string tokenJWT)
         {
             List<DTOubicacion> ubicaciones = new List<DTOubicacion>();
 
@@ -61,6 +63,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("ubicarVehiculo");
 
                 if (Res.IsSuccessStatusCode)
