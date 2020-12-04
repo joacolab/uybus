@@ -40,11 +40,12 @@ namespace WebApp.Proxys
             }
         }
 
-        public EVehiculo crearVehiculo(EVehiculo vehiculo)
+        public EVehiculo crearVehiculo(EVehiculo vehiculo, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl + "crear/vehiculo");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var postTask = client.PostAsJsonAsync<EVehiculo>("vehiculo", vehiculo);
                 postTask.Wait();
                 var result = postTask.Result;
@@ -52,11 +53,12 @@ namespace WebApp.Proxys
             return vehiculo;
         }
 
-        public EVehiculo editarVehiculo(EVehiculo vehiculo)
+        public EVehiculo editarVehiculo(EVehiculo vehiculo, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var putTask = client.PutAsJsonAsync($"editar/vehiculo/{vehiculo.Matricula}", vehiculo);
                 putTask.Wait();
                 var result = putTask.Result;
@@ -69,7 +71,7 @@ namespace WebApp.Proxys
         }
 
         //-----------------------------Viaje----------------------------------
-        public async Task<List<EViaje>> getAllViajes()
+        public async Task<List<EViaje>> getAllViajes(string tokenJWT)
         {
             List<EViaje> eViajes = new List<EViaje>();
 
@@ -78,6 +80,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("traer/viajes");
 
                 if (Res.IsSuccessStatusCode)
@@ -89,11 +92,12 @@ namespace WebApp.Proxys
             }
         }
 
-        public void crearViajes(DTOCrearViajes viajes)
+        public void crearViajes(DTOCrearViajes viajes, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl + "crear/viajes");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var postTask = client.PostAsJsonAsync<DTOCrearViajes>("viajes", viajes);
                 postTask.Wait();
                 var result = postTask.Result;
@@ -104,11 +108,12 @@ namespace WebApp.Proxys
             }
         }
 
-        public void editarViaje(DTOViaje viaje)
+        public void editarViaje(DTOViaje viaje, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var putTask = client.PutAsJsonAsync($"editar/viaje/{viaje.IdViaje}", viaje);
                 putTask.Wait();
                 var result = putTask.Result;
@@ -116,7 +121,7 @@ namespace WebApp.Proxys
         }
         //-------------------------------------paradas---------------------------------------
 
-        public async Task<List<EParada>> GetAllParada()
+        public async Task<List<EParada>> GetAllParada(string tokenJWT)
         {
             List<EParada> eParada = new List<EParada>();
 
@@ -125,6 +130,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("traer/paradas");
 
                 if (Res.IsSuccessStatusCode)
@@ -135,11 +141,12 @@ namespace WebApp.Proxys
                 return eParada;
             }
         }
-        public EParada crearParada(DTOParada DTOparada)
+        public EParada crearParada(DTOParada DTOparada, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl + "crear/parada");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var postTask = client.PostAsJsonAsync<DTOParada>("parada", DTOparada);
                 postTask.Wait();
                 var result = postTask.Result;
@@ -149,11 +156,12 @@ namespace WebApp.Proxys
         }
         
 
-        public void editarParada(DTOParada parada)
+        public void editarParada(DTOParada parada, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var putTask = client.PutAsJsonAsync($"editar/parada/{parada.IdParada}", parada);
                 putTask.Wait();
                 //var result = putTask.Result;
@@ -162,7 +170,7 @@ namespace WebApp.Proxys
 
 
         //-------------------------------------lineas---------------------------------------
-        public async Task<List<ELinea>> GetAllLineas()
+        public async Task<List<ELinea>> GetAllLineas(string tokenJWT)
         {
             List<ELinea> eLineas = new List<ELinea>();
 
@@ -171,6 +179,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("traer/linea");
 
                 if (Res.IsSuccessStatusCode)
@@ -182,11 +191,12 @@ namespace WebApp.Proxys
             }
         }
  
-         public ELinea crearLinea(DTOLinea linea)
+         public ELinea crearLinea(DTOLinea linea, string tokenJWT)
          {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl + "crear/linea");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var postTask = client.PostAsJsonAsync<DTOLinea>("linea", linea);
                 postTask.Wait();
                 var result = postTask.Result;
@@ -199,11 +209,12 @@ namespace WebApp.Proxys
 
 
         
-        public void editarLinea(DTOLinea linea)
+        public void editarLinea(DTOLinea linea, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var putTask = client.PutAsJsonAsync($"editar/linea/{linea.IdLinea}", linea.Nombre);
                 putTask.Wait();
                 //var result = putTask.Result;
@@ -212,7 +223,7 @@ namespace WebApp.Proxys
         
 
         //----------------------------tramo---------------------NO FUNCIONA____#####___###
-        public async Task<List<ETramo>> GetAllTramos()
+        public async Task<List<ETramo>> GetAllTramos(string tokenJWT)
         {
             List<ETramo> eTramos = new List<ETramo>();
 
@@ -221,6 +232,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("traer/tramo");
 
                 if (Res.IsSuccessStatusCode)
@@ -232,13 +244,14 @@ namespace WebApp.Proxys
             }
         }
     
-         public ETramo crearTramo(DTOTramoPrecio tramo)
+         public ETramo crearTramo(DTOTramoPrecio tramo, string tokenJWT)
          {
              using (var client = new HttpClient())
 
              {
                  client.BaseAddress = new Uri(Baseurl + "crear/tramo");
-                 var postTask = client.PostAsJsonAsync< DTOTramoPrecio> ("tramo", tramo);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
+                var postTask = client.PostAsJsonAsync< DTOTramoPrecio> ("tramo", tramo);
                  postTask.Wait();
                  var result = postTask.Result;
 
@@ -247,12 +260,13 @@ namespace WebApp.Proxys
          }
         
 
-         public void editarTramo(DTOTramo tramo)
+         public void editarTramo(DTOTramo tramo, string tokenJWT)
          {
              using (var client = new HttpClient())
              {
                  client.BaseAddress = new Uri(Baseurl);
-                 var putTask = client.PutAsJsonAsync($"editar/linea/{tramo.IdLinea}/{tramo.IdParada}", tramo);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
+                var putTask = client.PutAsJsonAsync($"editar/linea/{tramo.IdLinea}/{tramo.IdParada}", tramo);
                  putTask.Wait();
                  //var result = putTask.Result;
              }
@@ -262,7 +276,7 @@ namespace WebApp.Proxys
         //-----------------------------Salida------------------------------------------
 
 
-        public async Task<List<ESalida>> GetAllSalida()
+        public async Task<List<ESalida>> GetAllSalida(string tokenJWT)
         {
             List<ESalida> eSalida = new List<ESalida>();
 
@@ -271,6 +285,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("traer/salida");
 
                 if (Res.IsSuccessStatusCode)
@@ -282,23 +297,25 @@ namespace WebApp.Proxys
             }
         }
         
-         public void crearSalida(DTOSalida salida)
+         public void crearSalida(DTOSalida salida, string tokenJWT)
          {
              using (var client = new HttpClient())
              {
                  client.BaseAddress = new Uri(Baseurl + "crear/salida");
-                 var postTask = client.PostAsJsonAsync<DTOSalida>("salida", salida);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
+                var postTask = client.PostAsJsonAsync<DTOSalida>("salida", salida);
                  postTask.Wait();
                  var result = postTask.Result;
              }
          }
         
-         public void editarSalida(DTOSalida salida)
+         public void editarSalida(DTOSalida salida, string tokenJWT)
          {
              using (var client = new HttpClient())
              {
                  client.BaseAddress = new Uri(Baseurl);
-                 var putTask = client.PutAsJsonAsync($"editar/salida/{salida.IdSalida}",salida);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
+                var putTask = client.PutAsJsonAsync($"editar/salida/{salida.IdSalida}",salida);
                  putTask.Wait();
                  //var result = putTask.Result;
              }
@@ -306,7 +323,7 @@ namespace WebApp.Proxys
         //-----------------------------Asignar Fecha Libreta Conductor------------------------------------------
 
 
-        public async Task<List<EConductor>> GetAllConductores()
+        public async Task<List<EConductor>> GetAllConductores(string tokenJWT)
         {
             List<EConductor> eConductor = new List<EConductor>();
 
@@ -315,6 +332,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("traer/Conductores");
 
                 if (Res.IsSuccessStatusCode)
@@ -325,12 +343,13 @@ namespace WebApp.Proxys
                 return eConductor;
             }
         }
-        public void editarConductor(EConductor conductor)
+        public void editarConductor(EConductor conductor, string tokenJWT)
         {
             
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var putTask = client.PutAsJsonAsync($"editar/conductor/{conductor.Id}", conductor.VencimientoLicencia.ToString());
                 putTask.Wait();
                 //var result = putTask.Result;
@@ -339,21 +358,23 @@ namespace WebApp.Proxys
         //------------------------------------Reporte Utilidad-------------------------------------
 
 
-        public async Task<float> reporteUtilidad(DTOUtilidad reporteUtilidad)
+        public async Task<float> reporteUtilidad(DTOUtilidad reporteUtilidad, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl + "reporteUtilidad");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var postTask = await client.PostAsJsonAsync<DTOUtilidad>("reporteUtilidad", reporteUtilidad);
                 return await postTask.Content.ReadAsAsync<float>();
             }
         }
         //------------------------------------Reporte de pasajes------------------------------------
-        public async Task<List<EPasaje>> reportedePasaje(DTOreportePasaje reportePasaje)
+        public async Task<List<EPasaje>> reportedePasaje(DTOreportePasaje reportePasaje, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl + "reportePasaje");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var postTask = await client.PostAsJsonAsync<DTOreportePasaje>("reportePasaje", reportePasaje);
                 return await postTask.Content.ReadAsAsync<List<EPasaje>>();
             }

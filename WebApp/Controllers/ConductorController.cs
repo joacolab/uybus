@@ -28,7 +28,7 @@ namespace WebApp.Controllers
         //-------llegada----------
         public ActionResult lstViajes()
         {
-            List<EViaje> viajes = Task.Run(() => pxc.getAllViajes()).Result;
+            List<EViaje> viajes = Task.Run(() => pxc.getAllViajes(Session["tokenJWT"].ToString())).Result;
             List<EViaje> iniciados = new List<EViaje>();
             foreach (var viaje in viajes)
             {
@@ -51,14 +51,14 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult ingresarHF(DTOLegada llegada)
         {
-            List<EUsuario> siguientes = pxc.llegada(llegada);
+            List<EUsuario> siguientes = pxc.llegada(llegada, Session["tokenJWT"].ToString());
             return RedirectToAction("lstViajes");
         }
 
         //-------iniciar viaje----------
         public ActionResult traerViajes()
         {
-            List<EViaje> viajes = Task.Run(() => pxc.getAllViajes()).Result;
+            List<EViaje> viajes = Task.Run(() => pxc.getAllViajes(Session["tokenJWT"].ToString())).Result;
             List<EViaje> retorno = new List<EViaje>();
             foreach (var v in viajes)
             {
@@ -81,14 +81,14 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult iniciarViaje(EViaje ev)
         {
-            pxc.iniciarViaje(ev.IdViaje,ev.HoraInicioReal.ToString());
+            pxc.iniciarViaje(ev.IdViaje,ev.HoraInicioReal.ToString(), Session["tokenJWT"].ToString());
             return RedirectToAction("traerViajes");
         }
 
         //-------verificar pasaje -----------
         public ActionResult traerParadas()
         {
-            return View(Task.Run(() => pxc.GetAllParada()).Result);
+            return View(Task.Run(() => pxc.GetAllParada(Session["tokenJWT"].ToString())).Result);
         }
         public ActionResult verificarP(int id)
         {
@@ -100,7 +100,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult verificarP(EPasaje ep)
         {
-            Session["isValid"] = Task.Run(() => pxc.verificarPasaje(ep.IdPasaje, ep.IdParadaOrigen)).Result;
+            Session["isValid"] = Task.Run(() => pxc.verificarPasaje(ep.IdPasaje, ep.IdParadaOrigen, Session["tokenJWT"].ToString())).Result;
             return RedirectToAction("pasajeValido");
         }
 
