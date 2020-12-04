@@ -44,7 +44,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult crearVehiculo(EVehiculo vehiculo)
         {
-            pxa.crearVehiculo(vehiculo);
+            pxa.crearVehiculo(vehiculo, Session["tokenJWT"].ToString());
             return RedirectToAction("traerVehiculos");
         }
 
@@ -59,20 +59,20 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult editarVehiculo(EVehiculo vehiculo)
         {
-            pxa.editarVehiculo(vehiculo);
+            pxa.editarVehiculo(vehiculo, Session["tokenJWT"].ToString());
             return RedirectToAction("traerVehiculos");
         }
         //------------------------VIAJES---------------------------------------
         public ActionResult traerViajes()
         {
-            return View(Task.Run(() => pxa.getAllViajes()).Result);
+            return View(Task.Run(() => pxa.getAllViajes(Session["tokenJWT"].ToString())).Result);
         }
 
 
 
         public ActionResult traerSalidasV()
         {
-            return View(Task.Run(() => pxa.GetAllSalida()).Result);
+            return View(Task.Run(() => pxa.GetAllSalida(Session["tokenJWT"].ToString())).Result);
         }
 
         public ActionResult crearViaje(int id)
@@ -85,7 +85,7 @@ namespace WebApp.Controllers
         public ActionResult crearViaje(DTOCrearViajes viajes)
         {
             viajes.idSalida = (int)Session["salidaSelcs"];
-            pxa.crearViajes(viajes);
+            pxa.crearViajes(viajes, Session["tokenJWT"].ToString());
             return RedirectToAction("traerViajes");
         }
 
@@ -100,7 +100,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult editarViaje(DTOViaje viajes)
         {
-            pxa.editarViaje(viajes);
+            pxa.editarViaje(viajes, Session["tokenJWT"].ToString());
             return RedirectToAction("traerViajes");
         }
 
@@ -108,7 +108,7 @@ namespace WebApp.Controllers
         //-----------------------------parada---------------------------------
         public ActionResult traerParadas()
         {
-            return View(Task.Run(() => pxa.GetAllParada()).Result);
+            return View(Task.Run(() => pxa.GetAllParada(Session["tokenJWT"].ToString())).Result);
         }
 
 
@@ -123,7 +123,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult crearParada(DTOParada pa)
         {
-            foreach (var parada in Task.Run(() => pxa.GetAllParada()).Result)
+            foreach (var parada in Task.Run(() => pxa.GetAllParada(Session["tokenJWT"].ToString())).Result)
             {
                 if (parada.Nombre == pa.Nombre)
                 {
@@ -137,7 +137,7 @@ namespace WebApp.Controllers
                 }
             }
 
-            pxa.crearParada(pa);
+            pxa.crearParada(pa, Session["tokenJWT"].ToString());
             return RedirectToAction("traerParadas");
         }
 
@@ -153,7 +153,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult editarParada(DTOParada parada)
         {
-            pxa.editarParada(parada);
+            pxa.editarParada(parada, Session["tokenJWT"].ToString());
             return RedirectToAction("traerParadas");
         }
 
@@ -168,7 +168,7 @@ namespace WebApp.Controllers
             Session["selecParadaId"] = null;
             Session["errorNLinea"] = null;
             Session["ordenParada"] = null;
-            return View(Task.Run(() => pxa.GetAllLineas()).Result);
+            return View(Task.Run(() => pxa.GetAllLineas(Session["tokenJWT"].ToString())).Result);
         }
 
 
@@ -184,7 +184,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult crearLinea(DTOLinea linea)
         {
-            foreach (var li in Task.Run(() => pxa.GetAllLineas()).Result)
+            foreach (var li in Task.Run(() => pxa.GetAllLineas(Session["tokenJWT"].ToString())).Result)
             {
                 if (linea.Nombre == li.Nombre)
                 {
@@ -192,7 +192,7 @@ namespace WebApp.Controllers
                     return RedirectToAction("crearLinea");
                 }
             }
-            Session["Nuevalinea"] = pxa.crearLinea(linea).IdLinea;
+            Session["Nuevalinea"] = pxa.crearLinea(linea, Session["tokenJWT"].ToString()).IdLinea;
             return RedirectToAction("traerParadaL");//lista las paradas
         }
 
@@ -200,7 +200,7 @@ namespace WebApp.Controllers
         {
             List<EParada> retorno = new List<EParada>();
 
-            List<EParada> paradas = Task.Run(() => pxa.GetAllParada()).Result;
+            List<EParada> paradas = Task.Run(() => pxa.GetAllParada(Session["tokenJWT"].ToString())).Result;
             retorno.AddRange(paradas);
             List<int> idPars = (List<int>)Session["idPars"];
 
@@ -270,7 +270,7 @@ namespace WebApp.Controllers
                     tpre.Precio = tp.Precio;
                 }
 
-                pxa.crearTramo(tpre);
+                pxa.crearTramo(tpre, Session["tokenJWT"].ToString());
                 return RedirectToAction("traerParadaL");
             }
             else
@@ -282,7 +282,7 @@ namespace WebApp.Controllers
                 tpre.TiempoEstimado = tp.TiempoEstimado;
                 tpre.FechaEntradaVigencia = tp.FechaEntradaVigencia;
                 tpre.Precio = tp.Precio;
-                pxa.crearTramo(tpre);
+                pxa.crearTramo(tpre, Session["tokenJWT"].ToString());
                 Session["ordenParada"] = null;
                 Session["Nuevalinea"] = null;
                 Session["selecParadaId"] = null;
@@ -303,7 +303,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult editarLinea(DTOLinea linea)
         {
-            pxa.editarLinea(linea);
+            pxa.editarLinea(linea, Session["tokenJWT"].ToString());
             return RedirectToAction("traerLinea");
         }
 
@@ -312,12 +312,12 @@ namespace WebApp.Controllers
 
         public ActionResult traerSalida()
         {
-            return View(Task.Run(() => pxa.GetAllSalida()).Result);
+            return View(Task.Run(() => pxa.GetAllSalida(Session["tokenJWT"].ToString())).Result);
         }
 
         public ActionResult traerCondSallida()
         {
-            return View(Task.Run(() => pxa.GetAllConductores()).Result);
+            return View(Task.Run(() => pxa.GetAllConductores(Session["tokenJWT"].ToString())).Result);
         }
 
         public ActionResult listVeic(int id) //id del conductor, se listan los veiculos
@@ -329,7 +329,7 @@ namespace WebApp.Controllers
         public ActionResult selecLine(string id) //matricula, se listan las lineas
         {
             Session["veiculoMat"] = id;
-            return View(Task.Run(() => pxa.GetAllLineas()).Result);
+            return View(Task.Run(() => pxa.GetAllLineas(Session["tokenJWT"].ToString())).Result);
         }
 
 
@@ -345,7 +345,7 @@ namespace WebApp.Controllers
             salida.IdLinea = (int)Session["lineId"];
             salida.IdVehiculo = Session["veiculoMat"].ToString();
             salida.IdConductor = (int)Session["conductorId"];
-            pxa.crearSalida(salida);
+            pxa.crearSalida(salida, Session["tokenJWT"].ToString());
             return RedirectToAction("traerSalida");
         }
 
@@ -360,7 +360,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult editarSalida(DTOSalida salida)
         {
-            pxa.editarSalida(salida);
+            pxa.editarSalida(salida, Session["tokenJWT"].ToString());
             return RedirectToAction("traerSalida");
         }
         //----------------Conductor------------------------------------
@@ -368,7 +368,7 @@ namespace WebApp.Controllers
 
         public ActionResult traerConductores()
         {
-            return View(Task.Run(() => pxa.GetAllConductores()).Result);
+            return View(Task.Run(() => pxa.GetAllConductores(Session["tokenJWT"].ToString())).Result);
         }
 
 
@@ -382,7 +382,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult editarConductor(EConductor conductor)
         {
-            pxa.editarConductor(conductor);
+            pxa.editarConductor(conductor, Session["tokenJWT"].ToString());
             return RedirectToAction("traerConductores");
         }
 
@@ -440,7 +440,7 @@ namespace WebApp.Controllers
             if (utilidad.fechaDesde == null) utilidad.fechaDesde = "1900,01,01";
             if (utilidad.fechaHasat == null) utilidad.fechaHasat = "1900,01,01";
             DTOUtilidadFinal ut = new DTOUtilidadFinal();
-            float result = Task.Run(() => pxa.reporteUtilidad(utilidad)).Result;
+            float result = Task.Run(() => pxa.reporteUtilidad(utilidad, Session["tokenJWT"].ToString())).Result;
             ut.Valor = result * 100;
             return RedirectToAction("verUtilidad", ut);
 
@@ -504,7 +504,7 @@ namespace WebApp.Controllers
                 repoPasaje.viaje = -1;
                 repoPasaje.salida = -1;
             }
-            List<EPasaje> result = Task.Run(() => pxa.reportedePasaje(repoPasaje)).Result;
+            List<EPasaje> result = Task.Run(() => pxa.reportedePasaje(repoPasaje, Session["tokenJWT"].ToString())).Result;
             return View("verReportePasaje", result);
         }
 

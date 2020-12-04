@@ -18,10 +18,11 @@ namespace WebApp.Proxys
 
         //public string Baseurl = "https://localhost:44330/conductor/";
 
-        public List<EUsuario> llegada(DTOLegada llegada)
+        public List<EUsuario> llegada(DTOLegada llegada, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 string URLespecial = ConfigurationManager.AppSettings["baseURL"] + "/general/llegada";
                 var response = client.PostAsJsonAsync(URLespecial, llegada).Result;
                 List<EUsuario> returnValue = response.Content.ReadAsAsync<List<EUsuario>>().Result;
@@ -30,7 +31,7 @@ namespace WebApp.Proxys
 
         }
 
-        public async Task<List<EViaje>> getAllViajes()
+        public async Task<List<EViaje>> getAllViajes(string tokenJWT)
         {
             List<EViaje> eViajes = new List<EViaje>();
 
@@ -39,6 +40,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("traer/viajes");
 
                 if (Res.IsSuccessStatusCode)
@@ -49,18 +51,19 @@ namespace WebApp.Proxys
                 return eViajes;
             }
         }
-        public void iniciarViaje(int IdViaje, string HoraInicioReal)
+        public void iniciarViaje(int IdViaje, string HoraInicioReal, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 var putTask = client.PutAsJsonAsync($"iniciar-viaje/{IdViaje}", HoraInicioReal);
                 putTask.Wait();
                 var result = putTask.Result;
             }
         }
 
-        public async Task<List<EParada>> GetAllParada()
+        public async Task<List<EParada>> GetAllParada(string tokenJWT)
         {
             List<EParada> eParada = new List<EParada>();
 
@@ -69,6 +72,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("traer/paradas");
 
                 if (Res.IsSuccessStatusCode)
@@ -80,7 +84,7 @@ namespace WebApp.Proxys
             }
         }
 
-        public async Task<bool> verificarPasaje(int idPasaje, int idParada)
+        public async Task<bool> verificarPasaje(int idPasaje, int idParada, string tokenJWT)
         {
             bool resp = false;
             using (var client = new HttpClient())
@@ -88,6 +92,7 @@ namespace WebApp.Proxys
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 HttpResponseMessage Res = await client.GetAsync("verifiacer-pasaje/" + idPasaje +"/" + idParada);
 
                 if (Res.IsSuccessStatusCode)
