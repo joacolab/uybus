@@ -38,6 +38,7 @@ namespace Terminal
             cargarHorasSalidas(lineaSelected);
             btnSig.Visibility = System.Windows.Visibility.Hidden;
             lsA.Visibility = System.Windows.Visibility.Hidden;
+            lbA.Visibility = System.Windows.Visibility.Hidden;
 
             // cargarFechasViaje(null);
 
@@ -105,6 +106,7 @@ namespace Terminal
                 fechaSelected = (EViaje)lsFs.SelectedValue;
                 cargarAsientos(fechaSelected);
                 lsA.Visibility = System.Windows.Visibility.Visible;
+                lbA.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {

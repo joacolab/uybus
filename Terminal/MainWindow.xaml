@@ -17,14 +17,14 @@
             <ImageBrush Stretch="Fill" ImageSource="background\bg.png"
                 AlignmentY="Top" AlignmentX="Center"/>
         </Grid.Background>
-        <Label x:Name="lbTitulo" Foreground="White" Content="Terminal de compra de pasajes" HorizontalAlignment="Left" Margin="130,24,0,0" VerticalAlignment="Top" Height="60" Width="551" FontWeight="Bold" FontSize="36"/>
+        <Label x:Name="lbTitulo" Foreground="White" Content="Terminal de compra de pasajes" HorizontalAlignment="Left" Margin="130,30,0,0" VerticalAlignment="Top" Height="60" Width="551" FontWeight="Bold" FontSize="36"/>
         <Label HorizontalAlignment="Left" Margin="179,170,0,0" VerticalAlignment="Top" Width="173"/>
-        <Label x:Name="lbO" Foreground="White" FontWeight="Bold"  Content="Seleccione Origen" HorizontalAlignment="Left" Margin="335,84,0,0" VerticalAlignment="Top" Width="128" FontSize="14"/>
-        <Label x:Name="lbL" Foreground="White" FontWeight="Bold"  Content="Seleccione Linea" HorizontalAlignment="Left" Margin="78,84,0,0" VerticalAlignment="Top" Width="128" FontSize="14"/>
-        <Label x:Name="lbD" Foreground="White" FontWeight="Bold"  Content="Seleccione Destino" HorizontalAlignment="Left" Margin="581,84,0,0" VerticalAlignment="Top" FontSize="14" Width="138"/>
-        <Button x:Name="btnCerrar" Background="DodgerBlue"  Foreground="White" Content="Cerrar" HorizontalAlignment="Left" BorderBrush="DodgerBlue" Margin="42,347,0,0" VerticalAlignment="Top" Width="86" FontSize="18" Height="33" Click="btnCerrar_Click"/>
-        <Button x:Name="btnS" Content="Siguiente" Foreground="White"   BorderBrush="DodgerBlue" Background="DodgerBlue" HorizontalAlignment="Left" Margin="655,348,0,0" VerticalAlignment="Top" Width="99" FontSize="18" Height="33" Click="btnS_Click"/>
-        <ListBox x:Name="lsL" Background="Transparent" BorderBrush="White"   HorizontalAlignment="Left" Height="208" Margin="43,126,0,0" VerticalAlignment="Top" Width="214" SelectionChanged="lsL_SelectionChanged">
+        <Label x:Name="lbO" Foreground="White" FontWeight="Bold"  Content="Seleccione Origen" HorizontalAlignment="Left" Margin="280,92,0,0" VerticalAlignment="Top" Width="128" FontSize="14"/>
+        <Label x:Name="lbL" Foreground="White" FontWeight="Bold"  Content="Seleccione Linea" HorizontalAlignment="Left" Margin="49,88,0,0" VerticalAlignment="Top" Width="128" FontSize="14"/>
+        <Label x:Name="lbD" Foreground="White" FontWeight="Bold"  Content="Seleccione Destino" HorizontalAlignment="Left" Margin="528,94,0,0" VerticalAlignment="Top" FontSize="14" Width="138"/>
+        <Button x:Name="btnCerrar" Background="DodgerBlue"  Foreground="White" Content="Cerrar" HorizontalAlignment="Left" BorderBrush="DodgerBlue" Margin="50,341,0,0" VerticalAlignment="Top" Width="86" FontSize="18" Height="33" Click="btnCerrar_Click"/>
+        <Button x:Name="btnS" Content="Siguiente" Foreground="White"   BorderBrush="DodgerBlue" Background="DodgerBlue" HorizontalAlignment="Left" Margin="644,340,0,0" VerticalAlignment="Top" Width="99" FontSize="18" Height="33" Click="btnS_Click"/>
+        <ListBox x:Name="lsL" Background="Transparent" BorderBrush="White"   HorizontalAlignment="Left" Height="193" Margin="51,126,0,0" VerticalAlignment="Top" Width="214" SelectionChanged="lsL_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Foreground="White">
@@ -35,7 +35,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="lsD"  HorizontalAlignment="Left" Height="208"  Background="Transparent" BorderBrush="White"  Margin="534,126,0,0" VerticalAlignment="Top" Width="213" SelectionChanged="lsD_SelectionChanged">
+        <ListBox x:Name="lsD"  HorizontalAlignment="Left" Height="193"  Background="Transparent" BorderBrush="White"  Margin="531,126,0,0" VerticalAlignment="Top" Width="213" SelectionChanged="lsD_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Foreground="White">
@@ -46,7 +46,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="lsO"  Height="208"  Background="Transparent" BorderBrush="White"  Margin="297,126,291,0" VerticalAlignment="Top" SelectionChanged="lsO_SelectionChanged">
+        <ListBox x:Name="lsO"  Height="193"  Background="Transparent" BorderBrush="White"  Margin="284,126,281,0" VerticalAlignment="Top" SelectionChanged="lsO_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Foreground="White">

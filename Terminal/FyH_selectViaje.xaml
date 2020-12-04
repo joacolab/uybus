@@ -13,10 +13,10 @@
             <ImageBrush Stretch="Fill" ImageSource="background\bg.png"
                 AlignmentY="Top" AlignmentX="Center"/>
         </Grid.Background>
-        <Button x:Name="btnVolver"  Background="DodgerBlue"  Foreground="White" Content="Volver" HorizontalAlignment="Left" Margin="32,358,0,0" VerticalAlignment="Top" Width="74" FontSize="18" Height="29" Click="btnVolver_Click"/>
-        <Button x:Name="btnSig" Content="Siguiente"  Background="DodgerBlue"  Foreground="White" HorizontalAlignment="Left" Margin="659,357,0,0" VerticalAlignment="Top" Width="96" FontSize="18" Height="29" Click="btnSig_Click"/>
+        <Button x:Name="btnVolver"  Background="DodgerBlue"  Foreground="White" Content="Volver" HorizontalAlignment="Left" Margin="51,343,0,0" VerticalAlignment="Top" Width="74" FontSize="18" Height="29" Click="btnVolver_Click"/>
+        <Button x:Name="btnSig" Content="Siguiente"  Background="DodgerBlue"  Foreground="White" HorizontalAlignment="Left" Margin="645,344,0,0" VerticalAlignment="Top" Width="96" FontSize="18" Height="29" Click="btnSig_Click"/>
         <Label x:Name="lbHdS" Foreground="White" FontWeight="Bold" Content="Seleccione Hora de Salida" HorizontalAlignment="Left" Margin="45,77,0,0" VerticalAlignment="Top" FontSize="14" Width="192" Height="30"/>
-        <ListBox x:Name="lsHdSalida" Background="Transparent" BorderBrush="White" HorizontalAlignment="Left" Height="225" Margin="32,112,0,0" VerticalAlignment="Top" Width="215" SelectionChanged="lsHdSalida_SelectionChanged">
+        <ListBox x:Name="lsHdSalida" Background="Transparent" BorderBrush="White" HorizontalAlignment="Left" Height="213" Margin="51,112,0,0" VerticalAlignment="Top" Width="242" SelectionChanged="lsHdSalida_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Foreground="White">
@@ -28,7 +28,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Label x:Name="lbFdS" Foreground="White" FontWeight="Bold"  Content="Seleccione fecha de salida" HorizontalAlignment="Left" Margin="309,77,0,0" VerticalAlignment="Top" FontSize="14" Height="30"/>
-        <ListBox x:Name="lsFs" HorizontalAlignment="Left"  Background="Transparent" BorderBrush="White" Height="225" Margin="280,112,0,0" VerticalAlignment="Top" Width="238" SelectionChanged="lsFs_SelectionChanged">
+        <ListBox x:Name="lsFs" HorizontalAlignment="Left"  Background="Transparent" BorderBrush="White" Height="213" Margin="309,112,0,0" VerticalAlignment="Top" Width="249" SelectionChanged="lsFs_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Foreground="White">
@@ -39,9 +39,9 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label x:Name="lbA" Foreground="White" FontWeight="Bold" Content="Seleccione asiento" HorizontalAlignment="Left" Margin="592,77,0,0" VerticalAlignment="Top" FontSize="14" Height="30"/>
-        <ListBox x:Name="lsA" Background="Transparent" BorderBrush="White" Foreground="White" HorizontalAlignment="Left" Height="225" Margin="556,112,0,0" VerticalAlignment="Top" Width="199" SelectionChanged="lsA_SelectionChanged"/>
-        <Label x:Name="lbTit" Foreground="White" FontWeight="Bold" Content="Terminal de compra de pasajes" HorizontalAlignment="Left" Margin="149,11,0,0" VerticalAlignment="Top" FontSize="36"/>
+        <Label x:Name="lbA" Foreground="White" FontWeight="Bold" Content="Seleccione asiento" HorizontalAlignment="Left" Margin="568,77,0,0" VerticalAlignment="Top" FontSize="14" Height="30"/>
+        <ListBox x:Name="lsA" Background="Transparent" BorderBrush="White" Foreground="White" HorizontalAlignment="Left" Height="213" Margin="573,112,0,0" VerticalAlignment="Top" Width="169" SelectionChanged="lsA_SelectionChanged"/>
+        <Label x:Name="lbTit" Foreground="White" FontWeight="Bold" Content="Terminal de compra de pasajes" HorizontalAlignment="Left" Margin="149,16,0,0" VerticalAlignment="Top" FontSize="36"/>
 
     </Grid>
 </Window>

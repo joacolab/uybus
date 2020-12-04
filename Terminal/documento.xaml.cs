@@ -43,8 +43,8 @@ namespace Terminal
             AsientoSelected = _AsientoSelected;
             PrecioSelected = _PrecioSelected;
 
-            btnComprar.IsEnabled = false;
-            tbDoc.IsEnabled = false;
+            btnComprar.Visibility = System.Windows.Visibility.Hidden;
+            tbDoc.Visibility = System.Windows.Visibility.Hidden;
             lbV.Content = "$ " + PrecioSelected.ToString();
 
             //btnSig.IsEnabled = false;
@@ -136,7 +136,7 @@ namespace Terminal
         private void rbtnCI_Click(object sender, RoutedEventArgs e)
         {
 
-            tbDoc.IsEnabled = true;
+            tbDoc.Visibility = System.Windows.Visibility.Visible;
             if (rbtnCI.IsChecked == true)
             {
                 TipoDocumento = 1;
@@ -177,14 +177,14 @@ namespace Terminal
         private void tbDoc_TextChanged(object sender, TextChangedEventArgs e)
         {
    
-            btnComprar.IsEnabled = true;
+            btnComprar.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void rbtnC_Click(object sender, RoutedEventArgs e)
         {
             
 
-            tbDoc.IsEnabled = true;
+            tbDoc.Visibility = System.Windows.Visibility.Visible;
             if (rbtnC.IsChecked == true)
             {
                 TipoDocumento = 2;
