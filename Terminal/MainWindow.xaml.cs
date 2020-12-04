@@ -32,7 +32,8 @@ namespace Terminal
             cargarListaDeLineas();
             cargarListaDeParadasO(null);
             cargarListaDeParadasD(null, null);
-            btnS.IsEnabled = false;
+            btnS.Visibility = System.Windows.Visibility.Hidden;
+           
         }
         private void cargarListaDeLineas()
         {
@@ -100,7 +101,7 @@ namespace Terminal
         private void lsD_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             paradaDSelected = (EParada)lsD.SelectedValue;
-            btnS.IsEnabled = true;
+            btnS.Visibility = System.Windows.Visibility.Visible;
         }
 
 

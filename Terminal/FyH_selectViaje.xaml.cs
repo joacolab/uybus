@@ -36,8 +36,8 @@ namespace Terminal
             paradaOSelected = _paradaOSelected;
             paradaDSelected = _paradaDSelected;
             cargarHorasSalidas(lineaSelected);
-            btnSig.IsEnabled = false;
-            lsA.IsEnabled = false;
+            btnSig.Visibility = System.Windows.Visibility.Hidden;
+            lsA.Visibility = System.Windows.Visibility.Hidden;
 
             // cargarFechasViaje(null);
 
@@ -104,12 +104,12 @@ namespace Terminal
             {
                 fechaSelected = (EViaje)lsFs.SelectedValue;
                 cargarAsientos(fechaSelected);
-                lsA.IsEnabled = true;
+                lsA.Visibility = System.Windows.Visibility.Visible;
             }
             else
             {
                 fechaSelected = (EViaje)lsFs.SelectedValue;
-                btnSig.IsEnabled = true;
+                btnSig.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
@@ -128,7 +128,7 @@ namespace Terminal
         private void lsA_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             AsientoSelected = (int)lsA.SelectedValue;
-            btnSig.IsEnabled = true;
+            btnSig.Visibility = System.Windows.Visibility.Visible;
         }
 
 

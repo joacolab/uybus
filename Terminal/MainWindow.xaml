@@ -5,20 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Terminal"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+         Title="UruguayBus" Height="450" Width="800"
+        Icon="/background/icon.png"
+        Background="DodgerBlue"
         WindowStartupLocation="CenterScreen">
+        
     <Grid x:Name="main">
-        <Label x:Name="lbTitulo" Content="Terminal de Compra de Pasajes" HorizontalAlignment="Left" Margin="134,10,0,0" VerticalAlignment="Top" Height="60" Width="510" FontSize="36"/>
+        
+        <Grid.Background>
+            
+            <ImageBrush Stretch="Fill" ImageSource="background\bg.png"
+                AlignmentY="Top" AlignmentX="Center"/>
+        </Grid.Background>
+        <Label x:Name="lbTitulo" Foreground="White" Content="Terminal de compra de pasajes" HorizontalAlignment="Left" Margin="130,24,0,0" VerticalAlignment="Top" Height="60" Width="551" FontWeight="Bold" FontSize="36"/>
         <Label HorizontalAlignment="Left" Margin="179,170,0,0" VerticalAlignment="Top" Width="173"/>
-        <Label x:Name="lbO" Content="Seleccione Origen" HorizontalAlignment="Left" Margin="287,84,0,0" VerticalAlignment="Top" Width="127" FontSize="14"/>
-        <Label x:Name="lbL" Content="Seleccione Linea" HorizontalAlignment="Left" Margin="34,84,0,0" VerticalAlignment="Top" Width="119" FontSize="14"/>
-        <Label x:Name="lbD" Content="Seleccione Destino" HorizontalAlignment="Left" Margin="532,84,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Button x:Name="btnCerrar" Content="Cerrar" HorizontalAlignment="Left" Margin="34,355,0,0" VerticalAlignment="Top" Width="86" FontSize="18" Height="33" Click="btnCerrar_Click"/>
-        <Button x:Name="btnS" Content="Siguiente" HorizontalAlignment="Left" Margin="655,355,0,0" VerticalAlignment="Top" Width="99" FontSize="18" Height="33" Click="btnS_Click"/>
-        <ListBox x:Name="lsL" HorizontalAlignment="Left" Height="208" Margin="34,126,0,0" VerticalAlignment="Top" Width="214" SelectionChanged="lsL_SelectionChanged">
+        <Label x:Name="lbO" Foreground="White" FontWeight="Bold"  Content="Seleccione Origen" HorizontalAlignment="Left" Margin="335,84,0,0" VerticalAlignment="Top" Width="128" FontSize="14"/>
+        <Label x:Name="lbL" Foreground="White" FontWeight="Bold"  Content="Seleccione Linea" HorizontalAlignment="Left" Margin="78,84,0,0" VerticalAlignment="Top" Width="128" FontSize="14"/>
+        <Label x:Name="lbD" Foreground="White" FontWeight="Bold"  Content="Seleccione Destino" HorizontalAlignment="Left" Margin="581,84,0,0" VerticalAlignment="Top" FontSize="14" Width="138"/>
+        <Button x:Name="btnCerrar" Background="DodgerBlue"  Foreground="White" Content="Cerrar" HorizontalAlignment="Left" BorderBrush="DodgerBlue" Margin="42,347,0,0" VerticalAlignment="Top" Width="86" FontSize="18" Height="33" Click="btnCerrar_Click"/>
+        <Button x:Name="btnS" Content="Siguiente" Foreground="White"   BorderBrush="DodgerBlue" Background="DodgerBlue" HorizontalAlignment="Left" Margin="655,348,0,0" VerticalAlignment="Top" Width="99" FontSize="18" Height="33" Click="btnS_Click"/>
+        <ListBox x:Name="lsL" Background="Transparent" BorderBrush="White"   HorizontalAlignment="Left" Height="208" Margin="43,126,0,0" VerticalAlignment="Top" Width="214" SelectionChanged="lsL_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock>
+                    <TextBlock Foreground="White">
                         <Run Text="{Binding IdLinea}"/>
                         <Run Text="-"/>
                         <Run Text="{Binding Nombre}"/>
@@ -26,10 +35,10 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="lsD" HorizontalAlignment="Left" Height="208" Margin="532,126,0,0" VerticalAlignment="Top" Width="222" SelectionChanged="lsD_SelectionChanged">
+        <ListBox x:Name="lsD"  HorizontalAlignment="Left" Height="208"  Background="Transparent" BorderBrush="White"  Margin="534,126,0,0" VerticalAlignment="Top" Width="213" SelectionChanged="lsD_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock>
+                    <TextBlock Foreground="White">
                         <Run Text="{Binding IdParada}"/>
                         <Run Text="-"/>
                         <Run Text="{Binding Nombre}"/>
@@ -37,10 +46,10 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox x:Name="lsO" Height="208" Margin="287,126,301,0" VerticalAlignment="Top" SelectionChanged="lsO_SelectionChanged">
+        <ListBox x:Name="lsO"  Height="208"  Background="Transparent" BorderBrush="White"  Margin="297,126,291,0" VerticalAlignment="Top" SelectionChanged="lsO_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock>
+                    <TextBlock Foreground="White">
                         <Run Text="{Binding IdParada}"/>
                         <Run Text="-"/>
                         <Run Text="{Binding Nombre}"/>
