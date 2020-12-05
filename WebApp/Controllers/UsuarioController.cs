@@ -126,7 +126,6 @@ namespace WebApp.Controllers
         {
             try
             {
-                MercadoPago.SDK.SetAccessToken("TEST-995817817198514-111820-6429e0e59a4e1b887c6d078d7b5a0e32-174046938");
                 Payment payment = new Payment()
                 {
                     TransactionAmount = (int)Session["costo"],
@@ -166,7 +165,7 @@ namespace WebApp.Controllers
                 Session["ErrorPago"] = "Error";
                 return RedirectToAction("documento");
             }
-            
+
         }
 
         //----------------proximos vehiculos-----------------

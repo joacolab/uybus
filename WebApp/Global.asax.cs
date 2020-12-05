@@ -16,6 +16,8 @@ namespace WebApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            MercadoPago.SDK.SetAccessToken("TEST-995817817198514-111820-6429e0e59a4e1b887c6d078d7b5a0e32-174046938");
         }
     }
 }
