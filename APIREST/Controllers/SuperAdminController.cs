@@ -15,7 +15,7 @@ using System.Web.Http.Description;
 
 namespace APIREST.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     [RoutePrefix("super-admin")]
     public class SuperAdminController : ApiController
     {

@@ -1,6 +1,7 @@
 ﻿using System;  
 using System.Collections.Generic;  
-using System.Configuration;  
+using System.Configuration;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;  
 using System.Net;  
 using System.Net.Http;  
@@ -16,6 +17,7 @@ namespace APIREST.Token
     /// </summary>
     internal class TokenValidationHandler : DelegatingHandler
     {
+        public string Roles { get; set; }
         private static bool TryRetrieveToken(HttpRequestMessage request, out string token)
         {
             token = null;
@@ -49,7 +51,7 @@ namespace APIREST.Token
                 var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
 
                 SecurityToken securityToken;
-                var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+                var tokenHandler = new JwtSecurityTokenHandler();
                 TokenValidationParameters validationParameters = new TokenValidationParameters()
                 {
                     ValidAudience = audienceToken,
@@ -60,9 +62,23 @@ namespace APIREST.Token
                     IssuerSigningKey = securityKey
                 };
 
+
                 // Extract and assign Current Principal and user
                 Thread.CurrentPrincipal = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
                 HttpContext.Current.User = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
+
+               
+                //// Verificacion de roles --------------
+                //List<string> roles = ((JwtSecurityToken)securityToken).Payload["roles"].ToString().Split(',').ToList();
+                //// var roles = Enumerable.Empty<Roles>();
+                ////Roles
+                
+                //if (!roles.Contains(rol))
+                //{
+                //    statusCode = HttpStatusCode.Unauthorized;
+                //    return base.SendAsync(request, cancellationToken);
+                //}
+                //// Fin de verificacion de roles --------------
 
                 return base.SendAsync(request, cancellationToken);
             }

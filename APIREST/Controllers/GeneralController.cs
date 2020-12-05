@@ -29,7 +29,7 @@ namespace APIREST.Controllers
                 "fecha": "2020-12-03"
             }
         */
-        [Authorize]
+        [Authorize(Roles = "Conductor")]
         [HttpPost]
         [Route("llegada")]
         [ResponseType(typeof(List<EUsuario>))]

@@ -14,7 +14,7 @@ using DataAcessLayer.implementation;
 
 namespace APIREST.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Usuario")]
     [RoutePrefix("usuario")]
     public class UsuarioController : ApiController
     {

@@ -87,6 +87,28 @@ namespace DataAcessLayer.implementation
             }
         }
 
+        public EPersona getPerByEmail(string correo)
+        {
+            try
+            {
+                using (uybusEntities db = new uybusEntities())
+                {
+                    foreach (var p in db.Persona)
+                    {
+                        if (p.Correo == correo)
+                        {
+                            return Converter.personaAEpersona(p);
+                        }
+                    }
+                    return new EPersona();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<Rol> getRol(int id)
         {
             try

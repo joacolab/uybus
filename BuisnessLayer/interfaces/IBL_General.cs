@@ -9,6 +9,7 @@ namespace BuisnessLayer.interfaces
 {
     public interface IBL_General
     {
+        string rolesPorEmail(string correo);
         bool correoUnico(string email);
         EPersona iniciarSesion(string email, string password, string rol);
         void finalizarViaje(int idViaje);

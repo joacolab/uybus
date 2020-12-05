@@ -15,7 +15,7 @@ using System.Reflection;
 
 namespace APIREST.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [RoutePrefix("admin")]
     public class AdminController : ApiController
     {

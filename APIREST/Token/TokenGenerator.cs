@@ -1,6 +1,9 @@
 ﻿using System;  
 using System.Configuration;  
-using System.Security.Claims;  
+using System.Security.Claims;
+using BuisnessLayer.implementation;
+using BuisnessLayer.interfaces;
+using DataAcessLayer.implementation;
 using Microsoft.IdentityModel.Tokens;
 
 namespace APIREST.Token
@@ -11,6 +14,8 @@ namespace APIREST.Token
     /// </summary>
     internal static class TokenGenerator
     {
+        static IBL_General IGeneral = new BL_General(new DAL_Viaje(), new DAL_Llegada(), new DAL_Salida(), new DAL_Linea(), new DAL_Tramo(), new DAL_Parada(), new DAL_Pasaje(), new DAL_Usuario(), new DAL_Vehiculo(), new DAL_Persona(), new DAL_Admin(), new DAL_Conductor(), new DAL_SuperAdmin());
+
         public static string GenerateTokenJwt(string username)
         {
             // appsetting for Token JWT
@@ -23,7 +28,11 @@ namespace APIREST.Token
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
 
             // create a claimsIdentity
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, username) });
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] {
+                new Claim(ClaimTypes.Email, username),
+                //new Claim("roles", TokenGenerator.IGeneral.rolesPorEmail(username)),
+                new Claim(ClaimTypes.Role, TokenGenerator.IGeneral.rolesPorEmail(username)),
+            });
 
             // create token to the user
             var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();

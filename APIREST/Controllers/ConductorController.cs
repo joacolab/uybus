@@ -13,7 +13,7 @@ using System.Web.Http.Description;
 
 namespace APIREST.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Conductor")]
     [RoutePrefix("conductor")]
     public class ConductorController : ApiController
     {
