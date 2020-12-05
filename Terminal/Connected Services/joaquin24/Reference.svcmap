@@ -19,15 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:58746/Service1.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://soapuybus.azurewebsites.net/Service1.svc?singleWsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service14.xsd" MetadataType="Schema" ID="8811b6e1-e1d3-4df0-ab13-92f87869c397" SourceId="1" SourceUrl="http://localhost:58746/Service1.svc?xsd=xsd4" />
-    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="b449ab6e-9d5b-4552-b73a-82a3b7649cc3" SourceId="1" SourceUrl="http://localhost:58746/Service1.svc?xsd=xsd1" />
-    <MetadataFile FileName="Service11.xsd" MetadataType="Schema" ID="7e94924d-f230-4c43-8c30-d8d92c3b5389" SourceId="1" SourceUrl="http://localhost:58746/Service1.svc?xsd=xsd3" />
-    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="c3613772-c269-466f-97de-83c5a2f9e65f" SourceId="1" SourceUrl="http://localhost:58746/Service1.svc?wsdl" />
-    <MetadataFile FileName="Service12.xsd" MetadataType="Schema" ID="55c8a74f-a05b-4696-916e-eefbdbc3c35e" SourceId="1" SourceUrl="http://localhost:58746/Service1.svc?xsd=xsd0" />
-    <MetadataFile FileName="Service13.xsd" MetadataType="Schema" ID="43cbfcd6-b6a2-4479-9ef2-3c693daec889" SourceId="1" SourceUrl="http://localhost:58746/Service1.svc?xsd=xsd2" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="890999ad-bf8f-469f-bbba-4d45f14440e2" SourceId="1" SourceUrl="https://soapuybus.azurewebsites.net/Service1.svc?singleWsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
