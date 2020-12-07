@@ -38,3 +38,24 @@
 <div>
     @Html.ActionLink("Ir al inicio", "Index")
 </div>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.signalR-2.2.3.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script type="text/javascript">
+
+
+
+        $(function () {
+
+            var chat = $.connection.notificacion;
+            chat.client.notificarUsr = function (message) {
+                alert(message);
+            };
+            $.connection.hub.start();
+
+        });
+    </script>
+
+}
