@@ -90,7 +90,7 @@ namespace WebApp.Controllers
                 DTOLogin log = new DTOLogin();
 
                 log.email = persona.Correo;
-                log.password = persona.Password;
+                log.password = per.Password;
                 log.rol = "Usuario";
                 DTOEpToken res = pxg.iniciarSesion(log);
 

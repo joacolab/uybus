@@ -71,7 +71,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Documento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="TipoDocumento" Type="int" Nullable="false" />
           <Property Name="pNombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="sNombre" Type="varchar" MaxLength="50" />
@@ -503,7 +503,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TipoDocumento" Type="Int32" Nullable="false" />
           <Property Name="pNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="sNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />

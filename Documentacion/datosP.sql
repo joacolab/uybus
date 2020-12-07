@@ -1,15 +1,15 @@
-insert into persona VALUES ('45634766','admin@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,'Juan','Pedro','Alvarez','Suarez'); 
+insert into persona VALUES ('45634766','admin@gmail.com','b92ac40f43ad3a09a12c82b2d2ff9c4152f325e33d44b11f7f34fe7c613c4b27',1,'Juan','Pedro','Alvarez','Suarez'); 
 
-insert into persona VALUES ('95614576','karloxx09@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,'Carlos','Mengano','Balbiani','Fulano'); 
-insert into persona VALUES ('56615766','suarezjoaquinluis@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,'Joaquin','Mengano','Suarez','Fulano'); 
-insert into persona VALUES ('78665766','julioarrieta23@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,'Julio','Mengano','Arrieta','Fulano'); 
-insert into persona VALUES ('56257665','ricardo@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,'Ricardo','Pedro','Rocha','Rodriguez'); 
-insert into persona VALUES ('54653576','hernesto@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,'Hernesto','Luciana','Arrieta','Tussy');
+insert into persona VALUES ('95614576','karloxx09@gmail.com','b92ac40f43ad3a09a12c82b2d2ff9c4152f325e33d44b11f7f34fe7c613c4b27',1,'Carlos','Mengano','Balbiani','Fulano'); 
+insert into persona VALUES ('56615766','suarezjoaquinluis@gmail.com','b92ac40f43ad3a09a12c82b2d2ff9c4152f325e33d44b11f7f34fe7c613c4b27',1,'Joaquin','Mengano','Suarez','Fulano'); 
+insert into persona VALUES ('78665766','julioarrieta23@gmail.com','b92ac40f43ad3a09a12c82b2d2ff9c4152f325e33d44b11f7f34fe7c613c4b27',1,'Julio','Mengano','Arrieta','Fulano'); 
+insert into persona VALUES ('56257665','ricardo@gmail.com','b92ac40f43ad3a09a12c82b2d2ff9c4152f325e33d44b11f7f34fe7c613c4b27',1,'Ricardo','Pedro','Rocha','Rodriguez'); 
+insert into persona VALUES ('54653576','hernesto@gmail.com','b92ac40f43ad3a09a12c82b2d2ff9c4152f325e33d44b11f7f34fe7c613c4b27',1,'Hernesto','Luciana','Arrieta','Tussy');
  
-insert into persona VALUES ('43653766','ConductorGuille@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,'Guillermina','Maria','Michely','Gonzalez'); 
-insert into persona VALUES ('21315766','ConductorAlma@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,'Alma','Estefania','Rocha','Rodriguez'); 
+insert into persona VALUES ('43653766','ConductorGuille@gmail.com','b92ac40f43ad3a09a12c82b2d2ff9c4152f325e33d44b11f7f34fe7c613c4b27',1,'Guillermina','Maria','Michely','Gonzalez'); 
+insert into persona VALUES ('21315766','ConductorAlma@gmail.com','b92ac40f43ad3a09a12c82b2d2ff9c4152f325e33d44b11f7f34fe7c613c4b27',1,'Alma','Estefania','Rocha','Rodriguez'); 
 
-insert into persona VALUES ('34315766','superAdmin@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4',1,'Marcela','Luciana','Murillo','Bussy'); 
+insert into persona VALUES ('34315766','superAdmin@gmail.com','b92ac40f43ad3a09a12c82b2d2ff9c4152f325e33d44b11f7f34fe7c613c4b27',1,'Marcela','Luciana','Murillo','Bussy'); 
 
 insert into admin VALUES (1);
 
