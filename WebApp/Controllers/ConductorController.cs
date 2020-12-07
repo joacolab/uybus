@@ -1,4 +1,5 @@
-﻿using Share.DTOs;
+﻿using Microsoft.AspNet.SignalR;
+using Share.DTOs;
 using Share.entities;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,9 @@ namespace WebApp.Controllers
         //-------llegada----------
         public ActionResult lstViajes()
         {
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<Notificacion>();
+            hubContext.Clients.All.foo("Nombre", "una palabra");
+
             List<EViaje> viajes = Task.Run(() => pxc.getAllViajes(Session["tokenJWT"].ToString())).Result;
             List<EViaje> iniciados = new List<EViaje>();
             foreach (var viaje in viajes)
@@ -52,6 +56,10 @@ namespace WebApp.Controllers
         public ActionResult ingresarHF(DTOLegada llegada)
         {
             List<EUsuario> siguientes = pxc.llegada(llegada, Session["tokenJWT"].ToString());
+
+            //var hubContext = GlobalHost.ConnectionManager.GetHubContext<Notificacion>();
+            //hubContext.Clients.All.foo("Nombre", "una palabra");
+
             return RedirectToAction("lstViajes");
         }
 

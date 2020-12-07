@@ -43,6 +43,28 @@
 <br>
 
 
+@section scripts
+{
+    <script src="~/Scripts/jquery.signalR-2.2.3.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script type="text/javascript">
+
+
+
+        $(function () {
+
+            var chat = $.connection.notificacion;
+            chat.client.foo = function (name, message) {
+                alert(name + '' + message);
+            };
+            $.connection.hub.start();
+
+        });
+    </script>
+
+}
+
+
 
 
 
