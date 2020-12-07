@@ -2,6 +2,7 @@
 using DataAcessLayer;
 using DataAcessLayer.implementation;
 using DataAcessLayer.interfaces;
+using Share.DTOs;
 using Share.entities;
 using System;
 using System.Collections.Generic;
@@ -109,7 +110,7 @@ namespace BuisnessLayer.implementation
             EParada ep = new EParada();
             return ep;
         }
-        public List<EUsuario> CrearLlegada(int idViaje, TimeSpan hora, DateTime fecha)
+        public DTOnextBus CrearLlegada(int idViaje, TimeSpan hora, DateTime fecha)
         {
             List<ETramo> tramos = iLinea.getLinea(iSalida.getSalidas(iViaje.getViaje(idViaje).IdSalida).IdLinea).Tramo.ToList();
 
@@ -145,7 +146,7 @@ namespace BuisnessLayer.implementation
 
                 iLllegada.addLlegada(proxP.IdParada, idViaje, hora, fecha);
 
-                List<EUsuario> siguientesPjrs = notificacionProximidad(proxP.IdParada, idViaje);
+                DTOnextBus siguientesPjrs = notificacionProximidad2(proxP, idViaje, hora);
                 return siguientesPjrs;
             }
             else
@@ -157,21 +158,9 @@ namespace BuisnessLayer.implementation
 
                 iLllegada.addLlegada(proxP.IdParada, idViaje, hora, fecha);
 
-                List<EUsuario> siguientesPjrs = new List<EUsuario>();
+                DTOnextBus siguientesPjrs = new DTOnextBus();
                 return siguientesPjrs;
             }
-        }
-
-        public void finalizarViaje(int idViaje)
-        {
-            iViaje.finalizarViaje(idViaje);
-        }
-
-        private int nextParadaNot(int Parada, int viaje)
-        {
-            List<ETramo> tramos= iLinea.getLinea(iSalida.getSalidas(iViaje.getViaje(viaje).IdSalida).IdLinea).Tramo.ToList();
-            int ord = orden(Parada, tramos);
-            return nextParada(tramos, ord).IdParada;
         }
         public List<EUsuario> notificacionProximidad(int Parada, int viaje)
         {
@@ -190,34 +179,46 @@ namespace BuisnessLayer.implementation
                     usuarios.Add(iUsuario.getUsuario(pasaje.IdUsuario ?? default(int)));
                 }
             }
-            /*
-            List<EUsuario> usuarios = new List<EUsuario>();
-            int idL = iSalida.getSalidas(iViaje.getViaje(viaje).IdSalida).IdLinea;
-
-            ETramo tramo = iTramo.getTramos(idL ,Parada);
-            
-            List<ETramo> etramos = iLinea.getLinea(idL).Tramo.ToList();
-            EParada proximaParada = null;
-            
-            foreach (var item in etramos)
-            {
-                if (item.Orden == tramo.Orden +1) {
-                    proximaParada = iParada.getParada(item.IdParada);
-                    break;
-                }      
-            }
-            if (proximaParada == null) throw new Exception("Parada no encontrada");
-
-            foreach (var item in proximaParada.Pasaje.ToList())
-            {
-                if (item.IdUsuario != null)
-                {
-                    usuarios.Add(iUsuario.getUsuario(item.IdUsuario ?? default(int)));
-                }
-            }
-            */
             return usuarios;
 
+        }
+        private DTOnextBus notificacionProximidad2(EParada Eparada, int viaje, TimeSpan hora)
+        {
+            int Parada = Eparada.IdParada;
+            ESalida salida = iSalida.getSalidas(iViaje.getViaje(viaje).IdSalida);
+
+            string matric = iVehiculo.getVehiculos(salida.IdVehiculo).Matricula;
+            
+
+            DTOnextBus nextBus = new DTOnextBus();
+            if (isFinalParada(Parada, viaje))
+            {
+                return nextBus;
+            }
+            int idNextP = nextParadaNot(Parada, viaje);
+
+            int tiempo = iTramo.getTramos(salida.IdLinea, idNextP).TiempoEstimado;
+            TimeSpan minutes = TimeSpan.FromMinutes(tiempo);
+
+            string horastr = hora.Add(minutes).ToString();
+            nextBus.parada = iParada.getParada(idNextP).Nombre;
+            nextBus.matricula = matric;
+            nextBus.hora = horastr;
+
+            return nextBus;
+
+        }
+
+        public void finalizarViaje(int idViaje)
+        {
+            iViaje.finalizarViaje(idViaje);
+        }
+
+        private int nextParadaNot(int Parada, int viaje)
+        {
+            List<ETramo> tramos= iLinea.getLinea(iSalida.getSalidas(iViaje.getViaje(viaje).IdSalida).IdLinea).Tramo.ToList();
+            int ord = orden(Parada, tramos);
+            return nextParada(tramos, ord).IdParada;
         }
 
         private int valorVigente(int idLinea, int idParada)

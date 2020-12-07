@@ -32,7 +32,7 @@ namespace APIREST.Controllers
         [Authorize(Roles = "Conductor")]
         [HttpPost]
         [Route("llegada")]
-        [ResponseType(typeof(List<EUsuario>))]
+        [ResponseType(typeof(DTOnextBus))]
         public IHttpActionResult llegada([FromBody] DTOLegada llegada)
         {
             try
@@ -42,7 +42,7 @@ namespace APIREST.Controllers
                     return Content(HttpStatusCode.BadRequest, "No.");
                 }
 
-                List<EUsuario> res = cGeneral.CrearLlegada(llegada.idViaje, TimeSpan.Parse(llegada.hora), Convert.ToDateTime(llegada.fecha));
+                DTOnextBus res = cGeneral.CrearLlegada(llegada.idViaje, TimeSpan.Parse(llegada.hora), Convert.ToDateTime(llegada.fecha));
 
                 return Ok(res);
 

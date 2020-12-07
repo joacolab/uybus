@@ -29,9 +29,7 @@ namespace WebApp.Controllers
         //-------llegada----------
         public ActionResult lstViajes()
         {
-            var hubContext = GlobalHost.ConnectionManager.GetHubContext<Notificacion>();
-            hubContext.Clients.All.foo("Nombre", "una palabra");
-
+            
             List<EViaje> viajes = Task.Run(() => pxc.getAllViajes(Session["tokenJWT"].ToString())).Result;
             List<EViaje> iniciados = new List<EViaje>();
             foreach (var viaje in viajes)
@@ -55,10 +53,12 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult ingresarHF(DTOLegada llegada)
         {
-            List<EUsuario> siguientes = pxc.llegada(llegada, Session["tokenJWT"].ToString());
+            DTOnextBus siguientes = pxc.llegada(llegada, Session["tokenJWT"].ToString());
 
-            //var hubContext = GlobalHost.ConnectionManager.GetHubContext<Notificacion>();
-            //hubContext.Clients.All.foo("Nombre", "una palabra");
+            string sig = "El ómnibus con matrícula (" + siguientes.matricula +"), Pasara por la parada ("+ siguientes.parada + "), a las "+ siguientes.hora+" hrs.";
+            
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<Notificacion>();
+            hubContext.Clients.All.notificarUsr(sig);
 
             return RedirectToAction("lstViajes");
         }

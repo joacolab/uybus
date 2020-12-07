@@ -8,10 +8,10 @@ namespace WebApp
 {
     public class Notificacion : Hub
     {
-        public static void SendMessage(string name, string msg)
+        public static void SendMessage(string message)
         {
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<Notificacion>();
-            hubContext.Clients.All.foo(name, msg);
+            hubContext.Clients.All.notificarUsr(message);
         }
     }
 }

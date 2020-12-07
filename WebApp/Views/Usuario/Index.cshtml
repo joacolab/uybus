@@ -54,8 +54,8 @@
         $(function () {
 
             var chat = $.connection.notificacion;
-            chat.client.foo = function (name, message) {
-                alert(name + '' + message);
+            chat.client.notificarUsr = function (message) {
+                alert(message);
             };
             $.connection.hub.start();
 

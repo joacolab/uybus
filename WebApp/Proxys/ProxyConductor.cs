@@ -18,14 +18,14 @@ namespace WebApp.Proxys
 
         //public string Baseurl = "https://localhost:44330/conductor/";
 
-        public List<EUsuario> llegada(DTOLegada llegada, string tokenJWT)
+        public DTOnextBus llegada(DTOLegada llegada, string tokenJWT)
         {
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
                 string URLespecial = ConfigurationManager.AppSettings["baseURL"] + "/general/llegada";
                 var response = client.PostAsJsonAsync(URLespecial, llegada).Result;
-                List<EUsuario> returnValue = response.Content.ReadAsAsync<List<EUsuario>>().Result;
+                DTOnextBus returnValue = response.Content.ReadAsAsync<DTOnextBus>().Result;
                 return returnValue;
             }
 

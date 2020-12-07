@@ -49,6 +49,7 @@
     <Compile Include="DTOs\DTOLinea.cs" />
     <Compile Include="DTOs\DTOLogForm.cs" />
     <Compile Include="DTOs\DTOLogin.cs" />
+    <Compile Include="DTOs\DTOnextBus.cs" />
     <Compile Include="DTOs\DTOParada.cs" />
     <Compile Include="DTOs\DTOPersona.cs" />
     <Compile Include="DTOs\DTOPersonaRol.cs" />
