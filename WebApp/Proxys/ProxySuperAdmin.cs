@@ -17,7 +17,26 @@ namespace WebApp.Proxys
         public string Baseurl = ConfigurationManager.AppSettings["baseURL"] + "/super-admin/";
         //public string Baseurl = "https://localhost:44330/super-admin/";
 
+        public async Task<List<EParada>> GetAllParada(string tokenJWT)
+        {
+            List<EParada> eParada = new List<EParada>();
 
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokenJWT);
+                HttpResponseMessage Res = await client.GetAsync("traer/paradas");
+
+                if (Res.IsSuccessStatusCode)
+                {
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                    eParada = JsonConvert.DeserializeObject<List<EParada>>(EmpResponse);
+                }
+                return eParada;
+            }
+        }
         public async Task<List<EPersona>> GetAllPersonas(string tokenJWT)
         {
             List<EPersona> ePersona = new List<EPersona>();
