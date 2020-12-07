@@ -193,6 +193,9 @@ namespace BuisnessLayer.implementation
             DTOnextBus nextBus = new DTOnextBus();
             if (isFinalParada(Parada, viaje))
             {
+                nextBus.matricula = "N/A";
+                nextBus.parada = "N/A";
+                nextBus.hora = "N/A";
                 return nextBus;
             }
             int idNextP = nextParadaNot(Parada, viaje);
