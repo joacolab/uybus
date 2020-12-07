@@ -59,10 +59,10 @@ namespace WebApp.Controllers
             if (siguientes.matricula != "N/A")
             {
                 sig = "El ómnibus con matrícula (" + siguientes.matricula +"), Pasara por la parada ("+ siguientes.parada + "), a las "+ siguientes.hora+" hrs.";
+                var hubContext = GlobalHost.ConnectionManager.GetHubContext<Notificacion>();
+                hubContext.Clients.All.notificarUsr(sig);
             }
-            
-            var hubContext = GlobalHost.ConnectionManager.GetHubContext<Notificacion>();
-            hubContext.Clients.All.notificarUsr(sig);
+
 
             return RedirectToAction("lstViajes");
         }
