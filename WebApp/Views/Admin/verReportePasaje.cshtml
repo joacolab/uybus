@@ -40,7 +40,19 @@
             @Html.DisplayFor(modelItem => item.IdPasaje)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Asientos)
+            @if (item.Asientos != -1)
+            {
+                if (item.Asientos == null)
+                {
+                    <text>No selecciona</text>
+                }
+                @Html.DisplayFor(modelItem => item.Asientos)
+            }
+            else
+            {
+                <text>No selecciona</text>
+            }
+
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Documento)
@@ -49,6 +61,10 @@
             @Html.DisplayFor(modelItem => item.TipoDocuemtno)
         </td>
         <td>
+            @if (item.IdUsuario == null)
+            {
+                <text>Comprado desde terminal</text>
+            }
             @Html.DisplayFor(modelItem => item.IdUsuario)
         </td>
         <td>
