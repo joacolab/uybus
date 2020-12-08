@@ -135,13 +135,19 @@ namespace BuisnessLayer.implementation
 
             int ord = orden(idUltParada, tramos);
 
-            if (!isUltima(idUltParada, tramos)) //0 si es la ultima
+            if (!isUltima(idUltParada, tramos)) 
             {
                 proxP = nextParada(tramos, ord);
 
                 if (isFinalParada(proxP.IdParada, idViaje))
                 {
                     iViaje.finalizarViaje(idViaje);
+                    iLllegada.addLlegada(proxP.IdParada, idViaje, hora, fecha);
+                    DTOnextBus ee = new DTOnextBus();
+                    ee.matricula = "N/A";
+                    ee.hora = "N/A";
+                    ee.parada = "N/A";
+                    return ee;
                 }
 
                 iLllegada.addLlegada(proxP.IdParada, idViaje, hora, fecha);
@@ -154,11 +160,22 @@ namespace BuisnessLayer.implementation
                 if (isFinalParada(proxP.IdParada, idViaje))
                 {
                     iViaje.finalizarViaje(idViaje);
+
+                    iLllegada.addLlegada(proxP.IdParada, idViaje, hora, fecha);
+
+                    DTOnextBus sigui = new DTOnextBus();
+                    sigui.matricula = "N/A";
+                    sigui.hora = "N/A";
+                    sigui.parada = "N/A";
+                    return sigui;
                 }
 
                 iLllegada.addLlegada(proxP.IdParada, idViaje, hora, fecha);
 
                 DTOnextBus siguientesPjrs = new DTOnextBus();
+                siguientesPjrs.matricula = "N/A";
+                siguientesPjrs.hora = "N/A";
+                siguientesPjrs.parada = "N/A";
                 return siguientesPjrs;
             }
         }

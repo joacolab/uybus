@@ -56,11 +56,14 @@ namespace WebApp.Controllers
             DTOnextBus siguientes = pxc.llegada(llegada, Session["tokenJWT"].ToString());
 
             string sig = "";
-            if (siguientes.matricula != "N/A")
+            if (siguientes!=null)
             {
-                sig = "El ómnibus con matrícula (" + siguientes.matricula +"), Pasara por la parada ("+ siguientes.parada + "), a las "+ siguientes.hora+" hrs.";
-                var hubContext = GlobalHost.ConnectionManager.GetHubContext<Notificacion>();
-                hubContext.Clients.All.notificarUsr(sig);
+                if (siguientes.matricula != "N/A")
+                {
+                    sig = "El ómnibus con matrícula (" + siguientes.matricula +"), Pasara por la parada ("+ siguientes.parada + "), a las "+ siguientes.hora+" hrs.";
+                    var hubContext = GlobalHost.ConnectionManager.GetHubContext<Notificacion>();
+                    hubContext.Clients.All.notificarUsr(sig);
+                }
             }
 
 
