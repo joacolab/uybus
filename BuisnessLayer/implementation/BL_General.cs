@@ -48,16 +48,17 @@ namespace BuisnessLayer.implementation
 
         }
 
-        public string rolesPorEmail(string correo)
+        public List<string> rolesPorEmail(string correo)
         {
+            List<string> listStrR = new List<string>();
+
             int idPer = iPersona.getPerByEmail(correo).id;
 
-            string res = "";
             foreach (var rol in iPersona.getRol(idPer))
             {
-                res = res + rol.ToString();
+                listStrR.Add(rol.ToString());
             }
-            return res;
+            return listStrR;
         }
         public bool correoUnico(string email)
         {

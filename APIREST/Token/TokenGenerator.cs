@@ -30,9 +30,12 @@ namespace APIREST.Token
             // create a claimsIdentity
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] {
                 new Claim(ClaimTypes.Email, username),
-                //new Claim("roles", TokenGenerator.IGeneral.rolesPorEmail(username)),
-                new Claim(ClaimTypes.Role, TokenGenerator.IGeneral.rolesPorEmail(username)),
             });
+
+            foreach (var item in TokenGenerator.IGeneral.rolesPorEmail(username))
+            {
+                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, item));
+            }
 
             // create token to the user
             var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
