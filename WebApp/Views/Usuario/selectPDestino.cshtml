@@ -11,39 +11,44 @@
 
 
 
+<div class="row">
+    <div class="col-6 mx-auto ">
 
 
+        <table class="table table-bordered">
+            <thead>
+                <tr class="bg-primary">
 
-<table class="table table-bordered">
-    <thead>
-        <tr class="bg-primary">
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.HoraInicio)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.IdVehiculo)
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HoraInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdVehiculo)
+                        </td>
+                        <td class="text-right">
+                            @Html.ActionLink("Seleccionar", "selecSalida", new { id = item.IdSalida }, new { @class = "btn btn-primary" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.HoraInicio)
-            </th>
-            <th scope="col">
-                @Html.DisplayNameFor(model => model.IdVehiculo)
-            </th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
-                <td>
-                    @Html.DisplayFor(modelItem => item.HoraInicio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdVehiculo)
-                </td>
-                <td class="text-right">
-                    @Html.ActionLink("Seleccionar", "selecSalida", new { id = item.IdSalida }, new { @class = "btn btn-primary" })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    </div>
+</div>
+
 <div>
     @Html.ActionLink("Ir al inicio", "Index")
 </div>

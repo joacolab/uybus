@@ -11,32 +11,37 @@
 
 
 
+<div class="row">
+    <div class="col-6 mx-auto ">
 
+        <table class="table table-bordered">
+            <thead>
+                <tr class="bg-primary">
 
-<table class="table table-bordered">
-    <thead>
-        <tr class="bg-primary">
+                    <th scope="col">
+                        asiento
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
+                        <td>
+                            @Html.DisplayFor(modelItem => item)
+                        </td>
+                        <td class="text-right">
+                            @Html.ActionLink("Seleccionar", "selectAsiento", new { id = item }, new { @class = "btn btn-primary" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-            <th scope="col">
-                asiento
-            </th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
-                <td>
-                    @Html.DisplayFor(modelItem => item)
-                </td>
-                <td class="text-right">
-                    @Html.ActionLink("Seleccionar", "selectAsiento", new { id = item }, new { @class = "btn btn-primary" })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    </div>
+</div>
+
 <div>
     @Html.ActionLink("Ir al inicio", "Index")
 </div>

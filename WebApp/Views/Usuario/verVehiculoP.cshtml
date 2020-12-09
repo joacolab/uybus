@@ -12,43 +12,46 @@
 
 
 
+<div class="row">
+    <div class="col-6 mx-auto ">
 
+        <table class="table table-bordered">
+            <thead>
+                <tr class="bg-primary">
+                    <th scope="col">
+                        Matricula
+                    </th>
+                    <th scope="col">
+                        Linea
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
 
-<table class="table table-bordered">
-    <thead>
-        <tr class="bg-primary">
-            <th scope="col">
-                Matricula
-            </th>
-            <th scope="col">
-                Linea
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
+                        <td>
+                            @if (item.reservado)
+                            {
+                                <h3 style="color: rgb(255, 0, 0)"> @Html.DisplayFor(modelItem => item.Vehiculo.Matricula)</h3>
+                            }
+                            else
+                            {
+                                <h3> @Html.DisplayFor(modelItem => item.Vehiculo.Matricula)</h3>
+                            }
+                        </td>
 
-                <td>
-                    @if (item.reservado)
-                    {
-                        <h3 style="color: rgb(255, 0, 0)"> @Html.DisplayFor(modelItem => item.Vehiculo.Matricula)</h3>
-                    }
-                    else
-                    {
-                        <h3> @Html.DisplayFor(modelItem => item.Vehiculo.Matricula)</h3>
-                    }
-                </td>
+                        <td>
+                            <h3> @Html.DisplayFor(modelItem => item.linea)</h3>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-                <td>
-                    <h3> @Html.DisplayFor(modelItem => item.linea)</h3>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
+    </div>
+</div>
 
 <div>
     @Html.ActionLink("Atrás", "proxVehiculos")

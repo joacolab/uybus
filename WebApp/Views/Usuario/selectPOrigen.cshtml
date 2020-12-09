@@ -9,34 +9,37 @@
 <h2 style="color:azure">Seleccione parada de destino</h2>
 
 
+<div class="row">
+    <div class="col-6 mx-auto ">
 
+        <table class="table table-bordered">
+            <thead>
+                <tr class="bg-primary">
 
-<table class="table table-bordered">
-    <thead>
-        <tr class="bg-primary">
+                    <th scope="col">
+                        Paradas:
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
 
-            <th scope="col">
-                Paradas:
-            </th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr style="background-color: rgba(41, 104, 157,0.5);color: azure;">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td class="text-right">
+                            @Html.ActionLink("Seleccionar", "selectPDestino", new { id = item.IdParada }, new { @class = "btn btn-primary" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td class="text-right">
-                    @Html.ActionLink("Seleccionar", "selectPDestino", new { id = item.IdParada }, new { @class = "btn btn-primary" })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
+    </div>
+</div>
 
 <div>
     @Html.ActionLink("Ir al inicio", "Index")
