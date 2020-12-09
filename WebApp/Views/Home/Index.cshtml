@@ -21,29 +21,105 @@
 </div>
 
 
+@*pantalla de celular*@
+<style type="text/css">
+    @@media screen and (min-width: 100px) and (max-width:998px) {
+        #wrapper {
+            width: 98%;
+            margin: 0 auto;
+        }
+
+        section {
+            width: 98%;
+            margin: 0px 0px 10px 0px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .col-md-4 {
+            text-align: center;
+        }
+
+        .relleno div p {
+            text-align: center;
+            align-items: center;
+            width: 100px;
+            word-wrap: break-word;
+        }
+    }
+</style>
+
+
+@*En pantalla completa*@
+<style>
+    .row {
+        background-color: rgba(150,255,210,0.1);
+        padding-top: 25px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(150,255,210,0.2);
+    }
+
+    .relleno {
+        background-color: rgba(150,255,210,0.5);
+        border-radius: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        padding-top: 20px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .relleno p {
+        color: black;
+    }
+
+    .relleno h2 {
+        color: black;
+    }
+</style>
+
+
 
 <br>
 <div style="text-align:center; margin-bottom:80px">
     <h2 style="font-family:sans-serif;  color: aquamarine; font-size:60px;">Explora nuestra nueva flota</h2>
 </div>
 
-<div class="row" style="color:white;">
+
+<div class="row" style="color: white;">
     <div class="col-md-4">
-        <img src="~/Content/Images/Bus3.png" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
-        <h2>Doble piso</h2>
-        <p style="width: 300px">
-            Con nuestra nueva flota de coches de doble piso disfruta de una vista panorámica en tu recorrido a la ciudad capitalina,
-            desde cualquier punto del interior del país.
-        </p>
+        <div class="relleno">
+            <img src="~/Content/Images/Bus3.png" alt="Image" width="95%" height="200px" style="border: 2px solid black ;border-radius: 10px;max-width:300px" class="img-fluid">
+            <h2>Doble piso</h2>
+            <p>
+                Con nuestra nueva flota de coches de doble piso disfruta de una vista panorámica en tu recorrido a la ciudad capitalina,
+                desde cualquier punto del interior del país.
+            </p>
+        </div>
     </div>
     <div class="col-md-4">
-        <img src="~/Content/Images/Bus2.png" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
-        <h2>Más de 40 asientos </h2>
-        <p style="width: 300px">Lleva a tus conocidos y compañero de clase o de oficina en un ómnibus amplio y concurrido, para no perderte de ningún momento con las personas con las que trabajas.</p>
+        <div class="relleno">
+            <img src="~/Content/Images/Bus2.png" alt="Image" width="95%" height="200px" style="border: 2px solid black ;border-radius: 10px;max-width:300px" class="img-fluid">
+            <h2>Más de 40 asientos </h2>
+            <p>Lleva a tus conocidos y compañero de clase o de oficina en un ómnibus amplio y concurrido, para no perderte de ningún momento con las personas con las que trabajas.</p>
+        </div>
     </div>
     <div class="col-md-4">
-        <img src="~/Content/Images/Bus1.png" alt="Image" width="300px" height="200px" style="border: 2px solid black ;border-radius: 10px;" class="img-fluid">
-        <h2>Nuevo equipamiento</h2>
-        <p style="width: 300px">Comparta las mejores historias de instagram, con el Wifi de alta velocidad de abordo, cargue todo lo que necesita en su viaje en las nuevas y amplias bodegas inferiores, descargue lo que haga falta en los nuevos baños.</p>
+        <div class="relleno">
+            <img src="~/Content/Images/Bus1.png" alt="Image" width="95%" height="200px" style="border: 2px solid black ;border-radius: 10px;max-width:300px" class="img-fluid">
+            <h2>Nuevo equipamiento</h2>
+            <p>Comparta las mejores historias de instagram, con el Wifi de alta velocidad de abordo, cargue todo lo que necesita en su viaje en las nuevas y amplias bodegas inferiores.</p>
+        </div>
     </div>
 </div>
