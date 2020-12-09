@@ -15,7 +15,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.IdParada, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IdParada,"ID de la parada", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.IdParada, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.IdParada, "", new { @class = "text-danger" })
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdLinea, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IdLinea, "ID de la linea", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.IdLinea, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.IdLinea, "", new { @class = "text-danger" })
@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TiempoEstimado, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TiempoEstimado, "Tiempo estimado", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TiempoEstimado, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TiempoEstimado, "", new { @class = "text-danger" })
@@ -55,7 +55,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FechaEntradaVigencia, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FechaEntradaVigencia, "Fecha de entrada en vigencia", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FechaEntradaVigencia, new { htmlAttributes = new { @class = "form-control"  ,@type = "Date" } })
                 @Html.ValidationMessageFor(model => model.FechaEntradaVigencia, "", new { @class = "text-danger" })
