@@ -1,0 +1,36 @@
+
+
+Cadena de conexion:
+Server=tcp:lsuybusserver.database.windows.net,1433;Initial Catalog=uybus;Persist Security Info=False;User ID=lsuybususer;Password=uy5WE6$tu23;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+
+Conecion a MSSMS
+lsuybusserver.database.windows.net
+
+Nombre server
+lsuybusserver
+
+lsuybususer
+contraseña-> uy5WE6$tu23
+
+nombre de la REST : lsuybusrest
+
+Url a la rest:
+https://lsuybusrest.azurewebsites.net/
+
+Nombre del grupo:grlsuybus
+Base de datos: uybus
+
+Nombre de el MVC:
+uruguaybus2020
+
+Url del Mvc:
+https://uruguaybus2020.azurewebsites.net
+
+Nombre de la soap:
+uybussoap
+
+Url de la soap:
+https://uybussoap.azurewebsites.net
+
+
+
