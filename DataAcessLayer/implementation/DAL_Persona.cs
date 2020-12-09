@@ -76,6 +76,7 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Persona p = db.Persona.Find(id);
+                    if (p == null) return null;
                     EPersona ep = new EPersona();
                     ep = Converter.personaAEpersona(p);
                     return ep;

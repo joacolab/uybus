@@ -101,6 +101,7 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Salida sal = db.Salida.Find(idSalida);
+                    if (sal == null) return null;
                     return Converter.salidaAESalida(sal);
                 }
             }

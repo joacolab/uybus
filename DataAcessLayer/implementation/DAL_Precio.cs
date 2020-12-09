@@ -67,6 +67,7 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Precio p = db.Precio.Find(idLinea, idParada);
+                    if (p == null) return null;
                     return Converter.precioAEPrecio(p);
                 }
 

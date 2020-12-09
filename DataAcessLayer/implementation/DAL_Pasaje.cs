@@ -73,6 +73,12 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Pasaje pas = db.Pasaje.Find(idPasaje);
+                    if (pas == null)
+                    {
+                        EPasaje p = new EPasaje();
+                        p.IdParadaOrigen = -1;
+                        return p;
+                    }
                     return Converter.pasajeAEPasaje(pas);
                 }
             }

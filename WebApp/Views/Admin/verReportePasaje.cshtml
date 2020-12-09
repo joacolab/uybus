@@ -27,57 +27,91 @@
             Identificador de Viaje
         </th>
         <th>
-            Parada Destino 
+            Parada Destino
         </th>
         <th>
-           Parada Origen
+            Parada Origen
         </th>
     </tr>
+    @if (Model.Count() > 0)
+    {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdPasaje)
-        </td>
-        <td>
-            @if (item.Asientos != -1)
-            {
-                if (item.Asientos == null)
-                {
-                    <text>No selecciona</text>
-                }
-                @Html.DisplayFor(modelItem => item.Asientos)
-            }
-            else
-            {
-                <text>No selecciona</text>
-            }
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdPasaje)
+                </td>
+                <td>
+                    @if (item.Asientos != -1)
+                    {
+                        if (item.Asientos == null)
+                        {
+                            <text>No selecciona</text>
+                        }
+                        @Html.DisplayFor(modelItem => item.Asientos)
+                    }
+                    else
+                    {
+                        <text>No selecciona</text>
+                    }
 
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Documento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoDocuemtno)
-        </td>
-        <td>
-            @if (item.IdUsuario == null)
-            {
-                <text>Comprado desde terminal</text>
-            }
-            @Html.DisplayFor(modelItem => item.IdUsuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdViaje)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdParadaDestino)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdParadaOrigen)
-        </td>
-    </tr>
-}
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Documento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoDocuemtno)
+                </td>
+                <td>
+                    @if (item.IdUsuario == null)
+                    {
+                        <text>Comprado desde terminal</text>
+                    }
+                    @Html.DisplayFor(modelItem => item.IdUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdViaje)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdParadaDestino)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdParadaOrigen)
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td>
+                Identificador no encontrado
+            </td>
+            <td>
+               
+
+            </td>
+            <td>
+               
+            </td>
+            <td>
+
+            </td>
+            <td>
+              
+            </td>
+            <td>
+             
+            </td>
+            <td>
+             
+            </td>
+            <td>
+              
+            </td>
+        </tr>
+    }
 
 </table>
 

@@ -108,6 +108,10 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Linea linea = db.Linea.Find(idLinea);
+                    if (linea == null)
+                    {
+                        return null;
+                    }
                     return Converter.lineaAElinea(linea);
                 }
             }

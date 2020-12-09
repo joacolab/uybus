@@ -66,6 +66,7 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Llegada l = db.Llegada.Find(idParada, idViaje);
+                    if (l == null) return null;
                     ELlegada el = new ELlegada();
                     el = Converter.llegadaAEllegada(l);
                     return el;

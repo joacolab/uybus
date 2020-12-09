@@ -4,19 +4,28 @@
     ViewBag.Title = "verUtilidad";
 }
 
-<h2>Ver utilidad</h2>
+<h2>Porcentaje de utilidad</h2>
 
 <div>
 
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Valor)
-        </dt>
+            @if (Model.Valor == -100)
+            {
+                <text>Identificador no encontrado.</text>
+            }
+            else 
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.Valor)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Valor) %
-        </dd>
+                <dd>
+           
+                    @Html.DisplayFor(model => model.Valor) %
+                </dd>
+                
+            }
 
     </dl>
 </div>

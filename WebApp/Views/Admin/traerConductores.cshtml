@@ -10,10 +10,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Id)
+            ID del conductor 
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VencimientoLicencia)
+            Fecha de vencimineto de licencia de conducir
         </th>
         <th></th>
     </tr>
@@ -24,7 +24,14 @@
         @Html.DisplayFor(modelItem => item.Id)
     </td>
     <td>
-        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.VencimientoLicencia))
+        @if (item.VencimientoLicencia.ToString() == "10/10/1900 0:00:00")
+        {
+            <text> Sin asignar</text>
+        }
+        else
+        {
+            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.VencimientoLicencia))
+        }
     </td>
     <td>
         @Html.ActionLink("Editar", "editarConductor", new { id = item.Id })

@@ -112,6 +112,7 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Parada parada = db.Parada.Find(idParada);
+                    if (parada == null) return null;
                     return Converter.paradaAEParada(parada);
                 }
             }

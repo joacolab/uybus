@@ -1,0 +1,123 @@
+Recordar insertar parametros
+insert into parametro VALUES (60);
+insert into parametro VALUES (70);
+insert into parametro VALUES (80);
+insert into parametro VALUES (120);
+
+----------------------------------------------------
+Recordar registrar a un usuario y hacerlo superAdmin 
+
+	34315766
+	superAdmin@gmail.com
+	flor
+	CI
+	Marcela	
+	Luciana	
+	Murillo	
+	Bussy 
+
+insert into superadmin VALUES (2);
+----------------------------------------------------
+hacerlo Admin 
+
+	14343456
+	admin@gmail.com
+	flor
+	CI
+	Macarena	
+	Agustina	
+	Sanchez	
+	Roman 
+
+Ingresar como superAdmin y asignar rol a Macarena como Administradora
+----------------------------------------------------
+Ingresar vehiculo 
+
+	MAC1743
+	Advicer
+	Ford
+	3
+Editar vehiculo
+--------------
+
+Ingresar Parada
+	
+	Terminal San Jose
+	-34,333592
+	-56,715599
+
+	Punta Valdez
+	-34,585873 
+	-56,700948
+
+	Libertad
+	-34,639545
+ 	-56,61772
+
+	Plaza Cuba
+	-34,872245
+	-56,202655
+
+	Tres Cruces
+	-34,893905	
+	-56,167064
+------------------
+Registrar Conductor
+
+	66666554
+	ConductorGuille@gmail.com
+	flor
+	CI
+	Octavio	
+	Emiliano	
+	Perez
+	Silva
+
+El SuperAdmin le debe asigar como conductor  
+---------------------------------------------
+El admin debe asigar una fecha para la licencia de la libreta
+
+	10/01/2021
+----------------------------------------------
+Crear nueva linea
+	San Jose-Montevideo
+ 
+	Paradas:
+	Terminal San Jose -> origen
+	PuntaValdez ->  40
+			50
+			03/12/2020
+	Libertad ->	20
+			40
+			03/11/2020
+	PlazaCuba ->	20
+			30
+			03/11/2020
+        TresCruces ->   30
+			50
+			06/11/2020
+---------------------------------------------
+
+	Seleccionar 
+		Linea SM
+		Conductor 4
+		Vehiculo: MAC
+		Hora Inicio: 08:00		
+			
+------------------------------------------
+Crear viaje
+	De ayer a mañ
+-----------------------------
+Crear Usuario con correo real
+
+	OMG7432
+	karloxx09@gmail.com
+	flor
+	Credencial
+	Carlos	
+	Mauro	
+	Balbiani
+	Silva
+	
+
+ @min = "0", @max="100" 

@@ -51,9 +51,12 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Conductor conductor = db.Conductor.Find(idConductor);
-                    conductor.VencimientoLicencia = FechaVenc;
-                    db.Entry(conductor).State = EntityState.Modified;
-                    db.SaveChanges();
+                    if (conductor != null)
+                    { 
+                        conductor.VencimientoLicencia = FechaVenc;
+                        db.Entry(conductor).State = EntityState.Modified;
+                        db.SaveChanges();           
+                    }
                 }
             }
             catch (Exception e)
@@ -125,11 +128,15 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Conductor conductor = db.Conductor.Find(idConductor);
-                    conductor.VencimientoLicencia = FechaVenc;
-                    db.Entry(conductor).State = EntityState.Modified;
-                    db.SaveChanges();
+                    if (conductor != null)
+                    { 
+                        conductor.VencimientoLicencia = FechaVenc;
+                        db.Entry(conductor).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return Converter.conductorAEConductor(conductor);
+                    }
+                    return null;
 
-                    return Converter.conductorAEConductor(conductor);
                 }
             }
             catch (Exception e)

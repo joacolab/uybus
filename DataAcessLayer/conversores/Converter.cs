@@ -400,6 +400,7 @@ namespace DataAcessLayer.conversores
         }
         static public EPasaje pasajeAEPasaje(Pasaje pas)
         {
+
             EPasaje Epas = new EPasaje();
             Epas.IdPasaje = pas.IdPasaje;
             Epas.Asientos = pas.Asientos;

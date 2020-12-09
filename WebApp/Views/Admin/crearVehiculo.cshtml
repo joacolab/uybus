@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CantAsientos, "Cantidad de asientos", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CantAsientos, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CantAsientos, new { htmlAttributes = new { @class = "form-control", @min = "0", @max="100" } })
                 @Html.ValidationMessageFor(model => model.CantAsientos, "", new { @class = "text-danger" })
             </div>
         </div>

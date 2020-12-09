@@ -78,6 +78,8 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Tramo t = db.Tramo.Find(idLinea, idParada);
+
+                    if (t == null) return null;
                     ETramo et = new ETramo();
                     et = Converter.tramoAETramo(t);
                     return et;

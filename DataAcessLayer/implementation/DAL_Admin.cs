@@ -71,9 +71,12 @@ namespace DataAcessLayer.implementation
                     foreach (var a in Admins)
                     {
                         Persona per = db.Persona.Find(a.Id);
-                        EPersona Eper = new EPersona();
-                        Eper = Converter.personaAEpersona(per);
-                        lstEp.Add(Eper);
+                        if (per != null) 
+                        {
+                            EPersona Eper = new EPersona();
+                            Eper = Converter.personaAEpersona(per);
+                            lstEp.Add(Eper);                   
+                        }
                     }
                     return lstEp;
                 }

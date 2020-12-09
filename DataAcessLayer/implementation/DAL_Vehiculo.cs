@@ -91,6 +91,7 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Vehiculo v = db.Vehiculo.Find(matricula);
+                    if (v == null) return null;
                     EVehiculo ev = new EVehiculo();
                     ev = Converter.vehiculoAEVehiculo(v);
                     return ev;

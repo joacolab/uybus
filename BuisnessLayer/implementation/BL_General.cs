@@ -292,7 +292,12 @@ namespace BuisnessLayer.implementation
         }
         private float utilidadPorViaje(int idViaje)
         {
-            int cantAsientos = iVehiculo.getVehiculos(iSalida.getSalidas(iViaje.getViaje(idViaje).IdSalida).IdVehiculo).CantAsientos;
+            EViaje ev = iViaje.getViaje(idViaje);
+            if (ev == null)
+            {
+                return -1;
+            }
+            int cantAsientos = iVehiculo.getVehiculos(iSalida.getSalidas(ev.IdSalida).IdVehiculo).CantAsientos;
             int idLinea = iSalida.getSalidas(iViaje.getViaje(idViaje).IdSalida).IdLinea;
 
             int maxCostoPsaje = 0;
@@ -317,7 +322,12 @@ namespace BuisnessLayer.implementation
         private float utilidadPorSalida(int salida, List<DateTime> fechas)
         {
             float costo = 0;
-            foreach (var viaje in iSalida.getSalidas(salida).Viaje.ToList())
+            ESalida sal = iSalida.getSalidas(salida);
+            if (sal == null)
+            {
+                return -1;
+            }
+            foreach (var viaje in sal.Viaje.ToList())
             {
                 if (fechas.Contains(viaje.Fecha))
                 {
@@ -330,7 +340,12 @@ namespace BuisnessLayer.implementation
         private float utilidadPorLinea(int linea, List<DateTime> fechas)
         {
             float costo = 0;
-            foreach (var salida in iLinea.getLinea(linea).Salida.ToList())
+            ELinea lin = iLinea.getLinea(linea);
+            if (lin == null)
+            {
+                return -1;
+            }
+            foreach (var salida in lin.Salida.ToList())
             {
                 costo = costo + utilidadPorSalida(salida.IdSalida, fechas);
             }
@@ -363,7 +378,12 @@ namespace BuisnessLayer.implementation
             return resultado;
         }
         private List<EPasaje> pasajesDeViaje(int viaje) {
-            return iViaje.getViaje(viaje).Pasaje.ToList();
+            EViaje v = iViaje.getViaje(viaje);
+            if (v == null) 
+            {
+                return new List<EPasaje>();
+            }
+            return v.Pasaje.ToList();
         }
 
         private List<EPasaje> pasajeDeFechas(List<DateTime> fechas) 
@@ -386,7 +406,12 @@ namespace BuisnessLayer.implementation
         private List<EPasaje> pasajesDeSalida(int salida, List<DateTime> fechas) 
         {
             List<EPasaje> pasajes = new List<EPasaje>();
-            foreach (var viaje in iSalida.getSalidas(salida).Viaje.ToList())
+            ESalida es = iSalida.getSalidas(salida);
+            if (es == null) 
+            {
+                return pasajes;
+            }
+            foreach (var viaje in es.Viaje.ToList())
             {
                 if (fechas.Contains(viaje.Fecha))
                 {
@@ -403,8 +428,12 @@ namespace BuisnessLayer.implementation
         private List<EPasaje> pasajesDeLinea(int linea, List<DateTime> fechas) 
         {
             List<EPasaje> pasajes = new List<EPasaje>();
-
-            foreach (var salida in iLinea.getLinea(linea).Salida.ToList())
+            ELinea l = iLinea.getLinea(linea);
+            if (l == null)
+            {
+                return pasajes;
+            }
+            foreach (var salida in l.Salida.ToList())
             {
                 foreach (var pas in pasajesDeSalida(salida.IdSalida, fechas))
                 {

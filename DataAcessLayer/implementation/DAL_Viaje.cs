@@ -69,6 +69,7 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Viaje v = db.Viaje.Find(idViaje);
+                    if (v == null) return null;
                     EViaje ev = new EViaje();
                     ev = Converter.viajeAEViaje(v);
                     return ev;
@@ -87,6 +88,7 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Viaje v = db.Viaje.Find(idViaje);
+                    if (v == null) return null;
                     EViaje ev = new EViaje();
                     v.HoraInicioReal = HoraInicioReal;
                     db.Entry(v).State = EntityState.Modified;
@@ -108,11 +110,13 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Viaje v = db.Viaje.Find(idViaje);
-                    EViaje ev = new EViaje();
-                    v.Finalizado = 1;
-                    db.Entry(v).State = EntityState.Modified;
-                    db.SaveChanges();
-                    ev = Converter.viajeAEViaje(v);
+                    if (v != null)
+                    {
+                        EViaje ev = new EViaje();
+                        v.Finalizado = 1;
+                        db.Entry(v).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
                 }
             }
             catch (System.Exception ex)

@@ -63,6 +63,7 @@ namespace DataAcessLayer.implementation
                 using (uybusEntities db = new uybusEntities())
                 {
                     Parametro parametro = db.Parametro.Find(idParametro);
+                    if (parametro == null) return null;
                     return Converter.parametroAEParametro(parametro);
                 }
             }

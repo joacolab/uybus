@@ -47,9 +47,12 @@ namespace DataAcessLayer.implementation
                     {
 
                         SuperAdmin supa = db.SuperAdmin.Find(p.Id);
-                        ESuperAdmin Esupa = new ESuperAdmin();
-                        Esupa.Id = supa.Id; 
-                        lstEp.Add(Esupa);
+                        if (supa != null) 
+                        {
+                            ESuperAdmin Esupa = new ESuperAdmin();
+                            Esupa.Id = supa.Id; 
+                            lstEp.Add(Esupa);
+                        }
                     }
                     return lstEp;
                 }
