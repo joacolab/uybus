@@ -4,29 +4,75 @@
 }
 
 <div class="jumbotron">
-    <h1>Bienvenido @ViewBag.nombreUsu</h1>
+    <h1 style="color:white">Bienvenido administrador @ViewBag.nombreUsu</h1>
 </div>
 
 <br>
+<style>
+    body {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-image: url('../../Content/Images/bg1.png');
+    }
 
+    .bot {
+        display: inline-block;
+        text-align: center;
+        margin: 0 0.2em;
+        width: 100%;
+    }
+
+    .jumbotron {
+        background-color: rgba(41, 104, 157,0.5);
+        text-align: center;
+    }
+
+    .row {
+        display: inline;
+    }
+
+    #botones {
+        margin: 5px;
+        background-color: rgba(41, 104, 157,1);
+        color: white;
+        border-color: rgba(41, 104, 157,1);
+    }
+
+    #CuadroDeBtn {
+        background-color: rgba(3, 63, 128, 0.4);
+        border-radius: 15px;
+    }
+
+        #CuadroDeBtn h4 {
+            border-top-right-radius: 15px;
+            border-top-left-radius: 15px;
+        }
+</style>
 
 <!--RESUMEN tramo y salida no andan ya que le paso un diccionario-->
 
 
+<div id="CuadroDeBtn">
 
-<h4>Seleccione una operación</h4>
-<div class="row" style="height:300px">
-    <div class="col-md-4">
-        <h3 class="btn btn-default">@Html.ActionLink("Vehiculos", "traerVehiculos")</h3>
-        <h3 class="btn btn-default">@Html.ActionLink("Viajes", "traerViajes")</h3>
-        <h3 class="btn btn-default">@Html.ActionLink("Paradas", "traerParadas")</h3>
-        <h3 class="btn btn-default">@Html.ActionLink("Linea", "traerLinea")</h3>
-        <h3 class="btn btn-default">@Html.ActionLink("Salida", "traerSalida")</h3>
-        <h3 class="btn btn-default">@Html.ActionLink("Conductores", "traerConductores")</h3>
-        <h3 class="btn btn-default">@Html.ActionLink("Reporte de utilidad", "SelectreporteU")</h3>
-        <h3 class="btn btn-default">@Html.ActionLink("Reporte de pasajes", "selectRepP")</h3>
-    </div>
-    <div class="col-md-8">
+    <h4 style="padding: 10px;background-color:rgba(41, 104, 157,1);color: white;
+        font-size: xx-large">
+        Sección de administración
+    </h4>
+    <div class="row">
+        <div class="bot">
+            <button id="botones" class="btn btn-default btn-lg" onclick="location.href='@Url.Action("traerViajes", "Admin")';return false;">Viajes</button>
+            <button id="botones" class="btn btn-default btn-lg" onclick="location.href='@Url.Action("traerLinea", "Admin")';return false;">Linea</button>
+            <button id="botones" class="btn btn-default btn-lg" onclick="location.href='@Url.Action("traerSalida", "Admin")';return false;">Salida</button>
+            <button id="botones" class="btn btn-default btn-lg" onclick="location.href='@Url.Action("traerVehiculos", "Admin")';return false;">Vehiculos</button>
+            <button id="botones" class="btn btn-default btn-lg" onclick="location.href='@Url.Action("traerParadas", "Admin")';return false;">Paradas</button>
+        </div>
+        <div class="bot">
+            <button id="botones" class="btn btn-default btn-lg" onclick="location.href='@Url.Action("traerConductores", "Admin")';return false;">Conductores</button>
+            <button id="botones" class="btn btn-default btn-lg" onclick="location.href='@Url.Action("SelectreporteU", "Admin")';return false;">Reporte de utilidad</button>
+            <button id="botones" class="btn btn-default btn-lg" onclick="location.href='@Url.Action("selectRepP", "Admin")';return false;">Reporte de pasajes</button>
+        </div>
     </div>
 </div>
 
