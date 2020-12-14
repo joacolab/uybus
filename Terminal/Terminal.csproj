@@ -114,7 +114,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\joaquin24\Service1.wsdl" />
+    <None Include="Connected Services\joaquin24\Service11.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\API_SOAP.CompositeType.datasource" />
     <None Include="Properties\DataSources\Share.entities.ELinea.datasource" />

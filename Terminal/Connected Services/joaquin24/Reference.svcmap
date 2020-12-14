@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://soapuybus.azurewebsites.net/Service1.svc?singleWsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://uybussoap.azurewebsites.net/Service1.svc?singleWsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="890999ad-bf8f-469f-bbba-4d45f14440e2" SourceId="1" SourceUrl="https://soapuybus.azurewebsites.net/Service1.svc?singleWsdl" />
+    <MetadataFile FileName="Service11.wsdl" MetadataType="Wsdl" ID="12e5cc41-ff06-486f-8712-7fc345ccbb50" SourceId="1" SourceUrl="https://uybussoap.azurewebsites.net/Service1.svc?singleWsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

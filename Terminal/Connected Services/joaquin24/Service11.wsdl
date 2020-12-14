@@ -780,10 +780,10 @@
   </wsdl:binding>
   <wsdl:service name="Service1">
     <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
-      <soap:address location="http://soapuybus.azurewebsites.net/Service1.svc" />
+      <soap:address location="http://uybussoap.azurewebsites.net/Service1.svc" />
     </wsdl:port>
     <wsdl:port name="BasicHttpsBinding_IService1" binding="tns:BasicHttpsBinding_IService1">
-      <soap:address location="https://soapuybus.azurewebsites.net/Service1.svc" />
+      <soap:address location="https://uybussoap.azurewebsites.net/Service1.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
