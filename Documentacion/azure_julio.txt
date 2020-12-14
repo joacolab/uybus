@@ -1,0 +1,15 @@
+Cuenta de azure
+	usuario	: taraserv119@hotmail.com
+	passoword: diajAZ1IOdr0FEbTsdNg
+	
+	
+Cuenta de correo taraserv119@hotmail.com, passoword: diajAZ1IOdr0FEbTsdNg
+
+grupo:juliogrupo
+servidor:julioservidor
+servidor_BD:julioservidor.database.windows.net
+usuario:usuariojulio
+contraseña:uy5WE6$tu23
+
+cadena de conexion:
+Server=tcp:julioservidor.database.windows.net,1433;Initial Catalog=uybus;Persist Security Info=False;User ID=julioservidor;Password=uy5WE6$tu23;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
