@@ -22,12 +22,12 @@ COMMIT TRAN t;
 -- Reinicio de contadores para ID incrementales
 --
 BEGIN TRAN t;
-    	DBCC CHECKIDENT ('viaje', RESEED, 1);
-	DBCC CHECKIDENT ('salida', RESEED, 1);
-	DBCC CHECKIDENT ('precio', RESEED, 1);
-	DBCC CHECKIDENT ('parametro', RESEED, 1);
-	DBCC CHECKIDENT ('parada', RESEED, 1);
-	DBCC CHECKIDENT ('linea', RESEED, 1);
-	DBCC CHECKIDENT ('persona', RESEED, 1);
-	DBCC CHECKIDENT ('pasaje', RESEED, 1);
+    	DBCC CHECKIDENT ('viaje', RESEED, 0);
+	DBCC CHECKIDENT ('salida', RESEED, 0);
+	DBCC CHECKIDENT ('precio', RESEED, 0);
+	DBCC CHECKIDENT ('parametro', RESEED, 0);
+	DBCC CHECKIDENT ('parada', RESEED, 0);
+	DBCC CHECKIDENT ('linea', RESEED, 0);
+	DBCC CHECKIDENT ('persona', RESEED, 0);
+	DBCC CHECKIDENT ('pasaje', RESEED, 0);
 COMMIT TRAN t;
