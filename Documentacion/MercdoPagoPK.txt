@@ -1,31 +1,8 @@
-PK: TEST-80869768-294e-4b9b-9051-2362d31d1047
-token: TEST-995817817198514-111820-6429e0e59a4e1b887c6d078d7b5a0e32-174046938
-
-
-tarjetas: 
+﻿tarjetas: 
 
 5031 7557 3453 0604
 123
 11/25
 APRO
 
-4509 9535 6623 3704	
-123	
-11/25
-APRO
-
 CI: 32432443
-
-
--------------------Susuarios---------------------
-
-APRO: Pago aprobado.
-CONT: Pago pendiente.
-OTHE: Rechazado por error general.
-CALL: Rechazado con validación para autorizar.
-FUND: Rechazado por monto insuficiente.
-SECU: Rechazado por código de seguridad inválido.
-EXPI: Rechazado por problema con la fecha de expiración.
-FORM: Rechazado por error en formulario.
-
-------------------------------------------------
